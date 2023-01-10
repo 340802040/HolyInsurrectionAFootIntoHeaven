@@ -1,0 +1,15 @@
+import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+
+/**
+ * Write a description of class MyWorld here.
+ * 
+ * @author (your name) 
+ * @version (a version number or a date)
+ */
+public class Overworld extends World
+{
+    public Overworld() {    
+        super(900, 600, 1); 
+        
+    }
+}

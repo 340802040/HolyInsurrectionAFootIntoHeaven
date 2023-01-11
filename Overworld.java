@@ -14,9 +14,9 @@ public class Overworld extends World
     
     public Overworld() {    
         super(900, 675, 1);
-        width = 900;
-        height = 600;
-        BLOCK_SIZE = 45;
+        width = 1000;
+        height = 750;
+        BLOCK_SIZE = 50;
         GRID_WIDTH = width / BLOCK_SIZE; // 900 / 45 = 20
         GRID_HEIGHT = height / BLOCK_SIZE; // 600 / 45 = 15
         
@@ -38,10 +38,10 @@ public class Overworld extends World
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
         };
         
-        for (int r = 0; r < GRID_WIDTH; r++) {
-            for (int c = 0; c < GRID_HEIGHT; c++) {
+        for (int r = 0; r < GRID_HEIGHT; r++) {
+            for (int c = 0; c < GRID_WIDTH; c++) {
                 if (grid[r][c] == 0) { // grass tile
-                    
+                    addObject(new Grass(), c * BLOCK_SIZE + BLOCK_SIZE / 2, r * BLOCK_SIZE + BLOCK_SIZE / 2);
                 }
             }
         }

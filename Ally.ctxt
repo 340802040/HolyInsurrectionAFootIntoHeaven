@@ -9,4 +9,6 @@ comment3.params=
 comment3.target=void\ checkMovement()
 comment4.params=r\ c
 comment4.target=boolean\ canMoveTo(int,\ int)
-numComments=5
+comment5.params=
+comment5.target=void\ animateWalkCharacter()
+numComments=6

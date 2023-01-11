@@ -8,7 +8,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class GameInfo extends Actor
 {
-    
+    protected static String worldType;
     
     public GameInfo() {
         

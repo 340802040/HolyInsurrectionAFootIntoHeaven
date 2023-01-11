@@ -9,9 +9,9 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class Overworld extends World
 {
     private int width, height;
-    private static int BLOCK_SIZE;
-    private static int GRID_WIDTH, GRID_HEIGHT;
-    private static int X_OFFSET, Y_OFFSET;
+    protected static int BLOCK_SIZE;
+    protected static int GRID_WIDTH, GRID_HEIGHT;
+    protected static int X_OFFSET, Y_OFFSET;
     
     public Overworld() {    
         super(1200, 800, 1);
@@ -70,13 +70,5 @@ public class Overworld extends World
 
     public static int getYCell(int coordinate){
         return (coordinate - Y_OFFSET) % BLOCK_SIZE;
-    }
-
-    public static int getGridWidth() {
-        return GRID_WIDTH;
-    }
-    
-    public static int getGridHeight() {
-        return GRID_HEIGHT;
     }
 }

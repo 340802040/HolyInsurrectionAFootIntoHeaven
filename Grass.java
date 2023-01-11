@@ -9,7 +9,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class Grass extends Cell
 {
     public Grass() {
-        setImage("grass-tile.png");    
+        setImage("grass.png");    
     }
     
     public void act() {

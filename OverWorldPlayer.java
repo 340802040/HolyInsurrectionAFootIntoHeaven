@@ -6,9 +6,9 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Player extends Ally
+public class OverWorldPlayer extends Ally
 {
-    public Player() {
+    public OverWorldPlayer() {
         r = 0;
         c = 0;
         moveTimer = new SimpleTimer();
@@ -19,6 +19,6 @@ public class Player extends Ally
     }
 
     public void act() {
-        checkMovement();
+        checkWASDMovement();
     }
 }

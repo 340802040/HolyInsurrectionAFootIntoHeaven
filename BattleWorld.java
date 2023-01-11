@@ -6,9 +6,10 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class BattleWorld extends World
+public class BattleWorld extends GameWorld
 {
-    public BattleWorld() {    
-        super(1200, 800, 1); 
+    public BattleWorld(int width, int height, int pixelSize) {    
+        super(width, height, pixelSize);
+        GameInfo.worldType = "battle world";
     }
 }

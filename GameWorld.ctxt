@@ -1,0 +1,16 @@
+#BlueJ class context
+comment0.target=GameWorld
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ GameWorld\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=width\ height\ pixelSize
+comment1.target=GameWorld(int,\ int,\ int)
+comment2.params=
+comment2.target=void\ act()
+comment3.params=cellNumber
+comment3.target=int\ getXCoordinate(int)
+comment4.params=coordinate
+comment4.target=int\ getXCell(int)
+comment5.params=cellNumber
+comment5.target=int\ getYCoordinate(int)
+comment6.params=coordinate
+comment6.target=int\ getYCell(int)
+numComments=7

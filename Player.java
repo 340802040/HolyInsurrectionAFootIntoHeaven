@@ -29,19 +29,19 @@ public class Player extends Actor
                     setLocation(Overworld.getXCoordinate(c), Overworld.getYCoordinate(r));
                 }
             }
-            if (Greenfoot.isKeyDown("a")) {
+            else if (Greenfoot.isKeyDown("a")) {
                 if (canMoveTo(r, c - 1)) {
                     c--;
                     setLocation(Overworld.getXCoordinate(c), Overworld.getYCoordinate(r));
                 }
             }
-            if (Greenfoot.isKeyDown("s")) {
+            else if (Greenfoot.isKeyDown("s")) {
                 if (canMoveTo(r + 1, c)) {
                     r++;
                     setLocation(Overworld.getXCoordinate(c), Overworld.getYCoordinate(r));
                 }
             }
-            if (Greenfoot.isKeyDown("d")) {
+            else if (Greenfoot.isKeyDown("d")) {
                 if (canMoveTo(r, c + 1)) {
                     c++;
                     setLocation(Overworld.getXCoordinate(c), Overworld.getYCoordinate(r));

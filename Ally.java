@@ -9,17 +9,23 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class Ally extends Actor
 {
     protected int r, c; // row and column player is currently on
-    protected SimpleTimer moveTimer;
-    
+    protected SimpleTimer moveTimer = new SimpleTimer();
+    protected boolean selected;
+    // Animation
+    private SimpleTimer animationTimer = new SimpleTimer();
+    protected GreenfootImage[] walk = new GreenfootImage[7];
+    private int imageIndex = 0;
 
     public Ally() {
-        
+        selected = false;
     }
-    
+
     public void act() {
-    
+        if (selected) {
+            checkMovement();
+        }
     }
-    
+
     public void checkMovement() {
         if (moveTimer.millisElapsed() > 150) {
             if (Greenfoot.isKeyDown("w")) {
@@ -57,25 +63,22 @@ public class Ally extends Actor
             else {
                 setImage("images/Animations/PlayerOverworld/PlayerO00.png");
             }
-            
+
             moveTimer.mark();
         }
     }
-    
+
     public boolean canMoveTo(int r, int c) {
         return r >= 0 && r < Overworld.GRID_HEIGHT && c >= 0 && c < Overworld.GRID_WIDTH;
     }
-    
-    SimpleTimer animationTimer = new SimpleTimer();
-    GreenfootImage[] walk = new GreenfootImage[7];
-    int imageIndex = 0;
+
     public void animateWalkCharacter() {
         if(animationTimer.millisElapsed() < 90)
         {
             return;
         }
         animationTimer.mark();
-        
+
         setImage(walk[imageIndex]);
         imageIndex = (imageIndex + 1) % walk.length;
     }

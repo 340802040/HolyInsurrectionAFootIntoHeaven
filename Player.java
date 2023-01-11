@@ -13,8 +13,7 @@ public class Player extends Ally
         c = 0;
         moveTimer = new SimpleTimer();
         
-        for(int i = 0; i < 7; i++)
-        {
+        for(int i = 0; i < 7; i++) {
             walk[i] = new GreenfootImage("images/Animations/PlayerOverworld/PlayerO0" + i + ".png");
         }
     }

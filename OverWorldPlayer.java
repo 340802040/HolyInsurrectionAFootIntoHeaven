@@ -13,7 +13,7 @@ public class OverworldPlayer extends Actor
     private SimpleTimer animationTimer = new SimpleTimer();
     protected GreenfootImage[] walkFrames = new GreenfootImage[7];
     private int imageIndex = 0;
-
+    
     public OverworldPlayer() {
         r = 0;
         c = 0;
@@ -22,59 +22,57 @@ public class OverworldPlayer extends Actor
         for(int i = 0; i < 7; i++) {
             walkFrames[i] = new GreenfootImage("images/Animations/PlayerOverworld/PlayerO0" + i + ".png");
         }
-
+        
         setImage("images/Animations/PlayerOverWorld/PlayerO00.png");
     }
 
     public void act() {
         checkWASDMovement();
     }
-
+    
     public void checkWASDMovement() {
-            if (Greenfoot.isKeyDown("w") && canMoveTo(r - 1, c)) {
-                if (moveTimer.millisElapsed() > 150) {
+        if (moveTimer.millisElapsed() > 150) {
+            if (Greenfoot.isKeyDown("w")) {
+                if (canMoveTo(r - 1, c)) {
                     r--;
                     setLocation(GameWorld.getX(c), GameWorld.getY(r));
-                    moveTimer.mark();
+                    setRotation(0);
+                    animateWalkCharacter();
                 }
-                setRotation(0);
-                animateWalkCharacter();
             }
-            else if (Greenfoot.isKeyDown("a") && canMoveTo(r, c - 1)) {
-                if (moveTimer.millisElapsed() > 150) {
+            else if (Greenfoot.isKeyDown("a")) {
+                if (canMoveTo(r, c - 1)) {
                     c--;
                     setLocation(GameWorld.getX(c), GameWorld.getY(r));
-                    moveTimer.mark();
+                    setRotation(270);
+                    animateWalkCharacter();
                 }
-                setRotation(270);
-                animateWalkCharacter();
             }
-            else if (Greenfoot.isKeyDown("s") && canMoveTo(r + 1, c)) {
-                if (moveTimer.millisElapsed() > 150) {
+            else if (Greenfoot.isKeyDown("s")) {
+                if (canMoveTo(r + 1, c)) {
                     r++;
                     setLocation(GameWorld.getX(c), GameWorld.getY(r));
-                    moveTimer.mark();
+                    setRotation(180);
+                    animateWalkCharacter();
                 }
-                setRotation(180);
-                animateWalkCharacter();
             }
-            else if (Greenfoot.isKeyDown("d") && canMoveTo(r, c + 1)) {
-                if (moveTimer.millisElapsed() > 150) {
+            else if (Greenfoot.isKeyDown("d")) {
+                if (canMoveTo(r, c + 1)) {
                     c++;
                     setLocation(GameWorld.getX(c), GameWorld.getY(r));
-                    moveTimer.mark();
+                    setRotation(90);
+                    animateWalkCharacter();
                 }
-                setRotation(90);
-                animateWalkCharacter();
             }
 
-            
+            moveTimer.mark();
+        }
     }
-
+    
     public boolean canMoveTo(int r, int c) {
         return r >= 0 && r < GameWorld.GRID_HEIGHT && c >= 0 && c < GameWorld.GRID_WIDTH;
     }
-
+    
     public void animateWalkCharacter() {
         if(animationTimer.millisElapsed() < 90) {
             return;

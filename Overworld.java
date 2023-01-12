@@ -34,12 +34,12 @@ public class Overworld extends GameWorld
         for (int r = 0; r < GRID_HEIGHT; r++) {
             for (int c = 0; c < GRID_WIDTH; c++) {
                 if (map[r][c] == 0) { // grass tile
-                    addObject(new Grass(), c * BLOCK_SIZE + X_OFFSET, r * BLOCK_SIZE + Y_OFFSET);
+                    addObject(new Grass(), GameWorld.getX(c), GameWorld.getY(r));
                 }
             }
         }
 
         // Add player
-        addObject(new OverworldPlayer(), X_OFFSET, Y_OFFSET);
+        addObject(new OverworldPlayer(), GameWorld.getX(0), GameWorld.getY(0));
     }
 }

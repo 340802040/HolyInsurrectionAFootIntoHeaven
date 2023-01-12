@@ -33,12 +33,15 @@ public class Level1 extends BattleWorld
         for (int r = 0; r < GRID_HEIGHT; r++) {
             for (int c = 0; c < GRID_WIDTH; c++) {
                 if (map[r][c] == 0) { // grass tile
-                    addObject(new RockTile(), c * BLOCK_SIZE + X_OFFSET, r * BLOCK_SIZE + Y_OFFSET);
+                    addObject(new RockTile(), GameWorld.getX(c), GameWorld.getY(r));
                 }
             }
         }
         
         // Add selector
         addObject(new Selector(), X_OFFSET, Y_OFFSET);
+        
+        // Spawn testing ally
+        addObject(new Ally(), GameWorld.getX(2), GameWorld.getY(2));
     }
 }

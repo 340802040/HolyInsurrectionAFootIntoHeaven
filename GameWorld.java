@@ -24,24 +24,42 @@ public class GameWorld extends World
         X_OFFSET = BLOCK_SIZE / 2;
         Y_OFFSET = BLOCK_SIZE / 2;
     }
-
-    public void act() {
-
-    }
     
-    public static int getXCoordinate (int cellNumber){
+    /**
+     * Returns Greenfoot world's X coordinate given a cell number along the x-axis.
+     */
+    public static int getX(int cellNumber){
         return (cellNumber * BLOCK_SIZE) + X_OFFSET;
     }
 
+    /**
+     * Returns the cell number along the x-axis given an X coordinate.
+     */
     public static int getXCell(int coordinate){
-        return (coordinate - X_OFFSET) % BLOCK_SIZE;
+        if ((coordinate - X_OFFSET) % BLOCK_SIZE == 0) {
+            return (coordinate - X_OFFSET) / BLOCK_SIZE;
+        }
+        else return (coordinate - X_OFFSET) % BLOCK_SIZE;
     }
 
-    public static int getYCoordinate (int cellNumber){
+    /**
+     * Returns Greenfoot world's Y coordinate given a cell number along the y-axis.
+     */
+    public static int getY(int cellNumber){
         return (cellNumber * BLOCK_SIZE) + Y_OFFSET;
     }
 
+    /**
+     * Returns the cell number along the y-axis given an Y coordinate.
+     */
     public static int getYCell(int coordinate){
-        return (coordinate - Y_OFFSET) % BLOCK_SIZE;
+        if ((coordinate - Y_OFFSET) % BLOCK_SIZE == 0) {
+            return (coordinate - Y_OFFSET) / BLOCK_SIZE;
+        }
+        else return (coordinate - Y_OFFSET) % BLOCK_SIZE;
+    }
+    
+    public int[][] getMap() {
+        return map;
     }
 }

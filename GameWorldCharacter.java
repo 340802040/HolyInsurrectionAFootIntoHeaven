@@ -8,6 +8,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class GameWorldCharacter extends Actor
 {
+    private int actCount = 0;
     private int r, c;
     
     public GameWorldCharacter() {
@@ -20,7 +21,16 @@ public class GameWorldCharacter extends Actor
     }
     
     public void act() {
-        
+        actCount++;
+        updateCoords();
+    }
+    
+    /**
+     * Constantly updates the coordinates (r and c) of game world character as it moves.
+     */
+    public void updateCoords() {
+        r = GameWorld.getXCell(getY());
+        c = GameWorld.getYCell(getX());
     }
     
     public int getR() {

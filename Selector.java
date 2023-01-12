@@ -14,6 +14,8 @@ public class Selector extends Actor
     private boolean active; // whether the selector has selected an ally
     private Image selectionIndicator;
     private Ally selectedAlly;
+    private ArrayList<Point> path = new ArrayList<Point>();
+    private SimpleTimer timer = new SimpleTimer();
 
     public Selector() {
         r = 0;
@@ -27,6 +29,7 @@ public class Selector extends Actor
         checkMovement();
         checkSelect();
         checkDeselect();
+        checkConfirmMove();
     }
 
     public void checkMovement() {
@@ -77,6 +80,7 @@ public class Selector extends Actor
             active = true;
             getWorld().addObject(selectionIndicator, GameWorld.getX(c), GameWorld.getY(r));
             selectedAlly = (Ally)getOneIntersectingObject(Ally.class);
+            timer.mark();
         }
     }
 
@@ -85,11 +89,15 @@ public class Selector extends Actor
      */
     public void checkDeselect() {
         if (active && Greenfoot.isKeyDown("b")) {
-            active = false;
-            getWorld().removeObject(selectionIndicator);
-            selectedAlly = null;
-            removeHighlight();
+            deselect();
         }
+    }
+    
+    public void deselect() {
+        active = false;
+        getWorld().removeObject(selectionIndicator);
+        selectedAlly = null;
+        removeHighlight();
     }
 
     /**
@@ -104,13 +112,13 @@ public class Selector extends Actor
         int[][] dis = new int[GameWorld.GRID_HEIGHT][GameWorld.GRID_WIDTH];
         boolean[][] vis = new boolean[GameWorld.GRID_HEIGHT][GameWorld.GRID_WIDTH];
         Point start = new Point(selectedAlly.getR(), selectedAlly.getC());
+        //System.out.println(selectedAlly.getR() + " " + selectedAlly.getC());
         Queue<Point> Q = new LinkedList<Point>();
         Point[][] prev = new Point[GameWorld.GRID_HEIGHT][GameWorld.GRID_WIDTH]; // keeps track of nodes in shortest path
 
         Q.add(start);
         vis[start.c][start.r] = true;
         dis[start.c][start.r] = 0;
-        prev[start.c][start.r] = new Point(-1, -1);
 
         while (!Q.isEmpty()) {
             Point cur = Q.poll();
@@ -126,10 +134,12 @@ public class Selector extends Actor
                 }
             }
         }
-
-        // highlight path
+        
+        // store and highlight path
         Point p = new Point(r, c);
-        while (prev[p.r][p.c].r != -1) {
+        path.clear();
+        while (p.r != start.r || p.c != start.c) {
+            path.add(p);
             getWorld().addObject(new BlueHighlight(), GameWorld.getX(p.c), GameWorld.getX(p.r));
             p = prev[p.r][p.c];
         }
@@ -142,13 +152,15 @@ public class Selector extends Actor
             getWorld().removeObject(b);
         }
     }
-
-    static class Point {
-        int r, c;
-
-        public Point(int r, int c) {
-            this.r = r;
-            this.c = c;
+    
+    /**
+     * Checks if user has confirmed his location to move an Ally to.
+     */
+    public void checkConfirmMove() {
+        if (timer.millisElapsed() > 2000 && active && Greenfoot.isKeyDown("space")) {
+            selectedAlly.startMoving(path);
+            deselect();
+            Greenfoot.delay(20);
         }
-    }   
+    }
 }

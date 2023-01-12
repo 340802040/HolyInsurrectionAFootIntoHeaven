@@ -42,6 +42,6 @@ public class Level1 extends BattleWorld
         addObject(new Selector(), X_OFFSET, Y_OFFSET);
         
         // Spawn testing ally
-        addObject(new Ally(), GameWorld.getX(2), GameWorld.getY(2));
+        addObject(new Ally(), GameWorld.getX(3), GameWorld.getY(3));
     }
 }

@@ -40,6 +40,6 @@ public class Overworld extends GameWorld
         }
 
         // Add player
-        addObject(new OverWorldPlayer(), X_OFFSET, Y_OFFSET);
+        addObject(new OverworldPlayer(), X_OFFSET, Y_OFFSET);
     }
 }

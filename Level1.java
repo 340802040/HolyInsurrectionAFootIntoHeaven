@@ -38,6 +38,7 @@ public class Level1 extends BattleWorld
             }
         }
         
-        
+        // Add selector
+        addObject(new Selector(), X_OFFSET, Y_OFFSET);
     }
 }

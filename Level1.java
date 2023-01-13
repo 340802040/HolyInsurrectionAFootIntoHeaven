@@ -10,6 +10,7 @@ public class Level1 extends BattleWorld
 {
     public Level1() {
         super(1200, 800, 1);
+        String phase = "player phase";
         
         // Initialize grid
         map = new int[][] {
@@ -42,8 +43,8 @@ public class Level1 extends BattleWorld
         addObject(new Selector(), X_OFFSET, Y_OFFSET);
         
         // Spawn testing allies
-        //addObject(new Ally(10), GameWorld.getX(3), GameWorld.getY(4));
-        //addObject(new Ally(10), GameWorld.getX(5), GameWorld.getY(6));
+        addObject(new Ally(10), GameWorld.getX(3), GameWorld.getY(4));
+        addObject(new Ally(10), GameWorld.getX(5), GameWorld.getY(6));
         addObject(new Ally(10), GameWorld.getX(1), GameWorld.getY(4));
     }
 }

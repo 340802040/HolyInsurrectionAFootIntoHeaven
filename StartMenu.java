@@ -18,7 +18,7 @@ public class StartMenu extends World
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(1200, 800, 1); 
         
-        Button playButton = new Button();
-        addObject(playButton, getWidth() / 2, getHeight() / 2);
+
+        
     }
 }

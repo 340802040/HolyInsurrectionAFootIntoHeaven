@@ -18,6 +18,7 @@ public class Selector extends Actor
     private Ally selectedAlly;
     private ArrayList<Point> path = new ArrayList<Point>();
     private SimpleTimer timer = new SimpleTimer();
+    private Image selectionIndicator;
 
     public Selector() {
         r = 0;
@@ -29,6 +30,8 @@ public class Selector extends Actor
         }
 
         setImage("images/Animations/Selector/Selector00.png");
+        
+        selectionIndicator = new Image("images/Selector.png");
     }
 
     public void act() {
@@ -104,7 +107,7 @@ public class Selector extends Actor
     public void checkSelect() {
         if (!active && Greenfoot.isKeyDown("space") && getOneIntersectingObject(Ally.class) != null) {
             active = true;
-            
+            getWorld().addObject(selectionIndicator, GameWorld.getX(c), GameWorld.getY(r));
             selectedAlly = (Ally)getOneIntersectingObject(Ally.class);
             timer.mark();
         }
@@ -121,6 +124,7 @@ public class Selector extends Actor
     
     public void deselect() {
         active = false;
+        getWorld().removeObject(selectionIndicator);
         selectedAlly = null;
         removeHighlight();
     }

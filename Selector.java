@@ -61,7 +61,7 @@ public class Selector extends Actor
                 setLocation(GameWorld.getX(c), GameWorld.getY(r));
                 if (active) {
                     removeHighlight();
-                    highlightPath();    
+                    highlightPath();       
                 }
             }
             else if (Greenfoot.isKeyDown("d") && canMoveTo(r, c + 1)) {
@@ -107,6 +107,7 @@ public class Selector extends Actor
             getWorld().addObject(selectionIndicator, GameWorld.getX(c), GameWorld.getY(r));
             selectedAlly = (Ally)getOneIntersectingObject(Ally.class);
             timer.mark();
+            highlightPath();
         }
     }
 
@@ -146,11 +147,11 @@ public class Selector extends Actor
 
         while (!Q.isEmpty()) {
             Point cur = Q.poll();
-            if (cur.r == r && cur.c == c) {
+            if (cur.r == r && cur.c == c && !(cur.r == start.r && cur.c == start.c)) {
                 // check if path length is within character move limit
                 // store path
                 Point p = new Point(r, c);
-                path.clear();
+                path.clear(); 
                 while (p.r != start.r || p.c != start.c) {
                     path.add(p);
                     p = prev[p.r][p.c];

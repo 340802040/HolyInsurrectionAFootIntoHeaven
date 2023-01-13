@@ -85,7 +85,6 @@ public class BattleWorld extends GameWorld
     }
 
     public void resetEnemyVariables() {
-        System.out.println("called");
         enemiesMoved = 0;
         i = 0;
         curMovingEnemy = null;

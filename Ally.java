@@ -38,7 +38,7 @@ public class Ally extends GameWorldCharacter
             return;
         }
         Point p = path.get(i);
-        if (moveTimer.millisElapsed() > 50) {
+        if (moveTimer.millisElapsed() > 80) {
             setLocation(GameWorld.getX(p.c), GameWorld.getY(p.r));
             i--;
             moveTimer.mark();

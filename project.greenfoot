@@ -68,6 +68,7 @@ dependency8.type=UsesDependency
 dependency9.from=Overworld
 dependency9.to=OverworldPlayer
 dependency9.type=UsesDependency
+<<<<<<< HEAD
 editor.fx.0.height=734
 editor.fx.0.width=1294
 editor.fx.0.x=-7
@@ -77,6 +78,13 @@ editor.fx.1.width=653
 editor.fx.1.x=-6
 editor.fx.1.y=0
 height=734
+=======
+editor.fx.0.height=737
+editor.fx.0.width=814
+editor.fx.0.x=360
+editor.fx.0.y=26
+height=985
+>>>>>>> fb80e37fd29f36629bfdf6a440a83e1db5e9ab84
 package.numDependencies=23
 package.numTargets=20
 project.charset=UTF-8
@@ -234,7 +242,11 @@ target9.width=120
 target9.x=0
 target9.y=0
 version=3.0.0
+<<<<<<< HEAD
 width=1294
+=======
+width=1490
+>>>>>>> fb80e37fd29f36629bfdf6a440a83e1db5e9ab84
 world.lastInstantiated=Level1
-xPosition=0
-yPosition=0
+xPosition=32
+yPosition=52

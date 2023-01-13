@@ -14,24 +14,19 @@ public class Selector extends Actor
     private SimpleTimer animationTimer = new SimpleTimer();
     private GreenfootImage[] selectionFrames = new GreenfootImage[2];
     private int imageIndex = 0;
-    private boolean active; // whether the selector has selected an ally
+    private boolean active = false; // whether the selector has selected an ally
     private Ally selectedAlly;
     private ArrayList<Point> path = new ArrayList<Point>();
+    private boolean pathPossible;
     private SimpleTimer timer = new SimpleTimer();
     private Image selectionIndicator;
 
-    public Selector() {
-        r = 0;
-        c = 0;
-        active = false;
-        
+    public Selector() {        
         for(int i = 0; i < 2; i++) {
             selectionFrames[i] = new GreenfootImage("images/Animations/Selector/Selector0" + i + ".png");
         }
-
-        setImage("images/Animations/Selector/Selector00.png");
-        
-        selectionIndicator = new Image("images/Selector.png");
+        setImage("images/Animations/Selector/Selector00.png");        
+        selectionIndicator = new Image("selector.png");
     }
 
     public void act() {
@@ -138,24 +133,38 @@ public class Selector extends Actor
         int[][] map = ((GameWorld)getWorld()).getMap();
         int[] dx = {-1, 0, 1, 0};
         int[] dy = {0, -1, 0, 1};
-        int[][] dis = new int[GameWorld.GRID_HEIGHT][GameWorld.GRID_WIDTH];
         boolean[][] vis = new boolean[GameWorld.GRID_HEIGHT][GameWorld.GRID_WIDTH];
         Point start = new Point(selectedAlly.getR(), selectedAlly.getC());
-        //System.out.println(selectedAlly.getR() + " " + selectedAlly.getC());
         Queue<Point> Q = new LinkedList<Point>();
         Point[][] prev = new Point[GameWorld.GRID_HEIGHT][GameWorld.GRID_WIDTH]; // keeps track of nodes in shortest path
 
         Q.add(start);
-        vis[start.c][start.r] = true;
-        dis[start.c][start.r] = 0;
+        vis[start.r][start.c] = true;
+        pathPossible = false;
 
         while (!Q.isEmpty()) {
             Point cur = Q.poll();
             if (cur.r == r && cur.c == c) {
+                // check if path length is within character move limit
+                // store path
+                Point p = new Point(r, c);
+                path.clear();
+                while (p.r != start.r || p.c != start.c) {
+                    path.add(p);
+                    p = prev[p.r][p.c];
+                }
+                if (path.size() <= selectedAlly.getSpeed()) {
+                    // highlight path
+                    for (Point coord : path) {
+                        getWorld().addObject(new BlueHighlight(), GameWorld.getX(coord.c), GameWorld.getX(coord.r));
+                    }
+                    pathPossible = true;
+                }
                 break;
             }
+            
             for (int j = 0; j < 4; j++) { // checks 4 cardinal offsets
-                int nc = cur.c + dy[j], nr = cur.r + dx[j];
+                int nr = cur.r + dy[j], nc = cur.c + dx[j];
                 if (nc >= 0 && nc < GameWorld.GRID_WIDTH && nr >= 0 && nr < GameWorld.GRID_HEIGHT && !vis[nr][nc] && map[nr][nc] == 0) {
                     Q.add(new Point(nr, nc));
                     vis[nr][nc] = true; 
@@ -163,17 +172,7 @@ public class Selector extends Actor
                 }
             }
         }
-        
-        // store and highlight path
-        Point p = new Point(r, c);
-        path.clear();
-        while (p.r != start.r || p.c != start.c) {
-            path.add(p);
-            getWorld().addObject(new BlueHighlight(), GameWorld.getX(p.c), GameWorld.getX(p.r));
-            p = prev[p.r][p.c];
-        }
     }
-
     public void removeHighlight() {
         // remove all BlueHighlight's from the world
         List<BlueHighlight> l = getWorld().getObjects(BlueHighlight.class);
@@ -181,12 +180,12 @@ public class Selector extends Actor
             getWorld().removeObject(b);
         }
     }
-    
+
     /**
      * Checks if user has confirmed his location to move an Ally to.
      */
     public void checkConfirmMove() {
-        if (timer.millisElapsed() > 1000 && active && Greenfoot.isKeyDown("space")) {
+        if (timer.millisElapsed() > 1000 && active && Greenfoot.isKeyDown("space") && pathPossible) {
             selectedAlly.startMoving(path);
             deselect();
             Greenfoot.delay(30);

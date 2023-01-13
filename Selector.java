@@ -33,7 +33,7 @@ public class Selector extends Actor
     }
 
     public void checkMovement() {
-        if (moveTimer.millisElapsed() > 120) {
+        if (moveTimer.millisElapsed() > 90) {
             if (Greenfoot.isKeyDown("w") && canMoveTo(r - 1, c)) {
                 r--;
                 setLocation(GameWorld.getX(c), GameWorld.getY(r));
@@ -157,10 +157,10 @@ public class Selector extends Actor
      * Checks if user has confirmed his location to move an Ally to.
      */
     public void checkConfirmMove() {
-        if (timer.millisElapsed() > 2000 && active && Greenfoot.isKeyDown("space")) {
+        if (timer.millisElapsed() > 1000 && active && Greenfoot.isKeyDown("space")) {
             selectedAlly.startMoving(path);
             deselect();
-            Greenfoot.delay(20);
+            Greenfoot.delay(30);
         }
     }
 }

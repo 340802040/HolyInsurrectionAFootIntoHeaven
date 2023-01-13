@@ -11,8 +11,10 @@ public class Selector extends Actor
 {
     private int r, c;
     private SimpleTimer moveTimer = new SimpleTimer();
+    private SimpleTimer animationTimer = new SimpleTimer();
+    private GreenfootImage[] selectionFrames = new GreenfootImage[2];
+    private int imageIndex = 0;
     private boolean active; // whether the selector has selected an ally
-    private Image selectionIndicator;
     private Ally selectedAlly;
     private ArrayList<Point> path = new ArrayList<Point>();
     private SimpleTimer timer = new SimpleTimer();
@@ -21,8 +23,12 @@ public class Selector extends Actor
         r = 0;
         c = 0;
         active = false;
-        setImage("selector.png");
-        selectionIndicator = new Image("selector.png");
+        
+        for(int i = 0; i < 2; i++) {
+            selectionFrames[i] = new GreenfootImage("images/Animations/Selector/Selector0" + i + ".png");
+        }
+
+        setImage("images/Animations/Selector/Selector00.png");
     }
 
     public void act() {
@@ -30,6 +36,7 @@ public class Selector extends Actor
         checkSelect();
         checkDeselect();
         checkConfirmMove();
+        checkHovering();
     }
 
     public void checkMovement() {
@@ -75,10 +82,29 @@ public class Selector extends Actor
         return r >= 0 && r < GameWorld.GRID_HEIGHT && c >= 0 && c < GameWorld.GRID_WIDTH;
     }
 
+    public void checkHovering() {   // Animate selector if hovering
+        if(getOneIntersectingObject(Ally.class) != null) {
+            animateSelector();
+        }
+        else {
+            setImage("images/Animations/Selector/Selector00.png");
+        }
+    }
+    
+    public void animateSelector() {
+        if(animationTimer.millisElapsed() < 200) {
+            return;
+        }
+        animationTimer.mark();
+
+        setImage(selectionFrames[imageIndex]);
+        imageIndex = (imageIndex + 1) % selectionFrames.length;
+    }
+    
     public void checkSelect() {
         if (!active && Greenfoot.isKeyDown("space") && getOneIntersectingObject(Ally.class) != null) {
             active = true;
-            getWorld().addObject(selectionIndicator, GameWorld.getX(c), GameWorld.getY(r));
+            
             selectedAlly = (Ally)getOneIntersectingObject(Ally.class);
             timer.mark();
         }
@@ -95,7 +121,6 @@ public class Selector extends Actor
     
     public void deselect() {
         active = false;
-        getWorld().removeObject(selectionIndicator);
         selectedAlly = null;
         removeHighlight();
     }

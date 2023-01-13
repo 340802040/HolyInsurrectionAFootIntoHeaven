@@ -11,5 +11,7 @@ public class BattleWorld extends GameWorld
     public BattleWorld(int width, int height, int pixelSize) {    
         super(width, height, pixelSize);
         GameInfo.worldType = "battle world";
+        
+        setPaintOrder(Selector.class);
     }
 }

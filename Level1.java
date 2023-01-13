@@ -13,7 +13,7 @@ public class Level1 extends BattleWorld
         
         // Initialize grid
         map = new int[][] {
-                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -41,7 +41,9 @@ public class Level1 extends BattleWorld
         // Add selector
         addObject(new Selector(), X_OFFSET, Y_OFFSET);
         
-        // Spawn testing ally
-        addObject(new Ally(), GameWorld.getX(3), GameWorld.getY(3));
+        // Spawn testing allies
+        //addObject(new Ally(10), GameWorld.getX(3), GameWorld.getY(4));
+        //addObject(new Ally(10), GameWorld.getX(5), GameWorld.getY(6));
+        addObject(new Ally(10), GameWorld.getX(1), GameWorld.getY(4));
     }
 }

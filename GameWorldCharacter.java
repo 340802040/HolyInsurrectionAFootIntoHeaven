@@ -8,8 +8,9 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class GameWorldCharacter extends Actor
 {
-    private int actCount = 0;
-    private int r, c;
+    protected int actCount = 0;
+    protected int r, c;
+    protected int[][] map;
     
     public GameWorldCharacter() {
         
@@ -18,6 +19,8 @@ public class GameWorldCharacter extends Actor
     public void addedToWorld(World w) {
         r = GameWorld.getYCell(getY());
         c = GameWorld.getXCell(getX());
+        map = ((GameWorld)getWorld()).getMap(); 
+        map[r][c] = 1;
     }
     
     public void act() {

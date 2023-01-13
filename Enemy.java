@@ -13,6 +13,7 @@ public class Enemy extends BattleWorldCharacter
     protected boolean isMoving = false;
     protected boolean moved = false;
     private SimpleTimer moveTimer = new SimpleTimer();
+    private int dir; // 0 - 3 representing each cardinal direction
 
     public Enemy(int speed) {
         this.speed = speed;
@@ -47,11 +48,14 @@ public class Enemy extends BattleWorldCharacter
             return;
         }
 
-        if (moveTimer.millisElapsed() > 200) {
+        if (moveTimer.millisElapsed() > 250) {
             boolean flag = true;
             while (flag) {
-                // get random direction
-                int dir = Greenfoot.getRandomNumber(4);
+                // chance to switch direction
+                
+                if (Greenfoot.getRandomNumber(3) == 0) {
+                    dir = Greenfoot.getRandomNumber(4);    
+                }
                 switch (dir) {
                     case 0: // up
                         if (canMoveTo(r - 1, c)) {

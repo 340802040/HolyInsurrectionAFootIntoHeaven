@@ -1,5 +1,6 @@
 /**
- * Write a description of class Point here.
+ * Point represents a cell used for finding the shortest path in BattleWorld.
+ * Not a Greenfoot actor.
  * 
  * @author (your name) 
  * @version (a version number or a date)

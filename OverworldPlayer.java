@@ -8,17 +8,13 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class OverworldPlayer extends Actor
 {
-    private int r, c;
+    private int r = 0, c = 0;
     private SimpleTimer moveTimer = new SimpleTimer();
     private SimpleTimer animationTimer = new SimpleTimer();
     protected GreenfootImage[] walkFrames = new GreenfootImage[7];
     private int imageIndex = 0;
 
-    public OverworldPlayer() {
-        r = 0;
-        c = 0;
-        moveTimer = new SimpleTimer();        
-
+    public OverworldPlayer() {    
         for(int i = 0; i < 7; i++) {
             walkFrames[i] = new GreenfootImage("images/Animations/PlayerOverworld/PlayerO0" + i + ".png");
         }

@@ -19,8 +19,8 @@ public class GameWorld extends World
         width = 1200;
         height = 800;
         BLOCK_SIZE = 50;
-        GRID_WIDTH = width / BLOCK_SIZE; // 900 / 45 = 20
-        GRID_HEIGHT = height / BLOCK_SIZE; // 600 / 45 = 15
+        GRID_WIDTH = width / BLOCK_SIZE; 
+        GRID_HEIGHT = height / BLOCK_SIZE; 
         X_OFFSET = BLOCK_SIZE / 2;
         Y_OFFSET = BLOCK_SIZE / 2;
         

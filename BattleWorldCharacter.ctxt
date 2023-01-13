@@ -1,8 +1,8 @@
 #BlueJ class context
-comment0.target=GameWorldCharacter
+comment0.target=BattleWorldCharacter
 comment0.text=\r\n\ Write\ a\ description\ of\ class\ GameWorldCharacter\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
 comment1.params=
-comment1.target=GameWorldCharacter()
+comment1.target=BattleWorldCharacter()
 comment2.params=w
 comment2.target=void\ addedToWorld(greenfoot.World)
 comment3.params=

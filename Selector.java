@@ -9,7 +9,7 @@ import java.util.*;
  */
 public class Selector extends Actor
 {
-    private int r, c;
+    protected int r, c;
     private SimpleTimer moveTimer = new SimpleTimer();
     private SimpleTimer animationTimer = new SimpleTimer();
     private GreenfootImage[] selectionFrames = new GreenfootImage[2];
@@ -18,7 +18,7 @@ public class Selector extends Actor
     private Ally selectedAlly;
     private ArrayList<Point> path = new ArrayList<Point>();
     private boolean pathPossible;
-    private SimpleTimer timer = new SimpleTimer();
+    private SimpleTimer timer = new SimpleTimer(), timer2 = new SimpleTimer();
     private Image selectionIndicator;
 
     public Selector() {        
@@ -26,7 +26,8 @@ public class Selector extends Actor
             selectionFrames[i] = new GreenfootImage("images/Animations/Selector/Selector0" + i + ".png");
         }
         setImage("images/Animations/Selector/Selector00.png");        
-        selectionIndicator = new Image("selector.png");
+        selectionIndicator = new Image("Selector.png");
+        timer2.mark();
     }
 
     public void act() {
@@ -100,7 +101,8 @@ public class Selector extends Actor
     }
     
     public void checkSelect() {
-        if (!active && Greenfoot.isKeyDown("space") && getOneIntersectingObject(Ally.class) != null) {
+        Ally a = (Ally)getOneIntersectingObject(Ally.class);
+        if (timer2.millisElapsed() > 500 && !active && Greenfoot.isKeyDown("space") && a != null && !a.moved) {
             active = true;
             getWorld().addObject(selectionIndicator, GameWorld.getX(c), GameWorld.getY(r));
             selectedAlly = (Ally)getOneIntersectingObject(Ally.class);
@@ -173,6 +175,7 @@ public class Selector extends Actor
             }
         }
     }
+    
     public void removeHighlight() {
         // remove all BlueHighlight's from the world
         List<BlueHighlight> l = getWorld().getObjects(BlueHighlight.class);
@@ -185,10 +188,10 @@ public class Selector extends Actor
      * Checks if user has confirmed his location to move an Ally to.
      */
     public void checkConfirmMove() {
-        if (timer.millisElapsed() > 1000 && active && Greenfoot.isKeyDown("space") && pathPossible) {
+        if (timer.millisElapsed() > 500 && active && Greenfoot.isKeyDown("space") && pathPossible) {
             selectedAlly.startMoving(path);
             deselect();
-            Greenfoot.delay(30);
+            timer2.mark();
         }
     }
 }

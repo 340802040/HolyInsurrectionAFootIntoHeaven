@@ -10,9 +10,8 @@ public class Overworld extends GameWorld
 {
     public Overworld() {    
         super(1200, 800, 1);
-        GameInfo.worldType = "overworld";
 
-        // Initialize grid
+        // initialize grid
         map = new int[][] {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -39,7 +38,7 @@ public class Overworld extends GameWorld
             }
         }
 
-        // Add player
+        // add player
         addObject(new OverworldPlayer(), GameWorld.getX(0), GameWorld.getY(0));
     }
 }

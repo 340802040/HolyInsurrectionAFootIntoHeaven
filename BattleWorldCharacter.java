@@ -6,21 +6,20 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class GameWorldCharacter extends Actor
+public class BattleWorldCharacter extends Actor
 {
     protected int actCount = 0;
     protected int r, c;
     protected int[][] map;
     
-    public GameWorldCharacter() {
+    public BattleWorldCharacter() {
         
     }
     
     public void addedToWorld(World w) {
         r = GameWorld.getYCell(getY());
         c = GameWorld.getXCell(getX());
-        map = ((GameWorld)getWorld()).getMap(); 
-        map[r][c] = 1;
+        map = ((GameWorld)getWorld()).getMap();
     }
     
     public void act() {

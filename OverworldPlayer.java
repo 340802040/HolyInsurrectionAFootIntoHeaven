@@ -67,6 +67,7 @@ public class OverworldPlayer extends Actor
             setImage("images/Animations/PlayerOverWorld/PlayerO00.png");
         }
     }
+    
     public boolean canMoveTo(int r, int c) {
         return r >= 0 && r < GameWorld.GRID_HEIGHT && c >= 0 && c < GameWorld.GRID_WIDTH;
     }

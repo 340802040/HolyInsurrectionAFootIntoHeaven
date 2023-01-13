@@ -7,17 +7,23 @@ import java.util.*;
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Ally extends GameWorldCharacter
+public class Ally extends BattleWorldCharacter
 {
     private boolean isMoving = false;
     private ArrayList<Point> path = new ArrayList<Point>();
     private SimpleTimer moveTimer = new SimpleTimer();
     private int i; // index for path
     private int speed; // move limit
+    protected boolean moved = false; // whether has been moved already
 
     public Ally(int speed) {
         this.speed = speed;
         setImage("placeholder/ally.png");
+    }
+    
+    public void addedToWorld(World w) {
+        super.addedToWorld(w);
+        map[r][c] = 1;
     }
 
     public void act() {
@@ -31,17 +37,16 @@ public class Ally extends GameWorldCharacter
         i = path.size() - 1;
         isMoving = true;
         this.path = path;
-        
-        // update map (current space opens up while new space is occupied)
-        int newR = path.get(0).r;
-        int newC = path.get(0).c;
-        map[r][c] = 0;
-        map[newR][newC] = 1;
+        map[r][c] = 0; // clear spot
     }
 
     public void move() {
         if (i == -1) {
             isMoving = false;
+            moved = true;
+            map[r][c] = 1;
+            ((BattleWorld)getWorld()).increaseAlliesMoved();
+            getImage().setTransparency(150);
             return;
         }
         Point p = path.get(i);

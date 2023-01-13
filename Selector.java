@@ -26,7 +26,7 @@ public class Selector extends Actor
             selectionFrames[i] = new GreenfootImage("images/Animations/Selector/Selector0" + i + ".png");
         }
         setImage("images/Animations/Selector/Selector00.png");        
-        selectionIndicator = new Image("Selector.png");
+        selectionIndicator = new Image("pink-selector.png");
         timer2.mark();
     }
 

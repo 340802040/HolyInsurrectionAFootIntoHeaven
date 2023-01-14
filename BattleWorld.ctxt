@@ -18,4 +18,6 @@ comment7.target=void\ resetAllyVariables()
 comment7.text=\r\n\ Resets\ all\ necessary\ Ally\ variables\ such\ as\ Ally.moved\ and\ alliesMoved\ after\ player\ phase\ is\ over.\r\n
 comment8.params=
 comment8.target=void\ resetEnemyVariables()
-numComments=9
+comment9.params=
+comment9.target=java.util.ArrayList\ getAllies()
+numComments=10

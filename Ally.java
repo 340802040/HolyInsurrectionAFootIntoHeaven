@@ -49,6 +49,7 @@ public class Ally extends BattleWorldCharacter
             getImage().setTransparency(150);
             return;
         }
+        
         Point p = path.get(i);
         if (moveTimer.millisElapsed() > 80) {
             setLocation(GameWorld.getX(p.c), GameWorld.getY(p.r));

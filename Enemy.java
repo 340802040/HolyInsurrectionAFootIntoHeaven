@@ -1,4 +1,5 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import java.util.*;
 
 /**
  * Write a description of class Enemy here.
@@ -9,17 +10,20 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class Enemy extends BattleWorldCharacter
 {
     private int speed;
-    private int i; // index for movement
+    private int i, endIndex; // indices for movement
     protected boolean isMoving = false;
     protected boolean moved = false;
     private SimpleTimer moveTimer = new SimpleTimer();
     private int dir; // 0 - 3 representing each cardinal direction
+    private Ally target;
+    private boolean pathPossible;
+    private ArrayList<Point> path = new ArrayList<Point>();
 
     public Enemy(int speed) {
         this.speed = speed;
         setImage("placeholder/enemy.png");
     }
-    
+
     public void addedToWorld(World w) {
         super.addedToWorld(w);
         map[r][c] = 2;
@@ -31,15 +35,72 @@ public class Enemy extends BattleWorldCharacter
             move();
         }
     }
-    
+
     public void startMoving() {
-        isMoving = true;
+        getTargetAlly();
+        checkPath();
+        if (pathPossible) {
+            isMoving = true;    
+        }
+        i = path.size() - 1;
+        endIndex = path.size() <= speed ? -1 : (path.size() - speed);
         map[r][c] = 0; // clear spot
-        i = Greenfoot.getRandomNumber(speed) + 4;
+    }
+
+    public void getTargetAlly() { // for now just gets a random ally
+        ArrayList<Ally> allies = ((BattleWorld)getWorld()).getAllies();
+        target = allies.get(Greenfoot.getRandomNumber(allies.size()));
+    }
+
+    public void checkPath() {
+        // find shortest path from Ally to selector
+        map = ((GameWorld)getWorld()).getMap();
+        int[] dx = {-1, 0, 1, 0};
+        int[] dy = {0, -1, 0, 1};
+        boolean[][] vis = new boolean[GameWorld.GRID_HEIGHT][GameWorld.GRID_WIDTH];
+        Point start = new Point(r, c);
+        Queue<Point> Q = new LinkedList<Point>();
+        Point[][] prev = new Point[GameWorld.GRID_HEIGHT][GameWorld.GRID_WIDTH]; // keeps track of nodes in shortest path
+
+        Q.add(start);
+        vis[start.r][start.c] = true;
+        pathPossible = false;
+
+        while (!Q.isEmpty()) {
+            Point cur = Q.poll();
+            if (cur.r == target.getR() && cur.c == target.getC()) { // if node is target ally
+                getPath(start, prev[cur.r][cur.c], prev);
+                pathPossible = true;
+                break;
+            }
+            else if (map[cur.r][cur.c] == 1) { // if node is any other ally, ignore
+                continue;
+            }
+
+            for (int j = 0; j < 4; j++) { // checks 4 cardinal offsets
+                int nr = cur.r + dy[j], nc = cur.c + dx[j];
+                if (nc >= 0 && nc < GameWorld.GRID_WIDTH && nr >= 0 && nr < GameWorld.GRID_HEIGHT && !vis[nr][nc] && (map[nr][nc] == 0 || map[nr][nc] == 1)) {
+                    Q.add(new Point(nr, nc));
+                    vis[nr][nc] = true;
+                    prev[nr][nc] = cur;
+                }
+            }
+        }
+    }
+    
+    /**
+     * Stores the path from selectedAlly to current selector position.
+     */
+    public void getPath(Point start, Point end, Point[][] prev) {
+        path.clear(); 
+        while (end.r != start.r || end.c != start.c) {
+            path.add(end);
+            end = prev[end.r][end.c];
+        }
     }
 
     public void move() {
-        if (i == -1) {
+        if (i == endIndex) {
             isMoving = false;
             moved = true;
             map[r][c] = 2;
@@ -47,47 +108,10 @@ public class Enemy extends BattleWorldCharacter
             getImage().setTransparency(150);
             return;
         }
-
-        if (moveTimer.millisElapsed() > 250) {
-            boolean flag = true;
-            while (flag) {
-                // chance to switch direction
-                
-                if (Greenfoot.getRandomNumber(3) == 0) {
-                    dir = Greenfoot.getRandomNumber(4);    
-                }
-                switch (dir) {
-                    case 0: // up
-                        if (canMoveTo(r - 1, c)) {
-                            r--;
-                            setLocation(GameWorld.getX(c), GameWorld.getY(r));
-                            flag = false;
-                        }
-                        break;
-                    case 1: // right
-                        if (canMoveTo(r, c + 1)) {
-                            c++;
-                            setLocation(GameWorld.getX(c), GameWorld.getY(r));
-                            flag = false;
-                        }
-                        break;
-                    case 2: // down
-                        if (canMoveTo(r + 1, c)) {
-                            r++;
-                            setLocation(GameWorld.getX(c), GameWorld.getY(r));
-                            flag = false;
-                        }
-                        break;
-                    case 3: // left
-                        if (canMoveTo(r, c - 1)) {
-                            c--;
-                            setLocation(GameWorld.getX(c), GameWorld.getY(r));
-                            flag = false;
-                        }
-                        break;
-                }
-            }
-            
+        
+        Point p = path.get(i);
+        if (moveTimer.millisElapsed() > 80) {
+            setLocation(GameWorld.getX(p.c), GameWorld.getY(p.r));
             i--;
             moveTimer.mark();
         }

@@ -23,10 +23,10 @@ public class OverworldPlayer extends Actor
     }
 
     public void act() {
-        checkWASDMovement();
+        checkMovement();
     }
 
-    public void checkWASDMovement() {
+    public void checkMovement() {
         if (Greenfoot.isKeyDown("w") && canMoveTo(r - 1, c)) {
             if (moveTimer.millisElapsed() > 150) {
                 r--;

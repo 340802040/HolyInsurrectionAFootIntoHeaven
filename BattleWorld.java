@@ -64,6 +64,7 @@ public class BattleWorld extends GameWorld
             curMovingEnemy.startMoving();
         }
         if (curMovingEnemy.moved) {
+            Greenfoot.delay(40);
             i++;
             if (i >= enemies.size()) {
                 return;
@@ -92,6 +93,10 @@ public class BattleWorld extends GameWorld
             e.moved = false;
             e.getImage().setTransparency(255);
         }
+    }
+    
+    public ArrayList<Ally> getAllies() {
+        return allies;
     }
 
     /**

@@ -129,8 +129,8 @@ public class Selector extends Actor
     }
 
     /**
-     * If selector is active, highlights the path from selected Ally to current selector location. 
-     * This shows the user how many tiles it will take them to get to their desired location.
+     * Checks if there is a possible path from the selected ally to current selector(cursor) location.
+     * If yes, highlights the shortest path.
      */
     public void checkPath() {   
         // find shortest path from Ally to selector
@@ -148,8 +148,9 @@ public class Selector extends Actor
 
         while (!Q.isEmpty()) {
             Point cur = Q.poll();
-            if (cur.r == r && cur.c == c && map[cur.r][cur.c] == 2) { // if destination is enemy
-                getPath(start, prev[cur.r][cur.c], prev);
+            if (cur.r == r && cur.c == c && map[cur.r][cur.c] == 2) { // if node is enemy and selector is on one (user wishes to attack)
+                // get path from ally to just 1 tile before the enemy
+            getPath(start, prev[cur.r][cur.c], prev);
                 if (path.size() <= selectedAlly.getSpeed()) {
                     highlightPath();
                     getWorld().addObject(new Highlight("red-highlight.png"), GameWorld.getX(c), GameWorld.getY(r));   
@@ -157,7 +158,7 @@ public class Selector extends Actor
                 }
                 break;
             }
-            else if (map[cur.r][cur.c] == 2) { // ignore enemy cell if selector not on one
+            else if (map[cur.r][cur.c] == 2) { // if node is enemy but selector is not on one, ignore (path should not include enemies)
                 continue;
             }
             else if (cur.r == r && cur.c == c && !(cur.r == start.r && cur.c == start.c)) { // if destination is empty tile and not ally itself

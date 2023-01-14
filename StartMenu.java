@@ -17,20 +17,14 @@ public class StartMenu extends World
      * Constructor for objects of class StartMenu.
      * 
      */
-    public StartMenu()
-    {    
+    public StartMenu() {    
         // Create a new world with 1200x800 cells with a cell size of 1x1 pixels.
         super(1200, 800, 1); 
         
         setBackground("images/TitleScreen.png");
 
-        
-        
-        
         // Add Buttons
         addObject(playButton, 100, 300);
-        
-        
     }
     
     public void act() {
@@ -42,7 +36,7 @@ public class StartMenu extends World
             addObject(selector, 100, 300);
             added = true;
         }
-        if(!Greenfoot.mouseMoved(playButton) && added) {
+        if(Greenfoot.mouseMoved(null) && added && !Greenfoot.mouseMoved(selector) && !Greenfoot.mouseMoved(playButton)) {
             removeObject(selector);
             added = false;
         }

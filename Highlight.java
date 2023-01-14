@@ -6,14 +6,10 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class BlueHighlight extends Actor
+public class Highlight extends Actor
 {
-    public BlueHighlight() {
-        setImage("blue-highlight.png");
+    public Highlight(String path) {
+        setImage(path);
         getImage().setTransparency(100);
-    }
-    
-    public void act() {
-    
     }
 }

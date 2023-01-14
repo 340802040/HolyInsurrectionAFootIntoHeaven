@@ -20,6 +20,7 @@ public class Selector extends Actor
     private boolean pathPossible;
     private SimpleTimer timer = new SimpleTimer(), timer2 = new SimpleTimer();
     private Image selectionIndicator;
+    private int[][] map;
 
     public Selector() {        
         for(int i = 0; i < 2; i++) {
@@ -45,7 +46,7 @@ public class Selector extends Actor
                 setLocation(GameWorld.getX(c), GameWorld.getY(r));
                 if (active) {
                     removeHighlight();
-                    highlightPath();    
+                    checkPath();    
                 }
             }
             else if (Greenfoot.isKeyDown("a") && canMoveTo(r, c - 1)) {
@@ -53,7 +54,7 @@ public class Selector extends Actor
                 setLocation(GameWorld.getX(c), GameWorld.getY(r));
                 if (active) {
                     removeHighlight();
-                    highlightPath();    
+                    checkPath();    
                 }
             }
             else if (Greenfoot.isKeyDown("s") && canMoveTo(r + 1, c)) {
@@ -61,7 +62,7 @@ public class Selector extends Actor
                 setLocation(GameWorld.getX(c), GameWorld.getY(r));
                 if (active) {
                     removeHighlight();
-                    highlightPath();       
+                    checkPath();       
                 }
             }
             else if (Greenfoot.isKeyDown("d") && canMoveTo(r, c + 1)) {
@@ -69,7 +70,7 @@ public class Selector extends Actor
                 setLocation(GameWorld.getX(c), GameWorld.getY(r));
                 if (active) {
                     removeHighlight();
-                    highlightPath();    
+                    checkPath();    
                 }
             }
 
@@ -89,7 +90,7 @@ public class Selector extends Actor
             setImage("images/Animations/Selector/Selector00.png");
         }
     }
-    
+
     public void animateSelector() {
         if(animationTimer.millisElapsed() < 200) {
             return;
@@ -99,7 +100,7 @@ public class Selector extends Actor
         setImage(selectionFrames[imageIndex]);
         imageIndex = (imageIndex + 1) % selectionFrames.length;
     }
-    
+
     public void checkSelect() {
         Ally a = (Ally)getOneIntersectingObject(Ally.class);
         if (timer2.millisElapsed() > 500 && !active && Greenfoot.isKeyDown("space") && a != null && !a.moved) {
@@ -107,7 +108,7 @@ public class Selector extends Actor
             getWorld().addObject(selectionIndicator, GameWorld.getX(c), GameWorld.getY(r));
             selectedAlly = (Ally)getOneIntersectingObject(Ally.class);
             timer.mark();
-            highlightPath();
+            checkPath();
         }
     }
 
@@ -119,7 +120,7 @@ public class Selector extends Actor
             deselect();
         }
     }
-    
+
     public void deselect() {
         active = false;
         getWorld().removeObject(selectionIndicator);
@@ -131,9 +132,9 @@ public class Selector extends Actor
      * If selector is active, highlights the path from selected Ally to current selector location. 
      * This shows the user how many tiles it will take them to get to their desired location.
      */
-    public void highlightPath() {   
+    public void checkPath() {   
         // find shortest path from Ally to selector
-        int[][] map = ((GameWorld)getWorld()).getMap();
+        map = ((GameWorld)getWorld()).getMap();
         int[] dx = {-1, 0, 1, 0};
         int[] dy = {0, -1, 0, 1};
         boolean[][] vis = new boolean[GameWorld.GRID_HEIGHT][GameWorld.GRID_WIDTH];
@@ -147,41 +148,61 @@ public class Selector extends Actor
 
         while (!Q.isEmpty()) {
             Point cur = Q.poll();
-            if (cur.r == r && cur.c == c && !(cur.r == start.r && cur.c == start.c)) {
-                // check if path length is within character move limit
-                // store path
-                Point p = new Point(r, c);
-                path.clear(); 
-                while (p.r != start.r || p.c != start.c) {
-                    path.add(p);
-                    p = prev[p.r][p.c];
-                }
+            if (cur.r == r && cur.c == c && map[cur.r][cur.c] == 2) { // if destination is enemy
+                getPath(start, prev[cur.r][cur.c], prev);
                 if (path.size() <= selectedAlly.getSpeed()) {
-                    // highlight path
-                    for (Point coord : path) {
-                        getWorld().addObject(new BlueHighlight(), GameWorld.getX(coord.c), GameWorld.getX(coord.r));
-                    }
+                    highlightPath();
+                    getWorld().addObject(new Highlight("red-highlight.png"), GameWorld.getX(c), GameWorld.getY(r));   
                     pathPossible = true;
                 }
                 break;
             }
-            
+            else if (map[cur.r][cur.c] == 2) { // ignore enemy cell if selector not on one
+                continue;
+            }
+            else if (cur.r == r && cur.c == c && !(cur.r == start.r && cur.c == start.c)) { // if destination is empty tile and not ally itself
+                getPath(start, cur, prev);
+                if (path.size() <= selectedAlly.getSpeed()) {
+                    highlightPath();
+                    pathPossible = true;
+                }
+                break;
+            }
+
             for (int j = 0; j < 4; j++) { // checks 4 cardinal offsets
                 int nr = cur.r + dy[j], nc = cur.c + dx[j];
-                if (nc >= 0 && nc < GameWorld.GRID_WIDTH && nr >= 0 && nr < GameWorld.GRID_HEIGHT && !vis[nr][nc] && map[nr][nc] == 0) {
+                if (nc >= 0 && nc < GameWorld.GRID_WIDTH && nr >= 0 && nr < GameWorld.GRID_HEIGHT && !vis[nr][nc] && (map[nr][nc] == 0 || map[nr][nc] == 2)) {
+                    // add enemy cells into the queue but ignore them when polled unless selector is currently on an enemy
                     Q.add(new Point(nr, nc));
-                    vis[nr][nc] = true; 
+                    vis[nr][nc] = true;
                     prev[nr][nc] = cur;
                 }
             }
         }
     }
-    
+
+    /**
+     * Stores the path from selectedAlly to current selector position.
+     */
+    public void getPath(Point start, Point end, Point[][] prev) {
+        path.clear(); 
+        while (end.r != start.r || end.c != start.c) {
+            path.add(end);
+            end = prev[end.r][end.c];
+        }
+    }
+
+    public void highlightPath() {
+        for (Point coord : path) {
+            getWorld().addObject(new Highlight("blue-highlight.png"), GameWorld.getX(coord.c), GameWorld.getY(coord.r));   
+        }
+    }
+
     public void removeHighlight() {
         // remove all BlueHighlight's from the world
-        List<BlueHighlight> l = getWorld().getObjects(BlueHighlight.class);
-        for (BlueHighlight b : l) {
-            getWorld().removeObject(b);
+        List<Highlight> l = getWorld().getObjects(Highlight.class);
+        for (Highlight h : l) {
+            getWorld().removeObject(h);
         }
     }
 

@@ -44,18 +44,28 @@ public class BattleWorld extends GameWorld
     }
 
     public void checkPhaseSwitch() {
-        if (phase == "player" && alliesMoved == numAllies) {
-            phase = "enemy";
+        if (phase == "player" && alliesMoved == numAllies && !cardAnimating) {
+            addObject(new BattlePhaseCard("placeholder/enemy-phase.jpg"), getWidth() / 2, getHeight() / 2);
+            cardAnimating = true;
             removeObject(selector);
-            resetAllyVariables();
             //System.out.println("enemy phase");
         }
-        else if (phase == "enemy" && enemiesMoved == numEnemies) {
-            phase = "player";
-            addObject(selector, GameWorld.getX(selector.c), GameWorld.getY(selector.r));
-            resetEnemyVariables();
+        else if (phase == "enemy" && enemiesMoved == numEnemies && !cardAnimating) {
+            addObject(new BattlePhaseCard("placeholder/player-phase.jpg"), getWidth() / 2, getHeight() / 2);
+            cardAnimating = true;
             //System.out.println("player phase");
         }
+    }
+    
+    public void startEnemyPhase() {
+        resetEnemyVariables();
+        phase = "enemy";
+    }
+    
+    public void startPlayerPhase() {
+        resetAllyVariables();
+        phase = "player";
+        addObject(selector, GameWorld.getX(selector.c), GameWorld.getY(selector.r));
     }
 
     public void moveEnemies() {
@@ -63,10 +73,10 @@ public class BattleWorld extends GameWorld
             curMovingEnemy = enemies.get(i);
             curMovingEnemy.startMoving();
         }
-        if (curMovingEnemy.moved) {
+        if (curMovingEnemy.moved && i < enemies.size()) {
             Greenfoot.delay(40);
             i++;
-            if (i >= enemies.size()) {
+            if (i == enemies.size()) {
                 return;
             }
             curMovingEnemy = enemies.get(i);

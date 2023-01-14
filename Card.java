@@ -12,6 +12,8 @@ public abstract class Card extends Actor
     protected int actCount = 0;
     protected boolean isFadingIn = true;
     
+    public abstract void fadeOut();
+    
     public Card(String path) {
         setImage(path);
         getImage().setTransparency(0);
@@ -25,9 +27,7 @@ public abstract class Card extends Actor
         else {
             fadeOut();
         }
-    }
-    
-    public abstract void fadeOut();
+    }    
     
     public void fadeIn() {
         int newTrans = getImage().getTransparency() + 15;

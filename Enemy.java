@@ -9,15 +9,9 @@ import java.util.*;
  */
 public class Enemy extends BattleWorldCharacter
 {
-    private int speed;
-    private int i, endIndex; // indices for movement
-    protected boolean isMoving = false;
-    protected boolean moved = false;
-    private SimpleTimer moveTimer = new SimpleTimer();
+    private int endIndex; // for movement
     private int dir; // 0 - 3 representing each cardinal direction
-    private Ally target;
-    private boolean pathPossible;
-    private ArrayList<Point> path = new ArrayList<Point>();
+    private Ally target; // AI will determine which target enemy chooses to attack
 
     public Enemy(int speed) {
         this.speed = speed;
@@ -101,11 +95,13 @@ public class Enemy extends BattleWorldCharacter
 
     public void move() {
         if (i == endIndex) {
+            BattleWorld bw = ((BattleWorld)getWorld());
             isMoving = false;
             moved = true;
             map[r][c] = 2;
-            ((BattleWorld)getWorld()).increaseEnemiesMoved();
+            bw.enemiesMoved++;
             getImage().setTransparency(150);
+            
             return;
         }
         

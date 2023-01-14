@@ -8,8 +8,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Level1 extends BattleWorld
 {   
-    private Ally a1 = new Ally(10);
-    private Ally a2 = new Ally(10);
+    private FootSoldier a1 = new FootSoldier();
+    private FootSoldier a2 = new FootSoldier();
     //private Ally a3 = new Ally(10);
     private Enemy e1 = new Enemy(10);
     private Enemy e2 = new Enemy(10);
@@ -46,7 +46,7 @@ public class Level1 extends BattleWorld
         for (int r = 0; r < GRID_HEIGHT; r++) {
             for (int c = 0; c < GRID_WIDTH; c++) {
                 if (map[r][c] == 0) { // grass tile
-                    addObject(new RockTile(), GameWorld.getX(c), GameWorld.getY(r));
+                    addObject(new Rock(), GameWorld.getX(c), GameWorld.getY(r));
                 }
             }
         }
@@ -58,6 +58,6 @@ public class Level1 extends BattleWorld
         
         // spawn testing enemies
         addObject(e1, GameWorld.getX(GameWorld.GRID_WIDTH - 5), GameWorld.getY(GameWorld.GRID_HEIGHT - 5));
-        addObject(e2, GameWorld.getX(3), GameWorld.getY(3));
+        addObject(e2, GameWorld.getX(4), GameWorld.getY(3));
     }
 }

@@ -9,25 +9,28 @@ import java.util.*;
  */
 public class Selector extends Actor
 {
+    // DATA
     protected int r, c;
-    private SimpleTimer moveTimer = new SimpleTimer();
-    private SimpleTimer animationTimer = new SimpleTimer();
-    private GreenfootImage[] selectionFrames = new GreenfootImage[2];
-    private int imageIndex = 0;
     private boolean active = false; // whether the selector has selected an ally
     private Ally selectedAlly;
+    // PATH FINDING
     private ArrayList<Point> path = new ArrayList<Point>();
-    private boolean pathPossible;
-    private SimpleTimer timer = new SimpleTimer(), timer2 = new SimpleTimer();
-    private Image selectionIndicator;
+    private boolean pathPossible;   
     private int[][] map;
+    // ANIMATION
+    private SimpleTimer animationTimer = new SimpleTimer();
+    private GreenfootImage[] selectionFrames = new GreenfootImage[2];
+    private Image selectionIndicator = new Image("pink-selector.png");;
+    private int imageIndex = 0;    
+    // MISC
+    private SimpleTimer moveTimer = new SimpleTimer();
+    private SimpleTimer timer = new SimpleTimer(), timer2 = new SimpleTimer();
 
     public Selector() {        
         for(int i = 0; i < 2; i++) {
             selectionFrames[i] = new GreenfootImage("images/Animations/Selector/Selector0" + i + ".png");
         }
         setImage("images/Animations/Selector/Selector00.png");        
-        selectionIndicator = new Image("pink-selector.png");
         timer2.mark();
     }
 
@@ -148,9 +151,9 @@ public class Selector extends Actor
 
         while (!Q.isEmpty()) {
             Point cur = Q.poll();
-            if (cur.r == r && cur.c == c && map[cur.r][cur.c] == 2) { // if node is enemy and selector is on one (user wishes to attack)
+            if (cur.r == r && cur.c == c && map[r][c] == 2) { // if node is enemy and selector is on one (user wishes to attack)
                 // get path from ally to just 1 tile before the enemy
-            getPath(start, prev[cur.r][cur.c], prev);
+                getPath(start, prev[cur.r][cur.c], prev);
                 if (path.size() <= selectedAlly.getSpeed()) {
                     highlightPath();
                     getWorld().addObject(new Highlight("red-highlight.png"), GameWorld.getX(c), GameWorld.getY(r));   
@@ -161,7 +164,7 @@ public class Selector extends Actor
             else if (map[cur.r][cur.c] == 2) { // if node is enemy but selector is not on one, ignore (path should not include enemies)
                 continue;
             }
-            else if (cur.r == r && cur.c == c && !(cur.r == start.r && cur.c == start.c)) { // if destination is empty tile and not ally itself
+            else if (cur.r == r && cur.c == c /*!(cur.r == start.r && cur.c == start.c)*/) { // if destination is empty tile
                 getPath(start, cur, prev);
                 if (path.size() <= selectedAlly.getSpeed()) {
                     highlightPath();
@@ -212,6 +215,9 @@ public class Selector extends Actor
      */
     public void checkConfirmMove() {
         if (timer.millisElapsed() > 500 && active && Greenfoot.isKeyDown("space") && pathPossible) {
+            if (map[r][c] == 2) {
+                selectedAlly.selectedEnemy = (Enemy)getOneIntersectingObject(Enemy.class);
+            }
             selectedAlly.startMoving(path);
             deselect();
             timer2.mark();

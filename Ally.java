@@ -9,15 +9,15 @@ import java.util.*;
  */
 public class Ally extends BattleWorldCharacter
 {
-    private boolean isMoving = false;
-    private ArrayList<Point> path = new ArrayList<Point>();
-    private SimpleTimer moveTimer = new SimpleTimer();
-    private int i; // index for path
-    private int speed; // move limit
-    protected boolean moved = false; // whether has been moved already
+    // DATA
+    protected Enemy selectedEnemy; // whether character has selected an enemy to move to
+    protected String weapon;
+    protected int health;
+    protected int xp, level;
+    protected int ad; // attack damage
+    protected int critChance;
 
-    public Ally(int speed) {
-        this.speed = speed;
+    public Ally() {
         setImage("placeholder/ally.png");
     }
     
@@ -41,12 +41,19 @@ public class Ally extends BattleWorldCharacter
     }
 
     public void move() {
-        if (i == -1) {
+        if (i == -1) { // reached destination
+            BattleWorld bw = ((BattleWorld)getWorld());
             isMoving = false;
             moved = true;
             map[r][c] = 1;
-            ((BattleWorld)getWorld()).increaseAlliesMoved();
+            bw.alliesMoved++;
             getImage().setTransparency(150);
+            if (selectedEnemy != null) {
+                 bw.state = "decision";
+                 bw.addObject(new AttackDecisionWindow("attack-decision-window.png", this), bw.getWidth() - 300, bw.getHeight() / 2);
+                 bw.removeSelector();
+            }
+            
             return;
         }
         
@@ -56,7 +63,7 @@ public class Ally extends BattleWorldCharacter
             i--;
             moveTimer.mark();
         }
-    }
+    }    
     
     public int getSpeed() {
         return speed;

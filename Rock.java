@@ -6,11 +6,11 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class RockTile extends Cell
+public class Rock extends Cell
 {
-    public RockTile() {
+    public Rock() {
         setImage("placeholder/rock-tile.png");
-    }
+    }   
     
     public void act() {
         

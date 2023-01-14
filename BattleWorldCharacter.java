@@ -1,4 +1,5 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import java.util.*;
 
 /**
  * Write a description of class GameWorldCharacter here.
@@ -6,15 +7,24 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class BattleWorldCharacter extends Actor
-{
-    protected int actCount = 0;
+public abstract class BattleWorldCharacter extends Actor
+{    
+    // DATA
     protected int r, c;
+    protected int speed; // move limit
+    // MOVEMENT
+    protected boolean isMoving = false;
+    protected boolean moved = false; // whether has been moved already
+    protected int i; // index for path
+    protected SimpleTimer moveTimer = new SimpleTimer();
+    // PATH FINDING
+    protected ArrayList<Point> path = new ArrayList<Point>();
+    protected boolean pathPossible;
     protected int[][] map;
+    // MISC
+    protected int actCount = 0;
     
-    public BattleWorldCharacter() {
-        
-    }
+    public abstract void move();
     
     public void addedToWorld(World w) {
         r = GameWorld.getYCell(getY());

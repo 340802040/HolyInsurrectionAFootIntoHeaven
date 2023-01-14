@@ -9,7 +9,9 @@ import java.util.*;
  */
 public class BattleWorld extends GameWorld
 {
+    // DATA
     protected String phase = "player";
+    protected String state = "gameplay"; // could be gameplay, decision, or attack animation
     protected int numAllies;
     protected int numEnemies;
     protected int alliesMoved; // # of allies moved in a player phase
@@ -17,6 +19,8 @@ public class BattleWorld extends GameWorld
     protected ArrayList<Ally> allies = new ArrayList<Ally>();
     protected ArrayList<Enemy> enemies = new ArrayList<Enemy>();
     protected Selector selector = new Selector();
+    protected boolean attackAnimating; // whether an attack is currently animating
+    // ENEMY PHASE
     private int i; // index used for going through each enemy during enemy phase
     protected Enemy curMovingEnemy;
 
@@ -30,27 +34,19 @@ public class BattleWorld extends GameWorld
 
     public void act() {
         checkPhaseSwitch();
-        if (phase == "enemy") {
+        if (phase == "enemy" && state == "gameplay") {
             moveEnemies();
         }
     }
 
-    public void increaseAlliesMoved() {
-        alliesMoved++;
-    }
-
-    public void increaseEnemiesMoved() {
-        enemiesMoved++;
-    }
-
     public void checkPhaseSwitch() {
-        if (phase == "player" && alliesMoved == numAllies && !cardAnimating) {
+        if (phase == "player" && state == "gameplay" && alliesMoved == numAllies && !cardAnimating) {
             addObject(new BattlePhaseCard("placeholder/enemy-phase.jpg"), getWidth() / 2, getHeight() / 2);
             cardAnimating = true;
-            removeObject(selector);
+            removeSelector();
             //System.out.println("enemy phase");
         }
-        else if (phase == "enemy" && enemiesMoved == numEnemies && !cardAnimating) {
+        else if (phase == "enemy" && state == "gameplay" && enemiesMoved == numEnemies && !cardAnimating) {
             addObject(new BattlePhaseCard("placeholder/player-phase.jpg"), getWidth() / 2, getHeight() / 2);
             cardAnimating = true;
             //System.out.println("player phase");
@@ -65,7 +61,7 @@ public class BattleWorld extends GameWorld
     public void startPlayerPhase() {
         resetAllyVariables();
         phase = "player";
-        addObject(selector, GameWorld.getX(selector.c), GameWorld.getY(selector.r));
+        addSelector();
     }
 
     public void moveEnemies() {
@@ -92,6 +88,7 @@ public class BattleWorld extends GameWorld
         for (Ally a : allies) {
             a.moved = false;
             a.getImage().setTransparency(255);
+            a.selectedEnemy = null;
         }
     }
 
@@ -107,6 +104,20 @@ public class BattleWorld extends GameWorld
     
     public ArrayList<Ally> getAllies() {
         return allies;
+    }
+    
+    /**
+     * For other classes that need to remove the selector from the world.
+     */
+    public void removeSelector() {
+        removeObject(selector);
+    }
+    
+    /**
+     * Adds selector back into world at the position it left off at.
+     */
+    public void addSelector() {
+        addObject(selector, GameWorld.getX(selector.c), GameWorld.getY(selector.r));
     }
 
     /**

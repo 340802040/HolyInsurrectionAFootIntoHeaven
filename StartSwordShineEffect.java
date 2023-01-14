@@ -10,17 +10,22 @@ public class StartSwordShineEffect extends Actor
 {
     private SimpleTimer animationTimer = new SimpleTimer();
     private SimpleTimer timer = new SimpleTimer();
-    protected GreenfootImage[] shineFrames = new GreenfootImage[5];
+    protected GreenfootImage[] shineFrames = new GreenfootImage[13];
     private boolean marked = false;
     private int imageIndex = 0;
     World cutscene = new Cutscene();
     
     public StartSwordShineEffect() {
-        for(int i = 0; i < 5; i++) {
-            shineFrames[i] = new GreenfootImage("images/Animations/ShineAnimations/Shine0" + i + ".png");
+        for(int i = 0; i < 13; i++) {
+            if(i >= 10) {
+                shineFrames[i] = new GreenfootImage("images/Animations/ShineAnimations/Shine0" + i + ".png");
+            }
+            else {
+                shineFrames[i] = new GreenfootImage("images/Animations/ShineAnimations/Shine00" + i + ".png");
+            }
         }
         
-        setImage("images/Animations/ShineAnimations/Shine00.png");
+        setImage("images/Animations/ShineAnimations/Shine000.png");
     }
     
     public void act()
@@ -30,13 +35,13 @@ public class StartSwordShineEffect extends Actor
             marked = true;
         }
         animateShine();
-        if(timer.millisElapsed() > 1250) {
+        if(timer.millisElapsed() > 2050) {
             Greenfoot.setWorld(cutscene);
         }
     }
     
     public void animateShine() {
-        if(animationTimer.millisElapsed() < 250) {
+        if(animationTimer.millisElapsed() < 150) {
             return;
         }
         animationTimer.mark();

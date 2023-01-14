@@ -8,7 +8,11 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class StartMenu extends World
 {
-
+    // Initialize variables
+    Image playButton = new Image("images/Buttons/PlayButton.png");
+    Image selector = new Image("images/TitleSelector.png");
+    private boolean added = false;
+    
     /**
      * Constructor for objects of class StartMenu.
      * 
@@ -20,19 +24,27 @@ public class StartMenu extends World
         
         setBackground("images/TitleScreen.png");
 
-        // Initialize variables
-        Image playButton = new Image("images/Buttons/PlayButton.png");
-        Image selector = new Image("images/TitleSelector.png");
+        
+        
         
         // Add Buttons
         addObject(playButton, 100, 300);
         
-        // Add Selector
-        addObject(selector, 100, 300);
         
     }
     
     public void act() {
-        
+        checkHovering();
+    }
+    
+    public void checkHovering() {
+        if(Greenfoot.mouseMoved(playButton) && !added) {
+            addObject(selector, 100, 300);
+            added = true;
+        }
+        if(!Greenfoot.mouseMoved(playButton) && added) {
+            removeObject(selector);
+            added = false;
+        }
     }
 }

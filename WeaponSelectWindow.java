@@ -10,7 +10,7 @@ import java.util.*;
 public class WeaponSelectWindow extends AttackInterface
 {
     private WeaponIcon sword;
-    private WeaponIcon lance;
+    private WeaponIcon spear;
     private WeaponIcon bow;
     private WeaponIcon fire;
     private WeaponIcon water;
@@ -18,27 +18,8 @@ public class WeaponSelectWindow extends AttackInterface
     private ArrayList<WeaponIcon> icons = new ArrayList<WeaponIcon>();
     
     public WeaponSelectWindow(String path, Ally a, Enemy e, String attacker) {
-        // take in the class of ally and then displays list of possible weapons/magic      
-        // hovering over each weapon highlights the name of it
         super(path, a, e, attacker);
-        sword = new WeaponIcon("placeholder/weapon-icons/sword.jpg", "sword", a, e, this, attacker);
-        lance = new WeaponIcon("placeholder/weapon-icons/lance.png", "lance", a, e, this, attacker);
-        bow = new WeaponIcon("placeholder/weapon-icons/bow.jpg", "bow", a, e, this, attacker);
-        fire = new WeaponIcon("placeholder/weapon-icons/fire.jpg", "fire", a, e, this, attacker);
-        water = new WeaponIcon("placeholder/weapon-icons/water.jpg", "water", a, e, this, attacker);
-        ice = new WeaponIcon("placeholder/weapon-icons/ice.png", "ice", a, e, this, attacker);
-        
-        // determine ally's weapons
-        if (a instanceof Hero) {
-            
-        }
-        else if (a instanceof FootSoldier) {
-            icons.add(lance);
-        }
-        else if (a instanceof Cavalry) {
-            icons.add(sword);
-            icons.add(lance);
-        }
+        setup();       
     }
     
     public void addedToWorld(World w) {
@@ -49,10 +30,71 @@ public class WeaponSelectWindow extends AttackInterface
         checkGoBack();
     }
     
+    public void setup() {
+        sword = new WeaponIcon("WeaponIcons/Sword.png", "sword", a, e, this, attacker);
+        spear = new WeaponIcon("WeaponIcons/Spear.png", "spear", a, e, this, attacker);
+        bow = new WeaponIcon("WeaponIcons/Bow.png", "bow", a, e, this, attacker);
+        fire = new WeaponIcon("WeaponIcons/Fire.png", "fire", a, e, this, attacker);
+        water = new WeaponIcon("WeaponIcons/Water.png", "water", a, e, this, attacker);
+        ice = new WeaponIcon("WeaponIcons/Ice.png", "ice", a, e, this, attacker); 
+        
+        // determine ally's weapons and bg size
+        setImage("WeaponIcons/SmallWeaponIconBG.png");
+        if (a instanceof Hero) {
+            icons.add(sword);
+            icons.add(spear);
+            icons.add(bow);
+            icons.add(fire);
+            icons.add(water);
+            icons.add(ice);
+            setImage("WeaponIcons/BigWeaponIconBG.png");
+        }
+        else if (a instanceof FootSoldier) {
+            icons.add(spear);
+        }
+        else if (a instanceof Cavalry) {
+            icons.add(sword);
+            icons.add(spear);
+        }
+        else if (a instanceof Archer) {
+            icons.add(bow);
+        }
+        else if (a instanceof Wizard || a instanceof DivineSorceror) {
+            icons.add(fire);
+            icons.add(water);
+            icons.add(ice);
+        }
+        else if (a instanceof Chariot) {
+            icons.add(spear);
+        }
+        else if (a instanceof Crusader) {
+            icons.add(sword);
+            icons.add(spear);
+            icons.add(bow);
+        }
+        else if (a instanceof KingsGuard) {
+            icons.add(sword);
+            icons.add(spear);
+        }
+        else if (a instanceof ElephantRider) {
+            icons.add(spear);   
+        }
+        else if (a instanceof TheBlessedOne) {
+            icons.add(sword);
+            icons.add(spear);
+            icons.add(bow);
+            icons.add(fire);
+            icons.add(water);
+            icons.add(ice);
+            setImage("WeaponIcons/BigWeaponIconBG.png");
+        }
+    }
+    
     public void addWeaponIcons() {
-        for (int i = 0, x = 300; i < icons.size(); i++, x += 300) {
+        int y = getY() - getImage().getHeight() / 2 + 80 / 2;
+        for (int i = 0; i < icons.size(); i++, y += 60) {
             WeaponIcon icon = icons.get(i);
-            getWorld().addObject(icon, x, getWorld().getHeight() / 2);
+            getWorld().addObject(icon, getX(), y);
         }
     }
     
@@ -69,7 +111,7 @@ public class WeaponSelectWindow extends AttackInterface
      */
     public void removeSelf() {
         for (WeaponIcon icon : icons) {
-            getWorld().removeObject(icon);
+            icon.removeSelf();
         }
         super.removeSelf();
     }

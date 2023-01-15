@@ -43,8 +43,8 @@ public class Selector extends Actor
     }
 
     public void checkMovement() {
-        if (moveTimer.millisElapsed() > 90) {
-            if (Greenfoot.isKeyDown("w") && canMoveTo(r - 1, c)) {
+        if (moveTimer.millisElapsed() > 75) {
+            if (Greenfoot.isKeyDown("up") && canMoveTo(r - 1, c)) {
                 r--;
                 setLocation(GameWorld.getX(c), GameWorld.getY(r));
                 if (active) {
@@ -52,7 +52,7 @@ public class Selector extends Actor
                     checkPath();    
                 }
             }
-            else if (Greenfoot.isKeyDown("a") && canMoveTo(r, c - 1)) {
+            else if (Greenfoot.isKeyDown("left") && canMoveTo(r, c - 1)) {
                 c--;
                 setLocation(GameWorld.getX(c), GameWorld.getY(r));
                 if (active) {
@@ -60,7 +60,7 @@ public class Selector extends Actor
                     checkPath();    
                 }
             }
-            else if (Greenfoot.isKeyDown("s") && canMoveTo(r + 1, c)) {
+            else if (Greenfoot.isKeyDown("down") && canMoveTo(r + 1, c)) {
                 r++;
                 setLocation(GameWorld.getX(c), GameWorld.getY(r));
                 if (active) {
@@ -68,7 +68,7 @@ public class Selector extends Actor
                     checkPath();       
                 }
             }
-            else if (Greenfoot.isKeyDown("d") && canMoveTo(r, c + 1)) {
+            else if (Greenfoot.isKeyDown("right") && canMoveTo(r, c + 1)) {
                 c++;
                 setLocation(GameWorld.getX(c), GameWorld.getY(r));
                 if (active) {

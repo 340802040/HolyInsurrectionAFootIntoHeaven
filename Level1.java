@@ -8,7 +8,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Level1 extends BattleWorld
 {   
-    private FootSoldier a1 = new FootSoldier();
+    private Hero a1 = new Hero();
     private Cavalry a2 = new Cavalry();
     private EnemyFootSoldier e1 = new EnemyFootSoldier();
     private EnemyFootSoldier e2 = new EnemyFootSoldier();

@@ -1,16 +1,15 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class FootSoldier here.
+ * Write a description of class Crusader here.
  * 
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class FootSoldier extends Ally
+public class Crusader extends Cavalry
 {
-    public FootSoldier() {
-        speed = 4;
-        health = 20;
+    public Crusader() {
+        super();
     }
     
     public void act() {

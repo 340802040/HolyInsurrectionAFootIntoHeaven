@@ -19,7 +19,7 @@ public class AttackDecisionWindow extends AttackInterface
     public void checkUserInput() {
         BattleWorld bw = (BattleWorld)getWorld();
         if (Greenfoot.isKeyDown("k")) {
-            getWorld().addObject(new WeaponSelectWindow("placeholder/weapon-select-bg.png", a, e, attacker), getWorld().getWidth() / 2, getWorld().getHeight() / 2);
+            getWorld().addObject(new WeaponSelectWindow("placeholder/weapon-select-bg.png", a, e, attacker), getWorld().getWidth() - 200, getWorld().getHeight() / 2);
             removeSelf();
         }
         else if (Greenfoot.isKeyDown("i")) {

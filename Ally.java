@@ -20,7 +20,7 @@ public class Ally extends BattleWorldCharacter
     public Ally() {
         setImage("placeholder/ally.png");
     }
-    
+
     public void addedToWorld(World w) {
         super.addedToWorld(w);
         map[r][c] = 1;
@@ -49,14 +49,13 @@ public class Ally extends BattleWorldCharacter
             bw.alliesMoved++;
             getImage().setTransparency(150);
             if (selectedEnemy != null) {
-                 bw.state = "decision";
-                 bw.addObject(new AttackDecisionWindow("attack-decision-window.png", this), bw.getWidth() - 300, bw.getHeight() / 2);
-                 bw.removeSelector();
+                bw.state = "decision";
+                bw.addObject(new AttackDecisionWindow("attack-decision-window.png", this), bw.getWidth() - 300, bw.getHeight() / 2);
             }
-            
+
             return;
         }
-        
+
         Point p = path.get(i);
         if (moveTimer.millisElapsed() > 80) {
             setLocation(GameWorld.getX(p.c), GameWorld.getY(p.r));
@@ -64,7 +63,7 @@ public class Ally extends BattleWorldCharacter
             moveTimer.mark();
         }
     }    
-    
+
     public int getSpeed() {
         return speed;
     }

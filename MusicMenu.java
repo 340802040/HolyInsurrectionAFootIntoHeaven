@@ -10,6 +10,7 @@ public class MusicMenu extends World
 {
     Image soundIcon = new Image("images/Buttons/MusicSelection/SoundIcon.png");
     Image pauseButton = new Image("images/Buttons/MusicSelection/PauseButton.png");
+    Image backButton = new Image("images/Buttons/MusicSelection/BackButton.png");
     Image selector = new Image("images/Buttons/MusicSelection/MusicSelector.png");
     Image insurmountableButton = new Image("images/Buttons/MusicSelection/AnInsurmountableHindrance.png");
     Image fogButton = new Image("images/Buttons/MusicSelection/ASweepingFog.png");
@@ -19,6 +20,7 @@ public class MusicMenu extends World
     Image fairiesButton = new Image("images/Buttons/MusicSelection/LullabyOfFairies.png");
     Image dahliaButton = new Image("images/Buttons/MusicSelection/MeadowOfDahlias.png");
     Image strollingButton = new Image("images/Buttons/MusicSelection/TheStrolling.png");
+    World startMenu = new StartMenu();
     
     private boolean added = false;
     private boolean clicked = false;
@@ -49,7 +51,7 @@ public class MusicMenu extends World
         addObject(dahliaButton, 600, 575);
         addObject(strollingButton, 600, 650);
         addObject(pauseButton, 1145, 50);
-        
+        addObject(backButton, 1080, 50);
         setBackground("images/Buttons/MusicSelection/MusicBackground.png");
     }
 
@@ -212,6 +214,10 @@ public class MusicMenu extends World
                 removeObject(soundIcon);
                 isSoundIcon = false;
             }
+        }
+        if(Greenfoot.mouseClicked(pauseButton)) {
+            Soundtrack.stopAll();
+            Greenfoot.setWorld(startMenu);
         }
     }
 }

@@ -20,7 +20,6 @@ public class MusicMenu extends World
     Image fairiesButton = new Image("images/Buttons/MusicSelection/LullabyOfFairies.png");
     Image dahliaButton = new Image("images/Buttons/MusicSelection/MeadowOfDahlias.png");
     Image strollingButton = new Image("images/Buttons/MusicSelection/TheStrolling.png");
-    World startMenu = new StartMenu();
     
     private boolean added = false;
     private boolean clicked = false;
@@ -215,9 +214,9 @@ public class MusicMenu extends World
                 isSoundIcon = false;
             }
         }
-        if(Greenfoot.mouseClicked(pauseButton)) {
+        if(Greenfoot.mouseClicked(backButton)) {
             Soundtrack.stopAll();
-            Greenfoot.setWorld(startMenu);
+            Greenfoot.setWorld(new StartMenu());
         }
     }
 }

@@ -10,13 +10,17 @@ public class StartMenu extends World
 {
     // Initialize variables
     Image playButton = new Image("images/Buttons/PlayButton.png");
+    Image albumButton = new Image("images/Buttons/AlbumButton.png");
     Image selector = new Image("images/TitleSelector.png");
     StartSwordShineEffect shine = new StartSwordShineEffect();
     private boolean added = false;
+    private boolean onPlay = false;
+    private boolean onAlbum = false;
     private boolean clicked = false;
     private SimpleTimer animationTimer = new SimpleTimer();
     protected GreenfootImage[] titleFrames = new GreenfootImage[5];
     private int imageIndex = 0;
+    World musicWorld = new MusicMenu();
     
 
     /**
@@ -35,6 +39,10 @@ public class StartMenu extends World
 
         // Add Buttons
         addObject(playButton, 100, 300);
+        addObject(albumButton, 100, 400);
+        
+        // Set soundtrack volume
+        Soundtrack.setVolume();
     }
 
     public void act() {
@@ -47,17 +55,28 @@ public class StartMenu extends World
         if(Greenfoot.mouseMoved(playButton) && !added) {
             addObject(selector, 100, 300);
             added = true;
+            onPlay = true;
         }
-        if(Greenfoot.mouseMoved(null) && added && !Greenfoot.mouseMoved(selector) && !Greenfoot.mouseMoved(playButton)) {
+        else if(Greenfoot.mouseMoved(albumButton) && !added) {
+            addObject(selector, 100, 400);
+            added = true;
+            onAlbum = true;
+        }
+        if(Greenfoot.mouseMoved(null) && added && !Greenfoot.mouseMoved(selector) && !Greenfoot.mouseMoved(playButton) && !Greenfoot.mouseMoved(albumButton)) {
             removeObject(selector);
             added = false;
+            onPlay = false;
+            onAlbum = false;
         }
     }
 
     public void checkClick() {
-        if(Greenfoot.mouseClicked(selector) && !clicked) {
+        if(Greenfoot.mouseClicked(selector) && !clicked && onPlay) {
             clicked = true;
             addObject(shine, 600, 400);
+        }
+        if(Greenfoot.mouseClicked(selector) && !clicked && onAlbum) {
+            Greenfoot.setWorld(musicWorld);
         }
     }
 

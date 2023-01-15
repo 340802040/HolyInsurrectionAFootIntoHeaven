@@ -64,4 +64,8 @@ public class GameWorld extends World
     public int[][] getMap() {
         return map;
     }
+    
+    public void stopped() {
+        //Soundtrack.stopAll();
+    }
 }

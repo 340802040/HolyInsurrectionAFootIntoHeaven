@@ -11,6 +11,7 @@ public abstract class Ally extends BattleWorldCharacter
 {
     protected Enemy selectedEnemy; // whether character has selected an enemy to move to
     protected int xp, level;
+    protected Point prevLocation; // for when user wants to go back
 
     public Ally() {
         setImage("placeholder/ally.png");
@@ -33,6 +34,7 @@ public abstract class Ally extends BattleWorldCharacter
         isMoving = true;
         this.path = path;
         map[r][c] = 0; // clear spot
+        prevLocation = new Point(r, c); // save previous location
     }
 
     public void move() {

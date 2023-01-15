@@ -14,6 +14,7 @@ public class AttackDecisionWindow extends AttackInterface
 
     public void act() {
         checkUserInput();
+        checkGoBack();
     }
 
     public void checkUserInput() {
@@ -23,9 +24,24 @@ public class AttackDecisionWindow extends AttackInterface
             removeSelf();
         }
         else if (Greenfoot.isKeyDown("i")) {
-            
+
         }
         else if (Greenfoot.isKeyDown("j")) {
+            bw.state = "gameplay";
+            removeSelf();
+        }
+    }
+
+    public void checkGoBack() {
+        if (Greenfoot.isKeyDown("b")) {
+            BattleWorld bw = ((BattleWorld)getWorld());
+            int[][] map = bw.getMap();
+            a.moved = false;
+            map[a.r][a.c] = 0; // clear spot
+            bw.alliesMoved--;
+            a.getImage().setTransparency(255);
+            a.selectedEnemy = null;
+            a.setLocation(GameWorld.getX(a.prevLocation.c), GameWorld.getY(a.prevLocation.r));
             bw.state = "gameplay";
             removeSelf();
         }

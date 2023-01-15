@@ -17,4 +17,6 @@ comment5.target=int\ getYCell(int)
 comment5.text=\r\n\ Returns\ the\ cell\ number\ along\ the\ y-axis\ given\ an\ Y\ coordinate.\r\n
 comment6.params=
 comment6.target=int[][]\ getMap()
-numComments=7
+comment7.params=
+comment7.target=void\ stopped()
+numComments=8

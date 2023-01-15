@@ -27,4 +27,8 @@ public class Cutscene extends World
         }
         //setBackground((cutscene.getCurrentImage()));
     }
+    
+    public void stopped() {
+        Soundtrack.stopAll();
+    }
 }

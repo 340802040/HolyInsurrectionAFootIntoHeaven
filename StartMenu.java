@@ -89,4 +89,8 @@ public class StartMenu extends World
         setBackground(titleFrames[imageIndex]);
         imageIndex = (imageIndex + 1) % titleFrames.length;
     }
+    
+    public void stopped() {
+        Soundtrack.stopAll();
+    }
 }

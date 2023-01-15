@@ -19,6 +19,7 @@ public class BattleWorld extends GameWorld
     protected ArrayList<Ally> allies = new ArrayList<Ally>();
     protected ArrayList<Enemy> enemies = new ArrayList<Enemy>();
     protected Selector selector = new Selector();
+    protected boolean selectorAdded; // whether selector is in the world
     protected boolean attackAnimating; // whether an attack is currently animating
     // ENEMY PHASE
     private int i; // index used for going through each enemy during enemy phase
@@ -34,22 +35,31 @@ public class BattleWorld extends GameWorld
 
     public void act() {
         checkPhaseSwitch();
+        checkState();
         if (phase == "enemy" && state == "gameplay") {
             moveEnemies();
         }
     }
 
     public void checkPhaseSwitch() {
-        if (phase == "player" && state == "gameplay" && alliesMoved == numAllies && !cardAnimating) {
+        if (phase == "player" && state == "gameplay" && alliesMoved == numAllies) {
             addObject(new BattlePhaseCard("placeholder/enemy-phase.jpg"), getWidth() / 2, getHeight() / 2);
-            cardAnimating = true;
-            removeSelector();
-            //System.out.println("enemy phase");
+            state = "card animation";
         }
-        else if (phase == "enemy" && state == "gameplay" && enemiesMoved == numEnemies && !cardAnimating) {
+        else if (phase == "enemy" && state == "gameplay" && enemiesMoved == numEnemies) {
             addObject(new BattlePhaseCard("placeholder/player-phase.jpg"), getWidth() / 2, getHeight() / 2);
-            cardAnimating = true;
-            //System.out.println("player phase");
+            state = "card animation";
+        }
+    }
+    
+    public void checkState() {
+        if (state == "gameplay" && phase == "player" && !selectorAdded) {
+            addSelector();
+            selectorAdded = true;
+        }
+        else if (state != "gameplay" && selectorAdded) {
+            removeSelector();
+            selectorAdded = false;
         }
     }
     
@@ -61,7 +71,6 @@ public class BattleWorld extends GameWorld
     public void startPlayerPhase() {
         resetAllyVariables();
         phase = "player";
-        addSelector();
     }
 
     public void moveEnemies() {

@@ -20,6 +20,7 @@ public class BattlePhaseCard extends Card
         int newTrans = getImage().getTransparency() - 15;
         if (newTrans == 0) {
             BattleWorld bw = (BattleWorld)getWorld();
+            bw.state = "gameplay";
             if (bw.phase == "player") {
                 bw.startEnemyPhase();
             }

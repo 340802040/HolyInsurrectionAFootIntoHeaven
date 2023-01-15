@@ -6,12 +6,11 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class ItemWindow extends Window
+public class ItemWindow extends NonAttackInterface
 {    
-    public ItemWindow(String path, Ally ally) {
+    public ItemWindow(String path, Ally a) {
         // prolly take in hashmap of items and their quantity
-        super(path);
-        this.ally = ally;
+        super(path, a);
     }
     
     public void act() {

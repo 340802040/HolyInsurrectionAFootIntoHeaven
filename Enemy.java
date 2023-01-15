@@ -20,6 +20,7 @@ public abstract class Enemy extends BattleWorldCharacter
     private int j = 0;
 
     public Enemy() {
+        critChance = 0;
         setImage("placeholder/enemy.png");
     }
 

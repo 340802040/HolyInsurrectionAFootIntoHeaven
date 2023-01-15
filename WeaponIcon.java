@@ -24,7 +24,7 @@ public class WeaponIcon extends AttackInterface
             BattleWorld bw = (BattleWorld)getWorld();
             a.weapon = name;
             Greenfoot.setWorld(new AttackAnimationWorld(bw, a, e, attacker));
-            window.close();
+            window.removeSelf();
         }
     }
 }

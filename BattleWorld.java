@@ -36,9 +36,6 @@ public class BattleWorld extends GameWorld
     public void act() {
         checkPhaseSwitch();
         checkState();
-        if (phase == "enemy" && state == "gameplay") {
-            moveEnemies();
-        }
     }
 
     public void checkPhaseSwitch() {
@@ -60,6 +57,10 @@ public class BattleWorld extends GameWorld
         else if (state != "gameplay" && selectorAdded) {
             removeSelector();
             selectorAdded = false;
+        }
+        
+        if (phase == "enemy" && state == "gameplay") {
+            moveEnemies();
         }
     }
     

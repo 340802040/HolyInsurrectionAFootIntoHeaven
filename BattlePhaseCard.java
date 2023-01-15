@@ -27,7 +27,6 @@ public class BattlePhaseCard extends Card
             else {
                 bw.startPlayerPhase();
             }
-            bw.cardAnimating = false;
             bw.removeObject(this);
         }
         if (actCount % 4 == 0 && newTrans >= 0) {

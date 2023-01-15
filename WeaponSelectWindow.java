@@ -7,7 +7,7 @@ import java.util.*;
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class WeaponSelectWindow extends Window
+public class WeaponSelectWindow extends AttackInterface
 {
     private WeaponIcon sword;
     private WeaponIcon lance;
@@ -17,27 +17,25 @@ public class WeaponSelectWindow extends Window
     private WeaponIcon ice;
     private ArrayList<WeaponIcon> icons = new ArrayList<WeaponIcon>();
     
-    public WeaponSelectWindow(String path, Ally ally) {
+    public WeaponSelectWindow(String path, Ally a, Enemy e, String attacker) {
         // take in the class of ally and then displays list of possible weapons/magic      
         // hovering over each weapon highlights the name of it
-        // clicking a weapon gives it to the ally, self destructs all WeaponIcons associated with this class, and sets world to attack animation world
-        super(path);
-        this.ally = ally;
-        sword = new WeaponIcon("placeholder/weapon-icons/sword.jpg", "sword", ally, this);
-        lance = new WeaponIcon("placeholder/weapon-icons/lance.png", "lance", ally, this);
-        bow = new WeaponIcon("placeholder/weapon-icons/bow.jpg", "bow", ally, this);
-        fire = new WeaponIcon("placeholder/weapon-icons/fire.jpg", "fire", ally, this);
-        water = new WeaponIcon("placeholder/weapon-icons/water.jpg", "water", ally, this);
-        ice = new WeaponIcon("placeholder/weapon-icons/ice.png", "ice", ally, this);
+        super(path, a, e, attacker);
+        sword = new WeaponIcon("placeholder/weapon-icons/sword.jpg", "sword", a, e, this, attacker);
+        lance = new WeaponIcon("placeholder/weapon-icons/lance.png", "lance", a, e, this, attacker);
+        bow = new WeaponIcon("placeholder/weapon-icons/bow.jpg", "bow", a, e, this, attacker);
+        fire = new WeaponIcon("placeholder/weapon-icons/fire.jpg", "fire", a, e, this, attacker);
+        water = new WeaponIcon("placeholder/weapon-icons/water.jpg", "water", a, e, this, attacker);
+        ice = new WeaponIcon("placeholder/weapon-icons/ice.png", "ice", a, e, this, attacker);
         
         // determine ally's weapons
-        if (ally instanceof Hero) {
+        if (a instanceof Hero) {
             
         }
-        else if (ally instanceof FootSoldier) {
+        else if (a instanceof FootSoldier) {
             icons.add(lance);
         }
-        else if (ally instanceof Cavalry) {
+        else if (a instanceof Cavalry) {
             icons.add(sword);
             icons.add(lance);
         }

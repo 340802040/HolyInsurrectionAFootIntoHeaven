@@ -7,7 +7,7 @@ import java.util.*;
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Ally extends BattleWorldCharacter
+public abstract class Ally extends BattleWorldCharacter
 {
     // DATA
     protected Enemy selectedEnemy; // whether character has selected an enemy to move to
@@ -50,7 +50,7 @@ public class Ally extends BattleWorldCharacter
             getImage().setTransparency(150);
             if (selectedEnemy != null) {
                 bw.state = "decision";
-                bw.addObject(new AttackDecisionWindow("attack-decision-window.png", this), bw.getWidth() - 300, bw.getHeight() / 2);
+                bw.addObject(new AttackDecisionWindow("attack-decision-window.png", this, selectedEnemy, "ally"), bw.getWidth() - 300, bw.getHeight() / 2);
             }
 
             return;

@@ -10,9 +10,8 @@ public class Level1 extends BattleWorld
 {   
     private FootSoldier a1 = new FootSoldier();
     private Cavalry a2 = new Cavalry();
-    //private Ally a3 = new Ally(10);
-    private Enemy e1 = new Enemy(10);
-    private Enemy e2 = new Enemy(10);
+    private EnemyFootSoldier e1 = new EnemyFootSoldier();
+    private EnemyFootSoldier e2 = new EnemyFootSoldier();
     
     public Level1() {
         super(1200, 800, 1);

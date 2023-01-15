@@ -11,7 +11,7 @@ public class BattleWorld extends GameWorld
 {
     // DATA
     protected String phase = "player";
-    protected String state = "gameplay"; // could be gameplay, decision, or attack animation
+    protected String state = "gameplay";
     protected int numAllies;
     protected int numEnemies;
     protected int alliesMoved; // # of allies moved in a player phase

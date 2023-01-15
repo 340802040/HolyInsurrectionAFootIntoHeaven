@@ -53,4 +53,14 @@ public class WeaponSelectWindow extends Window
             getWorld().addObject(icon, x, getWorld().getHeight() / 2);
         }
     }
+    
+    /**
+     * Removes itself and all WeaponIcon's from the world.
+     */
+    public void close() {
+        for (WeaponIcon icon : icons) {
+            getWorld().removeObject(icon);
+        }
+        super.close();
+    }
 }

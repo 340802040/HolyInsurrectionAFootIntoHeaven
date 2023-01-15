@@ -25,8 +25,7 @@ public class WeaponIcon extends Image
             ally.weapon = name;
             Greenfoot.setWorld(new AttackAnimationWorld(bw));
             bw.addSelector();
-            bw.removeObject(window);
-            bw.removeObject(this);
+            window.close();
         }
     }
 }

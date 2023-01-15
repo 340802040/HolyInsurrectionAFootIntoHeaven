@@ -6,24 +6,24 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class WeaponIcon extends Image
+public class WeaponIcon extends AttackInterface
 {
     private String name;
     private Ally ally;
+    private Enemy e;
     private WeaponSelectWindow window;
 
-    public WeaponIcon(String path, String name, Ally ally, WeaponSelectWindow window) {
-        super(path);
+    public WeaponIcon(String path, String name, Ally a, Enemy e, WeaponSelectWindow window, String attacker) {
+        super(path, a, e, attacker);
         this.name = name;
-        this.ally = ally;
         this.window = window;
     }
 
     public void act() {
         if (Greenfoot.mouseClicked(this)) {
             BattleWorld bw = (BattleWorld)getWorld();
-            ally.weapon = name;
-            Greenfoot.setWorld(new AttackAnimationWorld(bw));
+            a.weapon = name;
+            Greenfoot.setWorld(new AttackAnimationWorld(bw, a, e, attacker));
             window.close();
         }
     }

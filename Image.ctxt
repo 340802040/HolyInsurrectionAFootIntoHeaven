@@ -4,5 +4,5 @@ comment0.text=\r\n\ A\ class\ simply\ to\ show\ an\ image.\r\n\ \r\n\ @author\ (
 comment1.params=path
 comment1.target=Image(java.lang.String)
 comment2.params=
-comment2.target=void\ act()
+comment2.target=void\ close()
 numComments=3

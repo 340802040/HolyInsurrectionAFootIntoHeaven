@@ -7,14 +7,19 @@ import java.util.*;
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Enemy extends BattleWorldCharacter
+public abstract class Enemy extends BattleWorldCharacter
 {
+    // DATA
+    private Ally target; // AI will determine which target enemy chooses to attack
+    private boolean willAttack; // if enemy can reach its target within its move limit, willAttack will be true
+    // MOVEMENT
     private int endIndex; // for movement
     private int dir; // 0 - 3 representing each cardinal direction
-    private Ally target; // AI will determine which target enemy chooses to attack
+    // FLASHING
+    private boolean isFlashing, flip; // if enemy about to attack, flash as an indicator
+    private int j = 0;
 
-    public Enemy(int speed) {
-        this.speed = speed;
+    public Enemy() {
         setImage("placeholder/enemy.png");
     }
 
@@ -28,6 +33,9 @@ public class Enemy extends BattleWorldCharacter
         if (isMoving) {
             move();
         }
+        if (isFlashing) {
+            flash();
+        }
     }
 
     public void startMoving() {
@@ -37,7 +45,14 @@ public class Enemy extends BattleWorldCharacter
             isMoving = true;    
         }
         i = path.size() - 1;
-        endIndex = path.size() <= speed ? -1 : (path.size() - speed);
+        if (path.size() <= speed) {
+            endIndex = -1;
+            willAttack = true;
+        }
+        else {
+            endIndex = path.size() - speed - 1;
+            willAttack = false;
+        }       
         map[r][c] = 0; // clear spot
     }
 
@@ -102,6 +117,11 @@ public class Enemy extends BattleWorldCharacter
             bw.enemiesMoved++;
             getImage().setTransparency(150);
             
+            if (willAttack) {
+                ((BattleWorld)getWorld()).state = "other";
+                isFlashing = true;
+            }
+            
             return;
         }
         
@@ -110,6 +130,26 @@ public class Enemy extends BattleWorldCharacter
             setLocation(GameWorld.getX(p.c), GameWorld.getY(p.r));
             i--;
             moveTimer.mark();
+        }
+    }
+    
+    public void flash() {
+        if (j == 13) {
+            Greenfoot.delay(40);
+            BattleWorld bw = (BattleWorld)getWorld();
+            Greenfoot.setWorld(new AttackAnimationWorld(bw, target, this, "enemy"));
+            isFlashing = false;
+            j = 0;
+        }
+        if (actCount % 10 == 0) {
+            if (flip) {
+                getImage().setTransparency(100);    
+            }
+            else {
+                getImage().setTransparency(255);    
+            }
+            flip = !flip;
+            j++;
         }
     }
 

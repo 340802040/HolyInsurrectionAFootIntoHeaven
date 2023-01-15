@@ -12,7 +12,7 @@ public class Image extends Actor
         setImage(path);
     }
     
-    public void close() {
+    public void removeSelf() {
         getWorld().removeObject(this);
     }
 }

@@ -45,6 +45,10 @@ public class WeaponSelectWindow extends AttackInterface
         addWeaponIcons();
     }
     
+    public void act() {
+        checkGoBack();
+    }
+    
     public void addWeaponIcons() {
         for (int i = 0, x = 300; i < icons.size(); i++, x += 300) {
             WeaponIcon icon = icons.get(i);
@@ -52,13 +56,21 @@ public class WeaponSelectWindow extends AttackInterface
         }
     }
     
+    public void checkGoBack() {
+        if (Greenfoot.isKeyDown("b")) {
+            BattleWorld bw = ((BattleWorld)getWorld());
+            bw.addObject(new AttackDecisionWindow("attack-decision-window.png", a, e, "ally"), bw.getWidth() - 250, bw.getHeight() / 2);
+            removeSelf();
+        }
+    }
+    
     /**
      * Removes itself and all WeaponIcon's from the world.
      */
-    public void close() {
+    public void removeSelf() {
         for (WeaponIcon icon : icons) {
             getWorld().removeObject(icon);
         }
-        super.close();
+        super.removeSelf();
     }
 }

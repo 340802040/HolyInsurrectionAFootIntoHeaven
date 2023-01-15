@@ -12,6 +12,10 @@ public abstract class BattleWorldCharacter extends Actor
     // DATA
     protected int r, c;
     protected int speed; // move limit
+    protected int health;
+    protected int damage;
+    protected int critChance;
+    protected String weapon;
     // MOVEMENT
     protected boolean isMoving = false;
     protected boolean moved = false; // whether has been moved already

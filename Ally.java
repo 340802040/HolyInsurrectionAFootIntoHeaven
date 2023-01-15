@@ -9,13 +9,8 @@ import java.util.*;
  */
 public abstract class Ally extends BattleWorldCharacter
 {
-    // DATA
     protected Enemy selectedEnemy; // whether character has selected an enemy to move to
-    protected String weapon;
-    protected int health;
     protected int xp, level;
-    protected int ad; // attack damage
-    protected int critChance;
 
     public Ally() {
         setImage("placeholder/ally.png");
@@ -50,7 +45,11 @@ public abstract class Ally extends BattleWorldCharacter
             getImage().setTransparency(150);
             if (selectedEnemy != null) {
                 bw.state = "decision";
-                bw.addObject(new AttackDecisionWindow("attack-decision-window.png", this, selectedEnemy, "ally"), bw.getWidth() - 300, bw.getHeight() / 2);
+                bw.addObject(new AttackDecisionWindow("attack-decision-window.png", this, selectedEnemy, "ally"), bw.getWidth() - 250, bw.getHeight() / 2);
+            }
+            else {
+                bw.state = "decision";
+                bw.addObject(new NonAttackDecisionWindow("non-attack-decision-window.png", this), bw.getWidth() - 250, bw.getHeight() / 2);
             }
 
             return;

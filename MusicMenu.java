@@ -48,7 +48,7 @@ public class MusicMenu extends World
         addObject(fairiesButton, 600, 500);
         addObject(dahliaButton, 600, 575);
         addObject(strollingButton, 600, 650);
-        addObject(pauseButton, 950, 50);
+        addObject(pauseButton, 1145, 50);
         
         setBackground("images/Buttons/MusicSelection/MusicBackground.png");
     }

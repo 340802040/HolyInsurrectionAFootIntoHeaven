@@ -9,7 +9,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class Archer extends Ally
 {
     public Archer() {
-        speed = 4;
+        moveLimit = 4;
     }
     
     public void act() {

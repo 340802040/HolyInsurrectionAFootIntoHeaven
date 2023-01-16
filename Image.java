@@ -12,6 +12,10 @@ public class Image extends Actor
         setImage(path);
     }
     
+    public Image(TextImage ti) {
+        setImage(ti);
+    }
+    
     public void removeSelf() {
         getWorld().removeObject(this);
     }

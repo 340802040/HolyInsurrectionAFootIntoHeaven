@@ -1,4 +1,5 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import java.util.*;
 
 /**
  * Write a description of class OverworldPlayer here.
@@ -8,7 +9,9 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class OverworldPlayer extends Actor
 {
+    // DATA
     private int r = 0, c = 0;
+    // ANIMATION
     private SimpleTimer moveTimer = new SimpleTimer();
     private SimpleTimer animationTimer = new SimpleTimer();
     protected GreenfootImage[] walkFrames = new GreenfootImage[7];

@@ -9,7 +9,11 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class EnemyFootSoldier extends Enemy
 {
     public EnemyFootSoldier() {
-        speed = 4;
+        moveLimit = 4;
+        maxHealth = 50;
+        health = maxHealth;
+        atk = 5;
+        crit = 20;
     }
     
     public void act() {

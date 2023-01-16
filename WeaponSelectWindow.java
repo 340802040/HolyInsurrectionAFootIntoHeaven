@@ -19,7 +19,7 @@ public class WeaponSelectWindow extends AttackInterface
     
     public WeaponSelectWindow(String path, Ally a, Enemy e, String attacker) {
         super(path, a, e, attacker);
-        setup();       
+        setup();
     }
     
     public void addedToWorld(World w) {
@@ -58,6 +58,10 @@ public class WeaponSelectWindow extends AttackInterface
         }
         else if (a instanceof Archer) {
             icons.add(bow);
+        }
+        else if (a instanceof Sniper) {
+            icons.add(bow);
+            icons.add(sword);
         }
         else if (a instanceof Wizard || a instanceof DivineSorceror) {
             icons.add(fire);

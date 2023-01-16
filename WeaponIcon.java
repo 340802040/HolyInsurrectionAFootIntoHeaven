@@ -9,8 +9,6 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class WeaponIcon extends AttackInterface
 {
     private String name;
-    private Ally ally;
-    private Enemy e;
     private WeaponSelectWindow window;
     private boolean borderAdded;
     private Image border = new Image("WeaponIcons/WeaponSelector2.png");
@@ -18,23 +16,23 @@ public class WeaponIcon extends AttackInterface
     public WeaponIcon(String path, String name, Ally a, Enemy e, WeaponSelectWindow window, String attacker) {
         super(path, a, e, attacker);
         this.name = name;
-        this.window = window;
+        this.window = window;   
     }
 
     public void act() {
         checkSelect();
         checkHover();
     }
-    
+
     public void checkSelect() {
         if (Greenfoot.mouseClicked(this) || Greenfoot.mouseClicked(border)) {
-            BattleWorld bw = (BattleWorld)getWorld();
+            BattleWorld bw =     (BattleWorld)getWorld();
             a.weapon = name;
             Greenfoot.setWorld(new AttackAnimationWorld(bw, a, e, attacker));
             window.removeSelf();
         }
     }
-    
+
     public void checkHover() {
         if(Greenfoot.mouseMoved(this) && !borderAdded) {
             getWorld().addObject(border, getX(), getY());
@@ -45,7 +43,7 @@ public class WeaponIcon extends AttackInterface
             borderAdded = false;
         }
     }
-    
+
     public void removeSelf() {
         if (borderAdded) {
             getWorld().removeObject(border);

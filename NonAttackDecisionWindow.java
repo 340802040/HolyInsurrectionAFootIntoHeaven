@@ -10,6 +10,7 @@ public class NonAttackDecisionWindow extends NonAttackInterface
 {
     public NonAttackDecisionWindow(String path, Ally a) {
         super(path, a);
+        timer.mark();
     }
     
     public void act() {
@@ -29,14 +30,15 @@ public class NonAttackDecisionWindow extends NonAttackInterface
     }
     
     public void checkGoBack() {
-        if (Greenfoot.isKeyDown("b")) {
+        if (Greenfoot.isKeyDown("b") && timer.millisElapsed() > 500) {
             BattleWorld bw = ((BattleWorld)getWorld());
+            bw.alliesMoved--;
             int[][] map = bw.getMap();
             a.moved = false;
-            map[a.r][a.c] = 0; // clear spot
-            bw.alliesMoved--;
-            a.getImage().setTransparency(255);
             a.selectedEnemy = null;
+            a.getImage().setTransparency(255);
+            map[a.r][a.c] = 0; // clear spot
+            map[a.prevLocation.r][a.prevLocation.c] = 1;
             a.setLocation(GameWorld.getX(a.prevLocation.c), GameWorld.getY(a.prevLocation.r));
             bw.state = "gameplay";
             removeSelf();

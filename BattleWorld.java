@@ -12,8 +12,6 @@ public class BattleWorld extends GameWorld
     // DATA
     protected String phase = "player";
     protected String state = "gameplay";
-    protected int numAllies;
-    protected int numEnemies;
     protected int alliesMoved; // # of allies moved in a player phase
     protected int enemiesMoved;
     protected ArrayList<Ally> allies = new ArrayList<Ally>();
@@ -30,7 +28,7 @@ public class BattleWorld extends GameWorld
         setPaintOrder(Selector.class);
 
         // add selector
-        addObject(selector, GameWorld.getX(0), GameWorld.getY(0));
+        addObject(selector, GameWorld.getX(0), GameWorld.getY(0));        
     }
 
     public void act() {
@@ -39,11 +37,11 @@ public class BattleWorld extends GameWorld
     }
 
     public void checkPhaseSwitch() {
-        if (phase == "player" && state == "gameplay" && alliesMoved == numAllies) {
+        if (phase == "player" && state == "gameplay" && alliesMoved == allies.size()) {
             addObject(new BattlePhaseCard("placeholder/enemy-phase.jpg"), getWidth() / 2, getHeight() / 2);
             state = "card animation";
         }
-        else if (phase == "enemy" && state == "gameplay" && enemiesMoved == numEnemies) {
+        else if (phase == "enemy" && state == "gameplay" && enemiesMoved == enemies.size()) {
             addObject(new BattlePhaseCard("placeholder/player-phase.jpg"), getWidth() / 2, getHeight() / 2);
             state = "card animation";
         }
@@ -110,10 +108,6 @@ public class BattleWorld extends GameWorld
             e.moved = false;
             e.getImage().setTransparency(255);
         }
-    }
-    
-    public ArrayList<Ally> getAllies() {
-        return allies;
     }
     
     /**

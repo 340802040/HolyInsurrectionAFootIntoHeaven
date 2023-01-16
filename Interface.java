@@ -9,6 +9,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public abstract class Interface extends Image
 {
     protected Ally a;
+    protected SimpleTimer timer = new SimpleTimer(); // add a buffer before user can choose to go back and prevents going back twice in a row
     
     public Interface(String path, Ally a) {
         super(path);

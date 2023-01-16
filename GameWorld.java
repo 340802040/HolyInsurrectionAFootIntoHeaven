@@ -23,10 +23,10 @@ public class GameWorld extends World
         GRID_HEIGHT = height / BLOCK_SIZE; 
         X_OFFSET = BLOCK_SIZE / 2;
         Y_OFFSET = BLOCK_SIZE / 2;
-        
+
         setPaintOrder(Selector.class);
     }
-    
+
     /**
      * Returns Greenfoot world's X coordinate given a cell number along the x-axis.
      */
@@ -60,11 +60,16 @@ public class GameWorld extends World
         }
         else return (coordinate - Y_OFFSET) % BLOCK_SIZE;
     }
-    
+
     public int[][] getMap() {
         return map;
     }
-    
+
+    public int getRandomNumberInRange(int start, int end) {
+        int x = Greenfoot.getRandomNumber(end - start + 1);
+        return start + x;
+    }
+
     public void stopped() {
         //Soundtrack.stopAll();
     }

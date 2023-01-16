@@ -33,6 +33,11 @@ public class Selector extends Actor
         setImage("images/Animations/Selector/Selector00.png");        
         timer2.mark();
     }
+    
+    public void addedToWorld(World w) {
+        r = GameWorld.getYCell(getY());
+        c = GameWorld.getXCell(getX());
+    }
 
     public void act() {
         checkMovement();
@@ -154,7 +159,7 @@ public class Selector extends Actor
             if (cur.r == r && cur.c == c && map[r][c] == 2) { // if node is enemy and selector is on one (user wishes to attack)
                 // get path from ally to just 1 tile before the enemy
                 getPath(start, prev[cur.r][cur.c], prev);
-                if (path.size() <= selectedAlly.getSpeed()) {
+                if (path.size() <= selectedAlly.moveLimit) {
                     highlightPath();
                     getWorld().addObject(new Highlight("red-highlight.png"), GameWorld.getX(c), GameWorld.getY(r));   
                     pathPossible = true;
@@ -166,7 +171,7 @@ public class Selector extends Actor
             }
             else if (cur.r == r && cur.c == c /*!(cur.r == start.r && cur.c == start.c)*/) { // if destination is empty tile
                 getPath(start, cur, prev);
-                if (path.size() <= selectedAlly.getSpeed()) {
+                if (path.size() <= selectedAlly.moveLimit) {
                     highlightPath();
                     pathPossible = true;
                 }

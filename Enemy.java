@@ -14,13 +14,11 @@ public abstract class Enemy extends BattleWorldCharacter
     private boolean willAttack; // if enemy can reach its target within its move limit, willAttack will be true
     // MOVEMENT
     private int endIndex; // for movement
-    private int dir; // 0 - 3 representing each cardinal direction
     // FLASHING
     private boolean isFlashing, flip; // if enemy about to attack, flash as an indicator
     private int j = 0;
 
     public Enemy() {
-        critChance = 0;
         setImage("placeholder/enemy.png");
     }
 
@@ -46,19 +44,19 @@ public abstract class Enemy extends BattleWorldCharacter
             isMoving = true;    
         }
         i = path.size() - 1;
-        if (path.size() <= speed) {
+        if (path.size() <= moveLimit) {
             endIndex = -1;
             willAttack = true;
         }
         else {
-            endIndex = path.size() - speed - 1;
+            endIndex = path.size() - moveLimit - 1;
             willAttack = false;
         }       
         map[r][c] = 0; // clear spot
     }
 
     public void getTargetAlly() { // for now just gets a random ally
-        ArrayList<Ally> allies = ((BattleWorld)getWorld()).getAllies();
+        ArrayList<Ally> allies = ((BattleWorld)getWorld()).allies;
         target = allies.get(Greenfoot.getRandomNumber(allies.size()));
     }
 

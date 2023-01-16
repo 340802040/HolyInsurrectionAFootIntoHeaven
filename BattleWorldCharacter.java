@@ -11,10 +11,14 @@ public abstract class BattleWorldCharacter extends Actor
 {    
     // DATA
     protected int r, c;
-    protected int speed; // move limit
-    protected int health;
-    protected int damage;
-    protected int critChance;
+    protected int moveLimit;
+    protected int maxHealth, health;
+    protected int atk; // base atk 
+    protected int def;
+    protected int ev; // evasion - each evasion reduces opponent's chance of hitting by 3%
+    protected int speed; // each speed you have greater than your enemy, the hit chance increases by 2%, if speed is greater than opponent's by 4, double attack
+    protected int hitChance;
+    protected int crit; // crit chance
     protected String weapon;
     // MOVEMENT
     protected boolean isMoving = false;
@@ -29,6 +33,11 @@ public abstract class BattleWorldCharacter extends Actor
     protected int actCount = 0;
     
     public abstract void move();
+    
+    public BattleWorldCharacter() {
+        // placeholder values for testing
+        hitChance = 100;
+    }
     
     public void addedToWorld(World w) {
         r = GameWorld.getYCell(getY());

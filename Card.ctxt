@@ -1,12 +1,16 @@
 #BlueJ class context
 comment0.target=Card
 comment0.text=\r\n\ Card\ is\ an\ introduction\ or\ visual\ that\ covers\ most\ of\ the\ screen\ and\r\n\ notifies\ the\ player\ of\ a\ change\ in\ the\ game\ state\ or\ setting.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
-comment1.params=
-comment1.target=void\ fadeOut()
-comment2.params=path
-comment2.target=Card(java.lang.String)
+comment1.params=path
+comment1.target=Card(java.lang.String)
+comment1.text=\r\n\ Creates\ a\ card\ of\ an\ image.\r\n
+comment2.params=ti
+comment2.target=Card(TextImage)
+comment2.text=\r\n\ Creates\ a\ card\ of\ just\ text.\r\n
 comment3.params=
 comment3.target=void\ act()
 comment4.params=
 comment4.target=void\ fadeIn()
-numComments=5
+comment5.params=
+comment5.target=void\ fadeOut()
+numComments=6

@@ -10,11 +10,12 @@ import java.util.*;
 public abstract class Ally extends BattleWorldCharacter
 {
     protected Enemy selectedEnemy; // whether character has selected an enemy to move to
-    protected int xp, level;
+    protected int xp = 0, level = 0, xpNeeded;
     protected Point prevLocation; // for when user wants to go back
 
     public Ally() {
         setImage("placeholder/ally.png");
+        xpNeeded = 100; // palceholder
     }
 
     public void addedToWorld(World w) {
@@ -27,6 +28,7 @@ public abstract class Ally extends BattleWorldCharacter
         if (isMoving) {
             move();
         }
+        checkLevelUp();
     }
 
     public void startMoving(ArrayList<Point> path) {
@@ -63,9 +65,17 @@ public abstract class Ally extends BattleWorldCharacter
             i--;
             moveTimer.mark();
         }
-    }    
-
-    public int getSpeed() {
-        return speed;
+    }
+    
+    public void increaseXp(int amount) {
+        xp += amount;
+    }
+    
+    public void checkLevelUp() {
+        if (xp >= xpNeeded) {
+            level++;
+            xp = 0;
+            xpNeeded += 10; // placeholder
+        }
     }
 }

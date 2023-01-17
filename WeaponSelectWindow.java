@@ -32,15 +32,15 @@ public class WeaponSelectWindow extends AttackInterface
     }
 
     public void setup() {
-        sword = new Image("WeaponIcons/Sword.png");
-        spear = new Image("WeaponIcons/Spear.png");
-        bow = new Image("WeaponIcons/Bow.png");
-        fire = new Image("WeaponIcons/Fire.png");
-        water = new Image("WeaponIcons/Water.png");
-        ice = new Image("WeaponIcons/Ice.png"); 
+        sword = new Image("Panels/WeaponIcons/Sword.png");
+        spear = new Image("Panels/WeaponIcons/Spear.png");
+        bow = new Image("Panels/WeaponIcons/Bow.png");
+        fire = new Image("Panels/WeaponIcons/Fire.png");
+        water = new Image("Panels/WeaponIcons/Water.png");
+        ice = new Image("Panels/WeaponIcons/Ice.png"); 
 
         // determine ally's weapons and bg size
-        setImage("WeaponIcons/SmallWeaponIconBG.png");
+        setImage("Panels/WeaponIcons/SmallWeaponIconBG.png");
         if (a instanceof Hero) {
             icons.add(sword);
             icons.add(spear);
@@ -48,7 +48,7 @@ public class WeaponSelectWindow extends AttackInterface
             icons.add(fire);
             icons.add(water);
             icons.add(ice);
-            setImage("WeaponIcons/BigWeaponIconBG.png");
+            setImage("Panels/WeaponIcons/BigWeaponIconBG.png");
         }
         else if (a instanceof FootSoldier) {
             icons.add(spear);
@@ -91,7 +91,7 @@ public class WeaponSelectWindow extends AttackInterface
             icons.add(fire);
             icons.add(water);
             icons.add(ice);
-            setImage("WeaponIcons/BigWeaponIconBG.png");
+            setImage("Panels/WeaponIcons/BigWeaponIconBG.png");
         }
     }
 
@@ -106,24 +106,31 @@ public class WeaponSelectWindow extends AttackInterface
     public void checkUserInput() {
         if (Greenfoot.isKeyDown("1") && icons.contains(sword)) {
             a.weapon = "Sword";
+            Greenfoot.setWorld(new AttackAnimationWorld((BattleWorld)getWorld(), a, e, "ally"));
+            removeSelf();
         }
         else if (Greenfoot.isKeyDown("2") && icons.contains(spear)) {
             a.weapon = "Spear";
+            Greenfoot.setWorld(new AttackAnimationWorld((BattleWorld)getWorld(), a, e, "ally"));
+            removeSelf();
         }
         else if (Greenfoot.isKeyDown("3") && icons.contains(bow)) {
             a.weapon = "Bow";
+            Greenfoot.setWorld(new AttackAnimationWorld((BattleWorld)getWorld(), a, e, "ally"));
+            removeSelf();
         }
         else if (Greenfoot.isKeyDown("4") && icons.contains(fire)) {
             a.weapon = "Fire";
+            Greenfoot.setWorld(new AttackAnimationWorld((BattleWorld)getWorld(), a, e, "ally"));
+            removeSelf();
         }
         else if (Greenfoot.isKeyDown("5") && icons.contains(water)) {
             a.weapon = "Water";
+            Greenfoot.setWorld(new AttackAnimationWorld((BattleWorld)getWorld(), a, e, "ally"));
+            removeSelf();
         }
         else if (Greenfoot.isKeyDown("6") && icons.contains(ice)) {
             a.weapon = "Ice";
-        }
-
-        if (Greenfoot.isKeyDown("1") || Greenfoot.isKeyDown("2") || Greenfoot.isKeyDown("3") || Greenfoot.isKeyDown("4") || Greenfoot.isKeyDown("5") || Greenfoot.isKeyDown("6")) {
             Greenfoot.setWorld(new AttackAnimationWorld((BattleWorld)getWorld(), a, e, "ally"));
             removeSelf();
         }
@@ -132,7 +139,7 @@ public class WeaponSelectWindow extends AttackInterface
     public void checkGoBack() {
         if (Greenfoot.isKeyDown("j")) {
             BattleWorld bw = ((BattleWorld)getWorld());
-            bw.addObject(new AttackDecisionWindow("attack-decision-window.png", a, e, "ally"), bw.getWidth() - 250, bw.getHeight() / 2);
+            bw.addObject(new AttackDecisionWindow("Panels/AttackDecisionWindow.png", a, e, "ally"), bw.getWidth() - 250, bw.getHeight() / 2);
             removeSelf();
         }
     }

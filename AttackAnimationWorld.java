@@ -22,7 +22,6 @@ public class AttackAnimationWorld extends GameWorld
     private boolean attackerWillCrit, defenderWillCrit;
     private int attackerFrameOfImpact, defenderFrameOfImpact;
     private double attackerWeaponMultiplier, defenderWeaponMultiplier;
-    protected boolean attackerFinished, defenderFinished;
     // FRAMES AND ANIMATION
     private ArrayList<GreenfootImage> attackerFrames = new ArrayList<GreenfootImage>();
     private ArrayList<GreenfootImage> defenderFrames = new ArrayList<GreenfootImage>();
@@ -36,8 +35,8 @@ public class AttackAnimationWorld extends GameWorld
     private String attackerName, defenderName;
     private String attackerPath, attackerCritPath, defenderPath, defenderCritPath; // path to folder with attack frames
     // HEALTH BARS AND LABELS
-    private Image tick = new Image("health-tick.png");
-    private Image greyTick = new Image("grey-health-tick.png"); 
+    private Image tick = new Image("HealthTick.png");
+    private Image greyTick = new Image("GreyHealthTick.png"); 
     private Font font = new Font("Candara", true, false, 70);
     private Text attackerHpLabel, defenderHpLabel;
     private ArrayList<Image> attackerTicks = new ArrayList<Image>();
@@ -77,6 +76,7 @@ public class AttackAnimationWorld extends GameWorld
             attackerActor = new BattleWorldCharacterImage(attackerPath + "Attack000.png");
             defenderActor = new BattleWorldCharacterImage(defenderPath + "Attack000.png");
         }
+        attackerActor.isAnimating = true; // attacker starts fight
         defenderActor.getImage().mirrorHorizontally();
         addObject(attackerActor, getWidth() / 2, getHeight() / 2);
         addObject(defenderActor, getWidth() / 2, getHeight() / 2);
@@ -185,7 +185,7 @@ public class AttackAnimationWorld extends GameWorld
         if (attacker.maxHealth <= 33) {
             // only display 1 row
             for (int i = 0, x = 110, y = getHeight() - allyHpBg.getImage().getHeight() / 2; i < attacker.maxHealth; i++, x += tick.getImage().getWidth() - 6) {
-                Image t = new Image("health-tick.png");
+                Image t = new Image("HealthTick.png");
                 attackerTicks.add(t);
                 addObject(t, x, y);
             }
@@ -193,26 +193,26 @@ public class AttackAnimationWorld extends GameWorld
         else {            
             // top row - length 33
             for (int i = 0, x = 110; i < 33; i++, x += tick.getImage().getWidth() - 6) {
-                Image t = new Image("health-tick.png");
+                Image t = new Image("HealthTick.png");
                 attackerTicks.add(t);
                 addObject(t, x, y1);
             }
             // bottom row - rest
             for (int i = 0, x = 110; i < attacker.maxHealth - 33; i++, x += tick.getImage().getWidth() - 6) {
-                Image t = new Image("health-tick.png");
+                Image t = new Image("HealthTick.png");
                 attackerTicks.add(t);
                 addObject(t, x, y2);
             }
         }
         // make attacker missing health grey
         for (int i = attacker.maxHealth - 1; i >= attacker.health; i--) {
-            attackerTicks.get(i).setImage("grey-health-tick.png");
+            attackerTicks.get(i).setImage("GreyHealthTick.png");
         }
 
         // DEFENDER HEALTH BAR
         if (defender.maxHealth <= 33) {
             for (int i = 0, x = 600 + 110, y = getHeight() - allyHpBg.getImage().getHeight() / 2; i < defender.maxHealth; i++, x += tick.getImage().getWidth() - 6) {
-                Image t = new Image("health-tick.png");
+                Image t = new Image("HealthTick.png");
                 defenderTicks.add(t);
                 addObject(t, x, y);
             }
@@ -220,20 +220,20 @@ public class AttackAnimationWorld extends GameWorld
         else {
             // top row - length 33
             for (int i = 0, x = 600 + 110; i < 33; i++, x += tick.getImage().getWidth() - 6) {
-                Image t = new Image("health-tick.png");
+                Image t = new Image("HealthTick.png");
                 defenderTicks.add(t);
                 addObject(t, x, y1);
             }
             // bottom row - rest
             for (int i = 0, x = 600 + 110; i < defender.maxHealth - 33; i++, x += tick.getImage().getWidth() - 6) {
-                Image t = new Image("health-tick.png");
+                Image t = new Image("HealthTick.png");
                 defenderTicks.add(t);
                 addObject(t, x, y2);
             }
         }
         // make defender missing health grey
         for (int i = defender.maxHealth - 1; i >= defender.health; i--) {
-            defenderTicks.get(i).setImage("grey-health-tick.png");
+            defenderTicks.get(i).setImage("GreyHealthTick.png");
         }
     }
 
@@ -316,13 +316,13 @@ public class AttackAnimationWorld extends GameWorld
         if (wounded == defender) {
             damageDealt = calculateDamageDealtBy(attacker, defender);
             for (int i = defender.health - 1; i >= defender.health - damageDealt; i--) {
-                defenderTicks.get(i).setImage("grey-health-tick.png");
+                defenderTicks.get(i).setImage("GreyHealthTick.png");
             }
         }
         else {
             damageDealt = calculateDamageDealtBy(defender, attacker);
             for (int i = attacker.health - 1; i >= attacker.health - damageDealt; i--) {
-                attackerTicks.get(i).setImage("grey-health-tick.png");
+                attackerTicks.get(i).setImage("GreyHealthTick.png");
             }
         }
         wounded.health -= damageDealt;
@@ -349,12 +349,10 @@ public class AttackAnimationWorld extends GameWorld
         if (wounded.health <= 0) {
             // check if wounded was ally or enemy
             if (wounded instanceof Ally) {
-                returnWorld.allies.remove(wounded);
-                returnWorld.removeObject(wounded);
+                returnWorld.removeAlly(a);
             }
             else if (wounded instanceof Enemy) {
-                returnWorld.enemies.remove(wounded);
-                returnWorld.removeObject(wounded);
+                returnWorld.removeEnemy(e);
                 a.increaseXp(69);
             }
 
@@ -371,7 +369,7 @@ public class AttackAnimationWorld extends GameWorld
     public void animate() {
         // attacker has first strike, then defender retaliates
         if (actCount % 5 == 0) {
-            if (!attackerActor.finished && attackerActor.isAlive) {
+            if (attackerActor.isAnimating) {
                 if (attack_i == attackerFrameOfImpact) {
                     if (attackerWillHit) {
                         cutHp(defender);
@@ -384,12 +382,18 @@ public class AttackAnimationWorld extends GameWorld
                 attackerActor.setImage(attackerFrames.get(attack_i));
                 attack_i++;
                 if (attack_i == attackerFrames.size()) {
-                    Greenfoot.delay(40);
-                    attackerActor.finished = true;
+                    attackerActor.isAnimating = false;
+                    if (defenderActor.isDying) {
+                        attackerActor.finished = true;
+                    }
+                    else {
+                        defenderActor.isAnimating = true; // switch turn to defender
+                    }
+                    
                 }
                 attack_i %= attackerFrames.size();
             }
-            else if (!defenderActor.finished && defenderActor.isAlive) {
+            else if (defenderActor.isAnimating) {
                 if (defend_i == defenderFrameOfImpact) {
                     if (defenderWillHit) {
                         cutHp(attacker);
@@ -402,8 +406,11 @@ public class AttackAnimationWorld extends GameWorld
                 defenderActor.setImage(defenderFrames.get(defend_i));
                 defend_i++;
                 if (defend_i == defenderFrames.size()) {
-                    Greenfoot.delay(40);
+                    defenderActor.isAnimating = false;
                     defenderActor.finished = true;
+                    if (!attackerActor.isDying) {
+                        attackerActor.finished = true;
+                    }
                 }
                 defend_i %= defenderFrames.size();
             }
@@ -412,6 +419,7 @@ public class AttackAnimationWorld extends GameWorld
 
     public void checkFightFinished() {
         if (attackerActor.finished && defenderActor.finished) {
+            Greenfoot.delay(50);
             returnToWorld();
         }
     }

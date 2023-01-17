@@ -19,7 +19,7 @@ public class EndTurnWindow extends NonAttackInterface
     }
         
     public void checkUserInput() {
-        if (timer.millisElapsed() > 500 && Greenfoot.isKeyDown("k")) {
+        if (timer.millisElapsed() > 350 && Greenfoot.isKeyDown("k")) {
             BattleWorld bw = (BattleWorld)getWorld();
             for (Ally ally : bw.allies) {
                 ally.moved = true;

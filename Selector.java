@@ -20,7 +20,7 @@ public class Selector extends Actor
     // ANIMATION
     private SimpleTimer animationTimer = new SimpleTimer();
     private GreenfootImage[] selectionFrames = new GreenfootImage[2];
-    private Image selectionIndicator = new Image("pink-selector.png");;
+    private Image selectionIndicator = new Image("PinkSelector.png");;
     private int imageIndex = 0;    
     // MISC
     private SimpleTimer moveTimer = new SimpleTimer();
@@ -121,7 +121,7 @@ public class Selector extends Actor
         else if (timer2.millisElapsed() > 500 && !active && Greenfoot.isKeyDown("k") && a == null) { // ground selected to end turn
             BattleWorld bw = (BattleWorld)getWorld();
             bw.state = "decision";
-            bw.addObject(new EndTurnWindow("end-turn-window.png", selectedAlly), getWorld().getWidth() - 150, getWorld().getHeight() / 2);
+            bw.addObject(new EndTurnWindow("Panels/EndTurnWindow.png", selectedAlly), getWorld().getWidth() - 150, getWorld().getHeight() / 2);
         }
     }
 
@@ -166,7 +166,7 @@ public class Selector extends Actor
                 getPath(start, prev[cur.r][cur.c], prev);
                 if (path.size() <= selectedAlly.moveLimit) {
                     highlightPath();
-                    getWorld().addObject(new Highlight("red-highlight.png"), GameWorld.getX(c), GameWorld.getY(r));   
+                    getWorld().addObject(new Highlight("RedHighlight.png"), GameWorld.getX(c), GameWorld.getY(r));   
                     pathPossible = true;
                 }
                 break;
@@ -208,7 +208,7 @@ public class Selector extends Actor
 
     public void highlightPath() {
         for (Point coord : path) {
-            getWorld().addObject(new Highlight("blue-highlight.png"), GameWorld.getX(coord.c), GameWorld.getY(coord.r));   
+            getWorld().addObject(new Highlight("BlueHighlight.png"), GameWorld.getX(coord.c), GameWorld.getY(coord.r));   
         }
     }
 

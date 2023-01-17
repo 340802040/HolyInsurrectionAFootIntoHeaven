@@ -127,6 +127,18 @@ public class BattleWorld extends GameWorld
         }
     }
     
+    public void removeAlly(Ally a) {
+        allies.remove(a);
+        map[a.r][a.c] = 0;
+        removeObject(a);
+    }
+    
+    public void removeEnemy(Enemy e) {
+        enemies.remove(e);
+        map[e.r][e.c] = 0;
+        removeObject(e);
+    }
+    
     public int getNumAlliesMoved() {
         int ret = 0;
         for (Ally a : allies) {

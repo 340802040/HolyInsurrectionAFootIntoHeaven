@@ -14,7 +14,7 @@ public abstract class Ally extends BattleWorldCharacter
     protected Point prevLocation; // for when user wants to go back
     
     public Ally() {
-        setImage("placeholder/ally.png");
+        setImage("Placeholder/ally.png");
         xpNeeded = 100; // palceholder
     }
 
@@ -48,11 +48,11 @@ public abstract class Ally extends BattleWorldCharacter
             getImage().setTransparency(150);
             if (selectedEnemy != null) {
                 bw.state = "decision";
-                bw.addObject(new AttackDecisionWindow("attack-decision-window.png", this, selectedEnemy, "ally"), bw.getWidth() - 250, bw.getHeight() / 2);
+                bw.addObject(new AttackDecisionWindow("Panels/AttackDecisionWindow.png", this, selectedEnemy, "ally"), bw.getWidth() - 250, bw.getHeight() / 2);
             }
             else {
                 bw.state = "decision";
-                bw.addObject(new NonAttackDecisionWindow("non-attack-decision-window.png", this), bw.getWidth() - 250, bw.getHeight() / 2);
+                bw.addObject(new NonAttackDecisionWindow("Panels/NonAttackDecisionWindow.png", this), bw.getWidth() - 250, bw.getHeight() / 2);
             }
 
             return;

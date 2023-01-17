@@ -20,23 +20,22 @@ public class AttackDecisionWindow extends AttackInterface
 
     public void checkUserInput() {
         BattleWorld bw = (BattleWorld)getWorld();
-        if (Greenfoot.isKeyDown("k")) {
+        if (Greenfoot.isKeyDown("1")) { // attack
             getWorld().addObject(new WeaponSelectWindow("placeholder/weapon-select-bg.png", a, e, attacker), getWorld().getWidth() - 200, getWorld().getHeight() / 2);
             removeSelf();
         }
-        else if (Greenfoot.isKeyDown("i")) {
+        else if (Greenfoot.isKeyDown("2")) { // item
 
         }
-        else if (Greenfoot.isKeyDown("j")) {
+        else if (Greenfoot.isKeyDown("3")) { // wait
             bw.state = "gameplay";
             removeSelf();
         }
     }
 
     public void checkGoBack() {
-        if (Greenfoot.isKeyDown("b") && timer.millisElapsed() > 500) {
+        if (Greenfoot.isKeyDown("j") && timer.millisElapsed() > 500) {
             BattleWorld bw = ((BattleWorld)getWorld());
-            bw.alliesMoved--;
             int[][] map = bw.getMap();
             a.moved = false;
             a.selectedEnemy = null;

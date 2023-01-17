@@ -31,12 +31,12 @@ public class WeaponSelectWindow extends AttackInterface
     }
     
     public void setup() {
-        sword = new WeaponIcon("WeaponIcons/Sword.png", "sword", a, e, this, attacker);
-        spear = new WeaponIcon("WeaponIcons/Spear.png", "spear", a, e, this, attacker);
-        bow = new WeaponIcon("WeaponIcons/Bow.png", "bow", a, e, this, attacker);
-        fire = new WeaponIcon("WeaponIcons/Fire.png", "fire", a, e, this, attacker);
-        water = new WeaponIcon("WeaponIcons/Water.png", "water", a, e, this, attacker);
-        ice = new WeaponIcon("WeaponIcons/Ice.png", "ice", a, e, this, attacker); 
+        sword = new WeaponIcon("WeaponIcons/Sword.png", "Sword", a, e, this, attacker);
+        spear = new WeaponIcon("WeaponIcons/Spear.png", "Spear", a, e, this, attacker);
+        bow = new WeaponIcon("WeaponIcons/Bow.png", "Bow", a, e, this, attacker);
+        fire = new WeaponIcon("WeaponIcons/Fire.png", "Fire", a, e, this, attacker);
+        water = new WeaponIcon("WeaponIcons/Water.png", "Water", a, e, this, attacker);
+        ice = new WeaponIcon("WeaponIcons/Ice.png", "Ice", a, e, this, attacker); 
         
         // determine ally's weapons and bg size
         setImage("WeaponIcons/SmallWeaponIconBG.png");
@@ -95,7 +95,7 @@ public class WeaponSelectWindow extends AttackInterface
     }
     
     public void addWeaponIcons() {
-        int y = getY() - getImage().getHeight() / 2 + 80 / 2;
+        int y = getY() - getImage().getHeight() / 2 + 43;
         for (int i = 0; i < icons.size(); i++, y += 60) {
             WeaponIcon icon = icons.get(i);
             getWorld().addObject(icon, getX(), y);
@@ -103,7 +103,7 @@ public class WeaponSelectWindow extends AttackInterface
     }
     
     public void checkGoBack() {
-        if (Greenfoot.isKeyDown("b")) {
+        if (Greenfoot.isKeyDown("j")) {
             BattleWorld bw = ((BattleWorld)getWorld());
             bw.addObject(new AttackDecisionWindow("attack-decision-window.png", a, e, "ally"), bw.getWidth() - 250, bw.getHeight() / 2);
             removeSelf();

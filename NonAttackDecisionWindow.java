@@ -20,19 +20,18 @@ public class NonAttackDecisionWindow extends NonAttackInterface
     
     public void checkUserInput() {
         BattleWorld bw = (BattleWorld)getWorld();
-        if (Greenfoot.isKeyDown("i")) {
+        if (Greenfoot.isKeyDown("2")) { // item
             //close();
         }
-        else if (Greenfoot.isKeyDown("j")) {
+        else if (Greenfoot.isKeyDown("3")) { // wait
             bw.state = "gameplay";
             removeSelf();
         }
     }
     
     public void checkGoBack() {
-        if (Greenfoot.isKeyDown("b") && timer.millisElapsed() > 500) {
+        if (Greenfoot.isKeyDown("j") && timer.millisElapsed() > 500) {
             BattleWorld bw = ((BattleWorld)getWorld());
-            bw.alliesMoved--;
             int[][] map = bw.getMap();
             a.moved = false;
             a.selectedEnemy = null;

@@ -6,19 +6,23 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Text extends Image
+public class TextCard extends Card
 {
     private Font font;
     private Color color;
     private Color bgColor;
-    
-    public Text(String s, Font font, Color color, Color bgColor) {
+
+    public TextCard(String s, Font font, Color color, Color bgColor) {
         super(new TextImage(s, font, color, bgColor));
         this.font = font;
         this.color = color;
         this.bgColor = bgColor;
     }
-    
+
+    public void act() {
+        super.act();
+    }
+
     public void setText(String s) {
         setImage(new TextImage(s, font, color, bgColor));
     }

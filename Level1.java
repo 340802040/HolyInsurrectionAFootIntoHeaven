@@ -41,7 +41,7 @@ public class Level1 extends BattleWorld
         for (int r = 0; r < GRID_HEIGHT; r++) {
             for (int c = 0; c < GRID_WIDTH; c++) {
                 if (map[r][c] == 0) { // cloud tile
-                    addObject(new Rock(), GameWorld.getX(c), GameWorld.getY(r));
+                    addObject(new Cloud(), GameWorld.getX(c), GameWorld.getY(r));
                 }
             }
         }        

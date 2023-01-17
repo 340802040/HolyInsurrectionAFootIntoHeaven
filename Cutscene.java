@@ -60,7 +60,7 @@ public class Cutscene extends World
     }
     
     public void checkDialogueFinished() {
-        if (d.dialogue_i == d.dialogues.size()) {
+        if (d.i == d.dialogues.size()) {
             Greenfoot.setWorld(new Tutorial());
         }
     }

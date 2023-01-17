@@ -12,7 +12,7 @@ public class Dialogue extends Actor
 {
     protected ArrayList<Image> dialogues = new ArrayList<Image>();
     private Image curDialogue;
-    protected int dialogue_i = 0;
+    protected int i = 0;
     
     public Dialogue(String path) {
         int size = new File(path).list().length;
@@ -21,21 +21,32 @@ public class Dialogue extends Actor
         }
     }
     
+    public void addedToWorld(World w) {
+        GameWorld gw = (GameWorld)w;
+        if (gw instanceof BattleWorld) {
+            gw.state = "dialogue";            
+        }
+    }
+    
     public void act() {
         displayDialogues();
     }
     
     public void displayDialogues() {
-        if (dialogue_i == dialogues.size()) {
-            getWorld().removeObject(this);
+        if (i == dialogues.size()) {
+            GameWorld gw = ((GameWorld)getWorld());
+            if (gw instanceof BattleWorld) {
+                gw.state = "gameplay";    
+            }
+            gw.removeObject(this);
             return;
         }
-        curDialogue = dialogues.get(dialogue_i);
+        curDialogue = dialogues.get(i);
         if (curDialogue.getWorld() == null) {
             getWorld().addObject(curDialogue, getWorld().getWidth() / 2, getWorld().getHeight() - 150);    
         }
         if (Greenfoot.mouseClicked(curDialogue)) {
-            dialogue_i++;
+            i++;
             getWorld().removeObject(curDialogue);
         }
     }

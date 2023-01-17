@@ -31,6 +31,10 @@ public abstract class Enemy extends BattleWorldCharacter
         super.act();
         if (isMoving) {
             move();
+            walkAnimate();
+        }
+        else {
+            idleAnimate();
         }
         if (isFlashing) {
             flash();
@@ -51,7 +55,8 @@ public abstract class Enemy extends BattleWorldCharacter
         else {
             endIndex = path.size() - moveLimit - 1;
             willAttack = false;
-        }       
+        }
+        prevLocation = new Point(r, c);
         map[r][c] = 0; // clear spot
     }
 
@@ -125,7 +130,9 @@ public abstract class Enemy extends BattleWorldCharacter
         
         Point p = path.get(i);
         if (moveTimer.millisElapsed() > 80) {
+            prevLocation = new Point(r, c);
             setLocation(GameWorld.getX(p.c), GameWorld.getY(p.r));
+            checkDirection();
             i--;
             moveTimer.mark();
         }

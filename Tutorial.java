@@ -8,8 +8,6 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Tutorial extends BattleWorld
 {
-    // DATA
-    private int turn = 0;
     // CHARACTERS
     private Hero hero = new Hero();
     private Crusader prodeus = new Crusader();
@@ -68,5 +66,9 @@ public class Tutorial extends BattleWorld
         }
         
         addObject(oldManD, 0, 0);
+    }
+    
+    public void act() {
+        super.act();
     }
 }

@@ -17,7 +17,7 @@ public class AttackAnimationWorld extends GameWorld
     private Enemy e;
     private String attacker_s;
     private BattleWorldCharacter attacker, defender;
-    private int numAttackerFrames, numAttackerCritFrames, numDefenderFrames, numDefenderCritFrames; 
+    //private int numAttackerFrames, numAttackerCritFrames, numDefenderFrames, numDefenderCritFrames; 
     private boolean attackerWillHit, defenderWillHit;
     private boolean attackerWillCrit, defenderWillCrit;
     private int attackerFrameOfImpact, defenderFrameOfImpact;
@@ -101,30 +101,30 @@ public class AttackAnimationWorld extends GameWorld
 
     public void initFrames() {
         if (attackerWillCrit) {
-            numAttackerCritFrames = new File(attackerCritPath).list().length;
-            for (int i = 0; i < numAttackerCritFrames; i++) {
+            int numFrames = new File(attackerCritPath).list().length;
+            for (int i = 0; i < numFrames; i++) {
                 String zeroes = i < 10 ? "00" : "0";
                 attackerFrames.add(new GreenfootImage(attackerCritPath + "Crit" + zeroes + i + ".png"));
             }
         }
         else {
-            numAttackerFrames = new File(attackerPath).list().length;
-            for (int i = 0; i < numAttackerFrames; i++) {
+            int numFrames = new File(attackerPath).list().length;
+            for (int i = 0; i < numFrames; i++) {
                 String zeroes = i < 10 ? "00" : "0";
                 attackerFrames.add(new GreenfootImage(attackerPath + "Attack" + zeroes + i + ".png"));
             }    
         }
         if (defenderWillCrit) {
-            numDefenderCritFrames = new File(defenderCritPath).list().length;
-            for (int i = 0; i < numDefenderCritFrames; i++) {
+            int numFrames = new File(defenderCritPath).list().length;
+            for (int i = 0; i < numFrames; i++) {
                 String zeroes = i < 10 ? "00" : "0";
                 defenderFrames.add(new GreenfootImage(defenderCritPath + "Crit" + zeroes + i + ".png"));
                 defenderFrames.get(i).mirrorHorizontally();
             }
         }
         else {
-            numDefenderFrames = new File(defenderPath).list().length;
-            for (int i = 0; i < numDefenderFrames; i++) {
+            int numFrames = new File(defenderPath).list().length;
+            for (int i = 0; i < numFrames; i++) {
                 String zeroes = i < 10 ? "00" : "0";
                 defenderFrames.add(new GreenfootImage(defenderPath + "Attack" + zeroes + i + ".png"));
                 defenderFrames.get(i).mirrorHorizontally();

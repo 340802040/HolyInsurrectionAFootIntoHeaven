@@ -1,5 +1,6 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.*;
+import java.io.File;
 
 /**
  * Write a description of class GameWorldCharacter here.
@@ -26,39 +27,59 @@ public abstract class BattleWorldCharacter extends Actor
     protected boolean moved = false; // whether has been moved already
     protected int i; // index for path
     protected SimpleTimer moveTimer = new SimpleTimer();
+    protected Point prevLocation; 
     // PATH FINDING
     protected ArrayList<Point> path = new ArrayList<Point>();
     protected boolean pathPossible;
     protected int[][] map;
     // ANIMATIONS
-    protected ArrayList<Image> walkFrames = new ArrayList<Image>();
-    protected ArrayList<Image> idleFrames = new ArrayList<Image>();
+    protected ArrayList<GreenfootImage> walkFrames = new ArrayList<GreenfootImage>();
+    protected ArrayList<GreenfootImage> idleFrames = new ArrayList<GreenfootImage>();
+    protected int idle_i = 0, walk_i = 0;
+    protected String facing; // which direction they are facing
     // MISC
     protected int actCount = 0;
-    
+
     public abstract void move();
-    
+
     public BattleWorldCharacter() {
         // placeholder values for testing
         hitChance = 90;
         terrainMultiplier = 1; // most characters have no terrain bonus
     }
-    
+
     public void addedToWorld(World w) {
         r = GameWorld.getYCell(getY());
         c = GameWorld.getXCell(getX());
         map = ((GameWorld)getWorld()).getMap();
+        initializeFrames();
     }
-    
+
     public void act() {
         actCount++;
         updateCoords();
     }
-    
-    public void initializeFrames() {
-        
+
+    public void initializeFrames() {        
+        String path = "";
+        if (this instanceof Ally) {
+            path = "Animations/AllyAnimations/Ally" + this.getClass().getSimpleName() + "Animations/";
+        }
+        else if (this instanceof Enemy) {
+            path = "Animations/EnemyAnimations/" + this.getClass().getSimpleName() + "Animations/";
+        }
+
+        // IDLE
+        for (int i = 0; i < 2; i++) {
+            idleFrames.add(new GreenfootImage(path + "Idle/Idle00" + i + ".png"));
+        }
+
+        // WALK
+        for (int i = 0; i < 2; i++) {
+            walkFrames.add(new GreenfootImage(path + "Walk/Walk00" + i + ".png"));
+        }
     }
-    
+
     /**
      * Constantly updates the coordinates (r and c) of game world character as it moves.
      */
@@ -66,11 +87,49 @@ public abstract class BattleWorldCharacter extends Actor
         r = GameWorld.getXCell(getY());
         c = GameWorld.getYCell(getX());
     }
-    
+
+    public void idleAnimate() {
+        if (actCount % 20 == 0) {
+            GreenfootImage frame = new GreenfootImage(idleFrames.get(idle_i));
+            if (moved) {
+                frame.setTransparency(100);
+            }
+            
+            setImage(frame);
+            idle_i++;
+            idle_i %= idleFrames.size();
+        }
+    }
+
+    public void walkAnimate() {
+        if (actCount % 20 == 0) {
+            GreenfootImage frame = new GreenfootImage(walkFrames.get(walk_i));
+            if (facing == "left") {
+                frame.mirrorHorizontally();
+            }
+            
+            setImage(frame);
+            walk_i++;
+            walk_i %= walkFrames.size();  
+        }
+    }
+
+    /**
+     * Checks current direction the character is moving.
+     */
+    public void checkDirection() {
+        if (c - prevLocation.c > 0) {
+            facing = "right";
+        }
+        else if (c - prevLocation.c < 0) {
+            facing = "left";
+        }
+    }
+
     public int getR() {
         return r;
     }
-    
+
     public int getC() {
         return c;
     }

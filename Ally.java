@@ -11,7 +11,6 @@ public abstract class Ally extends BattleWorldCharacter
 {
     protected Enemy selectedEnemy; // whether character has selected an enemy to move to
     protected int xp = 0, level = 0, xpNeeded;
-    protected Point prevLocation; // for when user wants to go back
     
     public Ally() {
         setImage("Placeholder/ally.png");
@@ -27,6 +26,10 @@ public abstract class Ally extends BattleWorldCharacter
         super.act();
         if (isMoving) {
             move();
+            walkAnimate();
+        }
+        else {
+            idleAnimate();
         }
         checkLevelUp();
     }
@@ -59,8 +62,10 @@ public abstract class Ally extends BattleWorldCharacter
         }
 
         Point p = path.get(i);
-        if (moveTimer.millisElapsed() > 80) {
+        if (moveTimer.millisElapsed() > 140) {
+            prevLocation = new Point(r, c);
             setLocation(GameWorld.getX(p.c), GameWorld.getY(p.r));
+            checkDirection();
             i--;
             moveTimer.mark();
         }

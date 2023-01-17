@@ -13,6 +13,7 @@ public class GameWorld extends World
     protected static int GRID_WIDTH, GRID_HEIGHT;
     protected static int X_OFFSET, Y_OFFSET;
     protected int[][] map;
+    protected String state;
 
     public GameWorld(int width, int height, int pixelSize) {    
         super(width, height, pixelSize);

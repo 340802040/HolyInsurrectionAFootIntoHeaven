@@ -11,7 +11,6 @@ public class BattleWorld extends GameWorld
 {
     // DATA
     protected String phase = "player";
-    protected String state = "gameplay";
     protected ArrayList<Ally> allies = new ArrayList<Ally>();
     protected ArrayList<Enemy> enemies = new ArrayList<Enemy>();
     protected Selector selector = new Selector();
@@ -22,6 +21,7 @@ public class BattleWorld extends GameWorld
 
     public BattleWorld(int width, int height, int pixelSize) {    
         super(width, height, pixelSize);
+        state = "gameplay";
         setPaintOrder(Selector.class);
 
         // add selector
@@ -71,7 +71,7 @@ public class BattleWorld extends GameWorld
             addSelector();
             selectorAdded = true;
         }
-        else if (state != "gameplay" && selectorAdded) {
+        else if (state != "gameplay") {
             removeSelector();
             selectorAdded = false;
         }

@@ -8,5 +8,5 @@ comment2.target=void\ act()
 comment3.params=
 comment3.target=void\ animateCutscene()
 comment4.params=
-comment4.target=void\ displayDialogues()
+comment4.target=void\ checkDialogueFinished()
 numComments=5

@@ -10,6 +10,7 @@ public class Hero extends Ally
 {
     public Hero() {
         moveLimit = 4;
+        
     }
     
     public void act() {

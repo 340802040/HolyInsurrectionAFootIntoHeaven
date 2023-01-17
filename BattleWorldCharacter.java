@@ -30,6 +30,9 @@ public abstract class BattleWorldCharacter extends Actor
     protected ArrayList<Point> path = new ArrayList<Point>();
     protected boolean pathPossible;
     protected int[][] map;
+    // ANIMATIONS
+    protected ArrayList<Image> walkFrames = new ArrayList<Image>();
+    protected ArrayList<Image> idleFrames = new ArrayList<Image>();
     // MISC
     protected int actCount = 0;
     
@@ -50,6 +53,10 @@ public abstract class BattleWorldCharacter extends Actor
     public void act() {
         actCount++;
         updateCoords();
+    }
+    
+    public void initializeFrames() {
+        
     }
     
     /**

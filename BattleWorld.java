@@ -16,7 +16,6 @@ public class BattleWorld extends GameWorld
     protected ArrayList<Enemy> enemies = new ArrayList<Enemy>();
     protected Selector selector = new Selector();
     protected boolean selectorAdded; // whether selector is in the world
-    protected boolean attackAnimating; // whether an attack is currently animating
     // ENEMY PHASE
     private int i; // index used for going through each enemy during enemy phase
     protected Enemy curMovingEnemy;

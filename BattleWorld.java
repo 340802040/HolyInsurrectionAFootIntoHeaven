@@ -12,8 +12,6 @@ public class BattleWorld extends GameWorld
     // DATA
     protected String phase = "player";
     protected String state = "gameplay";
-    protected int alliesMoved; // # of allies moved in a player phase
-    protected int enemiesMoved;
     protected ArrayList<Ally> allies = new ArrayList<Ally>();
     protected ArrayList<Enemy> enemies = new ArrayList<Enemy>();
     protected Selector selector = new Selector();
@@ -37,11 +35,11 @@ public class BattleWorld extends GameWorld
     }
 
     public void checkPhaseSwitch() {
-        if (phase == "player" && state == "gameplay" && alliesMoved == allies.size()) {
+        if (phase == "player" && state == "gameplay" && getNumAlliesMoved() == allies.size()) {
             addObject(new BattlePhaseCard("placeholder/enemy-phase.jpg"), getWidth() / 2, getHeight() / 2);
             state = "card animation";
         }
-        else if (phase == "enemy" && state == "gameplay" && enemiesMoved == enemies.size()) {
+        else if (phase == "enemy" && state == "gameplay" && getNumEnemiesMoved() == enemies.size()) {
             addObject(new BattlePhaseCard("placeholder/player-phase.jpg"), getWidth() / 2, getHeight() / 2);
             state = "card animation";
         }
@@ -92,7 +90,6 @@ public class BattleWorld extends GameWorld
      * Resets all necessary Ally variables such as Ally.moved and alliesMoved after player phase is over.
      */
     public void resetAllyVariables() {
-        alliesMoved = 0;
         for (Ally a : allies) {
             a.moved = false;
             a.getImage().setTransparency(255);
@@ -101,13 +98,34 @@ public class BattleWorld extends GameWorld
     }
 
     public void resetEnemyVariables() {
-        enemiesMoved = 0;
         i = 0;
         curMovingEnemy = null;
         for (Enemy e : enemies) {
             e.moved = false;
             e.getImage().setTransparency(255);
         }
+    }
+    
+    public int getNumAlliesMoved() {
+        int ret = 0;
+        for (Ally a : allies) {
+            if (a.moved) {
+                ret++;
+            }
+        }
+        
+        return ret;
+    }
+    
+    public int getNumEnemiesMoved() {
+        int ret = 0;
+        for (Enemy e : enemies) {
+            if (e.moved) {
+                ret++;
+            }
+        }
+        
+        return ret;
     }
     
     /**

@@ -70,6 +70,22 @@ public class GameWorld extends World
         return start + x;
     }
 
+    /**
+     * Returns the weapon multiplier for weapon1 given weapon1 vs weapon2.
+     * 
+     * @param w1 First weapon
+     * @param w2 Second weapon
+     */
+    public static double getWeaponMultiplier(String w1, String w2) {
+        if ((w1 == "Sword" && w2 == "Bow") || (w1 == "Bow" && w2 == "Lance") || (w1 == "Lance" && w2 == "Sword") || (w1 == "Fire" && w2 == "Ice") || (w1 == "Ice" && w2 == "Water") || (w1 == "Water" && w2 == "Fire")) {
+            return 1.3;
+        }
+        else if ((w1 == "Bow" && w2 == "Sword") || (w1 == "Lance" && w2 == "Bow") || (w1 == "Sword" && w2 == "Lance") || (w1 == "Ice" && w2 == "Fire") || (w1 == "Water" && w2 == "Ice") || (w1 == "Fire" && w2 == "Water")) {
+            return 0.7;   
+        }
+        else return 1;
+    }
+
     public void stopped() {
         //Soundtrack.stopAll();
     }

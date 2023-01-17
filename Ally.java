@@ -12,7 +12,8 @@ public abstract class Ally extends BattleWorldCharacter
     protected Enemy selectedEnemy; // whether character has selected an enemy to move to
     protected int xp = 0, level = 0, xpNeeded;
     protected Point prevLocation; // for when user wants to go back
-
+    
+    
     public Ally() {
         setImage("placeholder/ally.png");
         xpNeeded = 100; // palceholder
@@ -45,7 +46,6 @@ public abstract class Ally extends BattleWorldCharacter
             isMoving = false;
             moved = true;
             map[r][c] = 1;
-            bw.alliesMoved++;
             getImage().setTransparency(150);
             if (selectedEnemy != null) {
                 bw.state = "decision";

@@ -48,8 +48,8 @@ public class Selector extends Actor
     }
 
     public void checkMovement() {
-        if (moveTimer.millisElapsed() > 75) {
-            if (Greenfoot.isKeyDown("up") && canMoveTo(r - 1, c)) {
+        if (moveTimer.millisElapsed() > 85) {
+            if (Greenfoot.isKeyDown("w") && canMoveTo(r - 1, c)) {
                 r--;
                 setLocation(GameWorld.getX(c), GameWorld.getY(r));
                 if (active) {
@@ -57,7 +57,7 @@ public class Selector extends Actor
                     checkPath();    
                 }
             }
-            else if (Greenfoot.isKeyDown("left") && canMoveTo(r, c - 1)) {
+            else if (Greenfoot.isKeyDown("a") && canMoveTo(r, c - 1)) {
                 c--;
                 setLocation(GameWorld.getX(c), GameWorld.getY(r));
                 if (active) {
@@ -65,7 +65,7 @@ public class Selector extends Actor
                     checkPath();    
                 }
             }
-            else if (Greenfoot.isKeyDown("down") && canMoveTo(r + 1, c)) {
+            else if (Greenfoot.isKeyDown("s") && canMoveTo(r + 1, c)) {
                 r++;
                 setLocation(GameWorld.getX(c), GameWorld.getY(r));
                 if (active) {
@@ -73,7 +73,7 @@ public class Selector extends Actor
                     checkPath();       
                 }
             }
-            else if (Greenfoot.isKeyDown("right") && canMoveTo(r, c + 1)) {
+            else if (Greenfoot.isKeyDown("d") && canMoveTo(r, c + 1)) {
                 c++;
                 setLocation(GameWorld.getX(c), GameWorld.getY(r));
                 if (active) {
@@ -91,7 +91,7 @@ public class Selector extends Actor
     }
 
     public void checkHovering() {   // Animate selector if hovering
-        if(getOneIntersectingObject(Ally.class) != null) {
+        if (getOneIntersectingObject(Ally.class) != null) {
             animateSelector();
         }
         else {
@@ -111,12 +111,17 @@ public class Selector extends Actor
 
     public void checkSelect() {
         Ally a = (Ally)getOneIntersectingObject(Ally.class);
-        if (timer2.millisElapsed() > 500 && !active && Greenfoot.isKeyDown("space") && a != null && !a.moved) {
+        if (timer2.millisElapsed() > 500 && !active && Greenfoot.isKeyDown("k") && a != null && !a.moved) { // ally selected
             active = true;
             getWorld().addObject(selectionIndicator, GameWorld.getX(c), GameWorld.getY(r));
             selectedAlly = (Ally)getOneIntersectingObject(Ally.class);
             timer.mark();
             checkPath();
+        }
+        else if (timer2.millisElapsed() > 500 && !active && Greenfoot.isKeyDown("k") && a == null) { // ground selected to end turn
+            BattleWorld bw = (BattleWorld)getWorld();
+            bw.state = "decision";
+            bw.addObject(new EndTurnWindow("PlayerO00.png", selectedAlly), getWorld().getWidth() - 150, getWorld().getHeight() / 2);
         }
     }
 
@@ -124,7 +129,7 @@ public class Selector extends Actor
      * Checks if user deselected their current ally.
      */
     public void checkDeselect() {
-        if (active && Greenfoot.isKeyDown("b")) {
+        if (active && Greenfoot.isKeyDown("j")) {
             deselect();
         }
     }
@@ -219,7 +224,7 @@ public class Selector extends Actor
      * Checks if user has confirmed his location to move an Ally to.
      */
     public void checkConfirmMove() {
-        if (timer.millisElapsed() > 500 && active && Greenfoot.isKeyDown("space") && pathPossible) {
+        if (timer.millisElapsed() > 500 && active && Greenfoot.isKeyDown("k") && pathPossible) {
             if (map[r][c] == 2) {
                 selectedAlly.selectedEnemy = (Enemy)getOneIntersectingObject(Enemy.class);
             }

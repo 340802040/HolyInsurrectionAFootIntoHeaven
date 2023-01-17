@@ -113,7 +113,6 @@ public abstract class Enemy extends BattleWorldCharacter
             isMoving = false;
             moved = true;
             map[r][c] = 2;
-            bw.enemiesMoved++;
             getImage().setTransparency(150);
             
             if (willAttack) {
@@ -133,7 +132,7 @@ public abstract class Enemy extends BattleWorldCharacter
     }
     
     public void flash() {
-        if (j == 13) {
+        if (j == 11) {
             Greenfoot.delay(40);
             BattleWorld bw = (BattleWorld)getWorld();
             Greenfoot.setWorld(new AttackAnimationWorld(bw, target, this, "enemy"));

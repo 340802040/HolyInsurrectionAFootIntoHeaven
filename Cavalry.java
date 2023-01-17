@@ -10,6 +10,7 @@ public class Cavalry extends Ally
 {
     public Cavalry() {
         moveLimit = 7;
+        
     }
     
     public void act() {

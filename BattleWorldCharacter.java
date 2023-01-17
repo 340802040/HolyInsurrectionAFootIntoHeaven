@@ -16,7 +16,8 @@ public abstract class BattleWorldCharacter extends Actor
     protected int atk; // base atk 
     protected int def;
     protected int ev; // evasion - each evasion reduces opponent's chance of hitting by 3%
-    protected int speed; // each speed you have greater than your enemy, the hit chance increases by 2%, if speed is greater than opponent's by 4, double attack
+    protected int spd; // each speed you have greater than your enemy, the hit chance increases by 2%, if speed is greater than opponent's by 4, double attack
+    protected int terrainMultiplier;
     protected int hitChance;
     protected int crit; // crit chance
     protected String weapon;
@@ -36,7 +37,8 @@ public abstract class BattleWorldCharacter extends Actor
     
     public BattleWorldCharacter() {
         // placeholder values for testing
-        hitChance = 100;
+        hitChance = 90;
+        terrainMultiplier = 1; // most characters have no terrain bonus
     }
     
     public void addedToWorld(World w) {

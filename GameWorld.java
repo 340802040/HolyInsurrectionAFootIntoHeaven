@@ -65,8 +65,11 @@ public class GameWorld extends World
         return map;
     }
 
+    /**
+     * Gets random number from start to end exclusive.
+     */
     public int getRandomNumberInRange(int start, int end) {
-        int x = Greenfoot.getRandomNumber(end - start + 1);
+        int x = Greenfoot.getRandomNumber(end - start);
         return start + x;
     }
 

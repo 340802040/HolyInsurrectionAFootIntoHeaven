@@ -1,27 +1,35 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Level1 here.
+ * Write a description of class Tutorial here.
  * 
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Level1 extends BattleWorld
-{   
+public class Tutorial extends BattleWorld
+{
+    private int turn = 0;
+    private Hero hero = new Hero();
+    private Crusader prodeus = new Crusader();
     private EnemyFootSoldier e1 = new EnemyFootSoldier();
     private EnemyFootSoldier e2 = new EnemyFootSoldier();
-
-    public Level1() {
-        // level1 should take in array of allies but for now hardcode them
+    private EnemyFootSoldier e3 = new EnemyFootSoldier();
+    private EnemyFootSoldier e4 = new EnemyFootSoldier();
+    private EnemyFootSoldier boss = new EnemyFootSoldier();
+    
+    public Tutorial() {
         super(1200, 800, 1);
-        allies.add(new FootSoldier());
-        allies.add(new FootSoldier());
+        allies.add(hero);
         enemies.add(e1);
         enemies.add(e2);
-
+        enemies.add(e3);
+        enemies.add(e4);
+        enemies.add(boss);
+        
         map = new int[][] {
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 3, 3, 3, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -29,31 +37,30 @@ public class Level1 extends BattleWorld
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0,  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 3, 3, 3, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
         };
         initializeGrid();
-
-        // add all player's allies to a random location at the left of the screen
-        for (Ally a : allies) {
+        
+        // spawn hero
+        addObject(hero, GameWorld.getX(4), GameWorld.getY(GameWorld.GRID_HEIGHT / 2));
+        
+        // spawn enemies randomly
+        for (Enemy e : enemies) {
             while (true) {
-                int randx = Greenfoot.getRandomNumber(5);
-                int randy = Greenfoot.getRandomNumber(GameWorld.GRID_HEIGHT / 2);
-                if (map[randx][randy] == 0) {
-                    addObject(a, GameWorld.getX(randx), GameWorld.getY(randy));         
-                    map[randx][randy] = 1; // just to be safe in case the loop runs faster than Ally's addedToWorld()
+
+                int randr = getRandomNumberInRange(0, GameWorld.GRID_HEIGHT);
+                int randc = getRandomNumberInRange(GameWorld.GRID_WIDTH - 6, GameWorld.GRID_WIDTH - 1);
+                if (map[randr][randc] == 0) {
+                    addObject(e, GameWorld.getX(randc), GameWorld.getY(randr));         
+                    map[randr][randc] = 2; // just to be safe in case the loop runs faster than character's addedToWorld()
                     break;
                 }
             }
         }
-
-        // spawn testing enemies
-        addObject(e1, GameWorld.getX(GameWorld.GRID_WIDTH - 5), GameWorld.getY(GameWorld.GRID_HEIGHT - 5));
-        addObject(e2, GameWorld.getX(4), GameWorld.getY(3));
     }
 }

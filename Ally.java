@@ -13,7 +13,6 @@ public abstract class Ally extends BattleWorldCharacter
     protected int xp = 0, level = 0, xpNeeded;
     protected Point prevLocation; // for when user wants to go back
     
-    
     public Ally() {
         setImage("placeholder/ally.png");
         xpNeeded = 100; // palceholder

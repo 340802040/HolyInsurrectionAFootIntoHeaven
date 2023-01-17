@@ -20,10 +20,10 @@ public class NonAttackDecisionWindow extends NonAttackInterface
     
     public void checkUserInput() {
         BattleWorld bw = (BattleWorld)getWorld();
-        if (Greenfoot.isKeyDown("2")) { // item
+        if (Greenfoot.isKeyDown("x")) { // item
             //close();
         }
-        else if (Greenfoot.isKeyDown("3")) { // wait
+        else if (Greenfoot.isKeyDown("c")) { // wait
             bw.state = "gameplay";
             removeSelf();
         }

@@ -9,35 +9,36 @@ import java.util.*;
  */
 public class WeaponSelectWindow extends AttackInterface
 {
-    private WeaponIcon sword;
-    private WeaponIcon spear;
-    private WeaponIcon bow;
-    private WeaponIcon fire;
-    private WeaponIcon water;
-    private WeaponIcon ice;
-    private ArrayList<WeaponIcon> icons = new ArrayList<WeaponIcon>();
-    
+    private Image sword;
+    private Image spear;
+    private Image bow;
+    private Image fire;
+    private Image water;
+    private Image ice;
+    private ArrayList<Image> icons = new ArrayList<Image>();
+
     public WeaponSelectWindow(String path, Ally a, Enemy e, String attacker) {
         super(path, a, e, attacker);
         setup();
     }
-    
+
     public void addedToWorld(World w) {
         addWeaponIcons();
     }
-    
+
     public void act() {
         checkGoBack();
+        checkUserInput();
     }
-    
+
     public void setup() {
-        sword = new WeaponIcon("WeaponIcons/Sword.png", "Sword", a, e, this, attacker);
-        spear = new WeaponIcon("WeaponIcons/Spear.png", "Spear", a, e, this, attacker);
-        bow = new WeaponIcon("WeaponIcons/Bow.png", "Bow", a, e, this, attacker);
-        fire = new WeaponIcon("WeaponIcons/Fire.png", "Fire", a, e, this, attacker);
-        water = new WeaponIcon("WeaponIcons/Water.png", "Water", a, e, this, attacker);
-        ice = new WeaponIcon("WeaponIcons/Ice.png", "Ice", a, e, this, attacker); 
-        
+        sword = new Image("WeaponIcons/Sword.png");
+        spear = new Image("WeaponIcons/Spear.png");
+        bow = new Image("WeaponIcons/Bow.png");
+        fire = new Image("WeaponIcons/Fire.png");
+        water = new Image("WeaponIcons/Water.png");
+        ice = new Image("WeaponIcons/Ice.png"); 
+
         // determine ally's weapons and bg size
         setImage("WeaponIcons/SmallWeaponIconBG.png");
         if (a instanceof Hero) {
@@ -93,15 +94,41 @@ public class WeaponSelectWindow extends AttackInterface
             setImage("WeaponIcons/BigWeaponIconBG.png");
         }
     }
-    
+
     public void addWeaponIcons() {
         int y = getY() - getImage().getHeight() / 2 + 43;
         for (int i = 0; i < icons.size(); i++, y += 60) {
-            WeaponIcon icon = icons.get(i);
+            Image icon = icons.get(i);
             getWorld().addObject(icon, getX(), y);
         }
     }
-    
+
+    public void checkUserInput() {
+        if (Greenfoot.isKeyDown("1") && icons.contains(sword)) {
+            a.weapon = "Sword";
+        }
+        else if (Greenfoot.isKeyDown("2") && icons.contains(spear)) {
+            a.weapon = "Spear";
+        }
+        else if (Greenfoot.isKeyDown("3") && icons.contains(bow)) {
+            a.weapon = "Bow";
+        }
+        else if (Greenfoot.isKeyDown("4") && icons.contains(fire)) {
+            a.weapon = "Fire";
+        }
+        else if (Greenfoot.isKeyDown("5") && icons.contains(water)) {
+            a.weapon = "Water";
+        }
+        else if (Greenfoot.isKeyDown("6") && icons.contains(ice)) {
+            a.weapon = "Ice";
+        }
+
+        if (Greenfoot.isKeyDown("1") || Greenfoot.isKeyDown("2") || Greenfoot.isKeyDown("3") || Greenfoot.isKeyDown("4") || Greenfoot.isKeyDown("5") || Greenfoot.isKeyDown("6")) {
+            Greenfoot.setWorld(new AttackAnimationWorld((BattleWorld)getWorld(), a, e, "ally"));
+            removeSelf();
+        }
+    }
+
     public void checkGoBack() {
         if (Greenfoot.isKeyDown("j")) {
             BattleWorld bw = ((BattleWorld)getWorld());
@@ -109,12 +136,12 @@ public class WeaponSelectWindow extends AttackInterface
             removeSelf();
         }
     }
-    
+
     /**
      * Removes itself and all WeaponIcon's from the world.
      */
     public void removeSelf() {
-        for (WeaponIcon icon : icons) {
+        for (Image icon : icons) {
             icon.removeSelf();
         }
         super.removeSelf();

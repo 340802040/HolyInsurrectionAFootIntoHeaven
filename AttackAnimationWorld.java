@@ -22,13 +22,12 @@ public class AttackAnimationWorld extends GameWorld
     private boolean attackerWillCrit, defenderWillCrit;
     private int attackerFrameOfImpact, defenderFrameOfImpact;
     private double attackerWeaponMultiplier, defenderWeaponMultiplier;
-    protected String state = "attacking";
+    protected boolean attackerFinished, defenderFinished;
     // FRAMES AND ANIMATION
     private ArrayList<GreenfootImage> attackerFrames = new ArrayList<GreenfootImage>();
     private ArrayList<GreenfootImage> defenderFrames = new ArrayList<GreenfootImage>();
     private int attack_i = 0, defend_i = 0; // indexes for aniamtion
     private boolean framesInitialized = false;
-    protected boolean deathAnimating;
     // IMAGE ACTORS
     private Image allyHpBg = new Image("AllyHPbg.png");
     private Image enemyHpBg = new Image("EnemyHPbg.png");
@@ -360,9 +359,8 @@ public class AttackAnimationWorld extends GameWorld
             }
 
             // check if wounded was attacker or defender
-            deathAnimating = true;
             if (wounded == attacker) {
-                attackerActor.die();      
+                attackerActor.die();
             }
             else if (wounded == defender) {
                 defenderActor.die();
@@ -373,7 +371,7 @@ public class AttackAnimationWorld extends GameWorld
     public void animate() {
         // attacker has first strike, then defender retaliates
         if (actCount % 5 == 0) {
-            if (state == "attacking") {
+            if (!attackerActor.finished && attackerActor.isAlive) {
                 if (attack_i == attackerFrameOfImpact) {
                     if (attackerWillHit) {
                         cutHp(defender);
@@ -386,12 +384,12 @@ public class AttackAnimationWorld extends GameWorld
                 attackerActor.setImage(attackerFrames.get(attack_i));
                 attack_i++;
                 if (attack_i == attackerFrames.size()) {
-                    Greenfoot.delay(30);
-                    state = "defending";
+                    Greenfoot.delay(40);
+                    attackerActor.finished = true;
                 }
                 attack_i %= attackerFrames.size();
             }
-            else if (state == "defending") {
+            else if (!defenderActor.finished && defenderActor.isAlive) {
                 if (defend_i == defenderFrameOfImpact) {
                     if (defenderWillHit) {
                         cutHp(attacker);
@@ -405,8 +403,7 @@ public class AttackAnimationWorld extends GameWorld
                 defend_i++;
                 if (defend_i == defenderFrames.size()) {
                     Greenfoot.delay(40);
-                    state = "finished";
-                    
+                    defenderActor.finished = true;
                 }
                 defend_i %= defenderFrames.size();
             }
@@ -414,10 +411,14 @@ public class AttackAnimationWorld extends GameWorld
     }
 
     public void checkFightFinished() {
-        if (state == "finished" && !deathAnimating) {
-            returnWorld.state = "gameplay";
-            Greenfoot.setWorld(returnWorld);    
+        if (attackerActor.finished && defenderActor.finished) {
+            returnToWorld();
         }
+    }
+
+    public void returnToWorld() {
+        returnWorld.state = "gameplay";
+        Greenfoot.setWorld(returnWorld);
     }
 }
 

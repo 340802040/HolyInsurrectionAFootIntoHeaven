@@ -33,6 +33,28 @@ public class BattleWorld extends GameWorld
         checkPhaseSwitch();
         checkState();
     }
+    
+    public void initializeGrid() {
+        for (int r = 0; r < GRID_HEIGHT; r++) {
+            for (int c = 0; c < GRID_WIDTH; c++) {
+                if (map[r][c] == 0) {
+                    addObject(new Cell("EnvironmentTiles/cloud.png"), GameWorld.getX(c), GameWorld.getY(r));
+                }
+                else if (map[r][c] == 3) {
+                    addObject(new Cell("EnvironmentTiles/mountain.png"), GameWorld.getX(c), GameWorld.getY(r));
+                }
+                else if (map[r][c] == 4) {
+                    addObject(new Cell("EnvironmentTiles/forest.png"), GameWorld.getX(c), GameWorld.getY(r));
+                }
+                else if (map[r][c] == 5) {
+                    addObject(new Cell("EnvironmentTiles/house.png"), GameWorld.getX(c), GameWorld.getY(r));
+                }
+                else if (map[r][c] == 6) {
+                    addObject(new Cell("EnvironmentTiles/market.png"), GameWorld.getX(c), GameWorld.getY(r));
+                }
+            }
+        } 
+    }
 
     public void checkPhaseSwitch() {
         if (phase == "player" && state == "gameplay" && getNumAlliesMoved() == allies.size()) {
@@ -166,5 +188,9 @@ public class BattleWorld extends GameWorld
      * 0 - Available space
      * 1 - Ally
      * 2 - Enemy
+     * 3 - Mountain
+     * 4 - Forest
+     * 5 - House
+     * 6 - Market
      */
 }

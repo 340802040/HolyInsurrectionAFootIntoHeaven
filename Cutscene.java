@@ -38,7 +38,7 @@ public class Cutscene extends World
         }
         animateCutscene();
         if(timer.millisElapsed() > 7500) {
-            setBackground("images/Cutscens/Cutscene049.png");
+            setBackground("images/Cutscenes/Cutscene049.png");
         }
     }
     

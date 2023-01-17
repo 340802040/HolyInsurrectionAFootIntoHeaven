@@ -121,7 +121,7 @@ public class Selector extends Actor
         else if (timer2.millisElapsed() > 500 && !active && Greenfoot.isKeyDown("k") && a == null) { // ground selected to end turn
             BattleWorld bw = (BattleWorld)getWorld();
             bw.state = "decision";
-            bw.addObject(new EndTurnWindow("PlayerO00.png", selectedAlly), getWorld().getWidth() - 150, getWorld().getHeight() / 2);
+            bw.addObject(new EndTurnWindow("end-turn-window.png", selectedAlly), getWorld().getWidth() - 150, getWorld().getHeight() / 2);
         }
     }
 

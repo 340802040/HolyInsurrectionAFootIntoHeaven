@@ -10,7 +10,8 @@ public class BattleWorldCharacterImage extends Image
 {
     private int actCount = 0;
     protected boolean isFlashing, isFading, flip;
-    protected boolean isDead;
+    protected boolean isAlive = true;
+    protected boolean finished; // whether it has finished all its attacks and animations such as dying
     private int j = 0;
 
     public BattleWorldCharacterImage(String path) {
@@ -29,11 +30,11 @@ public class BattleWorldCharacterImage extends Image
 
     public void die() {
         isFlashing = true;
+        isAlive = false;
     }
 
     public void flash() {
         if (j == 7) {
-            Greenfoot.delay(40);
             isFlashing = false;
             isFading = true;
         }
@@ -53,8 +54,7 @@ public class BattleWorldCharacterImage extends Image
         int newTrans = getImage().getTransparency() - 5;
         if (newTrans == 0) {
             isFading = false;
-            ((AttackAnimationWorld)getWorld()).deathAnimating = false;
-            Greenfoot.delay(30);
+            finished = true;
         }
         if (actCount % 3 == 0 && newTrans >= 0) {
             getImage().setTransparency(newTrans);

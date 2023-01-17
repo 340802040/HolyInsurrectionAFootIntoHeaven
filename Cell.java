@@ -8,11 +8,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Cell extends Actor
 {
-    public Cell() {
-        
-    }
-    
-    public void act() {
-        
+    public Cell(String path) {
+        setImage(path);
     }
 }

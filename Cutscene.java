@@ -9,26 +9,46 @@ import java.util.*;
  */
 public class Cutscene extends World
 {
-    private GifImage cutscene = new GifImage("./gifs/cutscene1.gif");
-    private int actCount = 0;
-    private List<GreenfootImage> frames = cutscene.getImages();
-    private int anim_size = frames.size(), anim_index = 0;
+    private SimpleTimer animationTimer = new SimpleTimer();
+    private SimpleTimer timer = new SimpleTimer();
+    protected GreenfootImage[] cutscenes = new GreenfootImage[50];
+    private int imageIndex = 0;
+    private boolean marked = false;
     
-    public Cutscene() {    
+    public Cutscene() {
         super(1200, 800, 1);
-    }
-    
-    public void act() {
-        actCount++;
-        if (actCount % 1 == 0) {
-            setBackground(frames.get(anim_index));
-            anim_index++;
-            anim_index %= anim_size;
+        
+        for(int i = 0; i < 50; i++) {
+            if(i >= 10) {
+                cutscenes[i] = new GreenfootImage("images/Cutscenes/Cutscene0" + i + ".png");
+            }
+            else {
+                cutscenes[i] = new GreenfootImage("images/Cutscenes/Cutscene00" + i + ".png");
+            }
         }
-        //setBackground((cutscene.getCurrentImage()));
+        
+        setBackground("images/Cutscenes/Cutscene000.png");
     }
     
-    public void stopped() {
-        Soundtrack.stopAll();
+    public void act()
+    {
+        if(!marked) {
+            timer.mark();
+            marked = true;
+        }
+        animateCutscene();
+        if(timer.millisElapsed() > 7500) {
+            setBackground("images/Cutscens/Cutscene049.png");
+        }
+    }
+    
+    public void animateCutscene() {
+        if(animationTimer.millisElapsed() < 150) {
+            return;
+        }
+        animationTimer.mark();
+
+        setBackground(cutscenes[imageIndex]);
+        imageIndex = (imageIndex + 1) % cutscenes.length;
     }
 }

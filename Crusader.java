@@ -8,7 +8,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Crusader extends Cavalry
 {
-    public Crusader(int level) {
+    public Crusader() {
         super();
     }
     

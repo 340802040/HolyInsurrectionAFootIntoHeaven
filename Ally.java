@@ -62,9 +62,10 @@ public abstract class Ally extends BattleWorldCharacter
         }
 
         Point p = path.get(i);
-        if (moveTimer.millisElapsed() > 140) {
+        if (moveTimer.millisElapsed() > 200) {
             prevLocation = new Point(r, c);
             setLocation(GameWorld.getX(p.c), GameWorld.getY(p.r));
+            updateCoords();
             checkDirection();
             i--;
             moveTimer.mark();

@@ -41,7 +41,7 @@ public class WeaponSelectWindow extends AttackInterface
 
         // determine ally's weapons and bg size
         setImage("Panels/WeaponIcons/SmallWeaponIconBG.png");
-        if (a instanceof Hero) {
+        if (a instanceof AllyHero) {
             icons.add(sword);
             icons.add(spear);
             icons.add(bow);
@@ -50,41 +50,41 @@ public class WeaponSelectWindow extends AttackInterface
             icons.add(ice);
             setImage("Panels/WeaponIcons/BigWeaponIconBG.png");
         }
-        else if (a instanceof FootSoldier) {
+        else if (a instanceof AllyFootSoldier) {
             icons.add(spear);
         }
-        else if (a instanceof Cavalry) {
+        else if (a instanceof AllyCavalry) {
             icons.add(sword);
             icons.add(spear);
         }
-        else if (a instanceof Archer) {
+        else if (a instanceof AllyArcher) {
             icons.add(bow);
         }
-        else if (a instanceof Sniper) {
+        else if (a instanceof AllySniper) {
             icons.add(bow);
             icons.add(sword);
         }
-        else if (a instanceof Wizard || a instanceof DivineSorceror) {
+        else if (a instanceof AllyWizard || a instanceof AllyDivineSorceror) {
             icons.add(fire);
             icons.add(water);
             icons.add(ice);
         }
-        else if (a instanceof Chariot) {
+        else if (a instanceof AllyChariot) {
             icons.add(spear);
         }
-        else if (a instanceof Crusader) {
+        else if (a instanceof AllyCrusader) {
             icons.add(sword);
             icons.add(spear);
             icons.add(bow);
         }
-        else if (a instanceof KingsGuard) {
+        else if (a instanceof AllyKingsGuard) {
             icons.add(sword);
             icons.add(spear);
         }
-        else if (a instanceof ElephantRider) {
+        else if (a instanceof AllyElephantRider) {
             icons.add(spear);   
         }
-        else if (a instanceof TheBlessedOne) {
+        else if (a instanceof AllyTheBlessedOne) {
             icons.add(sword);
             icons.add(spear);
             icons.add(bow);

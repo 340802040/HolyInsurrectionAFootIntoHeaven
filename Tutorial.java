@@ -9,8 +9,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class Tutorial extends BattleWorld
 {
     // CHARACTERS
-    private Hero hero = new Hero();
-    private Crusader prodeus = new Crusader();
+    private AllyHero hero = new AllyHero();
+    private AllyCrusader prodeus = new AllyCrusader();
     private EnemyFootSoldier e1 = new EnemyFootSoldier();
     private EnemyFootSoldier e2 = new EnemyFootSoldier();
     private EnemyFootSoldier e3 = new EnemyFootSoldier();
@@ -50,13 +50,14 @@ public class Tutorial extends BattleWorld
         initializeGrid();
         
         // spawn hero
-        addObject(hero, GameWorld.getX(4), GameWorld.getY(GameWorld.GRID_HEIGHT / 2));
+        addObject(hero, GameWorld.getX(4), GameWorld.getY(8));
+        map[4][8] = 1; // BattleWorldCharacter addedToWorld() may be too slow to set coordinates
         
         // spawn enemies randomly
         for (Enemy e : enemies) {
             while (true) {
                 int randr = getRandomNumberInRange(0, GameWorld.GRID_HEIGHT);
-                int randc = getRandomNumberInRange(GameWorld.GRID_WIDTH - 6, GameWorld.GRID_WIDTH - 1);
+                int randc = getRandomNumberInRange(GameWorld.GRID_WIDTH - 6, GameWorld.GRID_WIDTH);
                 if (map[randr][randc] == 0) {
                     addObject(e, GameWorld.getX(randc), GameWorld.getY(randr));         
                     map[randr][randc] = 2; // just to be safe in case the loop runs faster than character's addedToWorld()

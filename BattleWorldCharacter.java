@@ -63,7 +63,7 @@ public abstract class BattleWorldCharacter extends Actor
     public void initializeFrames() {        
         String path = "";
         if (this instanceof Ally) {
-            path = "Animations/AllyAnimations/Ally" + this.getClass().getSimpleName() + "Animations/";
+            path = "Animations/AllyAnimations/" + this.getClass().getSimpleName() + "Animations/";
         }
         else if (this instanceof Enemy) {
             path = "Animations/EnemyAnimations/" + this.getClass().getSimpleName() + "Animations/";
@@ -102,7 +102,7 @@ public abstract class BattleWorldCharacter extends Actor
     }
 
     public void walkAnimate() {
-        if (actCount % 20 == 0) {
+        if (actCount % 5 == 0) {
             GreenfootImage frame = new GreenfootImage(walkFrames.get(walk_i));
             if (facing == "left") {
                 frame.mirrorHorizontally();
@@ -118,10 +118,11 @@ public abstract class BattleWorldCharacter extends Actor
      * Checks current direction the character is moving.
      */
     public void checkDirection() {
-        if (c - prevLocation.c > 0) {
+        if (c - prevLocation.c > 0) {   
             facing = "right";
         }
         else if (c - prevLocation.c < 0) {
+            
             facing = "left";
         }
     }

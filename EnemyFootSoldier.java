@@ -10,7 +10,7 @@ public class EnemyFootSoldier extends Enemy
 {
     public EnemyFootSoldier() {
         moveLimit = 4;
-        maxHealth = 5;
+        maxHealth = 50;
         health = maxHealth;
         atk = 5;
         crit = 20;

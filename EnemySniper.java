@@ -10,7 +10,7 @@ public class EnemySniper extends EnemyArcher
 {
     public EnemySniper() {
         super();
-        weapons.add("Bow");
+        weapons.add("Sword");
     }
     
     public void act() {

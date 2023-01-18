@@ -9,7 +9,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class EnemyArcher extends Enemy
 {
     public EnemyArcher() {
-        moveLimit = 4;
+        moveLimit = 4;    
         weapons.add("Bow");
     }
     

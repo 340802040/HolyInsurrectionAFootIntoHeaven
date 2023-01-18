@@ -1,0 +1,14 @@
+#BlueJ class context
+comment0.target=BattleWorldCharacterImage
+comment0.text=\r\n\ Image\ of\ a\ battle\ world\ character\ used\ in\ AttackAnimationWorld\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=path
+comment1.target=BattleWorldCharacterImage(java.lang.String)
+comment2.params=
+comment2.target=void\ act()
+comment3.params=
+comment3.target=void\ die()
+comment4.params=
+comment4.target=void\ flash()
+comment5.params=
+comment5.target=void\ fade()
+numComments=6

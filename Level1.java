@@ -14,8 +14,8 @@ public class Level1 extends BattleWorld
     public Level1() {
         // level1 should take in array of allies but for now hardcode them
         super(1200, 800, 1);
-        allies.add(new AllyFootSoldier());
-        allies.add(new AllyFootSoldier());
+        allies.add(new FootSoldier());
+        allies.add(new FootSoldier());
         enemies.add(e1);
         enemies.add(e2);
 
@@ -29,7 +29,7 @@ public class Level1 extends BattleWorld
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0,  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -39,28 +39,21 @@ public class Level1 extends BattleWorld
         };
         initializeGrid();
 
+        // add all player's allies to a random location at the left of the screen
         for (Ally a : allies) {
             while (true) {
-                int randx = getRandomNumberInRange(0, 10);
-                int randy = getRandomNumberInRange(0, 10);
-                if (map[randx][randy] == 0) {                      
+                int randx = Greenfoot.getRandomNumber(5);
+                int randy = Greenfoot.getRandomNumber(GameWorld.GRID_HEIGHT / 2);
+                if (map[randx][randy] == 0) {
                     addObject(a, GameWorld.getX(randx), GameWorld.getY(randy));         
                     map[randx][randy] = 1; // just to be safe in case the loop runs faster than Ally's addedToWorld()
                     break;
                 }
             }
         }
-        
-        for (Enemy e : enemies) {
-            while (true) {
-                int randx = getRandomNumberInRange(0, 10);
-                int randy = getRandomNumberInRange(0, 10);
-                if (map[randx][randy] == 0) {                       
-                    addObject(e, GameWorld.getX(randx), GameWorld.getY(randy));         
-                    map[randx][randy] = 2;
-                    break;
-                }
-            }
-        }
+
+        // spawn testing enemies
+        addObject(e1, GameWorld.getX(GameWorld.GRID_WIDTH - 5), GameWorld.getY(GameWorld.GRID_HEIGHT - 5));
+        addObject(e2, GameWorld.getX(4), GameWorld.getY(3));
     }
 }

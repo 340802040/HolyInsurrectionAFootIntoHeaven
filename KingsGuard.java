@@ -10,6 +10,7 @@ public class KingsGuard extends FootSoldier
 {
     public KingsGuard() {
         super();
+        weapons.add("Sword");
     }
     
     public void act() {

@@ -10,6 +10,7 @@ public class Sniper extends Archer
 {
     public Sniper() {
         super();
+        weapons.add("Sword");
     }
     
     public void act() {

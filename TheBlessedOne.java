@@ -10,6 +10,7 @@ public class TheBlessedOne extends Hero
 {
     public TheBlessedOne() {
         super();
+        weapons.add("TheHolyWeapon");
     }
     
     public void act() {

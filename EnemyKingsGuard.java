@@ -10,6 +10,7 @@ public class EnemyKingsGuard extends EnemyFootSoldier
 {
     public EnemyKingsGuard() {
         super();
+        weapons.add("Sword");
     }
     
     public void act() {

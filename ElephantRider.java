@@ -10,6 +10,7 @@ public class ElephantRider extends Chariot
 {
     public ElephantRider() {
         super();
+        weapons.add("Stampede");
     }
     
     public void act() {

@@ -10,6 +10,9 @@ public class Wizard extends Ally
 {
     public Wizard() {
         moveLimit = 4;
+        weapons.add("Fire");
+        weapons.add("Water");
+        weapons.add("Ice");
     }
     
     public void act() {

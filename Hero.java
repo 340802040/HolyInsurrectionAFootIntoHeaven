@@ -10,7 +10,12 @@ public class Hero extends Ally
 {
     public Hero() {
         moveLimit = 4;
-        
+        weapons.add("Sword");
+        weapons.add("Spear");
+        weapons.add("Bow");
+        weapons.add("Fire");
+        weapons.add("Water");
+        weapons.add("Ice");
     }
     
     public void act() {

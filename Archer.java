@@ -10,6 +10,7 @@ public class Archer extends Ally
 {
     public Archer() {
         moveLimit = 4;
+        weapons.add("Bow");
     }
     
     public void act() {

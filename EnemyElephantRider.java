@@ -10,6 +10,7 @@ public class EnemyElephantRider extends EnemyChariot
 {
     public EnemyElephantRider() {
         super();
+        weapons.add("Stampede");
     }
     
     public void act() {

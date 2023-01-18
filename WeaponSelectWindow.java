@@ -41,57 +41,30 @@ public class WeaponSelectWindow extends AttackInterface
 
         // determine ally's weapons and bg size
         setImage("Panels/WeaponIcons/SmallWeaponIconBG.png");
-        if (a instanceof Hero) {
-            icons.add(sword);
-            icons.add(spear);
-            icons.add(bow);
-            icons.add(fire);
-            icons.add(water);
-            icons.add(ice);
+        if (a instanceof Hero || a instanceof TheBlessedOne) {
             setImage("Panels/WeaponIcons/BigWeaponIconBG.png");
         }
-        else if (a instanceof FootSoldier) {
-            icons.add(spear);
-        }
-        else if (a instanceof Cavalry) {
-            icons.add(sword);
-            icons.add(spear);
-        }
-        else if (a instanceof Archer) {
-            icons.add(bow);
-        }
-        else if (a instanceof Sniper) {
-            icons.add(bow);
-            icons.add(sword);
-        }
-        else if (a instanceof Wizard || a instanceof DivineSorceror) {
-            icons.add(fire);
-            icons.add(water);
-            icons.add(ice);
-        }
-        else if (a instanceof Chariot) {
-            icons.add(spear);
-        }
-        else if (a instanceof Crusader) {
-            icons.add(sword);
-            icons.add(spear);
-            icons.add(bow);
-        }
-        else if (a instanceof KingsGuard) {
-            icons.add(sword);
-            icons.add(spear);
-        }
-        else if (a instanceof ElephantRider) {
-            icons.add(spear);   
-        }
-        else if (a instanceof TheBlessedOne) {
-            icons.add(sword);
-            icons.add(spear);
-            icons.add(bow);
-            icons.add(fire);
-            icons.add(water);
-            icons.add(ice);
-            setImage("Panels/WeaponIcons/BigWeaponIconBG.png");
+        for (String weapon : a.weapons) {
+            switch (weapon) {
+                case "Sword":
+                    icons.add(sword);
+                    break;
+                case "Spear":
+                    icons.add(spear);
+                    break;
+                case "Bow":
+                    icons.add(bow);
+                    break;
+                case "Fire":
+                    icons.add(fire);
+                    break;
+                case "Water":
+                    icons.add(water);
+                    break;
+                case "Ice":
+                    icons.add(ice);
+                    break;
+            }
         }
     }
 

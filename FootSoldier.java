@@ -14,7 +14,7 @@ public class FootSoldier extends Ally
         health = maxHealth;
         atk = 3;
         crit = 20;
-        hitChance = 0;
+        weapons.add("Spear");
     }
     
     public void act() {

@@ -10,6 +10,7 @@ public class Crusader extends Cavalry
 {
     public Crusader() {
         super();
+        weapons.add("Bow");
     }
     
     public void act() {

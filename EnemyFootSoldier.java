@@ -10,10 +10,11 @@ public class EnemyFootSoldier extends Enemy
 {
     public EnemyFootSoldier() {
         moveLimit = 4;
-        maxHealth = 50;
+        maxHealth = 5;
         health = maxHealth;
         atk = 5;
         crit = 20;
+        weapons.add("Spear");
     }
     
     public void act() {

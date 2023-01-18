@@ -10,6 +10,7 @@ public class EnemyChariot extends Enemy
 {
     public EnemyChariot() {
         moveLimit = 5;
+        weapons.add("Spear");
     }
     
     public void act() {

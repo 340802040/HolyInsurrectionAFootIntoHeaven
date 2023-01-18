@@ -21,6 +21,7 @@ public abstract class BattleWorldCharacter extends Actor
     protected int terrainMultiplier;
     protected int hitChance;
     protected int crit; // crit chance
+    protected ArrayList<String> weapons = new ArrayList<String>(); // possible weapons
     protected String weapon;
     // MOVEMENT
     protected boolean isMoving = false;

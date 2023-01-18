@@ -10,6 +10,9 @@ public class EnemyWizard extends Enemy
 {
     public EnemyWizard() {
         moveLimit = 4;
+        weapons.add("Fire");
+        weapons.add("Water");
+        weapons.add("Ice");
     }
     
     public void act() {

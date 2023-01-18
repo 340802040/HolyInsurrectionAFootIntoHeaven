@@ -41,8 +41,8 @@ public class AttackDecisionWindow extends AttackInterface
             a.selectedEnemy = null;
             a.getImage().setTransparency(255);
             map[a.r][a.c] = 0; // clear spot
-            map[a.prevLocation.r][a.prevLocation.c] = 1;
-            a.setLocation(GameWorld.getX(a.prevLocation.c), GameWorld.getY(a.prevLocation.r));
+            map[a.backLocation.r][a.backLocation.c] = 1;
+            a.setLocation(GameWorld.getX(a.backLocation.c), GameWorld.getY(a.backLocation.r));
             bw.state = "gameplay";
             removeSelf();
         }

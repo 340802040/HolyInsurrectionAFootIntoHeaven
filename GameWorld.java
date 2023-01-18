@@ -81,10 +81,10 @@ public class GameWorld extends World
      * @param w2 Second weapon
      */
     public static double getWeaponMultiplier(String w1, String w2) {
-        if ((w1 == "Sword" && w2 == "Bow") || (w1 == "Bow" && w2 == "Lance") || (w1 == "Lance" && w2 == "Sword") || (w1 == "Fire" && w2 == "Ice") || (w1 == "Ice" && w2 == "Water") || (w1 == "Water" && w2 == "Fire")) {
+        if ((w1 == "Sword" && w2 == "Bow") || (w1 == "Bow" && w2 == "Spear") || (w1 == "Spear" && w2 == "Sword") || (w1 == "Fire" && w2 == "Ice") || (w1 == "Ice" && w2 == "Water") || (w1 == "Water" && w2 == "Fire")) {
             return 1.3;
         }
-        else if ((w1 == "Bow" && w2 == "Sword") || (w1 == "Lance" && w2 == "Bow") || (w1 == "Sword" && w2 == "Lance") || (w1 == "Ice" && w2 == "Fire") || (w1 == "Water" && w2 == "Ice") || (w1 == "Fire" && w2 == "Water")) {
+        else if ((w1 == "Bow" && w2 == "Sword") || (w1 == "Spear" && w2 == "Bow") || (w1 == "Sword" && w2 == "Spear") || (w1 == "Ice" && w2 == "Fire") || (w1 == "Water" && w2 == "Ice") || (w1 == "Fire" && w2 == "Water")) {
             return 0.7;   
         }
         else return 1;

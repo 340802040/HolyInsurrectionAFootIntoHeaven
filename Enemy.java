@@ -12,6 +12,7 @@ public abstract class Enemy extends BattleWorldCharacter
     // DATA
     private Ally target; // AI will determine which target enemy chooses to attack
     private boolean willAttack; // if enemy can reach its target within its move limit, willAttack will be true
+    protected int xpToGive;
     // MOVEMENT
     private int endIndex; // for movement
     // FLASHING
@@ -19,7 +20,7 @@ public abstract class Enemy extends BattleWorldCharacter
     private int j = 0;
 
     public Enemy() {
-        setImage("placeholder/enemy.png");
+
     }
 
     public void addedToWorld(World w) {
@@ -62,7 +63,40 @@ public abstract class Enemy extends BattleWorldCharacter
 
     public void getTargetAlly() { // for now just gets a random ally
         ArrayList<Ally> allies = ((BattleWorld)getWorld()).allies;
-        target = allies.get(Greenfoot.getRandomNumber(allies.size()));
+        target = null;
+        String counter = "";
+        for (Ally a : allies) {
+            switch (a.weapon) {
+                case "Sword":
+                    counter = "Bow";
+                    break;
+                case "Spear":
+                    counter = "Sword";
+                    break;
+                case "Bow":
+                    counter = "Spear";
+                    break;
+                case "Fire":
+                    counter = "Water";
+                    break;
+                case "Water":
+                    counter = "Ice";
+                    break;
+                case "Ice":
+                    counter = "Fire";
+                    break;
+            }
+            
+            if (weapons.contains(counter)) {
+                target = a;
+                weapon = counter;
+                break;
+            }
+        }
+        
+        if (target == null) { // if no counter
+            target = allies.get(Greenfoot.getRandomNumber(allies.size()));
+        }
     }
 
     public void checkPath() {

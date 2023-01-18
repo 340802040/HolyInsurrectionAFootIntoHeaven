@@ -1,10 +1,12 @@
 #BlueJ class context
 comment0.target=Image
 comment0.text=\r\n\ A\ class\ simply\ to\ show\ an\ image.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
-comment1.params=path
-comment1.target=Image(java.lang.String)
-comment2.params=ti
-comment2.target=Image(TextImage)
-comment3.params=
-comment3.target=void\ removeSelf()
-numComments=4
+comment1.params=
+comment1.target=Image()
+comment2.params=path
+comment2.target=Image(java.lang.String)
+comment3.params=ti
+comment3.target=Image(TextImage)
+comment4.params=
+comment4.target=void\ removeSelf()
+numComments=5

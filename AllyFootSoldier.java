@@ -9,7 +9,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class AllyFootSoldier extends Ally
 {
     public AllyFootSoldier() {
-        moveLimit = 4;
+        moveLimit = 15;
         maxHealth = 10;
         health = maxHealth;
         atk = 3;

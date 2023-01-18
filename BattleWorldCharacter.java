@@ -22,7 +22,7 @@ public abstract class BattleWorldCharacter extends Actor
     protected int hitChance;
     protected int crit; // crit chance
     protected ArrayList<String> weapons = new ArrayList<String>();
-    protected String weapon;
+    protected String weapon = "";
     // MOVEMENT
     protected boolean isMoving = false;
     protected boolean moved = false; // whether has been moved already
@@ -50,10 +50,10 @@ public abstract class BattleWorldCharacter extends Actor
     }
 
     public void addedToWorld(World w) {
-        r = GameWorld.getYCell(getY());
-        c = GameWorld.getXCell(getX());
+        updateCoords();
         map = ((GameWorld)getWorld()).getMap();
         initializeFrames();
+        setImage(idleFrames.get(0));
     }
 
     public void act() {

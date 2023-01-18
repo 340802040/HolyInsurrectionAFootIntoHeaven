@@ -8,8 +8,13 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class EnemyAttacker extends Attacker
 {    
+    Enemy me;
+    Ally other;
+    
     public EnemyAttacker(BattleWorldCharacter me, BattleWorldCharacter other) {
         super(me, other);
+        this.me = (Enemy)me;
+        this.other = (Ally)other;
         path = "images/Animations/EnemyAnimations/" + name + "Animations/Attack/";
         critPath = "images/Animations/EnemyAnimations/" + name + "Animations/Crit/";
     }
@@ -22,8 +27,8 @@ public class EnemyAttacker extends Attacker
         if (me.health <= 0) {
             die();
             AttackAnimationWorld w = (AttackAnimationWorld)getWorld();
-            w.returnWorld.removeEnemy((Enemy)me);
-            ((Ally)other).increaseXp(69); // increase ally xp
+            w.returnWorld.removeEnemy(me);
+            other.increaseXp(me.xpToGive); // increase ally xp
         }
     }
     

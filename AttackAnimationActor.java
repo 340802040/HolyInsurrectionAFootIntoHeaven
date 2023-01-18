@@ -15,16 +15,16 @@ public abstract class AttackAnimationActor extends Actor
     protected BattleWorldCharacter me, other;
     protected String name;
     protected boolean isFlashing, isFading, flip;
-    protected boolean isAnimating, isDying, finished; // whether it has finished all its attacks and animations such as dying
-    protected int j = 0;
+    protected boolean isAnimating, dmgIndicatorIsAnimating, isDying, finished; // whether it has finished all its attacks and animations such as dying
+    protected int j = 0; // number of flashes when dead
     protected boolean willHit, willCrit;
     protected int frameOfImpact;
     protected double weaponMultiplier;
     // ANIMATION
     protected ArrayList<GreenfootImage> frames = new ArrayList<GreenfootImage>();
     protected ArrayList<GreenfootImage> dmgIndicators = new ArrayList<GreenfootImage>();
-    protected Image dmgIndicator;
-    protected int i, damageIndicator_i; // indexes for aniamtion
+    protected Image dmgIndicator = new Image();
+    protected int i = 0, damage_i = 0; // indexes for animation
     protected boolean framesInitialized = false;
     // FILE PATHS
     protected String path, critPath;
@@ -53,21 +53,24 @@ public abstract class AttackAnimationActor extends Actor
     }
 
     public void act() {
-        actCount++;
-        if (isAnimating) {
-            animate();
-        }
-        if (isFlashing) {
-            flash();
-        }
-        if (isFading) {
-            fade();
+        if (framesInitialized) {
+            actCount++;
+            if (isAnimating) {
+                animate();
+            }
+            if (isFlashing) {
+                flash();
+            }
+            if (isFading) {
+                fade();
+            }    
         }
     }
 
     public void initFrames() {
+        // ATTACK AND CRIT FRAMES
         if (willCrit) {
-            int numFrames = new File(path).list().length;
+            int numFrames = new File(critPath).list().length;
             for (int i = 0; i < numFrames; i++) {
                 String zeroes = i < 10 ? "00" : "0";
                 frames.add(new GreenfootImage(critPath + "Crit" + zeroes + i + ".png"));
@@ -86,8 +89,17 @@ public abstract class AttackAnimationActor extends Actor
                 }
             }
         }
-        
+        // DMG INDICATOR FRAMES
+        for (int i = 0; i < 5; i++) {
+            dmgIndicators.add(new GreenfootImage("Animations/DamageAnimations/Damage0" + i + ".png"));
+            if (this instanceof Defender) {
+                dmgIndicators.get(i).mirrorHorizontally();
+            }
+        }
+
         setImage(frames.get(0));
+        dmgIndicator.setImage(dmgIndicators.get(0));
+        framesInitialized = true;
     }
 
     public double getWeaponMultiplier() {
@@ -102,7 +114,7 @@ public abstract class AttackAnimationActor extends Actor
     public boolean determineWillCrit() {
         return Greenfoot.getRandomNumber(100) <  me.crit;
     }
-    
+
     public int getFrameOfImpact() {
         if (me instanceof AllyHero) {
 
@@ -140,7 +152,7 @@ public abstract class AttackAnimationActor extends Actor
         else if (me instanceof AllyTheBlessedOne) {
 
         }
-        
+
         return -1;
     }
 

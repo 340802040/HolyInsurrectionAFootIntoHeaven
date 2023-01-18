@@ -41,11 +41,11 @@ public class Level1 extends BattleWorld
 
         for (Ally a : allies) {
             while (true) {
-                int randx = getRandomNumberInRange(0, 10);
-                int randy = getRandomNumberInRange(0, 10);
-                if (map[randx][randy] == 0) {                      
-                    addObject(a, GameWorld.getX(randx), GameWorld.getY(randy));         
-                    map[randx][randy] = 1; // just to be safe in case the loop runs faster than Ally's addedToWorld()
+                int r = getRandomNumberInRange(0, 10);
+                int c = getRandomNumberInRange(0, 10);
+                if (map[r][c] == 0) {                      
+                    addObject(a, GameWorld.getX(r), GameWorld.getY(c));         
+                    map[r][c] = 1; // just to be safe in case the loop runs faster than Ally's addedToWorld()
                     break;
                 }
             }
@@ -53,11 +53,11 @@ public class Level1 extends BattleWorld
         
         for (Enemy e : enemies) {
             while (true) {
-                int randx = getRandomNumberInRange(0, 10);
-                int randy = getRandomNumberInRange(0, 10);
-                if (map[randx][randy] == 0) {                       
-                    addObject(e, GameWorld.getX(randx), GameWorld.getY(randy));         
-                    map[randx][randy] = 2;
+                int r = getRandomNumberInRange(0, 10);
+                int c = getRandomNumberInRange(0, 10);
+                if (map[r][c] == 0) {                       
+                    addObject(e, GameWorld.getX(c), GameWorld.getY(r));         
+                    map[r][c] = 2;
                     break;
                 }
             }

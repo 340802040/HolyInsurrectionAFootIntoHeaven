@@ -22,8 +22,9 @@ public abstract class Enemy extends BattleWorldCharacter
 
     public Enemy(int level) {
         this.level = level;
+        name = getName();
         levelUp(level);
-        hitXp = 160;
+        hitXp = 10000;
         killXp = 200;
     }
 
@@ -44,6 +45,17 @@ public abstract class Enemy extends BattleWorldCharacter
         if (isFlashing) {
             flash();
         }
+    }
+
+    public String getName() {
+        String s = this.getClass().getSimpleName();
+        String[] r = s.split("(?=\\p{Upper})");
+        String ret = "";
+        for (String ss : r) {
+            ret += ss + " ";
+        }
+        
+        return ret;
     }
 
     public void startMoving() {
@@ -90,14 +102,14 @@ public abstract class Enemy extends BattleWorldCharacter
                     counter = "Fire";
                     break;
             }
-            
+
             if (weapons.contains(counter)) {
                 target = a;
                 weapon = counter;
                 break;
             }
         }
-        
+
         if (target == null) { // if no counter
             target = allies.get(Greenfoot.getRandomNumber(allies.size()));
         }
@@ -138,7 +150,7 @@ public abstract class Enemy extends BattleWorldCharacter
             }
         }
     }
-    
+
     /**
      * Stores the path from selectedAlly to current selector position.
      */
@@ -157,15 +169,15 @@ public abstract class Enemy extends BattleWorldCharacter
             moved = true;
             map[r][c] = 2;
             getImage().setTransparency(150);
-            
+
             if (willAttack) {
                 ((BattleWorld)getWorld()).state = "other";
                 isFlashing = true;
             }
-            
+
             return;
         }
-        
+
         Point p = path.get(i);
         if (moveTimer.millisElapsed() > 200) {
             prevLocation = new Point(r, c);
@@ -176,11 +188,11 @@ public abstract class Enemy extends BattleWorldCharacter
             moveTimer.mark();
         }
     }
-    
+
     public void levelUp(int amount) {
         for (int i = 0; i < amount; i++) {
-            int numStatIncreases = GameWorld.getRandomNumberInRange(1, 5);
-            List<String> upgradedStats = GameWorld.pickNRandom(stats, numStatIncreases);
+            int numStatIncreases = GameWorld.getRandomNumberInRange(1, potentialStats.size() + 1);
+            List<String> upgradedStats = GameWorld.pickNRandom(potentialStats, numStatIncreases);
             int increase = 2;
             for (String s : upgradedStats) {
                 switch (s) {
@@ -204,7 +216,7 @@ public abstract class Enemy extends BattleWorldCharacter
             }
         }
     }
-    
+
     public void flash() {
         if (j == 11) {
             Greenfoot.delay(40);

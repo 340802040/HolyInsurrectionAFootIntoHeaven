@@ -8,8 +8,9 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class NonAttackDecisionWindow extends NonAttackInterface
 {
-    public NonAttackDecisionWindow(String path, Ally a) {
-        super(path, a);
+    public NonAttackDecisionWindow(Ally a) {
+        super(a);
+        setImage("Panels/NonAttackDecisionWindow.png");
         timer.mark();
     }
     

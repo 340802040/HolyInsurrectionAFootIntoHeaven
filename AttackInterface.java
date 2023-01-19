@@ -9,12 +9,9 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public abstract class AttackInterface extends Interface
 {
     protected Enemy e;
-    protected String attacker;
     
-    public AttackInterface(String path, Ally a, Enemy e, String attacker) {
-        super(path, a);
-        this.a = a;
+    public AttackInterface(Ally a, Enemy e) {
+        super(a);
         this.e = e;
-        this.attacker = attacker;
     }
 }

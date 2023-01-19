@@ -12,7 +12,6 @@ public abstract class Ally extends BattleWorldCharacter
     protected Enemy selectedEnemy; // whether character has selected an enemy to move to
     protected int xp = 0, xpNeeded = 50, xpGained;
     protected Point backLocation; // location to go back to
-    protected String name;
 
     public Ally(String name) {
         this.name = name;
@@ -51,11 +50,11 @@ public abstract class Ally extends BattleWorldCharacter
             getImage().setTransparency(150);
             if (selectedEnemy != null) {
                 bw.state = "decision";
-                bw.addObject(new AttackDecisionWindow("Panels/AttackDecisionWindow.png", this, selectedEnemy, "ally"), bw.getWidth() - 250, bw.getHeight() / 2);
+                bw.addObject(new AttackDecisionWindow(this, selectedEnemy), bw.getWidth() - 250, bw.getHeight() / 2);
             }
             else {
                 bw.state = "decision";
-                bw.addObject(new NonAttackDecisionWindow("Panels/NonAttackDecisionWindow.png", this), bw.getWidth() - 250, bw.getHeight() / 2);
+                bw.addObject(new NonAttackDecisionWindow(this), bw.getWidth() - 250, bw.getHeight() / 2);
             }
 
             return;
@@ -78,6 +77,8 @@ public abstract class Ally extends BattleWorldCharacter
     }
 
     public String getLevelUpMsg() {
+        String msg;
+        
         if (xp >= xpNeeded) {
             int numLevelUps = 0;
             while (true) {
@@ -91,9 +92,9 @@ public abstract class Ally extends BattleWorldCharacter
             level += numLevelUps;
             int increase = 2 * numLevelUps;
 
-            int numStatIncreases = GameWorld.getRandomNumberInRange(1, 6);
-            List<String> upgradedStats = GameWorld.pickNRandom(stats, numStatIncreases);
-            String msg = "XP +" + xpGained + " --> LEVEL +" + numLevelUps + "\n";
+            int numStatIncreases = GameWorld.getRandomNumberInRange(1, potentialStats.size() + 1);
+            List<String> upgradedStats = GameWorld.pickNRandom(potentialStats, numStatIncreases);
+            msg = "XP +" + xpGained + " --> LEVEL +" + numLevelUps + "\n";
             for (String s : upgradedStats) {
                 switch (s) {
                     case "health":
@@ -120,9 +121,12 @@ public abstract class Ally extends BattleWorldCharacter
                 }
             }
             xpGained = 0;
-
-            return msg;
         }
-        else return "";
+        else {
+            msg = "XP +" + xpGained;   
+            xpGained = 0;
+        }
+        
+        return msg;
     }
 }

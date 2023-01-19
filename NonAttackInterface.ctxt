@@ -1,6 +1,8 @@
 #BlueJ class context
 comment0.target=NonAttackInterface
 comment0.text=\r\n\ Write\ a\ description\ of\ class\ Window\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
-comment1.params=path\ a
-comment1.target=NonAttackInterface(java.lang.String,\ Ally)
-numComments=2
+comment1.params=a
+comment1.target=NonAttackInterface(Ally)
+comment2.params=bwc
+comment2.target=NonAttackInterface(BattleWorldCharacter)
+numComments=3

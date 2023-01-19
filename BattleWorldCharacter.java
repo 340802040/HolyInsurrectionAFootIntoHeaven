@@ -11,10 +11,9 @@ import java.io.File;
 public abstract class BattleWorldCharacter extends Actor
 {    
     // DATA
-    protected int r, c;
-    protected int moveLimit;
+    protected String name;
     protected int level = 0;
-    protected List<String> stats = Arrays.asList("health", "atk", "def", "ev", "spd");
+    protected List<String> potentialStats = new ArrayList<String>(Arrays.asList("health", "atk", "def", "ev", "spd")); // stats that are upgradable
     protected int maxHealth, health;
     protected int atk; // base atk 
     protected int def;
@@ -24,6 +23,8 @@ public abstract class BattleWorldCharacter extends Actor
     protected int crit; // crit chance
     protected ArrayList<String> weapons = new ArrayList<String>();
     protected String weapon = "";
+    protected int r, c;
+    protected int moveLimit;
     // MOVEMENT
     protected boolean isMoving = false;
     protected boolean moved = false; // whether has been moved already
@@ -97,7 +98,7 @@ public abstract class BattleWorldCharacter extends Actor
             if (moved) {
                 frame.setTransparency(100);
             }
-            
+
             setImage(frame);
             idle_i++;
             idle_i %= idleFrames.size();
@@ -110,7 +111,7 @@ public abstract class BattleWorldCharacter extends Actor
             if (facing == "left") {
                 frame.mirrorHorizontally();
             }
-            
+
             setImage(frame);
             walk_i++;
             walk_i %= walkFrames.size();  
@@ -125,14 +126,14 @@ public abstract class BattleWorldCharacter extends Actor
             facing = "right";
         }
         else if (c - prevLocation.c < 0) {
-            
             facing = "left";
         }
     }
-    
+
     public void checkHealth() {
         if (maxHealth > 66) {
             maxHealth = 66;
+            potentialStats.remove("health");
         }
         if (health > 66) {
             health = 66;

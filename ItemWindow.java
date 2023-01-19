@@ -8,9 +8,9 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class ItemWindow extends NonAttackInterface
 {    
-    public ItemWindow(String path, Ally a) {
+    public ItemWindow(Ally a) {
         // prolly take in hashmap of items and their quantity
-        super(path, a);
+        super(a);
     }
     
     public void act() {

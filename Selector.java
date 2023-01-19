@@ -11,7 +11,7 @@ public class Selector extends Actor
 {
     // DATA
     protected int r, c;
-    private boolean active = false; // whether the selector has selected an ally
+    private boolean active; // whether the selector has selected an ally
     private Ally selectedAlly;
     // PATH FINDING
     private ArrayList<Point> path = new ArrayList<Point>();
@@ -86,10 +86,6 @@ public class Selector extends Actor
         }
     }
 
-    public boolean canMoveTo(int r, int c) {
-        return r >= 0 && r < GameWorld.GRID_HEIGHT && c >= 0 && c < GameWorld.GRID_WIDTH;
-    }
-
     public void checkHovering() {   // Animate selector if hovering
         if (getOneIntersectingObject(Ally.class) != null) {
             animateSelector();
@@ -110,18 +106,24 @@ public class Selector extends Actor
     }
 
     public void checkSelect() {
+        BattleWorld bw = (BattleWorld)getWorld();
         Ally a = (Ally)getOneIntersectingObject(Ally.class);
+        BattleWorldCharacter bwc = (BattleWorldCharacter)getOneIntersectingObject(BattleWorldCharacter.class);
+        
         if (timer2.millisElapsed() > 500 && !active && Greenfoot.isKeyDown("k") && a != null && !a.moved) { // ally selected
             active = true;
-            getWorld().addObject(selectionIndicator, GameWorld.getX(c), GameWorld.getY(r));
+            bw.addObject(selectionIndicator, GameWorld.getX(c), GameWorld.getY(r));
             selectedAlly = (Ally)getOneIntersectingObject(Ally.class);
             timer.mark();
             checkPath();
         }
         else if (timer2.millisElapsed() > 500 && !active && Greenfoot.isKeyDown("k") && a == null) { // ground selected to end turn
-            BattleWorld bw = (BattleWorld)getWorld();
             bw.state = "decision";
-            bw.addObject(new EndTurnWindow("Panels/EndTurnWindow.png", selectedAlly), getWorld().getWidth() - 220, getWorld().getHeight() / 2);
+            bw.addObject(new EndTurnWindow(selectedAlly), bw.getWidth() - 220, bw.getHeight() / 2);
+        }
+        else if (timer2.millisElapsed() > 500 && !active && Greenfoot.isKeyDown("u") && bwc != null) { // show stats
+            bw.state = "decision";
+            bw.addObject(new StatWindow(bwc), bw.getWidth() / 2, bw.getHeight() / 2);
         }
     }
 
@@ -232,5 +234,9 @@ public class Selector extends Actor
             deselect();
             timer2.mark();
         }
+    }
+    
+    public boolean canMoveTo(int r, int c) {
+        return r >= 0 && r < GameWorld.GRID_HEIGHT && c >= 0 && c < GameWorld.GRID_WIDTH;
     }
 }

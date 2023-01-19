@@ -8,8 +8,9 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class AttackDecisionWindow extends AttackInterface
 {
-    public AttackDecisionWindow(String path, Ally a, Enemy e, String attacker) {
-        super(path, a, e, attacker);
+    public AttackDecisionWindow(Ally a, Enemy e) {
+        super(a, e);
+        setImage("Panels/AttackDecisionWindow.png");
         timer.mark();
     }
 
@@ -21,7 +22,7 @@ public class AttackDecisionWindow extends AttackInterface
     public void checkUserInput() {
         BattleWorld bw = (BattleWorld)getWorld();
         if (Greenfoot.isKeyDown("z")) { // attack
-            getWorld().addObject(new WeaponSelectWindow("Placeholder/weapon-select-bg.png", a, e, attacker), getWorld().getWidth() - 200, getWorld().getHeight() / 2);
+            getWorld().addObject(new WeaponSelectWindow(a, e), getWorld().getWidth() - 200, getWorld().getHeight() / 2);
             removeSelf();
         }
         else if (Greenfoot.isKeyDown("x")) { // item

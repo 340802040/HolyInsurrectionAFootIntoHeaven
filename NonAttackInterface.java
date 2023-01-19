@@ -11,8 +11,12 @@ public class NonAttackInterface extends Interface
     protected Ally a; // ally that the window applies to
     protected SimpleTimer timer = new SimpleTimer();
     
-    public NonAttackInterface(String path, Ally a) {
-        super(path, a);
+    public NonAttackInterface(Ally a) {
+        super(a);
         this.a = a;
+    }
+    
+    public NonAttackInterface(BattleWorldCharacter bwc) {
+        super(bwc);
     }
 }

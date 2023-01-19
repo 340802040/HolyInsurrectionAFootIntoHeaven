@@ -17,8 +17,8 @@ public class WeaponSelectWindow extends AttackInterface
     private Image ice;
     private ArrayList<Image> icons = new ArrayList<Image>();
 
-    public WeaponSelectWindow(String path, Ally a, Enemy e, String attacker) {
-        super(path, a, e, attacker);
+    public WeaponSelectWindow(Ally a, Enemy e) {
+        super(a, e);
         setup();
     }
 
@@ -114,7 +114,7 @@ public class WeaponSelectWindow extends AttackInterface
     public void checkGoBack() {
         if (Greenfoot.isKeyDown("j")) {
             BattleWorld bw = ((BattleWorld)getWorld());
-            bw.addObject(new AttackDecisionWindow("Panels/AttackDecisionWindow.png", a, e, "ally"), bw.getWidth() - 250, bw.getHeight() / 2);
+            bw.addObject(new AttackDecisionWindow(a, e), bw.getWidth() - 250, bw.getHeight() / 2);
             removeSelf();
         }
     }

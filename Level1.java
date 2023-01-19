@@ -14,8 +14,8 @@ public class Level1 extends BattleWorld
     public Level1() {
         // level1 should take in array of allies but for now hardcode them
         super(1200, 800, 1);
-        allies.add(new AllyFootSoldier("hello"));
-        allies.add(new AllyFootSoldier("hi"));
+        allies.add(new AllyFootSoldier("YOOOOO"));
+        allies.add(new AllyFootSoldier("OIIIIII"));
         enemies.add(e1);
         enemies.add(e2);
 

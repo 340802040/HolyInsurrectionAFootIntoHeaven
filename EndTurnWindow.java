@@ -8,8 +8,9 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class EndTurnWindow extends NonAttackInterface
 {
-    public EndTurnWindow(String path, Ally a) {
-        super(path, a);
+    public EndTurnWindow(Ally a) {
+        super(a);
+        setImage("Panels/EndTurnWindow.png");
         timer.mark();
     }
     

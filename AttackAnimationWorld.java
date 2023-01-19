@@ -23,6 +23,7 @@ public class AttackAnimationWorld extends GameWorld
     // MISC
     protected SimpleTimer timer = new SimpleTimer();
     protected boolean timerMarked;
+    protected Text levelUpMsg;
     
     public AttackAnimationWorld(BattleWorld returnWorld, Ally a, Enemy e, String attacker_s) {
         super(1200, 800, 1);
@@ -89,9 +90,15 @@ public class AttackAnimationWorld extends GameWorld
         if (attackerActor.finished && defenderActor.finished) {
             if (!timerMarked) {
                 timer.mark();
-                timerMarked = true;    
+                timerMarked = true;
+                if (attackerActor instanceof AllyAttacker) {
+                    addObject(levelUpMsg, 200, getHeight() / 2 - 100);    
+                }
+                else {
+                    addObject(levelUpMsg, getWidth() - 200, getHeight() / 2 - 100);    
+                }
             }
-            else if (timer.millisElapsed() > 2000) {
+            else if (timer.millisElapsed() > 5000) {
                 returnToWorld();    
             }
         }

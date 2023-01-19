@@ -68,8 +68,7 @@ public abstract class Defender extends AttackAnimationActor
                     getWorld().addObject(dmgIndicator, getWorld().getWidth() / 2, getWorld().getHeight() / 2);
                     
                     if (me instanceof Ally) {
-                        TextCard t = ((Ally)me).increaseXp(((Enemy)other).hitXp);
-                        getWorld().addObject(t, getWorld().getWidth() - 250, getWorld().getHeight() / 2 - 100);
+                        w.levelUpMsg = ((Ally)me).increaseXp(((Enemy)other).hitXp);
                     }
                 }
                 else {

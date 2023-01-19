@@ -72,11 +72,11 @@ public abstract class Ally extends BattleWorldCharacter
         }
     }
 
-    public TextCard increaseXp(int amount) {
+    public Text increaseXp(int amount) {
         xp += amount;
-        Font font = new Font("Candara", true, false, 50);
+        Font font = new Font("Candara", true, false, 40);
         String msg = "XP +" + amount + getLevelUpMsg();
-        return new TextCard(msg, font, Color.GREEN, null, 18);
+        return new Text(msg, font, Color.GREEN, null);
     }
 
     public String getLevelUpMsg() {
@@ -102,7 +102,6 @@ public abstract class Ally extends BattleWorldCharacter
                     case "health":
                         msg += "MAX HP +" + increase + "\n";
                         maxHealth += increase;
-                        health += increase;
                         checkHealth();
                         break;
                     case "atk":

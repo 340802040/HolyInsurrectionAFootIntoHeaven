@@ -13,25 +13,27 @@ public class Dialogue extends Actor
     protected ArrayList<Image> dialogues = new ArrayList<Image>();
     private Image curDialogue;
     protected int i = 0;
-    
+
     public Dialogue(String path) {
         int size = new File(path).list().length;
         for (int i = 0; i < size; i++) {
             dialogues.add(new Image(path + "Text" + i + ".png"));
         }
     }
-    
+
     public void addedToWorld(World w) {
-        GameWorld gw = (GameWorld)w;
-        if (gw instanceof BattleWorld) {
-            gw.state = "dialogue";            
+        if (w instanceof GameWorld) {
+            GameWorld gw = (GameWorld)w;
+            if (gw instanceof BattleWorld) {
+                gw.state = "dialogue";            
+            }    
         }
     }
-    
+
     public void act() {
         displayDialogues();
     }
-    
+
     public void displayDialogues() {
         if (i == dialogues.size()) {
             GameWorld gw = ((GameWorld)getWorld());

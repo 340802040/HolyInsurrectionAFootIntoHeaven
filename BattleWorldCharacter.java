@@ -52,8 +52,9 @@ public abstract class BattleWorldCharacter extends Actor
     public void addedToWorld(World w) {
         updateCoords();
         map = ((GameWorld)getWorld()).getMap();
-        initializeFrames();
+        initFrames();
         setImage(idleFrames.get(0));
+        weapon = weapons.get(0); // set default weapon
     }
 
     public void act() {
@@ -61,7 +62,7 @@ public abstract class BattleWorldCharacter extends Actor
         updateCoords();
     }
 
-    public void initializeFrames() {        
+    public void initFrames() {        
         String path = "";
         if (this instanceof Ally) {
             path = "Animations/AllyAnimations/" + this.getClass().getSimpleName() + "Animations/";

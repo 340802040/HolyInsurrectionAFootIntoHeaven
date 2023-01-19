@@ -112,6 +112,7 @@ public abstract class Enemy extends BattleWorldCharacter
 
         if (target == null) { // if no counter
             target = allies.get(Greenfoot.getRandomNumber(allies.size()));
+            weapon = weapons.get(0);
         }
     }
 

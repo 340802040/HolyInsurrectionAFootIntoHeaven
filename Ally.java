@@ -10,7 +10,7 @@ import java.util.*;
 public abstract class Ally extends BattleWorldCharacter
 {
     protected Enemy selectedEnemy; // whether character has selected an enemy to move to
-    protected int xp = 0, xpNeeded = 50;
+    protected int xp = 0, xpNeeded = 50, xpGained;
     protected Point backLocation; // location to go back to
     protected String name;
 
@@ -72,31 +72,28 @@ public abstract class Ally extends BattleWorldCharacter
         }
     }
 
-    public Text increaseXp(int amount) {
+    public void increaseXp(int amount) {
         xp += amount;
-        Font font = new Font("Candara", true, false, 40);
-        String msg = "XP +" + amount + getLevelUpMsg();
-        return new Text(msg, font, Color.GREEN, null);
+        xpGained += amount;
     }
 
     public String getLevelUpMsg() {
         if (xp >= xpNeeded) {
             int numLevelUps = 0;
-            int xpCopy = xp;
             while (true) {
-                xpCopy -= xpNeeded;
-                if (xpCopy < 0) {
+                if (xp - xpNeeded < 0) {
                     break;
                 }
+                xp -= xpNeeded;
                 numLevelUps++;
-                xpNeeded += 5;
+                xpNeeded += 20;
             }
             level += numLevelUps;
             int increase = 2 * numLevelUps;
 
-            int numStatIncreases = GameWorld.getRandomNumberInRange(1, 5);
+            int numStatIncreases = GameWorld.getRandomNumberInRange(1, 6);
             List<String> upgradedStats = GameWorld.pickNRandom(stats, numStatIncreases);
-            String msg = " --> LEVEL +" + numLevelUps + "\n";
+            String msg = "XP +" + xpGained + " --> LEVEL +" + numLevelUps + "\n";
             for (String s : upgradedStats) {
                 switch (s) {
                     case "health":
@@ -122,6 +119,7 @@ public abstract class Ally extends BattleWorldCharacter
                         break;
                 }
             }
+            xpGained = 0;
 
             return msg;
         }

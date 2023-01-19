@@ -70,7 +70,7 @@ public abstract class AttackAnimationActor extends Actor
 
     public void initFrames() {
         // ATTACK AND CRIT FRAMES
-        if (willCrit) {
+        if (willHit && willCrit) {
             int numFrames = new File(critPath).list().length;
             for (int i = 0; i < numFrames; i++) {
                 String zeroes = i < 10 ? "00" : "0";
@@ -91,11 +91,21 @@ public abstract class AttackAnimationActor extends Actor
             }
         }
         // DMG INDICATOR FRAMES
-        for (int i = 0; i < 8; i++) {
-            dmgIndicators.add(new GreenfootImage("Animations/DamageAnimations/Damage0" + i + ".png"));
-            if (this instanceof Defender) {
-                dmgIndicators.get(i).mirrorHorizontally();
-            }
+        if (willCrit) {
+            for (int i = 0; i < 8; i++) {
+                dmgIndicators.add(new GreenfootImage("Animations/DamageAnimations/Crit/Crit0" + i + ".png"));
+                if (this instanceof Defender) {
+                    dmgIndicators.get(i).mirrorHorizontally();
+                }
+            }   
+        }
+        else {
+            for (int i = 0; i < 8; i++) {
+                dmgIndicators.add(new GreenfootImage("Animations/DamageAnimations/Damage0" + i + ".png"));
+                if (this instanceof Defender) {
+                    dmgIndicators.get(i).mirrorHorizontally();
+                }
+            }   
         }
 
         setImage(frames.get(0));
@@ -158,7 +168,7 @@ public abstract class AttackAnimationActor extends Actor
     }
 
     public void cutHp() {
-        int damageDealt = AttackAnimationWorld.calculateDamageDealtBy(other, me);
+        int damageDealt = AttackAnimationWorld.calculateDamageDealtBy(other, me, willCrit);
         int j = (me.health - damageDealt) < 0 ? 0 : me.health - damageDealt;
         for (int i = me.health - 1; i >= j; i--) {
             ticks.get(i).setImage("GreyHealthTick.png");
@@ -174,14 +184,14 @@ public abstract class AttackAnimationActor extends Actor
     public abstract void checkDeath();
 
     public abstract void animate();
-    
+
     public abstract void drawHealthBarAndLabel();
-    
+
     public void updateHealthBarAndLabel() {
         removeHealthBar();
         drawHealthBarAndLabel();
     }
-    
+
     public void removeHealthBar() {
         for (Image tick : ticks) {
             getWorld().removeObject(tick);

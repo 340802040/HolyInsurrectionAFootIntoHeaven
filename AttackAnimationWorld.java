@@ -23,8 +23,7 @@ public class AttackAnimationWorld extends GameWorld
     // MISC
     protected SimpleTimer timer = new SimpleTimer();
     protected boolean timerMarked;
-    protected Text levelUpMsg;
-    
+
     public AttackAnimationWorld(BattleWorld returnWorld, Ally a, Enemy e, String attacker_s) {
         super(1200, 800, 1);
         this.returnWorld = returnWorld;
@@ -39,12 +38,12 @@ public class AttackAnimationWorld extends GameWorld
     public void act() {
         checkFightFinished();
     }
-    
+
     public void setup() {
         setupHpBgs(); // setup first so bg's are underneath labels and bars
         setupActors();
     }
-    
+
     public void setupActors() {
         if (attacker_s == "ally") {
             attackerActor = new AllyAttacker(a, e);
@@ -60,18 +59,18 @@ public class AttackAnimationWorld extends GameWorld
 
     public void setupHpBgs() {
         if (attacker_s == "ally") {
-             addObject(allyHpBg, getWidth() / 4, getHeight() - allyHpBg.getImage().getHeight() / 2);
-             addObject(enemyHpBg, getWidth() / 4 * 3, getHeight() - enemyHpBg.getImage().getHeight() / 2);
-         }
-         else {
-             addObject(enemyHpBg, getWidth() / 4, getHeight() - enemyHpBg.getImage().getHeight() / 2);
-             addObject(allyHpBg, getWidth() / 4 * 3, getHeight() - allyHpBg.getImage().getHeight() / 2);
-         }
+            addObject(allyHpBg, getWidth() / 4, getHeight() - allyHpBg.getImage().getHeight() / 2);
+            addObject(enemyHpBg, getWidth() / 4 * 3, getHeight() - enemyHpBg.getImage().getHeight() / 2);
+        }
+        else {
+            addObject(enemyHpBg, getWidth() / 4, getHeight() - enemyHpBg.getImage().getHeight() / 2);
+            addObject(allyHpBg, getWidth() / 4 * 3, getHeight() - allyHpBg.getImage().getHeight() / 2);
+        }
     }
-    
-    public static int calculateDamageDealtBy(BattleWorldCharacter dealer, BattleWorldCharacter dealtTo) {
+
+    public static int calculateDamageDealtBy(BattleWorldCharacter dealer, BattleWorldCharacter dealtTo, boolean willCrit) {
         int weaponDmg = 0;
-        int damageDealt = (int)((dealer.atk + weaponDmg) * dealer.terrainMultiplier * GameWorld.getWeaponMultiplier(dealer.weapon, dealtTo.weapon) - dealtTo.def);
+        int damageDealt = (int)((dealer.atk + weaponDmg) * (willCrit ? 3 : 1) * dealer.terrainMultiplier * GameWorld.getWeaponMultiplier(dealer.weapon, dealtTo.weapon) - dealtTo.def);
         if (damageDealt <= 0) {
             damageDealt = 1; // minimum
         }
@@ -91,11 +90,15 @@ public class AttackAnimationWorld extends GameWorld
             if (!timerMarked) {
                 timer.mark();
                 timerMarked = true;
+
+                Font font = new Font("Candara", true, false, 40);
+                String msg = a.getLevelUpMsg();
+                Text t = new Text(msg, font, Color.YELLOW, null);
                 if (attackerActor instanceof AllyAttacker) {
-                    addObject(levelUpMsg, 200, getHeight() / 2 - 100);    
+                    addObject(t, 200, getHeight() / 2 - 100);    
                 }
                 else {
-                    addObject(levelUpMsg, getWidth() - 200, getHeight() / 2 - 100);    
+                    addObject(t, getWidth() - 200, getHeight() / 2 - 100);    
                 }
             }
             else if (timer.millisElapsed() > 5000) {

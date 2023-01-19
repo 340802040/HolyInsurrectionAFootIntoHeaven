@@ -70,7 +70,7 @@ public abstract class Attacker extends AttackAnimationActor
                     getWorld().addObject(dmgIndicator, getWorld().getWidth() / 2, getWorld().getHeight() / 2);
                     
                     if (me instanceof Ally) {
-                        w.levelUpMsg = ((Ally)me).increaseXp(((Enemy)other).hitXp);
+                        ((Ally)me).increaseXp(((Enemy)other).hitXp);
                     }
                 }
                 else {

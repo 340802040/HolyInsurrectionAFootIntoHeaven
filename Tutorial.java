@@ -19,6 +19,8 @@ public class Tutorial extends BattleWorld
     // DIALOGUES
     Dialogue oldManD = new Dialogue("images/Text/OldManInstructions/");
     Dialogue prodeusD = new Dialogue("images/Text/ProdeusInstructions/");
+    // MISC
+    private boolean mark;
     
     public Tutorial() {
         super(1200, 800, 1);
@@ -28,6 +30,9 @@ public class Tutorial extends BattleWorld
         enemies.add(e3);
         enemies.add(e4);
         enemies.add(boss);
+        
+        hero.weapons.clear();
+        boss.isBoss = true;
         
         map = new int[][] {
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -49,13 +54,14 @@ public class Tutorial extends BattleWorld
         };
         initializeGrid();
         
-        // spawn hero
         addObject(hero, GameWorld.getX(4), GameWorld.getY(8));
-        map[4][8] = 1; // BattleWorldCharacter addedToWorld() may be too slow to set coordinates
+        map[8][4] = 1; // BattleWorldCharacter addedToWorld() may be too slow to set coordinates
+        addObject(boss, GameWorld.getX(20), GameWorld.getY(8));
+        map[8][20] = 2;
         
         // spawn enemies randomly
         for (Enemy e : enemies) {
-            while (true) {
+            while (!e.isBoss) {
                 int r = getRandomNumberInRange(0, GameWorld.GRID_HEIGHT);
                 int c = getRandomNumberInRange(GameWorld.GRID_WIDTH - 6, GameWorld.GRID_WIDTH);
                 if (map[r][c] == 0) {
@@ -71,5 +77,14 @@ public class Tutorial extends BattleWorld
     
     public void act() {
         super.act();
+        if (turns == 1 && !mark) {
+            addObject(prodeusD, 0, 0);
+            hero.weapons.add("Sword");
+            hero.weapons.add("Spear");
+            hero.weapons.add("Bow");
+            addObject(prodeus, GameWorld.getX(1), GameWorld.getY(7));
+            allies.add(prodeus);
+            mark = true;
+        }
     }
 }

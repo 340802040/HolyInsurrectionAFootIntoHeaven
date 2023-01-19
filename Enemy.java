@@ -13,6 +13,7 @@ public abstract class Enemy extends BattleWorldCharacter
     private Ally target; // AI will determine which target enemy chooses to attack
     private boolean willAttack; // if enemy can reach its target within its move limit, willAttack will be true
     protected int hitXp, killXp; // xp rewarded for hitting 
+    protected boolean isBoss;
     // MOVEMENT
     private int endIndex; // for movement
     // DEATH ANIMATION

@@ -89,7 +89,7 @@ public abstract class BattleWorldCharacter extends Actor
     }
 
     public void idleAnimate() {
-        if (actCount % 20 == 0) {
+        if (actCount % 25 == 0) {
             GreenfootImage frame = new GreenfootImage(idleFrames.get(idle_i));
             if (moved) {
                 frame.setTransparency(100);
@@ -102,7 +102,7 @@ public abstract class BattleWorldCharacter extends Actor
     }
 
     public void walkAnimate() {
-        if (actCount % 5 == 0) {
+        if (actCount % 10 == 0) {
             GreenfootImage frame = new GreenfootImage(walkFrames.get(walk_i));
             if (facing == "left") {
                 frame.mirrorHorizontally();

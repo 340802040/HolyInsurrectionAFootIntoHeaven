@@ -15,6 +15,7 @@ public class BattleWorld extends GameWorld
     protected ArrayList<Enemy> enemies = new ArrayList<Enemy>();
     protected Selector selector = new Selector();
     protected boolean selectorAdded; // whether selector is in the world
+    protected int turns = 0;
     // ENEMY PHASE
     private int i; // index used for going through each enemy during enemy phase
     protected Enemy curMovingEnemy;
@@ -32,7 +33,7 @@ public class BattleWorld extends GameWorld
         checkPhaseSwitch();
         checkState();
     }
-    
+
     public void initializeGrid() {
         for (int r = 0; r < GRID_HEIGHT; r++) {
             for (int c = 0; c < GRID_WIDTH; c++) {
@@ -65,7 +66,7 @@ public class BattleWorld extends GameWorld
             state = "card animation";
         }
     }
-    
+
     public void checkState() {
         if (state == "gameplay" && phase == "player" && !selectorAdded) {
             addSelector();
@@ -75,18 +76,19 @@ public class BattleWorld extends GameWorld
             removeSelector();
             selectorAdded = false;
         }
-        
+
         if (phase == "enemy" && state == "gameplay") {
             moveEnemies();
         }
     }
-    
+
     public void startEnemyPhase() {
         resetEnemyVariables();
         phase = "enemy";
     }
-    
+
     public void startPlayerPhase() {
+        turns++;
         resetAllyVariables();
         phase = "player";
     }
@@ -94,16 +96,26 @@ public class BattleWorld extends GameWorld
     public void moveEnemies() {
         if (i == 0 && curMovingEnemy == null) {
             curMovingEnemy = enemies.get(i);
-            curMovingEnemy.startMoving();
+            if (curMovingEnemy.isBoss == true) {
+                curMovingEnemy.moved = true;
+            }
+            else {
+                curMovingEnemy.startMoving();   
+            }
         }
         if (curMovingEnemy.moved && i < enemies.size()) {
-            Greenfoot.delay(40);
+            Greenfoot.delay(30);
             i++;
             if (i == enemies.size()) {
                 return;
             }
             curMovingEnemy = enemies.get(i);
-            curMovingEnemy.startMoving();
+            if (curMovingEnemy.isBoss == true) {
+                curMovingEnemy.moved = true;
+            }
+            else {
+                curMovingEnemy.startMoving();    
+            }
         }
     }
 
@@ -126,19 +138,19 @@ public class BattleWorld extends GameWorld
             e.getImage().setTransparency(255);
         }
     }
-    
+
     public void removeAlly(Ally a) {
         allies.remove(a);
         map[a.r][a.c] = 0;
         removeObject(a);
     }
-    
+
     public void removeEnemy(Enemy e) {
         enemies.remove(e);
         map[e.r][e.c] = 0;
         removeObject(e);
     }
-    
+
     public int getNumAlliesMoved() {
         int ret = 0;
         for (Ally a : allies) {
@@ -146,10 +158,10 @@ public class BattleWorld extends GameWorld
                 ret++;
             }
         }
-        
+
         return ret;
     }
-    
+
     public int getNumEnemiesMoved() {
         int ret = 0;
         for (Enemy e : enemies) {
@@ -157,17 +169,17 @@ public class BattleWorld extends GameWorld
                 ret++;
             }
         }
-        
+
         return ret;
     }
-    
+
     /**
      * For other classes that need to remove the selector from the world.
      */
     public void removeSelector() {
         removeObject(selector);
     }
-    
+
     /**
      * Adds selector back into world at the position it left off at.
      */

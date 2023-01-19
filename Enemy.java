@@ -24,7 +24,7 @@ public abstract class Enemy extends BattleWorldCharacter
         this.level = level;
         name = getName();
         levelUp(level);
-        hitXp = 10000;
+        hitXp = 10;
         killXp = 200;
     }
 

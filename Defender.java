@@ -11,7 +11,7 @@ public abstract class Defender extends AttackAnimationActor
     public Defender(BattleWorldCharacter me, BattleWorldCharacter other) {
         super(me, other);
     }
-    
+
     public void addedToWorld(World w) {
         super.addedToWorld(w);
     }
@@ -24,7 +24,7 @@ public abstract class Defender extends AttackAnimationActor
         // LABEL
         hpLabel.setText(Integer.toString(me.health));
         getWorld().addObject(hpLabel, 600 + 50, getWorld().getHeight() - allyHpBg.getImage().getHeight() / 2 + 8);
-        
+
         // BAR        
         int y1 = 700; // top row
         int y2 = y1 + tick.getImage().getHeight() + 8; // bottom row
@@ -58,7 +58,7 @@ public abstract class Defender extends AttackAnimationActor
     public void animate() {
         AttackAnimationWorld w = (AttackAnimationWorld)getWorld();
         AttackAnimationActor otherActor = w.getOtherActor(this);
-        
+
         if (actCount % 7 == 0) {
             // FRAME OF IMPACT
             if (i == frameOfImpact) {
@@ -66,17 +66,22 @@ public abstract class Defender extends AttackAnimationActor
                     otherActor.cutHp();
                     dmgIndicatorIsAnimating = true;
                     getWorld().addObject(dmgIndicator, getWorld().getWidth() / 2, getWorld().getHeight() / 2);
-                    
+
+                    if (willCrit) {
+                        TextCard t = new TextCard("Crit!", font, Color.WHITE, null, 5);
+                        getWorld().addObject(t, getWorld().getWidth() / 2, 100);
+                    }
+
                     if (me instanceof Ally) {
                         ((Ally)me).increaseXp(((Enemy)other).hitXp);
                     }
                 }
                 else {
-                    TextCard miss = new TextCard("Miss!", font, Color.WHITE, null, 5);
-                    getWorld().addObject(miss, getWorld().getWidth() / 2, getWorld().getHeight() / 2 - 200);
+                    TextCard t = new TextCard("Miss!", font, Color.WHITE, null, 5);
+                    getWorld().addObject(t, getWorld().getWidth() / 2, 100);
                 }
             }
-            
+
             // ATTACK ANIMATION
             setImage(frames.get(i));
             i++;
@@ -88,7 +93,7 @@ public abstract class Defender extends AttackAnimationActor
                 }
             }
             i %= frames.size();
-            
+
             // DMG INDICATOR
             if (dmgIndicatorIsAnimating) {
                 dmgIndicator.setImage(dmgIndicators.get(damage_i));

@@ -6,12 +6,9 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class StatWindow extends NonAttackInterface
-{
-    private Font font = new Font("Candara", true, false, 45);
-    
+public class StatWindow extends Image
+{    
     public StatWindow(BattleWorldCharacter bwc) {
-        super(bwc);
         String stats = "\n" + bwc.name + "\n\n";
         String whitespace = "     ";
         stats += whitespace + "LEVEL - " + bwc.level + whitespace + "\n";
@@ -26,7 +23,15 @@ public class StatWindow extends NonAttackInterface
         stats += whitespace + "SPD - " + bwc.spd + whitespace + "\n";
         stats += whitespace + "Crit Chance - " + bwc.crit + "%" + whitespace + "\n";
         stats += whitespace + "Current Weapon - " + (bwc.weapon == "" ? "Not yet chosen" : bwc.weapon) + whitespace + "\n \n";
+        
+        Font font = new Font("Candara", true, false, 45);
         TextImage ti = new TextImage(stats, font, Color.YELLOW, Color.BLACK);
+        ti.setTransparency(190);
+        setImage(ti);
+    }
+    
+    public StatWindow(String s, Font font, Color textColor, Color bgColor) {
+        TextImage ti = new TextImage(s, font, textColor, bgColor);
         ti.setTransparency(190);
         setImage(ti);
     }

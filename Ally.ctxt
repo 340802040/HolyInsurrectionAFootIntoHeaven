@@ -15,4 +15,5 @@ comment6.params=amount
 comment6.target=void\ increaseXp(int)
 comment7.params=
 comment7.target=java.lang.String\ getLevelUpMsg()
+comment7.text=\r\n\ Calculates\ how\ many\ levels\ gained\ from\ total\ xp\ gained\ after\ a\ fight.\r\n\ If\ leveled\ up,\ increases\ stats.\ \r\n\ \r\n\ @return\ String\ message\ with\ all\ information\ (xp\ gained,\ amount\ of\ level\ ups\ and\ stat\ increases).\r\n
 numComments=8

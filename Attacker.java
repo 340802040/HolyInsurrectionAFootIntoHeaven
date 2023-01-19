@@ -69,13 +69,18 @@ public abstract class Attacker extends AttackAnimationActor
                     dmgIndicatorIsAnimating = true;
                     getWorld().addObject(dmgIndicator, getWorld().getWidth() / 2, getWorld().getHeight() / 2);
                     
+                    if (willCrit) {
+                        TextCard t = new TextCard("Crit!", font, Color.WHITE, null, 5);
+                        getWorld().addObject(t, getWorld().getWidth() / 2, 100);
+                    }
+                    
                     if (me instanceof Ally) {
                         ((Ally)me).increaseXp(((Enemy)other).hitXp);
                     }
                 }
                 else {
-                    TextCard miss = new TextCard("Miss!", font, Color.WHITE, null, 5);
-                    getWorld().addObject(miss, getWorld().getWidth() / 2, getWorld().getHeight() / 2 - 200);
+                    TextCard t = new TextCard("Miss!", font, Color.WHITE, null, 5);
+                    getWorld().addObject(t, getWorld().getWidth() / 2, 100);
                 }
             }
             

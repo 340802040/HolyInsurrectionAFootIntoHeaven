@@ -76,8 +76,15 @@ public abstract class Ally extends BattleWorldCharacter
         xpGained += amount;
     }
 
+    /**
+     * Calculates how many levels gained from total xp gained after a fight.
+     * If leveled up, increases stats. 
+     * 
+     * @return String message with all information (xp gained, amount of level ups and stat increases).
+     */
     public String getLevelUpMsg() {
         String msg;
+        String whitespace = "     ";
         
         if (xp >= xpNeeded) {
             int numLevelUps = 0;
@@ -94,36 +101,37 @@ public abstract class Ally extends BattleWorldCharacter
 
             int numStatIncreases = GameWorld.getRandomNumberInRange(1, potentialStats.size() + 1);
             List<String> upgradedStats = GameWorld.pickNRandom(potentialStats, numStatIncreases);
-            msg = "XP +" + xpGained + " --> LEVEL +" + numLevelUps + "\n";
+            msg = "\n" + whitespace + "XP +" + xpGained + " --> LEVEL +" + numLevelUps + whitespace + "\n";
             for (String s : upgradedStats) {
                 switch (s) {
                     case "health":
-                        msg += "MAX HP +" + increase + "\n";
+                        msg += whitespace + "MAX HP +" + increase + whitespace + "\n";
                         maxHealth += increase;
                         checkHealth();
                         break;
                     case "atk":
-                        msg += "ATK +" + increase + "\n";
+                        msg += whitespace + "ATK +" + increase + whitespace + "\n";
                         atk += increase;
                         break;
                     case "def":
-                        msg += "DEF +" + increase + "\n";
+                        msg += whitespace + "DEF +" + increase + whitespace + "\n";
                         def += increase;
                         break;
                     case "ev":
-                        msg += "EV +" + increase + "\n";
+                        msg += whitespace + "EV +" + increase + whitespace + "\n";
                         ev += increase;
                         break;
                     case "spd":
-                        msg += "SPD +" + increase + "\n";
+                        msg += whitespace + "SPD +" + increase + whitespace + "\n";
                         spd += increase;
                         break;
                 }
             }
+            msg += " \n";
             xpGained = 0;
         }
         else {
-            msg = "XP +" + xpGained;   
+            msg = "\n" + whitespace + "XP +" + xpGained + whitespace + "\n \n";   
             xpGained = 0;
         }
         

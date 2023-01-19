@@ -43,7 +43,9 @@ public abstract class AttackAnimationActor extends Actor
         name = me.getClass().getSimpleName();
         weaponMultiplier = getWeaponMultiplier();
         willHit = determineWillHit();
-        willCrit = determineWillCrit();
+        if (willHit) {
+            willCrit = determineWillCrit();    
+        }
         frameOfImpact = getFrameOfImpact();
         hpLabel = new Text(Integer.toString(me.health), font, Color.WHITE, null);
     }
@@ -70,7 +72,7 @@ public abstract class AttackAnimationActor extends Actor
 
     public void initFrames() {
         // ATTACK AND CRIT FRAMES
-        if (willHit && willCrit) {
+        if (willCrit) {
             int numFrames = new File(critPath).list().length;
             for (int i = 0; i < numFrames; i++) {
                 String zeroes = i < 10 ? "00" : "0";
@@ -123,12 +125,13 @@ public abstract class AttackAnimationActor extends Actor
     }
 
     public boolean determineWillCrit() {
-        return Greenfoot.getRandomNumber(100) <  me.crit;
+        return true;
+        //return Greenfoot.getRandomNumber(100) <  me.crit;
     }
 
     public int getFrameOfImpact() {
         if (me instanceof AllyHero) {
-
+            
         }
         else if (me instanceof AllyFootSoldier || me instanceof EnemyFootSoldier) {
             return willCrit ? 22 : 18;

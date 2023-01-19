@@ -69,7 +69,7 @@ public class AttackAnimationWorld extends GameWorld
     }
 
     public static int calculateDamageDealtBy(BattleWorldCharacter dealer, BattleWorldCharacter dealtTo, boolean willCrit) {
-        int weaponDmg = 0;
+        int weaponDmg = 0; // wth was this
         int damageDealt = (int)((dealer.atk + weaponDmg) * (willCrit ? 3 : 1) * dealer.terrainMultiplier * GameWorld.getWeaponMultiplier(dealer.weapon, dealtTo.weapon) - dealtTo.def);
         if (damageDealt <= 0) {
             damageDealt = 1; // minimum
@@ -91,15 +91,10 @@ public class AttackAnimationWorld extends GameWorld
                 timer.mark();
                 timerMarked = true;
 
-                Font font = new Font("Candara", true, false, 40);
+                Font font = new Font("Candara", true, false, 50);
                 String msg = a.getLevelUpMsg();
-                Text t = new Text(msg, font, Color.YELLOW, null);
-                if (attackerActor instanceof AllyAttacker) {
-                    addObject(t, 200, getHeight() / 2 - 100);    
-                }
-                else {
-                    addObject(t, getWidth() - 200, getHeight() / 2 - 100);    
-                }
+                StatWindow sw = new StatWindow(msg, font, Color.YELLOW, Color.BLACK);
+                addObject(sw, getWidth() / 2, getHeight() / 2);
             }
             else if (timer.millisElapsed() > 5000) {
                 returnToWorld();    

@@ -15,8 +15,4 @@ public class NonAttackInterface extends Interface
         super(a);
         this.a = a;
     }
-    
-    public NonAttackInterface(BattleWorldCharacter bwc) {
-        super(bwc);
-    }
 }

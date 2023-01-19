@@ -12,8 +12,8 @@ public class TextCard extends Card
     private Color color;
     private Color bgColor;
 
-    public TextCard(String s, Font font, Color color, Color bgColor) {
-        super(new TextImage(s, font, color, bgColor));
+    public TextCard(String s, Font font, Color color, Color bgColor, int mod) {
+        super(new TextImage(s, font, color, bgColor), mod);
         this.font = font;
         this.color = color;
         this.bgColor = bgColor;

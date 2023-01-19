@@ -12,15 +12,18 @@ public abstract class Enemy extends BattleWorldCharacter
     // DATA
     private Ally target; // AI will determine which target enemy chooses to attack
     private boolean willAttack; // if enemy can reach its target within its move limit, willAttack will be true
-    protected int xpToGive;
+    protected int hitXp, killXp; // xp rewarded for hitting 
     // MOVEMENT
     private int endIndex; // for movement
-    // FLASHING
+    // DEATH ANIMATION
     private boolean isFlashing, flip; // if enemy about to attack, flash as an indicator
     private int j = 0;
 
-    public Enemy() {
-
+    public Enemy(int level) {
+        this.level = level;
+        levelUp(level);
+        hitXp = 160;
+        killXp = 200;
     }
 
     public void addedToWorld(World w) {
@@ -170,6 +173,34 @@ public abstract class Enemy extends BattleWorldCharacter
             checkDirection();
             i--;
             moveTimer.mark();
+        }
+    }
+    
+    public void levelUp(int amount) {
+        for (int i = 0; i < amount; i++) {
+            int numStatIncreases = GameWorld.getRandomNumberInRange(1, 5);
+            List<String> upgradedStats = GameWorld.pickNRandom(stats, numStatIncreases);
+            int increase = 2;
+            for (String s : upgradedStats) {
+                switch (s) {
+                    case "health":
+                        maxHealth += increase;
+                        health += increase;
+                        break;
+                    case "atk":
+                        atk += increase;
+                        break;
+                    case "def":
+                        def += increase;
+                        break;
+                    case "ev":
+                        ev += increase;
+                        break;
+                    case "spd":
+                        spd += increase;
+                        break;
+                }
+            }
         }
     }
     

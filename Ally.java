@@ -10,11 +10,12 @@ import java.util.*;
 public abstract class Ally extends BattleWorldCharacter
 {
     protected Enemy selectedEnemy; // whether character has selected an enemy to move to
-    protected int xp = 0, level = 0, xpNeeded;
+    protected int xp = 0, xpNeeded = 50;
     protected Point backLocation; // location to go back to
-    
-    public Ally() {
-        xpNeeded = 100; // placeholder
+    protected String name;
+
+    public Ally(String name) {
+        this.name = name;
     }
 
     public void addedToWorld(World w) {
@@ -31,7 +32,6 @@ public abstract class Ally extends BattleWorldCharacter
         else {
             idleAnimate();
         }
-        checkLevelUp();
     }
 
     public void startMoving(ArrayList<Point> path) {
@@ -71,16 +71,61 @@ public abstract class Ally extends BattleWorldCharacter
             moveTimer.mark();
         }
     }
-    
-    public void increaseXp(int amount) {
+
+    public TextCard increaseXp(int amount) {
         xp += amount;
+        Font font = new Font("Candara", true, false, 50);
+        String msg = "XP +" + amount + getLevelUpMsg();
+        return new TextCard(msg, font, Color.GREEN, null, 18);
     }
-    
-    public void checkLevelUp() {
+
+    public String getLevelUpMsg() {
         if (xp >= xpNeeded) {
-            level++;
-            xp = 0;
-            xpNeeded += 10; // placeholder
+            int numLevelUps = 0;
+            int xpCopy = xp;
+            while (true) {
+                xpCopy -= xpNeeded;
+                if (xpCopy < 0) {
+                    break;
+                }
+                numLevelUps++;
+                xpNeeded += 5;
+            }
+            level += numLevelUps;
+            int increase = 2 * numLevelUps;
+
+            int numStatIncreases = GameWorld.getRandomNumberInRange(1, 5);
+            List<String> upgradedStats = GameWorld.pickNRandom(stats, numStatIncreases);
+            String msg = " --> LEVEL +" + numLevelUps + "\n";
+            for (String s : upgradedStats) {
+                switch (s) {
+                    case "health":
+                        msg += "MAX HP +" + increase + "\n";
+                        maxHealth += increase + 10000;
+                        health += increase + 10000;
+                        checkHealth();
+                        break;
+                    case "atk":
+                        msg += "ATK +" + increase + "\n";
+                        atk += increase;
+                        break;
+                    case "def":
+                        msg += "DEF +" + increase + "\n";
+                        def += increase;
+                        break;
+                    case "ev":
+                        msg += "EV +" + increase + "\n";
+                        ev += increase;
+                        break;
+                    case "spd":
+                        msg += "SPD +" + increase + "\n";
+                        spd += increase;
+                        break;
+                }
+            }
+
+            return msg;
         }
+        else return "";
     }
 }

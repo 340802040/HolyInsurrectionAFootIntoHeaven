@@ -1,4 +1,5 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import java.util.*;
 
 /**
  * Write a description of class GameWorld here.
@@ -69,7 +70,7 @@ public class GameWorld extends World
     /**
      * Gets random number from start to end exclusive.
      */
-    public int getRandomNumberInRange(int start, int end) {
+    public static int getRandomNumberInRange(int start, int end) {
         int x = Greenfoot.getRandomNumber(end - start);
         return start + x;
     }
@@ -88,6 +89,15 @@ public class GameWorld extends World
             return 0.7;   
         }
         else return 1;
+    }
+    
+    /**
+     * Picks n random items from a list and returns them.
+     */
+    public static List<String> pickNRandom(List<String> lst, int n) {
+        List<String> copy = new ArrayList<String>(lst);
+        Collections.shuffle(copy);
+        return n > copy.size() ? copy.subList(0, copy.size()) : copy.subList(0, n);
     }
 
     public void stopped() {

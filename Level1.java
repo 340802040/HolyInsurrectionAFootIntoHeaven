@@ -8,14 +8,14 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Level1 extends BattleWorld
 {   
-    private EnemyFootSoldier e1 = new EnemyFootSoldier();
-    private EnemyFootSoldier e2 = new EnemyFootSoldier();
+    private EnemyFootSoldier e1 = new EnemyFootSoldier(1);
+    private EnemyFootSoldier e2 = new EnemyFootSoldier(1);
 
     public Level1() {
         // level1 should take in array of allies but for now hardcode them
         super(1200, 800, 1);
-        allies.add(new AllyFootSoldier());
-        allies.add(new AllyFootSoldier());
+        allies.add(new AllyFootSoldier("hello"));
+        allies.add(new AllyFootSoldier("hi"));
         enemies.add(e1);
         enemies.add(e2);
 
@@ -44,7 +44,7 @@ public class Level1 extends BattleWorld
                 int r = getRandomNumberInRange(0, 10);
                 int c = getRandomNumberInRange(0, 10);
                 if (map[r][c] == 0) {                      
-                    addObject(a, GameWorld.getX(r), GameWorld.getY(c));         
+                    addObject(a, GameWorld.getX(c), GameWorld.getY(r));         
                     map[r][c] = 1; // just to be safe in case the loop runs faster than Ally's addedToWorld()
                     break;
                 }

@@ -11,7 +11,6 @@ import java.io.File;
 public abstract class AttackAnimationActor extends Actor
 {
     // DATA
-    protected int actCount = 0;
     protected BattleWorldCharacter me, other;
     protected String name;
     protected boolean isFlashing, isFading, flip;
@@ -35,6 +34,7 @@ public abstract class AttackAnimationActor extends Actor
     protected Image enemyHpBg = new Image("EnemyHPbg.png");
     protected Text hpLabel;
     // MISC
+    protected int actCount = 0;
     protected Font font = new Font("Candara", true, false, 70);
 
     public AttackAnimationActor(BattleWorldCharacter me, BattleWorldCharacter other) {
@@ -63,7 +63,8 @@ public abstract class AttackAnimationActor extends Actor
             }
             if (isFading) {
                 fade();
-            }    
+            }
+            updateHealthBarAndLabel();
         }
     }
 
@@ -158,10 +159,14 @@ public abstract class AttackAnimationActor extends Actor
 
     public void cutHp() {
         int damageDealt = AttackAnimationWorld.calculateDamageDealtBy(other, me);
-        for (int i = me.health - 1; i >= me.health - damageDealt; i--) {
+        int j = (me.health - damageDealt) < 0 ? 0 : me.health - damageDealt;
+        for (int i = me.health - 1; i >= j; i--) {
             ticks.get(i).setImage("GreyHealthTick.png");
         }
         me.health -= damageDealt;
+        if (me.health < 0) {
+            me.health = 0;
+        }
         hpLabel.setText(Integer.toString(me.health));
         checkDeath();
     }
@@ -169,6 +174,20 @@ public abstract class AttackAnimationActor extends Actor
     public abstract void checkDeath();
 
     public abstract void animate();
+    
+    public abstract void drawHealthBarAndLabel();
+    
+    public void updateHealthBarAndLabel() {
+        removeHealthBar();
+        drawHealthBarAndLabel();
+    }
+    
+    public void removeHealthBar() {
+        for (Image tick : ticks) {
+            getWorld().removeObject(tick);
+        }
+        ticks.clear();
+    }
 
     public void die() {
         isFlashing = true;

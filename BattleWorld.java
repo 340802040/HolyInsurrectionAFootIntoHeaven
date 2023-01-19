@@ -57,11 +57,11 @@ public class BattleWorld extends GameWorld
 
     public void checkPhaseSwitch() {
         if (phase == "player" && state == "gameplay" && getNumAlliesMoved() == allies.size()) {
-            addObject(new BattlePhaseCard("placeholder/enemy-phase.jpg"), getWidth() / 2, getHeight() / 2);
+            addObject(new BattlePhaseCard("Placeholder/enemy-phase.jpg"), getWidth() / 2, getHeight() / 2);
             state = "card animation";
         }
         else if (phase == "enemy" && state == "gameplay" && getNumEnemiesMoved() == enemies.size()) {
-            addObject(new BattlePhaseCard("placeholder/player-phase.jpg"), getWidth() / 2, getHeight() / 2);
+            addObject(new BattlePhaseCard("Placeholder/player-phase.jpg"), getWidth() / 2, getHeight() / 2);
             state = "card animation";
         }
     }

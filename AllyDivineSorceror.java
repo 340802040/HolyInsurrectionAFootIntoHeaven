@@ -8,8 +8,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class AllyDivineSorceror extends AllyWizard
 {
-    public AllyDivineSorceror() {
-        super();
+    public AllyDivineSorceror(String name) {
+        super(name);
     }
     
     public void act() {

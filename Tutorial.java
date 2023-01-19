@@ -9,13 +9,13 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class Tutorial extends BattleWorld
 {
     // CHARACTERS
-    private AllyHero hero = new AllyHero();
-    private AllyCrusader prodeus = new AllyCrusader();
-    private EnemyFootSoldier e1 = new EnemyFootSoldier();
-    private EnemyFootSoldier e2 = new EnemyFootSoldier();
-    private EnemyFootSoldier e3 = new EnemyFootSoldier();
-    private EnemyFootSoldier e4 = new EnemyFootSoldier();
-    private EnemyFootSoldier boss = new EnemyFootSoldier();
+    private AllyHero hero = new AllyHero("Hero");
+    private AllyCrusader prodeus = new AllyCrusader("Prodeus");
+    private EnemyFootSoldier e1 = new EnemyFootSoldier(1);
+    private EnemyFootSoldier e2 = new EnemyFootSoldier(1);
+    private EnemyFootSoldier e3 = new EnemyFootSoldier(1);
+    private EnemyFootSoldier e4 = new EnemyFootSoldier(1);
+    private EnemyFootSoldier boss = new EnemyFootSoldier(1);
     // DIALOGUES
     Dialogue oldManD = new Dialogue("images/Text/OldManInstructions/");
     Dialogue prodeusD = new Dialogue("images/Text/ProdeusInstructions/");
@@ -56,11 +56,11 @@ public class Tutorial extends BattleWorld
         // spawn enemies randomly
         for (Enemy e : enemies) {
             while (true) {
-                int randr = getRandomNumberInRange(0, GameWorld.GRID_HEIGHT);
-                int randc = getRandomNumberInRange(GameWorld.GRID_WIDTH - 6, GameWorld.GRID_WIDTH);
-                if (map[randr][randc] == 0) {
-                    addObject(e, GameWorld.getX(randc), GameWorld.getY(randr));         
-                    map[randr][randc] = 2; // just to be safe in case the loop runs faster than character's addedToWorld()
+                int r = getRandomNumberInRange(0, GameWorld.GRID_HEIGHT);
+                int c = getRandomNumberInRange(GameWorld.GRID_WIDTH - 6, GameWorld.GRID_WIDTH);
+                if (map[r][c] == 0) {
+                    addObject(e, GameWorld.getX(c), GameWorld.getY(r));         
+                    map[r][c] = 2; // just to be safe in case the loop runs faster than character's addedToWorld()
                     break;
                 }
             }

@@ -13,13 +13,14 @@ public abstract class BattleWorldCharacter extends Actor
     // DATA
     protected int r, c;
     protected int moveLimit;
+    protected int level = 0;
+    protected List<String> stats = Arrays.asList("health", "atk", "def", "ev", "spd");
     protected int maxHealth, health;
     protected int atk; // base atk 
     protected int def;
     protected int ev; // evasion - each evasion reduces opponent's chance of hitting by 3%
     protected int spd; // each speed you have greater than your enemy, the hit chance increases by 2%, if speed is greater than opponent's by 4, double attack
     protected int terrainMultiplier;
-    protected int hitChance;
     protected int crit; // crit chance
     protected ArrayList<String> weapons = new ArrayList<String>();
     protected String weapon = "";
@@ -44,8 +45,6 @@ public abstract class BattleWorldCharacter extends Actor
     public abstract void move();
 
     public BattleWorldCharacter() {
-        // placeholder values for testing
-        hitChance = 90;
         terrainMultiplier = 1; // most characters have no terrain bonus
     }
 
@@ -125,6 +124,15 @@ public abstract class BattleWorldCharacter extends Actor
         else if (c - prevLocation.c < 0) {
             
             facing = "left";
+        }
+    }
+    
+    public void checkHealth() {
+        if (maxHealth > 66) {
+            maxHealth = 66;
+        }
+        if (health > 66) {
+            health = 66;
         }
     }
 

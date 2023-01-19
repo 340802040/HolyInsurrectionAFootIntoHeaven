@@ -14,15 +14,15 @@ public abstract class Defender extends AttackAnimationActor
     
     public void addedToWorld(World w) {
         super.addedToWorld(w);
-        setupHpLabelAndBar();
     }
 
     public void act() {
         super.act();
     }
 
-    public void setupHpLabelAndBar() {
+    public void drawHealthBarAndLabel() {
         // LABEL
+        hpLabel.setText(Integer.toString(me.health));
         getWorld().addObject(hpLabel, 600 + 50, getWorld().getHeight() - allyHpBg.getImage().getHeight() / 2 + 8);
         
         // BAR        
@@ -66,9 +66,14 @@ public abstract class Defender extends AttackAnimationActor
                     otherActor.cutHp();
                     dmgIndicatorIsAnimating = true;
                     getWorld().addObject(dmgIndicator, getWorld().getWidth() / 2, getWorld().getHeight() / 2);
+                    
+                    if (me instanceof Ally) {
+                        TextCard t = ((Ally)me).increaseXp(((Enemy)other).hitXp);
+                        getWorld().addObject(t, getWorld().getWidth() - 250, getWorld().getHeight() / 2 - 100);
+                    }
                 }
                 else {
-                    TextCard miss = new TextCard("Miss!", font, Color.WHITE, null);
+                    TextCard miss = new TextCard("Miss!", font, Color.WHITE, null, 5);
                     getWorld().addObject(miss, getWorld().getWidth() / 2, getWorld().getHeight() / 2 - 200);
                 }
             }

@@ -8,7 +8,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class AllyChariot extends Ally
 {
-    public AllyChariot() {
+    public AllyChariot(String name) {
+        super(name);
         moveLimit = 5;
         weapons.add("Spear");
     }

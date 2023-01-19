@@ -8,8 +8,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class AllySniper extends AllyArcher
 {
-    public AllySniper() {
-        super();
+    public AllySniper(String name) {
+        super(name);
         weapons.add("Sword");
     }
     

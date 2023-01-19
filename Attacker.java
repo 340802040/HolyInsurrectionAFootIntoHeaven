@@ -15,15 +15,15 @@ public abstract class Attacker extends AttackAnimationActor
     
     public void addedToWorld(World w) {
         super.addedToWorld(w);
-        setupHpLabelAndBar();
     }
 
     public void act() {
         super.act();
     }
 
-    public void setupHpLabelAndBar() {
+    public void drawHealthBarAndLabel() {
         // LABEL
+        hpLabel.setText(Integer.toString(me.health));
         getWorld().addObject(hpLabel, 50, getWorld().getHeight() - allyHpBg.getImage().getHeight() / 2 + 8);
         
         // BAR
@@ -68,18 +68,20 @@ public abstract class Attacker extends AttackAnimationActor
                     otherActor.cutHp();
                     dmgIndicatorIsAnimating = true;
                     getWorld().addObject(dmgIndicator, getWorld().getWidth() / 2, getWorld().getHeight() / 2);
+                    
+                    if (me instanceof Ally) {
+                        TextCard t = ((Ally)me).increaseXp(((Enemy)other).hitXp);
+                        getWorld().addObject(t, 250, getWorld().getHeight() / 2 - 100);
+                    }
                 }
                 else {
-                    TextCard miss = new TextCard("Miss!", font, Color.WHITE, null);
+                    TextCard miss = new TextCard("Miss!", font, Color.WHITE, null, 5);
                     getWorld().addObject(miss, getWorld().getWidth() / 2, getWorld().getHeight() / 2 - 200);
                 }
             }
             
             // ATTACK ANIMATION
             setImage(frames.get(i));
-            if (i == 34) {
-                System.out.println("bruh");
-            }
             i++;
             if (i == frames.size()) {
                 isAnimating = false;

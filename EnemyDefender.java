@@ -28,8 +28,12 @@ public class EnemyDefender extends Defender
             die();
             AttackAnimationWorld w = (AttackAnimationWorld)getWorld();
             w.returnWorld.removeEnemy(me);
-            (other).increaseXp(me.xpToGive); // increase ally xp
+            other.increaseXp(me.killXp);
         }
+    }
+    
+    public void drawHealthBarAndLabel() {
+        super.drawHealthBarAndLabel();
     }
     
     public void animate() {

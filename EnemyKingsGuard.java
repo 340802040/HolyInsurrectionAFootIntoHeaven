@@ -8,8 +8,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class EnemyKingsGuard extends EnemyFootSoldier
 {
-    public EnemyKingsGuard() {
-        super();
+    public EnemyKingsGuard(int level) {
+        super(level);
         weapons.add("Sword");
     }
     

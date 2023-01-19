@@ -20,6 +20,9 @@ public class AttackAnimationWorld extends GameWorld
     protected Image allyHpBg = new Image("AllyHPbg.png");
     protected Image enemyHpBg = new Image("EnemyHPbg.png");
     protected AttackAnimationActor attackerActor, defenderActor;
+    // MISC
+    protected SimpleTimer timer = new SimpleTimer();
+    protected boolean timerMarked;
     
     public AttackAnimationWorld(BattleWorld returnWorld, Ally a, Enemy e, String attacker_s) {
         super(1200, 800, 1);
@@ -29,9 +32,19 @@ public class AttackAnimationWorld extends GameWorld
         this.attacker_s = attacker_s;
         returnWorld.state = "attack animation";
         setBackground("BattleBackground.png");
-        
-        setupHpBgs();
-        
+        setup();
+    }
+
+    public void act() {
+        checkFightFinished();
+    }
+    
+    public void setup() {
+        setupHpBgs(); // setup first so bg's are underneath labels and bars
+        setupActors();
+    }
+    
+    public void setupActors() {
         if (attacker_s == "ally") {
             attackerActor = new AllyAttacker(a, e);
             defenderActor = new EnemyDefender(e, a);
@@ -42,10 +55,6 @@ public class AttackAnimationWorld extends GameWorld
         }
         addObject(attackerActor, getWidth() / 2, getHeight() / 2);
         addObject(defenderActor, getWidth() / 2, getHeight() / 2);
-    }
-
-    public void act() {
-        checkFightFinished();
     }
 
     public void setupHpBgs() {
@@ -62,6 +71,9 @@ public class AttackAnimationWorld extends GameWorld
     public static int calculateDamageDealtBy(BattleWorldCharacter dealer, BattleWorldCharacter dealtTo) {
         int weaponDmg = 0;
         int damageDealt = (int)((dealer.atk + weaponDmg) * dealer.terrainMultiplier * GameWorld.getWeaponMultiplier(dealer.weapon, dealtTo.weapon) - dealtTo.def);
+        if (damageDealt <= 0) {
+            damageDealt = 1; // minimum
+        }
 
         return damageDealt;
     }
@@ -75,8 +87,13 @@ public class AttackAnimationWorld extends GameWorld
 
     public void checkFightFinished() {
         if (attackerActor.finished && defenderActor.finished) {
-            Greenfoot.delay(50);
-            returnToWorld();
+            if (!timerMarked) {
+                timer.mark();
+                timerMarked = true;    
+            }
+            else if (timer.millisElapsed() > 2000) {
+                returnToWorld();    
+            }
         }
     }
 

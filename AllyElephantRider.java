@@ -8,8 +8,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class AllyElephantRider extends AllyChariot
 {
-    public AllyElephantRider() {
-        super();
+    public AllyElephantRider(String name) {
+        super(name);
         weapons.add("Stampede");
     }
     

@@ -8,7 +8,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class EnemyCavalry extends Enemy
 {
-    public EnemyCavalry() {
+    public EnemyCavalry(int level) {
+        super(level);
         moveLimit = 7;
         weapons.add("Sword");
         weapons.add("Spear");

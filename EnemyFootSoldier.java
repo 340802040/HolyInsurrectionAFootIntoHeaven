@@ -8,9 +8,10 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class EnemyFootSoldier extends Enemy
 {
-    public EnemyFootSoldier() {
+    public EnemyFootSoldier(int level) {
+        super(level);
         moveLimit = 4;
-        maxHealth = 50;
+        maxHealth = 35;
         health = maxHealth;
         atk = 5;
         crit = 20;

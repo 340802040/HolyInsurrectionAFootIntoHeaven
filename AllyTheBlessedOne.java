@@ -8,8 +8,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class AllyTheBlessedOne extends AllyHero
 {
-    public AllyTheBlessedOne() {
-        super();
+    public AllyTheBlessedOne(String name) {
+        super(name);
         weapons.add("TheHolyWeapon");
     }
     

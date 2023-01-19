@@ -8,13 +8,13 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class AllyFootSoldier extends Ally
 {
-    public AllyFootSoldier() {
+    public AllyFootSoldier(String name) {
+        super(name);
         moveLimit = 15;
-        maxHealth = 10;
+        maxHealth = 30;
         health = maxHealth;
         atk = 3;
         crit = 20;
-        hitChance = 0;
         weapons.add("Spear");
     }
     

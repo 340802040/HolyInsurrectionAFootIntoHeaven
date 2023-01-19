@@ -48,7 +48,7 @@ public class Selector extends Actor
     }
 
     public void checkMovement() {
-        if (moveTimer.millisElapsed() > 85) {
+        if (moveTimer.millisElapsed() > 100) {
             if (Greenfoot.isKeyDown("w") && canMoveTo(r - 1, c)) {
                 r--;
                 setLocation(GameWorld.getX(c), GameWorld.getY(r));
@@ -121,7 +121,7 @@ public class Selector extends Actor
         else if (timer2.millisElapsed() > 500 && !active && Greenfoot.isKeyDown("k") && a == null) { // ground selected to end turn
             BattleWorld bw = (BattleWorld)getWorld();
             bw.state = "decision";
-            bw.addObject(new EndTurnWindow("Panels/EndTurnWindow.png", selectedAlly), getWorld().getWidth() - 150, getWorld().getHeight() / 2);
+            bw.addObject(new EndTurnWindow("Panels/EndTurnWindow.png", selectedAlly), getWorld().getWidth() - 220, getWorld().getHeight() / 2);
         }
     }
 

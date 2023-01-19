@@ -8,10 +8,10 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class EnemyDivineSorceror extends EnemyWizard
 {
-    public EnemyDivineSorceror() {
-        super();
+    public EnemyDivineSorceror(int level) {
+        super(level);
     }
-    
+
     public void act() {
         super.act();
     }

@@ -91,7 +91,7 @@ public abstract class AttackAnimationActor extends Actor
             }
         }
         // DMG INDICATOR FRAMES
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 8; i++) {
             dmgIndicators.add(new GreenfootImage("Animations/DamageAnimations/Damage0" + i + ".png"));
             if (this instanceof Defender) {
                 dmgIndicators.get(i).mirrorHorizontally();

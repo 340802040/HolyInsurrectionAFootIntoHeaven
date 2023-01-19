@@ -88,6 +88,9 @@ public abstract class BattleWorldCharacter extends Actor
         c = GameWorld.getYCell(getX());
     }
 
+    /**
+     * Always animates character facing right (original direction of images).
+     */
     public void idleAnimate() {
         if (actCount % 25 == 0) {
             GreenfootImage frame = new GreenfootImage(idleFrames.get(idle_i));

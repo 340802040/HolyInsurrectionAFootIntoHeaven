@@ -19,9 +19,7 @@ public class StartMenu extends World
     private boolean clicked = false;
     private SimpleTimer animationTimer = new SimpleTimer();
     protected GreenfootImage[] titleFrames = new GreenfootImage[5];
-    private int imageIndex = 0;
-    World musicWorld = new MusicMenu();
-    
+    private int imageIndex = 0;    
 
     /**
      * Constructor for objects of class StartMenu.
@@ -38,8 +36,8 @@ public class StartMenu extends World
         setBackground("images/TitleScreen.png");
 
         // Add Buttons
-        addObject(playButton, 100, 300);
-        addObject(albumButton, 100, 400);
+        addObject(playButton, 150, 400);
+        addObject(albumButton, 150, 480);
         
         // Set soundtrack volume
         Soundtrack.setVolume();
@@ -53,12 +51,12 @@ public class StartMenu extends World
 
     public void checkHovering() {
         if(Greenfoot.mouseMoved(playButton) && !added) {
-            addObject(selector, 100, 300);
+            addObject(selector, playButton.getX(), playButton.getY());
             added = true;
             onPlay = true;
         }
         else if(Greenfoot.mouseMoved(albumButton) && !added) {
-            addObject(selector, 100, 400);
+            addObject(selector, albumButton.getX(), albumButton.getY());
             added = true;
             onAlbum = true;
         }
@@ -76,7 +74,7 @@ public class StartMenu extends World
             addObject(shine, 600, 400);
         }
         if(Greenfoot.mouseClicked(selector) && !clicked && onAlbum) {
-            Greenfoot.setWorld(musicWorld);
+            Greenfoot.setWorld(new MusicMenu());
         }
     }
 

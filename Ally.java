@@ -101,8 +101,8 @@ public abstract class Ally extends BattleWorldCharacter
                 switch (s) {
                     case "health":
                         msg += "MAX HP +" + increase + "\n";
-                        maxHealth += increase + 10000;
-                        health += increase + 10000;
+                        maxHealth += increase;
+                        health += increase;
                         checkHealth();
                         break;
                     case "atk":

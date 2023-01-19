@@ -12,9 +12,13 @@ public class StatWindow extends NonAttackInterface
     
     public StatWindow(BattleWorldCharacter bwc) {
         super(bwc);
-        String stats = "\n" + bwc.name + " Stats \n\n";
+        String stats = "\n" + bwc.name + "\n\n";
         String whitespace = "     ";
         stats += whitespace + "LEVEL - " + bwc.level + whitespace + "\n";
+        if (bwc instanceof Ally) {
+            Ally a = (Ally)bwc;
+            stats += whitespace + "XP - " + a.xp + "/" + a.xpNeeded + whitespace + "\n";
+        }
         stats += whitespace + "HP - " + bwc.health + "/" + bwc.maxHealth + whitespace + "\n";
         stats += whitespace + "ATK - " + bwc.atk + whitespace + "\n";
         stats += whitespace + "DEF - " + bwc.def + whitespace + "\n";

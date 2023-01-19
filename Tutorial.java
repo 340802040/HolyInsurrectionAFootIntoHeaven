@@ -32,6 +32,7 @@ public class Tutorial extends BattleWorld
         enemies.add(boss);
         
         hero.weapons.clear();
+        hero.weapons.add("Fists");
         boss.isBoss = true;
         
         map = new int[][] {

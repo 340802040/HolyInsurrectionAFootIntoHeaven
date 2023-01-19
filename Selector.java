@@ -20,7 +20,7 @@ public class Selector extends Actor
     // ANIMATION
     private SimpleTimer animationTimer = new SimpleTimer();
     private GreenfootImage[] selectionFrames = new GreenfootImage[2];
-    private Image selectionIndicator = new Image("PinkSelector.png");;
+    private Highlight selectionIndicator = new Highlight("GreenHighlight.png");
     private int imageIndex = 0;    
     // MISC
     private SimpleTimer moveTimer = new SimpleTimer();
@@ -33,7 +33,7 @@ public class Selector extends Actor
         setImage("images/Animations/Selector/Selector00.png");        
         timer2.mark();
     }
-    
+
     public void addedToWorld(World w) {
         r = GameWorld.getYCell(getY());
         c = GameWorld.getXCell(getX());
@@ -44,7 +44,7 @@ public class Selector extends Actor
         checkSelect();
         checkDeselect();
         checkConfirmMove();
-        checkHovering();
+        animateSelector();
     }
 
     public void checkMovement() {
@@ -85,39 +85,32 @@ public class Selector extends Actor
             moveTimer.mark();
         }
     }
-
-    public void checkHovering() {   // Animate selector if hovering
-        if (getOneIntersectingObject(Ally.class) != null) {
-            animateSelector();
-        }
-        else {
-            setImage("images/Animations/Selector/Selector00.png");
-        }
-    }
-
+    
     public void animateSelector() {
-        if(animationTimer.millisElapsed() < 200) {
-            return;
+        if (hoveringOverAlly()) {
+            setImage("Selector2.png");   
         }
-        animationTimer.mark();
+        else if (animationTimer.millisElapsed() > 300) {
+            animationTimer.mark();
 
-        setImage(selectionFrames[imageIndex]);
-        imageIndex = (imageIndex + 1) % selectionFrames.length;
+            setImage(selectionFrames[imageIndex]);
+            imageIndex = (imageIndex + 1) % selectionFrames.length;
+        }
     }
 
     public void checkSelect() {
         BattleWorld bw = (BattleWorld)getWorld();
-        Ally a = (Ally)getOneIntersectingObject(Ally.class);
-        BattleWorldCharacter bwc = (BattleWorldCharacter)getOneIntersectingObject(BattleWorldCharacter.class);
-        
-        if (timer2.millisElapsed() > 500 && !active && Greenfoot.isKeyDown("k") && a != null && !a.moved) { // ally selected
+        Ally a = (Ally)getOneObjectAtOffset(0, 0, Ally.class);
+        BattleWorldCharacter bwc = (BattleWorldCharacter)getOneObjectAtOffset(0, 0, BattleWorldCharacter.class);
+
+        if (timer2.millisElapsed() > 500 && !active && Greenfoot.isKeyDown("k") && hoveringOverAlly() && !a.moved) { // ally selected
             active = true;
             bw.addObject(selectionIndicator, GameWorld.getX(c), GameWorld.getY(r));
-            selectedAlly = (Ally)getOneIntersectingObject(Ally.class);
+            selectedAlly = a;
             timer.mark();
             checkPath();
         }
-        else if (timer2.millisElapsed() > 500 && !active && Greenfoot.isKeyDown("k") && a == null) { // ground selected to end turn
+        else if (timer2.millisElapsed() > 500 && !active && Greenfoot.isKeyDown("k") && !hoveringOverAlly()) { // ground selected to end turn
             bw.state = "decision";
             bw.addObject(new EndTurnWindow(selectedAlly), bw.getWidth() - 220, bw.getHeight() / 2);
         }
@@ -218,7 +211,9 @@ public class Selector extends Actor
         // remove all BlueHighlight's from the world
         List<Highlight> l = getWorld().getObjects(Highlight.class);
         for (Highlight h : l) {
-            getWorld().removeObject(h);
+            if (h != selectionIndicator) {
+                getWorld().removeObject(h);    
+            }
         }
     }
 
@@ -228,7 +223,7 @@ public class Selector extends Actor
     public void checkConfirmMove() {
         if (timer.millisElapsed() > 500 && active && Greenfoot.isKeyDown("k") && pathPossible) {
             if (map[r][c] == 2) {
-                selectedAlly.selectedEnemy = (Enemy)getOneIntersectingObject(Enemy.class);
+                selectedAlly.selectedEnemy = (Enemy)getOneObjectAtOffset(0, 0, Enemy.class);
             }
             selectedAlly.startMoving(path);
             deselect();
@@ -236,6 +231,10 @@ public class Selector extends Actor
         }
     }
     
+    public boolean hoveringOverAlly() {
+        return (Ally)getOneObjectAtOffset(0, 0, Ally.class) != null;
+    }
+
     public boolean canMoveTo(int r, int c) {
         return r >= 0 && r < GameWorld.GRID_HEIGHT && c >= 0 && c < GameWorld.GRID_WIDTH;
     }

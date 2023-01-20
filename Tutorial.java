@@ -34,7 +34,7 @@ public class Tutorial extends BattleWorld
         hero.weapons.clear();
         hero.weapons.add("Fists");
         boss.isBoss = true;
-        boss.name = "Divine Sorceror Boss";
+        boss.name = "Foot Soldier Boss";
 
         map = new int[][] {
             {3, 3, 3, 0, 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 3, 0, 0, 0, 3, 3, 3, 0, 3, 3},
@@ -58,8 +58,9 @@ public class Tutorial extends BattleWorld
 
         addObject(hero, GameWorld.getX(4), GameWorld.getY(8));
         //map[8][4] = 1; // BattleWorldCharacter addedToWorld() may be too slow to set coordinates
-        
         addObject(boss, GameWorld.getX(21), GameWorld.getY(8));
+        addObject(bossIcon, GameWorld.getX(21), GameWorld.getY(8));
+        
         addObject(e1, GameWorld.getX(19), GameWorld.getY(6));
         addObject(e2, GameWorld.getX(19), GameWorld.getY(7));
         addObject(e3, GameWorld.getX(19), GameWorld.getY(9));

@@ -76,6 +76,7 @@ public class Tutorial extends BattleWorld
             hero.weapons.add("Sword");
             hero.weapons.add("Spear");
             hero.weapons.add("Bow");
+            hero.weapon = "Sword";
             addObject(prodeus, GameWorld.getX(1), GameWorld.getY(7));
             allies.add(prodeus);
             mark = true;

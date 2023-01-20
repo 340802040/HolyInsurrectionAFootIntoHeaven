@@ -15,8 +15,8 @@ public class AllyAttacker extends Attacker
         super(me, other);
         this.me = (Ally)me;
         this.other = (Enemy)other;
-        path = "images/Animations/AllyAnimations/" + name + "Animations/Attack/";
-        critPath = "images/Animations/AllyAnimations/" + name + "Animations/Crit/";
+        path = "images/Animations/AllyAnimations/" + name + "Animations/Attack/" + me.weapon + "/";
+        critPath = "images/Animations/AllyAnimations/" + name + "Animations/Crit/" + me.weapon + "/";
     }
 
     public void act() {

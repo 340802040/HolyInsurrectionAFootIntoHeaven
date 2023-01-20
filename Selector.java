@@ -88,7 +88,7 @@ public class Selector extends Actor
             moveTimer.mark();
         }
     }
-    
+
     public void animateSelector() {
         if (hoveringOverAlly()) {
             setImage("Selector2.png");   
@@ -138,7 +138,7 @@ public class Selector extends Actor
         selectedAlly = null;
         removeHighlight();
     }
-    
+
     public void checkHovering() {
         BattleWorldCharacter bwc = (BattleWorldCharacter)getOneObjectAtOffset(0, 0, BattleWorldCharacter.class);
         if (bwc != null && !hoverAdded) {
@@ -147,9 +147,20 @@ public class Selector extends Actor
             hoverAdded = true;
         }
         else if (bwc == null) {
-            getWorld().removeObject(hoverWindow);
-            hoverAdded = false;
+            removeHoverWindow();
         }
+    }
+
+    public void removeHoverWindow() {
+        if (hoverAdded) {
+            getWorld().removeObject(hoverWindow);
+            hoverAdded = false;    
+        }
+    }
+
+    public void removeSelf() {
+        removeHoverWindow();
+        getWorld().removeObject(this);
     }
 
     /**
@@ -246,7 +257,7 @@ public class Selector extends Actor
             timer2.mark();
         }
     }
-    
+
     public boolean hoveringOverAlly() {
         return (Ally)getOneObjectAtOffset(0, 0, Ally.class) != null;
     }

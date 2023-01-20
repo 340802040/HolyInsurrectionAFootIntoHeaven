@@ -83,16 +83,19 @@ public abstract class Defender extends AttackAnimationActor
             }
 
             // ATTACK ANIMATION
-            setImage(frames.get(i));
-            i++;
-            if (i == frames.size()) {
-                isAnimating = false;
-                finished = true;
-                if (!otherActor.isDying) {
-                    otherActor.finished = true;
+            if (isAnimating) {
+                setImage(frames.get(i));
+                i++;
+                if (i == frames.size()) {
+                    isAnimating = false;
+                    if (!otherActor.isDying) {
+                        otherActor.finished = true;
+                    }
                 }
+                else {
+                    i %= frames.size();    
+                }    
             }
-            i %= frames.size();
 
             // DMG INDICATOR
             if (dmgIndicatorIsAnimating) {
@@ -103,6 +106,10 @@ public abstract class Defender extends AttackAnimationActor
                     getWorld().removeObject(dmgIndicator);
                 }
                 damage_i %= dmgIndicators.size();
+            }
+
+            if (!isAnimating && !dmgIndicatorIsAnimating) {
+                finished = true;
             }
         }
     }

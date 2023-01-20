@@ -74,8 +74,8 @@ public class BattleWorld extends GameWorld
             addSelector();
             selectorAdded = true;
         }
-        else if (state != "gameplay") {
-            removeSelector();
+        else if (state != "gameplay" && selectorAdded) {
+            selector.removeSelf();
             selectorAdded = false;
         }
 
@@ -173,13 +173,6 @@ public class BattleWorld extends GameWorld
         }
 
         return ret;
-    }
-
-    /**
-     * For other classes that need to remove the selector from the world.
-     */
-    public void removeSelector() {
-        removeObject(selector);
     }
 
     /**

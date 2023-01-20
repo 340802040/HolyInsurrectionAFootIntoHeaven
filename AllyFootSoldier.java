@@ -13,7 +13,6 @@ public class AllyFootSoldier extends Ally
         moveLimit = 15;
         maxHealth = 30;
         health = maxHealth;
-        atk = 5;
         crit = 20;
         weapons.add("Spear");
     }

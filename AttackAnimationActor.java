@@ -57,7 +57,7 @@ public abstract class AttackAnimationActor extends Actor
     public void act() {
         if (framesInitialized) {
             actCount++;
-            if (isAnimating) {
+            if (isAnimating || dmgIndicatorIsAnimating)  {
                 animate();
             }
             if (isFlashing) {
@@ -132,7 +132,12 @@ public abstract class AttackAnimationActor extends Actor
 
     public int getFrameOfImpact() {
         if (me instanceof AllyHero) {
-            
+            switch (me.weapon) {
+                case "Sword":
+                    return willCrit ? 23 : 5;
+                case "Bow":
+                    return willCrit ? 22 : 17;
+            }
         }
         else if (me instanceof AllyFootSoldier || me instanceof EnemyFootSoldier) {
             return willCrit ? 22 : 18;

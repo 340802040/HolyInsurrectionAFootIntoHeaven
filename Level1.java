@@ -18,6 +18,8 @@ public class Level1 extends BattleWorld
         allies.add(new AllyFootSoldier("OIIIIII"));
         enemies.add(e1);
         enemies.add(e2);
+        
+        
 
         map = new int[][] {
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},

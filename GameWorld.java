@@ -25,8 +25,6 @@ public class GameWorld extends World
         GRID_HEIGHT = height / BLOCK_SIZE; 
         X_OFFSET = BLOCK_SIZE / 2;
         Y_OFFSET = BLOCK_SIZE / 2;
-
-        setPaintOrder(Selector.class);
     }
 
     /**

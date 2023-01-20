@@ -25,10 +25,10 @@ public class BattleWorld extends GameWorld
     public BattleWorld(int width, int height, int pixelSize) {    
         super(width, height, pixelSize);
         state = "gameplay";
-        setPaintOrder(Selector.class);
 
-        // add selector
-        addObject(selector, GameWorld.getX(0), GameWorld.getY(0));        
+        addObject(selector, GameWorld.getX(0), GameWorld.getY(0)); 
+        
+        setPaintOrder(HoverWindow.class, Selector.class);
     }
 
     public void act() {

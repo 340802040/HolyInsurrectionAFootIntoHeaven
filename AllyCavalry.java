@@ -10,6 +10,8 @@ public class AllyCavalry extends Ally
 {
     public AllyCavalry(String name) {
         super(name);
+        maxHealth = 45;
+        health = maxHealth;
         moveLimit = 7;
         weapons.add("Sword");
         weapons.add("Spear");

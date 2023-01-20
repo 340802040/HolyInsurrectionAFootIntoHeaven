@@ -10,6 +10,8 @@ public class AllyHero extends Ally
 {
     public AllyHero(String name) {
         super(name);
+        maxHealth = 30;
+        health = maxHealth;
         moveLimit = 4;
         weapons.add("Sword");
         weapons.add("Spear");

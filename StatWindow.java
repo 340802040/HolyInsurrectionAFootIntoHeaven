@@ -8,6 +8,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class StatWindow extends Image
 {    
+    
     public StatWindow(BattleWorldCharacter bwc) {
         String stats = "\n" + bwc.name + "\n\n";
         String whitespace = "     ";
@@ -25,8 +26,10 @@ public class StatWindow extends Image
         stats += whitespace + "Current Weapon - " + (bwc.weapon == "" ? "Not yet chosen" : bwc.weapon) + whitespace + "\n \n";
         
         Font font = new Font("Candara", true, false, 45);
-        TextImage ti = new TextImage(stats, font, Color.YELLOW, Color.BLACK);
-        ti.setTransparency(190);
+        Color fontColor = (bwc instanceof Ally) ? Color.WHITE : Color.BLACK.darker();
+        Color bgColor = (bwc instanceof Ally) ? Color.BLUE : Color.RED;
+        TextImage ti = new TextImage(stats, font, fontColor, bgColor);
+        ti.setTransparency(200);
         setImage(ti);
     }
     

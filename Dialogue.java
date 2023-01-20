@@ -13,6 +13,7 @@ public class Dialogue extends Actor
     protected ArrayList<Image> dialogues = new ArrayList<Image>();
     private Image curDialogue;
     protected int i = 0;
+    protected SimpleTimer timer = new SimpleTimer();
 
     public Dialogue(String path) {
         int size = new File(path).list().length;
@@ -47,7 +48,8 @@ public class Dialogue extends Actor
         if (curDialogue.getWorld() == null) {
             getWorld().addObject(curDialogue, getWorld().getWidth() / 2, getWorld().getHeight() - 150);    
         }
-        if (Greenfoot.mouseClicked(curDialogue)) {
+        if (Greenfoot.mouseClicked(curDialogue) || (Greenfoot.isKeyDown("k") && timer.millisElapsed() > 500)) {
+            timer.mark();
             i++;
             getWorld().removeObject(curDialogue);
         }

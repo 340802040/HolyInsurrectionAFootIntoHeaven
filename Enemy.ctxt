@@ -1,14 +1,12 @@
 #BlueJ class context
 comment0.target=Enemy
 comment0.text=\r\n\ Write\ a\ description\ of\ class\ Enemy\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
-comment1.params=level
-comment1.target=Enemy(int)
-comment10.params=amount
-comment10.target=void\ levelUp(int)
-comment11.params=
-comment11.target=void\ flash()
-comment12.params=r\ c
-comment12.target=boolean\ canMoveTo(int,\ int)
+comment1.params=
+comment1.target=Enemy()
+comment10.params=
+comment10.target=void\ flash()
+comment11.params=r\ c
+comment11.target=boolean\ canMoveTo(int,\ int)
 comment2.params=w
 comment2.target=void\ addedToWorld(greenfoot.World)
 comment3.params=
@@ -26,4 +24,4 @@ comment8.target=void\ getPath(Point,\ Point,\ Point[][])
 comment8.text=\r\n\ Stores\ the\ path\ from\ selectedAlly\ to\ current\ selector\ position.\r\n
 comment9.params=
 comment9.target=void\ move()
-numComments=13
+numComments=12

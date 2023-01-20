@@ -12,9 +12,10 @@ public class StatWindow extends Image
     public StatWindow(BattleWorldCharacter bwc) {
         String stats = "\n" + bwc.name + "\n\n";
         String whitespace = "     ";
-        stats += whitespace + "LEVEL - " + bwc.level + whitespace + "\n";
+        
         if (bwc instanceof Ally) {
             Ally a = (Ally)bwc;
+            stats += whitespace + "LEVEL - " + bwc.level + whitespace + "\n";
             stats += whitespace + "XP - " + a.xp + "/" + a.xpNeeded + whitespace + "\n";
         }
         stats += whitespace + "HP - " + bwc.health + "/" + bwc.maxHealth + whitespace + "\n";
@@ -22,7 +23,6 @@ public class StatWindow extends Image
         stats += whitespace + "DEF - " + bwc.def + whitespace + "\n";
         stats += whitespace + "EV - " + bwc.ev + whitespace + "\n";
         stats += whitespace + "SPD - " + bwc.spd + whitespace + "\n";
-        stats += whitespace + "Crit Chance - " + bwc.crit + "%" + whitespace + "\n";
         stats += whitespace + "Current Weapon - " + (bwc.weapon == "" ? "Not yet chosen" : bwc.weapon) + whitespace + "\n \n";
         
         Font font = new Font("Candara", true, false, 45);

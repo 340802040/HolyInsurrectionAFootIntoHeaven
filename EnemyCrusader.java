@@ -8,8 +8,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class EnemyCrusader extends EnemyCavalry
 {
-    public EnemyCrusader(int level) {
-        super(level);
+    public EnemyCrusader() {
+        super();
         weapons.add("Bow");
     }
     

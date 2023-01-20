@@ -48,6 +48,7 @@ public abstract class Ally extends BattleWorldCharacter
             moved = true;
             map[r][c] = 1;
             getImage().setTransparency(150);
+            bw.selector.selectedAlly = null;
             if (selectedEnemy != null) {
                 bw.state = "decision";
                 bw.addObject(new AttackDecisionWindow(this, selectedEnemy), bw.getWidth() - 250, bw.getHeight() / 2);

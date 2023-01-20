@@ -12,7 +12,7 @@ public class Selector extends Actor
     // DATA
     protected int r, c;
     private boolean active; // whether the selector has selected an ally
-    private Ally selectedAlly;
+    protected Ally selectedAlly;
     // PATH FINDING
     private ArrayList<Point> path = new ArrayList<Point>();
     private boolean pathPossible;   
@@ -27,6 +27,7 @@ public class Selector extends Actor
     private SimpleTimer timer = new SimpleTimer(), timer2 = new SimpleTimer();
     private HoverWindow hoverWindow;
     private boolean hoverAdded;
+    private BattleWorldCharacter curHovering;
 
     public Selector() {        
         for(int i = 0; i < 2; i++) {
@@ -42,8 +43,10 @@ public class Selector extends Actor
     }
 
     public void act() {
-        checkMovement();
-        checkSelect();
+        //if (selectedAlly == null || (selectedAlly != null && !selectedAlly.isMoving)) {
+            checkMovement();
+            checkSelect();    
+        //}
         checkDeselect();
         checkConfirmMove();
         checkHovering();
@@ -135,16 +138,24 @@ public class Selector extends Actor
     public void deselect() {
         active = false;
         getWorld().removeObject(selectionIndicator);
-        selectedAlly = null;
         removeHighlight();
     }
 
     public void checkHovering() {
         BattleWorldCharacter bwc = (BattleWorldCharacter)getOneObjectAtOffset(0, 0, BattleWorldCharacter.class);
-        if (bwc != null && !hoverAdded) {
+        if (bwc != null && hoverAdded && bwc != curHovering) {
+            removeHoverWindow();
             hoverWindow = new HoverWindow(bwc);
             getWorld().addObject(hoverWindow, 160, 115);
             hoverAdded = true;
+            curHovering = bwc;
+        }
+        else if (bwc != null && !hoverAdded) {
+            removeHoverWindow();
+            hoverWindow = new HoverWindow(bwc);
+            getWorld().addObject(hoverWindow, 160, 115);
+            hoverAdded = true;
+            curHovering = bwc;
         }
         else if (bwc == null) {
             removeHoverWindow();
@@ -152,7 +163,7 @@ public class Selector extends Actor
     }
 
     public void removeHoverWindow() {
-        if (hoverAdded) {
+        if (hoverAdded && getWorld() != null) {
             getWorld().removeObject(hoverWindow);
             hoverAdded = false;    
         }
@@ -160,7 +171,9 @@ public class Selector extends Actor
 
     public void removeSelf() {
         removeHoverWindow();
-        getWorld().removeObject(this);
+        if (getWorld() != null) {
+            getWorld().removeObject(this);    
+        }
     }
 
     /**
@@ -255,6 +268,8 @@ public class Selector extends Actor
             selectedAlly.startMoving(path);
             deselect();
             timer2.mark();
+            BattleWorld bw = (BattleWorld)getWorld();
+            bw.state = "character moving";
         }
     }
 

@@ -11,11 +11,11 @@ public class Tutorial extends BattleWorld
     // CHARACTERS
     private AllyHero hero = new AllyHero("Hero");
     private AllyCrusader prodeus = new AllyCrusader("Prodeus");
-    private EnemyFootSoldier e1 = new EnemyFootSoldier(1);
-    private EnemyFootSoldier e2 = new EnemyFootSoldier(1);
-    private EnemyFootSoldier e3 = new EnemyFootSoldier(1);
-    private EnemyFootSoldier e4 = new EnemyFootSoldier(1);
-    private EnemyFootSoldier boss = new EnemyFootSoldier(1);
+    private EnemyFootSoldier e1 = new EnemyFootSoldier();
+    private EnemyFootSoldier e2 = new EnemyFootSoldier();
+    private EnemyFootSoldier e3 = new EnemyFootSoldier();
+    private EnemyFootSoldier e4 = new EnemyFootSoldier();
+    private EnemyFootSoldier boss = new EnemyFootSoldier();
     // DIALOGUES
     Dialogue oldManD = new Dialogue("images/Text/OldManInstructions/");
     Dialogue prodeusD = new Dialogue("images/Text/ProdeusInstructions/");
@@ -35,6 +35,8 @@ public class Tutorial extends BattleWorld
         hero.weapons.add("Fists");
         boss.isBoss = true;
         boss.name = "Foot Soldier Boss";
+        
+        setupEnemyStats();
 
         map = new int[][] {
             {3, 3, 3, 0, 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 3, 0, 0, 0, 3, 3, 3, 0, 3, 3},
@@ -80,6 +82,20 @@ public class Tutorial extends BattleWorld
             addObject(prodeus, GameWorld.getX(1), GameWorld.getY(7));
             allies.add(prodeus);
             mark = true;
+        }
+    }
+    
+    public void setupEnemyStats() {
+        for (Enemy e : enemies) {
+            if (e instanceof EnemyFootSoldier) {
+                e.maxHealth = e.health = 9;
+                e.atk = 1;
+            }
+            else if (e.isBoss) {
+                e.maxHealth = e.health = 15;
+                e.atk = 3;
+                e.def = 1;
+            }
         }
     }
 }

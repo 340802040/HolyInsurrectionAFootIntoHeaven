@@ -20,10 +20,8 @@ public abstract class Enemy extends BattleWorldCharacter
     private boolean isFlashing, flip; // if enemy about to attack, flash as an indicator
     private int j = 0;
 
-    public Enemy(int level) {
-        this.level = level;
+    public Enemy() {
         name = getName();
-        levelUp(level);
         hitXp = 10;
         killXp = 200;
     }
@@ -190,34 +188,6 @@ public abstract class Enemy extends BattleWorldCharacter
             checkDirection();
             i--;
             moveTimer.mark();
-        }
-    }
-
-    public void levelUp(int amount) {
-        for (int i = 0; i < amount; i++) {
-            int numStatIncreases = GameWorld.getRandomNumberInRange(1, potentialStats.size() + 1);
-            List<String> upgradedStats = GameWorld.pickNRandom(potentialStats, numStatIncreases);
-            int increase = 2;
-            for (String s : upgradedStats) {
-                switch (s) {
-                    case "health":
-                        maxHealth += increase;
-                        health += increase;
-                        break;
-                    case "atk":
-                        atk += increase;
-                        break;
-                    case "def":
-                        def += increase;
-                        break;
-                    case "ev":
-                        ev += increase;
-                        break;
-                    case "spd":
-                        spd += increase;
-                        break;
-                }
-            }
         }
     }
 

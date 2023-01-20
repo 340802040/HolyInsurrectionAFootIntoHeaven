@@ -8,8 +8,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class EnemyWizard extends Enemy
 {
-    public EnemyWizard(int level) {
-        super(level);
+    public EnemyWizard() {
+        super();
         moveLimit = 4;
         weapons.add("Fire");
         weapons.add("Water");

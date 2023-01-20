@@ -10,12 +10,11 @@ public class AllyFootSoldier extends Ally
 {
     public AllyFootSoldier(String name) {
         super(name);
-        moveLimit = 15;
-        maxHealth = 30;
-        health = maxHealth;
+        maxHealth = health = 30;
         crit = 20;
+        moveLimit = 15;
         weapons.add("Spear");
-    }
+    }   
     
     public void act() {
         super.act();

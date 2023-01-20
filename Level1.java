@@ -8,8 +8,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Level1 extends BattleWorld
 {   
-    private EnemyFootSoldier e1 = new EnemyFootSoldier(1);
-    private EnemyFootSoldier e2 = new EnemyFootSoldier(1);
+    private EnemyFootSoldier e1 = new EnemyFootSoldier();
+    private EnemyFootSoldier e2 = new EnemyFootSoldier();
 
     public Level1() {
         // level1 should take in array of allies but for now hardcode them
@@ -18,8 +18,6 @@ public class Level1 extends BattleWorld
         allies.add(new AllyFootSoldier("OIIIIII"));
         enemies.add(e1);
         enemies.add(e2);
-        
-        
 
         map = new int[][] {
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},

@@ -74,7 +74,7 @@ public class BattleWorld extends GameWorld
             addSelector();
             selectorAdded = true;
         }
-        else if (state != "gameplay" && selectorAdded) {
+        else if (state != "gameplay") {
             selector.removeSelf();
             selectorAdded = false;
         }
@@ -85,14 +85,34 @@ public class BattleWorld extends GameWorld
     }
 
     public void startEnemyPhase() {
-        resetEnemyVariables();
+        resetAllyVariables();
         phase = "enemy";
     }
 
     public void startPlayerPhase() {
         turns++;
-        resetAllyVariables();
+        resetEnemyVariables();
         phase = "player";
+    }
+    
+    /**
+     * Resets all necessary Ally variables such as Ally.moved and alliesMoved after player phase is over.
+     */
+    public void resetAllyVariables() {
+        for (Ally a : allies) {
+            a.moved = false;
+            a.getImage().setTransparency(255);
+            a.selectedEnemy = null;
+        }
+    }
+
+    public void resetEnemyVariables() {
+        i = 0;
+        curMovingEnemy = null;
+        for (Enemy e : enemies) {
+            e.moved = false;
+            e.getImage().setTransparency(255);
+        }
     }
 
     public void moveEnemies() {
@@ -118,26 +138,6 @@ public class BattleWorld extends GameWorld
             else {
                 curMovingEnemy.startMoving();    
             }
-        }
-    }
-
-    /**
-     * Resets all necessary Ally variables such as Ally.moved and alliesMoved after player phase is over.
-     */
-    public void resetAllyVariables() {
-        for (Ally a : allies) {
-            a.moved = false;
-            a.getImage().setTransparency(255);
-            a.selectedEnemy = null;
-        }
-    }
-
-    public void resetEnemyVariables() {
-        i = 0;
-        curMovingEnemy = null;
-        for (Enemy e : enemies) {
-            e.moved = false;
-            e.getImage().setTransparency(255);
         }
     }
 

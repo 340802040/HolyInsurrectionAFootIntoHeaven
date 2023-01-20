@@ -34,7 +34,7 @@ public class Tutorial extends BattleWorld
         hero.weapons.clear();
         hero.weapons.add("Fists");
         boss.isBoss = true;
-        boss.name = "Enemy Foot Soldier Boss";
+        boss.name = "Divine Sorceror Boss";
 
         map = new int[][] {
             {3, 3, 3, 0, 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 3, 0, 0, 0, 3, 3, 3, 0, 3, 3},

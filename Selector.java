@@ -25,6 +25,8 @@ public class Selector extends Actor
     // MISC
     private SimpleTimer moveTimer = new SimpleTimer();
     private SimpleTimer timer = new SimpleTimer(), timer2 = new SimpleTimer();
+    private HoverWindow hoverWindow;
+    private boolean hoverAdded;
 
     public Selector() {        
         for(int i = 0; i < 2; i++) {
@@ -44,6 +46,7 @@ public class Selector extends Actor
         checkSelect();
         checkDeselect();
         checkConfirmMove();
+        checkHovering();
         animateSelector();
     }
 
@@ -134,6 +137,19 @@ public class Selector extends Actor
         getWorld().removeObject(selectionIndicator);
         selectedAlly = null;
         removeHighlight();
+    }
+    
+    public void checkHovering() {
+        BattleWorldCharacter bwc = (BattleWorldCharacter)getOneObjectAtOffset(0, 0, BattleWorldCharacter.class);
+        if (bwc != null && !hoverAdded) {
+            hoverWindow = new HoverWindow(bwc);
+            getWorld().addObject(hoverWindow, 160, 115);
+            hoverAdded = true;
+        }
+        else if (bwc == null) {
+            getWorld().removeObject(hoverWindow);
+            hoverAdded = false;
+        }
     }
 
     /**

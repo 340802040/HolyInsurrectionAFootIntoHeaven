@@ -26,10 +26,10 @@ public class StatWindow extends Image
         stats += whitespace + "Current Weapon - " + (bwc.weapon == "" ? "Not yet chosen" : bwc.weapon) + whitespace + "\n \n";
         
         Font font = new Font("Candara", true, false, 45);
-        Color fontColor = (bwc instanceof Ally) ? Color.WHITE : Color.BLACK.darker();
+        Color fontColor = (bwc instanceof Ally) ? Color.WHITE : Color.WHITE;
         Color bgColor = (bwc instanceof Ally) ? Color.BLUE : Color.RED;
         TextImage ti = new TextImage(stats, font, fontColor, bgColor);
-        ti.setTransparency(200);
+        ti.setTransparency(230);
         setImage(ti);
     }
     

@@ -52,6 +52,9 @@ public abstract class Enemy extends BattleWorldCharacter
         String[] r = s.split("(?=\\p{Upper})");
         String ret = "";
         for (String ss : r) {
+            if (ss.equals("Enemy")) {
+                continue;
+            }
             ret += ss + " ";
         }
         

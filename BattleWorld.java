@@ -19,6 +19,8 @@ public class BattleWorld extends GameWorld
     // ENEMY PHASE
     private int i; // index used for going through each enemy during enemy phase
     protected Enemy curMovingEnemy;
+    // MISC
+    //protected Image bossIcon = new Image("
 
     public BattleWorld(int width, int height, int pixelSize) {    
         super(width, height, pixelSize);

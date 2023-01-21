@@ -15,8 +15,8 @@ public class EnemyDefender extends Defender
         super(me, other);
         this.me = (Enemy)me;
         this.other = (Ally)other;
-        path = "images/Animations/EnemyAnimations/" + name + "Animations/Attack/" + me.weapon + "/";
-        critPath = "images/Animations/EnemyAnimations/" + name + "Animations/Crit/" + me.weapon + "/";
+        path = "images/Animations/EnemyAnimations/" + className + "Animations/Attack/" + me.weapon + "/";
+        critPath = "images/Animations/EnemyAnimations/" + className + "Animations/Crit/" + me.weapon + "/";
     }
     
     public void act() {

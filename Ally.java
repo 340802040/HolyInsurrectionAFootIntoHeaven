@@ -99,7 +99,7 @@ public abstract class Ally extends BattleWorldCharacter
                 xpNeeded += 20;
             }
             level += numLevelUps;
-            int increase = 2 * numLevelUps;
+            int increase = 1 * numLevelUps;
 
             int numStatIncreases = GameWorld.getRandomNumberInRange(1, potentialStats.size() + 1);
             List<String> upgradedStats = GameWorld.pickNRandom(potentialStats, numStatIncreases);

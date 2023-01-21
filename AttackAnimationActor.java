@@ -12,7 +12,7 @@ public abstract class AttackAnimationActor extends Actor
 {
     // DATA
     protected BattleWorldCharacter me, other;
-    protected String name;
+    protected String className;
     protected boolean isFlashing, isFading, flip;
     protected boolean isAnimating, dmgIndicatorIsAnimating, isDying, finished; // whether it has finished all its attacks and animations such as dying
     protected int j = 0; // number of flashes when dead
@@ -40,7 +40,7 @@ public abstract class AttackAnimationActor extends Actor
     public AttackAnimationActor(BattleWorldCharacter me, BattleWorldCharacter other) {
         this.me = me;
         this.other = other;
-        name = me.getClass().getSimpleName();
+        className = me.getClass().getSimpleName();
         weaponMultiplier = getWeaponMultiplier();
         willHit = determineWillHit();
         if (willHit) {
@@ -130,50 +130,44 @@ public abstract class AttackAnimationActor extends Actor
     }
 
     public int getFrameOfImpact() {
-        if (me instanceof AllyHero) {
+        if (className.equals("AllyHero")) {
             switch (me.weapon) {
-                case "Sword":
-                    return willCrit ? 23 : 5;
-                case "Bow":
-                    return willCrit ? 22 : 17;
-                case "Spear":
-                    return willCrit ? 21 : 15;
+            case "Sword":
+                return willCrit ? 23 : 5;
+            case "Bow":
+                return willCrit ? 22 : 17;
+            case "Spear":
+                return willCrit ? 21 : 15;
             }
         }
-        else if (me instanceof AllyFootSoldier || me instanceof EnemyFootSoldier) {
+        else if (className.equals("AllyTheBlessedOne")) {
+            
+        }
+        else if (className.equals("AllyFootSoldier") || className.equals("EnemyFootSoldier")) {
             return willCrit ? 22 : 18;
         }
-        else if (me instanceof AllyCavalry || me instanceof EnemyCavalry) {
-
+        else if (className.equals("AllyKingsGuard") || className.equals("EnemyKingsGuard")) {
+            
         }
-        else if (me instanceof AllyArcher || me instanceof EnemyArcher) {
-
+        else if (className.equals("AllyCavalry") || className.equals("EnemyCavalry")) {
+            
         }
-        else if (me instanceof AllySniper || me instanceof EnemySniper) {
-
-        }
-        else if (me instanceof AllyWizard || me instanceof EnemyWizard) {
-
-        }
-        else if (me instanceof AllyDivineSorceror || me instanceof EnemyDivineSorceror) {
-
-        }
-        else if (me instanceof AllyChariot || me instanceof EnemyChariot) {
-
-        }
-        else if (me instanceof AllyCrusader || me instanceof EnemyCrusader) {
+        else if (className.equals("AllyCrusader") || className.equals("EnemyCrusader")) {
             return willCrit ? 7 : 2;
         }
-        else if (me instanceof AllyKingsGuard || me instanceof EnemyKingsGuard) {
-
+        else if (className.equals("AllyArcher") || className.equals("EnemyArcher")) {
+            
         }
-        else if (me instanceof AllyElephantRider || me instanceof EnemyElephantRider) {
-
+        else if (className.equals("AllySniper") || className.equals("EnemySniper")) {
+            
         }
-        else if (me instanceof AllyTheBlessedOne) {
-
+        else if (className.equals("AllyWizard") || className.equals("EnemyWizard")) {
+            
         }
-
+        else if (className.equals("AllyDivineSorceror") || className.equals("EnemyDivineSorceror")) {
+            
+        }
+        
         return -1;
     }
 

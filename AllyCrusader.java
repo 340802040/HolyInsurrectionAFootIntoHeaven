@@ -10,7 +10,6 @@ public class AllyCrusader extends AllyCavalry
 {
     public AllyCrusader(String name) {
         super(name);
-        weapons.add("Bow");
     }
     
     public void act() {

@@ -137,6 +137,8 @@ public abstract class AttackAnimationActor extends Actor
                     return willCrit ? 23 : 5;
                 case "Bow":
                     return willCrit ? 22 : 17;
+                case "Spear":
+                    return willCrit ? 21 : 15;
             }
         }
         else if (me instanceof AllyFootSoldier || me instanceof EnemyFootSoldier) {

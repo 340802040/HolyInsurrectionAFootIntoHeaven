@@ -163,7 +163,7 @@ public abstract class AttackAnimationActor extends Actor
 
         }
         else if (me instanceof AllyCrusader || me instanceof EnemyCrusader) {
-
+            return willCrit ? 7 : 2;
         }
         else if (me instanceof AllyKingsGuard || me instanceof EnemyKingsGuard) {
 

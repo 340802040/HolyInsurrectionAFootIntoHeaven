@@ -126,8 +126,7 @@ public abstract class AttackAnimationActor extends Actor
     }
 
     public boolean determineWillCrit() {
-        return true;
-        //return Greenfoot.getRandomNumber(100) <  me.crit;
+        return Greenfoot.getRandomNumber(100) <  me.crit;
     }
 
     public int getFrameOfImpact() {
@@ -238,7 +237,7 @@ public abstract class AttackAnimationActor extends Actor
             isFading = false;
             finished = true;
         }
-        if (actCount % 3 == 0 && newTrans >= 0) {
+        if (actCount % 2 == 0 && newTrans >= 0) {
             getImage().setTransparency(newTrans);
         }
     }

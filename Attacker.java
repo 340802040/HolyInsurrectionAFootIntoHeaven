@@ -95,9 +95,7 @@ public abstract class Attacker extends AttackAnimationActor
                         otherActor.isAnimating = true; // switch turn to defender
                     }
                 }
-                else {
-                    i %= frames.size();    
-                }
+                else i %= frames.size();
             }
 
             // DMG INDICATOR
@@ -108,10 +106,12 @@ public abstract class Attacker extends AttackAnimationActor
                     dmgIndicatorIsAnimating = false;
                     getWorld().removeObject(dmgIndicator);
                 }
-                damage_i %= dmgIndicators.size();
+                else damage_i %= dmgIndicators.size();
             }
-
-            if (!isAnimating && !dmgIndicatorIsAnimating) {
+            
+            // SET FINISHED
+            // only if we have killed the defender can we safely set out finished state
+            if (otherActor.isDying && !isAnimating && !dmgIndicatorIsAnimating) {
                 finished = true;
             }
         }

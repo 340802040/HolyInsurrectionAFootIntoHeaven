@@ -15,6 +15,7 @@ public abstract class Ally extends BattleWorldCharacter
 
     public Ally(String name) {
         this.name = name;
+        crit = 3;
     }
 
     public void addedToWorld(World w) {

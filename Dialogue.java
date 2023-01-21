@@ -48,7 +48,7 @@ public class Dialogue extends Actor
         if (curDialogue.getWorld() == null) {
             getWorld().addObject(curDialogue, getWorld().getWidth() / 2, getWorld().getHeight() - 150);    
         }
-        if (Greenfoot.mouseClicked(curDialogue) || (Greenfoot.isKeyDown("k") && timer.millisElapsed() > 500)) {
+        if (Greenfoot.mouseClicked(curDialogue) || (Greenfoot.isKeyDown("k") && timer.millisElapsed() > 300)) {
             timer.mark();
             i++;
             getWorld().removeObject(curDialogue);

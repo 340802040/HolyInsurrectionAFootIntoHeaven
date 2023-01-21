@@ -25,34 +25,29 @@ public class Tutorial extends BattleWorld
     public Tutorial() {
         super(1200, 800, 1);
         allies.add(hero);
+        enemies.add(boss);
         enemies.add(e1);
         enemies.add(e2);
         enemies.add(e3);
         enemies.add(e4);
-        enemies.add(boss);
-
-        hero.weapons.clear();
-        hero.weapons.add("Fists");
-        boss.isBoss = true;
-        boss.name = "Foot Soldier Boss";
-        
-        setupEnemyStats();
+    
+        setupStats();
 
         map = new int[][] {
             {3, 3, 3, 0, 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 3, 0, 0, 0, 3, 3, 3, 0, 3, 3},
             {3, 3, 3, 0, 0, 3, 3, 3, 0, 0, 3, 3, 3, 3, 3, 3, 0, 0, 3, 0, 0, 0, 3, 3},
-            {0, 4, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 5, 5, 5, 5, 5, 5, 5, 5},
-            {0, 0, 0, 4, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 5, 5, 5, 5, 5, 5, 5, 5},
+            {0, 4, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 5, 5, 5, 5, 5, 5, 5, 5},
             {0, 0, 4, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 5, 0},
             {0, 0, 0, 0, 0, 0, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
             {0, 4, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 5, 0, 0, 0},
-            {0, 0, 0, 0, 0, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 4, 4, 0, 0, 0, 0, 0, 0, 5, 5, 5, 5, 5, 5, 5, 5, 5},
             {0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 5, 5, 5, 5, 5, 5, 5, 5},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
             {0, 3, 3, 3, 3, 0, 3, 3, 0, 0, 0, 3, 3, 3, 3, 0, 3, 3, 3, 0, 0, 3, 0, 0},
             {3, 3, 3, 0, 3, 3, 0, 3, 3, 0, 3, 3, 3, 3, 3, 3, 0, 0, 3, 3, 3, 3, 3, 3}
         };
@@ -85,16 +80,27 @@ public class Tutorial extends BattleWorld
         }
     }
     
-    public void setupEnemyStats() {
+    public void setupStats() {
+        // ALLIES
+        hero.weapons.clear();
+        hero.weapons.add("Fists");
+        hero.maxHealth = hero.health = 20;
+        hero.atk = 1000;
+        prodeus.maxHealth = prodeus.health = 45;
+        prodeus.atk = 7;
+        
+        // ENEMIES
+        boss.isBoss = true;
+        boss.name = "Foot Soldier Boss";
         for (Enemy e : enemies) {
-            if (e instanceof EnemyFootSoldier) {
-                e.maxHealth = e.health = 9;
-                e.atk = 1;
-            }
-            else if (e.isBoss) {
+            if (e.isBoss) { // first check if boss since boss is also a foot soldier
                 e.maxHealth = e.health = 15;
-                e.atk = 3;
-                e.def = 1;
+                e.atk = 6;
+                e.def = 2;
+            }
+            else if (e instanceof EnemyFootSoldier) {
+                e.maxHealth = e.health = 9;
+                e.atk = 2;
             }
         }
     }

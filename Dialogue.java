@@ -14,8 +14,10 @@ public class Dialogue extends Actor
     private Image curDialogue;
     protected int i = 0;
     protected SimpleTimer timer = new SimpleTimer();
+    protected String prevState;
 
-    public Dialogue(String path) {
+    public Dialogue(String path, String prevState) {
+        this.prevState = prevState;
         int size = new File(path).list().length;
         for (int i = 0; i < size; i++) {
             dialogues.add(new Image(path + "Text" + i + ".png"));
@@ -39,7 +41,7 @@ public class Dialogue extends Actor
         if (i == dialogues.size()) {
             GameWorld gw = ((GameWorld)getWorld());
             if (gw instanceof BattleWorld) {
-                gw.state = "gameplay";    
+                gw.state = prevState;    
             }
             gw.removeObject(this);
             return;

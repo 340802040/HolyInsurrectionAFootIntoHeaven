@@ -17,8 +17,9 @@ public class Tutorial extends BattleWorld
     private EnemyFootSoldier e4 = new EnemyFootSoldier();
     private EnemyFootSoldier boss = new EnemyFootSoldier();
     // DIALOGUES
-    Dialogue oldManD = new Dialogue("images/Text/OldManInstructions/");
-    Dialogue prodeusD = new Dialogue("images/Text/ProdeusInstructions/");
+    Dialogue oldManD = new Dialogue("images/Text/OldManInstructions/", "gameplay"); // images/ needed for Java.io.File detection
+    Dialogue prodeusD = new Dialogue("images/Text/ProdeusInstructions/", "gameplay");
+    Dialogue oldManD2 = new Dialogue("images/Text/PostChap1/", "clear");
     // MISC
     private boolean mark;
 
@@ -78,6 +79,7 @@ public class Tutorial extends BattleWorld
             allies.add(prodeus);
             mark = true;
         }
+        checkClear();
     }
     
     public void setupStats() {
@@ -85,9 +87,10 @@ public class Tutorial extends BattleWorld
         hero.weapons.clear();
         hero.weapons.add("Fists");
         hero.maxHealth = hero.health = 20;
-        hero.atk = 1000;
+        hero.atk = 6;
         prodeus.maxHealth = prodeus.health = 45;
-        prodeus.atk = 7;
+        prodeus.atk = 12;
+        prodeus.def = 10;
         
         // ENEMIES
         boss.isBoss = true;
@@ -102,6 +105,16 @@ public class Tutorial extends BattleWorld
                 e.maxHealth = e.health = 9;
                 e.atk = 2;
             }
+        }
+    }
+    
+    public void checkClear() {
+        if (enemies.size() == 0 && state != "clear") {
+            state = "clear";
+            addObject(oldManD2, 0, 0);
+        }
+        if (oldManD2.i == oldManD2.dialogues.size()) {
+            Greenfoot.setWorld(new Level1());
         }
     }
 }

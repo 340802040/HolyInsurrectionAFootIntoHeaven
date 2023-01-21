@@ -122,7 +122,7 @@ public class Selector extends Actor
         }
         else if (timer2.millisElapsed() > 500 && !active && Greenfoot.isKeyDown("u") && bwc != null) { // show stats
             bw.state = "decision";
-            bw.addObject(new StatWindow(bwc), bw.getWidth() / 2, bw.getHeight() / 2);
+            bw.addObject(new StatWindow(bwc, bw.state), bw.getWidth() / 2, bw.getHeight() / 2);
         }
     }
 

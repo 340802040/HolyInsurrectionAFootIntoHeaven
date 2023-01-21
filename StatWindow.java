@@ -8,10 +8,12 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class StatWindow extends Image
 {    
+    String prevState;
     
-    public StatWindow(BattleWorldCharacter bwc) {
-        String stats = "\n" + bwc.name + "\n\n";
+    public StatWindow(BattleWorldCharacter bwc, String prevState) {
+        this.prevState = prevState;
         String whitespace = "     ";
+        String stats = "\n" + whitespace + bwc.name + whitespace + "\n\n";
         
         if (bwc instanceof Ally) {
             Ally a = (Ally)bwc;
@@ -33,9 +35,10 @@ public class StatWindow extends Image
         setImage(ti);
     }
     
-    public StatWindow(String s, Font font, Color textColor, Color bgColor) {
+    public StatWindow(String s, Font font, Color textColor, Color bgColor, int trans, String prevState) {
+        this.prevState = prevState;
         TextImage ti = new TextImage(s, font, textColor, bgColor);
-        ti.setTransparency(190);
+        ti.setTransparency(trans);
         setImage(ti);
     }
 
@@ -45,8 +48,8 @@ public class StatWindow extends Image
 
     public void checkGoBack() {
         if (Greenfoot.isKeyDown("j")) {
-            BattleWorld bw = ((BattleWorld)getWorld());
-            bw.state = "gameplay";
+            GameWorld gw = ((GameWorld)getWorld());
+            gw.state = prevState;
             removeSelf();
         }
     }

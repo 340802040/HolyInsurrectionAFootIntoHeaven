@@ -6,7 +6,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class MusicMenu extends World
+public class MusicMenu extends GameWorld
 {
     Image soundIcon = new Image("images/Buttons/MusicSelection/SoundIcon.png");
     Image pauseButton = new Image("images/Buttons/MusicSelection/PauseButton.png");
@@ -32,13 +32,8 @@ public class MusicMenu extends World
     private boolean onFairies = false;
     private boolean onDahlia = false;
     private boolean onStrolling = false;
-    /**
-     * Constructor for objects of class MusicMenu.
-     * 
-     */
-    public MusicMenu()
-    {    
-        // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
+    
+    public MusicMenu() {    
         super(1200, 800, 1);
 
         addObject(insurmountableButton, 600, 125);

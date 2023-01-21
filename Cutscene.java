@@ -24,7 +24,7 @@ public class Cutscene extends World
             String zeroes = i >= 10 ? "0" : "00";
             cutscenes[i] = new GreenfootImage("images/Cutscenes/Cutscene" + zeroes + i + ".png");
         }
-        d = new Dialogue("images/Text/Intro/");
+        d = new Dialogue("images/Text/Intro/", "");
 
         setBackground("images/Cutscenes/Cutscene000.png");
     }

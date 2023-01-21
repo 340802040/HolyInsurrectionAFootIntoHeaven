@@ -93,7 +93,7 @@ public class AttackAnimationWorld extends GameWorld
 
                 Font font = new Font("Candara", true, false, 50);
                 String msg = a.getLevelUpMsg();
-                StatWindow sw = new StatWindow(msg, font, Color.YELLOW, Color.BLACK);
+                StatWindow sw = new StatWindow(msg, font, Color.YELLOW, Color.BLACK, 210, null);
                 addObject(sw, getWidth() / 2, getHeight() / 2);
             }
             else if (timer.millisElapsed() > 3000) {

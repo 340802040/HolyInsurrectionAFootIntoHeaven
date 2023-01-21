@@ -92,9 +92,7 @@ public abstract class Defender extends AttackAnimationActor
                         otherActor.finished = true;
                     }
                 }
-                else {
-                    i %= frames.size();    
-                }    
+                else i %= frames.size(); 
             }
 
             // DMG INDICATOR
@@ -105,9 +103,12 @@ public abstract class Defender extends AttackAnimationActor
                     dmgIndicatorIsAnimating = false;
                     getWorld().removeObject(dmgIndicator);
                 }
-                damage_i %= dmgIndicators.size();
+                else damage_i %= dmgIndicators.size();
             }
 
+            // SET FINISHED
+            // defender must be alive if animate() is called
+            // defender always finishes regardless of whether killed or didn't kill attacker
             if (!isAnimating && !dmgIndicatorIsAnimating) {
                 finished = true;
             }

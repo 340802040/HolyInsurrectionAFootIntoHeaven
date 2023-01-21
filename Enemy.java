@@ -23,7 +23,7 @@ public abstract class Enemy extends BattleWorldCharacter
     public Enemy() {
         name = getName();
         hitXp = 10;
-        killXp = 200;
+        killXp = 20;
     }
 
     public void addedToWorld(World w) {
@@ -55,7 +55,7 @@ public abstract class Enemy extends BattleWorldCharacter
             }
             ret += ss + " ";
         }
-        
+
         return ret;
     }
 
@@ -63,24 +63,29 @@ public abstract class Enemy extends BattleWorldCharacter
         getTargetAlly();
         checkPath();
         if (pathPossible) {
-            isMoving = true;    
-        }
-        i = path.size() - 1;
-        if (path.size() <= moveLimit) {
-            endIndex = -1;
-            willAttack = true;
+            isMoving = true; 
+            i = path.size() - 1;
+            if (path.size() <= moveLimit) {
+                endIndex = -1;
+                willAttack = true;
+            }
+            else {
+                endIndex = path.size() - moveLimit - 1;
+                willAttack = false;
+            }
+            prevLocation = new Point(r, c);
+            map[r][c] = 0; // clear spot
         }
         else {
-            endIndex = path.size() - moveLimit - 1;
-            willAttack = false;
+            moved = true;
         }
-        prevLocation = new Point(r, c);
-        map[r][c] = 0; // clear spot
     }
-
     public void getTargetAlly() { // for now just gets a random ally
         ArrayList<Ally> allies = ((BattleWorld)getWorld()).allies;
+        
         target = null;
+        
+        // try to find a weapon counter
         String counter = "";
         for (Ally a : allies) {
             switch (a.weapon) {
@@ -107,7 +112,7 @@ public abstract class Enemy extends BattleWorldCharacter
             if (weapons.contains(counter)) {
                 target = a;
                 weapon = counter;
-                break;
+                return;
             }
         }
 

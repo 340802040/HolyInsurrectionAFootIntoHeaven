@@ -96,7 +96,7 @@ public class AttackAnimationWorld extends GameWorld
                 StatWindow sw = new StatWindow(msg, font, Color.YELLOW, Color.BLACK);
                 addObject(sw, getWidth() / 2, getHeight() / 2);
             }
-            else if (timer.millisElapsed() > 5000) {
+            else if (timer.millisElapsed() > 3000) {
                 returnToWorld();    
             }
         }

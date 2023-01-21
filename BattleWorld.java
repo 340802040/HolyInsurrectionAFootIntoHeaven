@@ -7,7 +7,7 @@ import java.util.*;
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class BattleWorld extends GameWorld
+public abstract class BattleWorld extends GameWorld
 {
     // DATA
     protected String phase = "player";
@@ -118,7 +118,7 @@ public class BattleWorld extends GameWorld
     public void moveEnemies() {
         if (i == 0 && curMovingEnemy == null) {
             curMovingEnemy = enemies.get(i);
-            if (curMovingEnemy.isBoss == true) {
+            if (curMovingEnemy.isBoss) {
                 curMovingEnemy.moved = true;
             }
             else {
@@ -132,7 +132,7 @@ public class BattleWorld extends GameWorld
                 return;
             }
             curMovingEnemy = enemies.get(i);
-            if (curMovingEnemy.isBoss == true) {
+            if (curMovingEnemy.isBoss) {
                 curMovingEnemy.moved = true;
             }
             else {
@@ -150,6 +150,7 @@ public class BattleWorld extends GameWorld
     public void removeEnemy(Enemy e) {
         enemies.remove(e);
         map[e.r][e.c] = 0;
+        i -= (i == 0) ? 0 : 1;
         removeObject(e);
     }
 

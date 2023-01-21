@@ -18,6 +18,8 @@ public class Level1 extends BattleWorld
         allies.add(new AllyFootSoldier("OIIIIII"));
         enemies.add(e1);
         enemies.add(e2);
+        
+        setupEnemyStats();
 
         map = new int[][] {
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -60,6 +62,20 @@ public class Level1 extends BattleWorld
                     map[r][c] = 2;
                     break;
                 }
+            }
+        }        
+    }
+    
+    public void setupEnemyStats() {
+        for (Enemy e : enemies) {
+            if (e instanceof EnemyFootSoldier) {
+                e.maxHealth = e.health = 9;
+                e.atk = 1;
+            }
+            else if (e.isBoss) {
+                e.maxHealth = e.health = 15;
+                e.atk = 3;
+                e.def = 1;
             }
         }
     }

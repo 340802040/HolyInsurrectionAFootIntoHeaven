@@ -133,14 +133,7 @@ public abstract class AttackAnimationActor extends Actor
             return willCrit ? 6 : 17;
         }
         else if (className.equals("AllyWizard") || className.equals("EnemyWizard")) {
-            switch (me.weapon) {
-                case "Fire":
-                    return willCrit ? 12 : 12;
-                case "Water":
-                    return willCrit ? 12 : 12;
-                case "Ice":
-                    return willCrit ? 12 : 12;
-            }
+            return willCrit ? 12 : 12;
         }
 
         return -1;

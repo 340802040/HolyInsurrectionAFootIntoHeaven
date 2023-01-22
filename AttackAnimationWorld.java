@@ -16,6 +16,7 @@ public class AttackAnimationWorld extends GameWorld
     protected Ally a;
     protected Enemy e;
     protected String attacker_s;
+    protected String returnState = "gameplay";
     // IMAGE ACTORS
     protected Image allyHpBg = new Image("AllyHPbg.png");
     protected Image enemyHpBg = new Image("EnemyHPbg.png");
@@ -30,8 +31,7 @@ public class AttackAnimationWorld extends GameWorld
         this.a = a;
         this.e = e;
         this.attacker_s = attacker_s;
-        returnWorld.state = "attack animation";
-        setBackground("BattleBackground.png");
+        setBackground(Images.imgs2.get("attack animation world bg"));
         setup();
     }
 
@@ -58,14 +58,8 @@ public class AttackAnimationWorld extends GameWorld
     }
 
     public void setupHpBgs() {
-        if (attacker_s == "ally") {
-            addObject(allyHpBg, getWidth() / 4, getHeight() - allyHpBg.getImage().getHeight() / 2);
-            addObject(enemyHpBg, getWidth() / 4 * 3, getHeight() - enemyHpBg.getImage().getHeight() / 2);
-        }
-        else {
-            addObject(enemyHpBg, getWidth() / 4, getHeight() - enemyHpBg.getImage().getHeight() / 2);
-            addObject(allyHpBg, getWidth() / 4 * 3, getHeight() - allyHpBg.getImage().getHeight() / 2);
-        }
+        addObject(allyHpBg, getWidth() / 4, getHeight() - allyHpBg.getImage().getHeight() / 2);
+        addObject(enemyHpBg, getWidth() / 4 * 3, getHeight() - enemyHpBg.getImage().getHeight() / 2);
     }
 
     public static int calculateDamageDealtBy(BattleWorldCharacter dealer, BattleWorldCharacter dealtTo, boolean willCrit) {
@@ -93,7 +87,7 @@ public class AttackAnimationWorld extends GameWorld
 
                 Font font = new Font("Candara", true, false, 50);
                 String msg = a.getLevelUpMsg();
-                StatWindow sw = new StatWindow(msg, font, Color.YELLOW, Color.BLACK, 210, null);
+                StatWindow sw = new StatWindow(msg, font, Color.YELLOW, Color.BLACK, 240, null);
                 addObject(sw, getWidth() / 2, getHeight() / 2);
             }
             else if (timer.millisElapsed() > 3000) {
@@ -103,7 +97,13 @@ public class AttackAnimationWorld extends GameWorld
     }
 
     public void returnToWorld() {
-        returnWorld.state = "gameplay";
-        Greenfoot.setWorld(returnWorld);
+        returnWorld.state = returnState;
+        if (returnState.equals("lost")) {
+            Greenfoot.setWorld(new GameOverWorld());
+        }
+        else Greenfoot.setWorld(returnWorld);
+        
+        attackerActor.resetTransparency();
+        defenderActor.resetTransparency();
     }
 }

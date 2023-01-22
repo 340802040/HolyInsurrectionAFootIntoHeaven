@@ -20,12 +20,12 @@ public class HoverWindow extends Image
         
         String s = bwc.name + "\n";
         s += "HP - " + bwc.health + "/" + bwc.maxHealth + "\n";
-        s += "Weapon - " + (bwc.weapon == "" ? "N/A" : bwc.weapon) + "\n";
+        s += "Weapon - " + (bwc.weapon == "" ? "N/A" : bwc.weapon);
         
         Font font = new Font("Candara", true, false, 35);
         TextImage ti = new TextImage(s, font, Color.WHITE, null);
         img.drawImage(ti, img.getWidth() / 2 - ti.getWidth() / 2, img.getHeight() / 2 - ti.getHeight() / 2);
-        img.setTransparency(230);
+        img.setTransparency(200);
         
         setImage(img);
     }

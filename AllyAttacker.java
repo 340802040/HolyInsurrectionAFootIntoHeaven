@@ -10,7 +10,7 @@ public class AllyAttacker extends Attacker
 {    
     Ally me;
     Enemy other;
-    
+
     public AllyAttacker(BattleWorldCharacter me, BattleWorldCharacter other) {
         super(me, other);
         this.me = (Ally)me;
@@ -28,13 +28,12 @@ public class AllyAttacker extends Attacker
             die();
             AttackAnimationWorld w = (AttackAnimationWorld)getWorld();
             w.returnWorld.removeAlly(me);
+            if (me.name.equals("Hero") || me.name.equals("Prodeus")) {
+                w.returnState = "lost";
+            }
         }
     }
-    
-    public void drawHealthBarAndLabel() {
-        super.drawHealthBarAndLabel();
-    }
-    
+
     public void animate() {
         super.animate();
     }

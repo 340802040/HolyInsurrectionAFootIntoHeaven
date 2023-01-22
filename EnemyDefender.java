@@ -32,10 +32,6 @@ public class EnemyDefender extends Defender
         }
     }
     
-    public void drawHealthBarAndLabel() {
-        super.drawHealthBarAndLabel();
-    }
-    
     public void animate() {
         super.animate();
     }

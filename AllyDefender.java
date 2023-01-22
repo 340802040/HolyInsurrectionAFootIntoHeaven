@@ -28,6 +28,10 @@ public class AllyDefender extends Defender
             die();
             AttackAnimationWorld w = (AttackAnimationWorld)getWorld();
             w.returnWorld.removeAlly(me);
+            if (me.name.equals("Hero") || me.name.equals("Prodeus")) {
+                System.out.println(1);
+                w.returnState = "lost";
+            }
         }
     }
     

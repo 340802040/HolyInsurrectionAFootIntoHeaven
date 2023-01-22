@@ -10,7 +10,7 @@ public class AllyHero extends Ally
 {
     public AllyHero(String name) {
         super(name);
-        moveLimit = 10;
+        moveLimit = 5;
         
         weapons.add("Sword");
         weapons.add("Spear");

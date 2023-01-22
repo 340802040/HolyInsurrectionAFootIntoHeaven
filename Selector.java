@@ -11,23 +11,23 @@ public class Selector extends Actor
 {
     // DATA
     protected int r, c;
-    private boolean active; // whether the selector has selected an ally
+    protected boolean active; // whether the selector has selected an ally
     protected Ally selectedAlly;
     // PATH FINDING
-    private ArrayList<Point> path = new ArrayList<Point>();
-    private boolean pathPossible;   
-    private int[][] map;
+    protected ArrayList<Point> path = new ArrayList<Point>();
+    protected boolean pathPossible;   
+    protected int[][] map;
     // ANIMATION
-    private SimpleTimer animationTimer = new SimpleTimer();
-    private GreenfootImage[] selectionFrames = new GreenfootImage[2];
-    private Highlight selectionIndicator = new Highlight("GreenHighlight.png");
-    private int imageIndex = 0;    
+    protected SimpleTimer animationTimer = new SimpleTimer();
+    protected GreenfootImage[] selectionFrames = new GreenfootImage[2];
+    protected Highlight selectionIndicator = new Highlight("GreenHighlight.png");
+    protected int imageIndex = 0;    
     // MISC
-    private SimpleTimer moveTimer = new SimpleTimer();
-    private SimpleTimer timer = new SimpleTimer(), timer2 = new SimpleTimer();
-    private HoverWindow hoverWindow;
-    private boolean hoverAdded;
-    private BattleWorldCharacter curHovering;
+    protected SimpleTimer moveTimer = new SimpleTimer();
+    protected SimpleTimer timer = new SimpleTimer(), timer2 = new SimpleTimer();
+    protected HoverWindow hoverWindow;
+    protected boolean hoverAdded;
+    protected BattleWorldCharacter curHovering;
 
     public Selector() {        
         for(int i = 0; i < 2; i++) {
@@ -43,10 +43,8 @@ public class Selector extends Actor
     }
 
     public void act() {
-        //if (selectedAlly == null || (selectedAlly != null && !selectedAlly.isMoving)) {
-            checkMovement();
-            checkSelect();    
-        //}
+        checkMovement();
+        checkSelect();    
         checkDeselect();
         checkConfirmMove();
         checkHovering();
@@ -122,7 +120,7 @@ public class Selector extends Actor
         }
         else if (timer2.millisElapsed() > 500 && !active && Greenfoot.isKeyDown("u") && bwc != null) { // show stats
             bw.state = "decision";
-            bw.addObject(new StatWindow(bwc, bw.state), bw.getWidth() / 2, bw.getHeight() / 2);
+            bw.addObject(new StatWindow(bwc, "gameplay"), bw.getWidth() / 2, bw.getHeight() / 2);
         }
     }
 

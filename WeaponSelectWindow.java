@@ -40,7 +40,7 @@ public class WeaponSelectWindow extends AttackInterface
         ice = new Image("Panels/WeaponIcons/Ice.png"); 
 
         // determine ally's weapons and bg size
-        if (a instanceof AllyHero || a instanceof AllyTheBlessedOne) {
+        if (a instanceof AllyHero) {
             setImage("Panels/WeaponIcons/BigWeaponIconBG.png");
         }
         else {
@@ -81,34 +81,35 @@ public class WeaponSelectWindow extends AttackInterface
     public void checkUserInput() {
         if (Greenfoot.isKeyDown("1") && icons.contains(sword)) {
             a.weapon = "Sword";
-            Greenfoot.setWorld(new AttackAnimationWorld((BattleWorld)getWorld(), a, e, "ally"));
-            removeSelf();
+            changeWorlds();
         }
         else if (Greenfoot.isKeyDown("2") && icons.contains(spear)) {
             a.weapon = "Spear";
-            Greenfoot.setWorld(new AttackAnimationWorld((BattleWorld)getWorld(), a, e, "ally"));
-            removeSelf();
+            changeWorlds();
         }
         else if (Greenfoot.isKeyDown("3") && icons.contains(bow)) {
             a.weapon = "Bow";
-            Greenfoot.setWorld(new AttackAnimationWorld((BattleWorld)getWorld(), a, e, "ally"));
-            removeSelf();
+            changeWorlds();
         }
         else if (Greenfoot.isKeyDown("4") && icons.contains(fire)) {
             a.weapon = "Fire";
-            Greenfoot.setWorld(new AttackAnimationWorld((BattleWorld)getWorld(), a, e, "ally"));
-            removeSelf();
+            changeWorlds();
         }
         else if (Greenfoot.isKeyDown("5") && icons.contains(water)) {
             a.weapon = "Water";
-            Greenfoot.setWorld(new AttackAnimationWorld((BattleWorld)getWorld(), a, e, "ally"));
-            removeSelf();
+            changeWorlds();
         }
         else if (Greenfoot.isKeyDown("6") && icons.contains(ice)) {
             a.weapon = "Ice";
-            Greenfoot.setWorld(new AttackAnimationWorld((BattleWorld)getWorld(), a, e, "ally"));
-            removeSelf();
+            changeWorlds();
         }
+    }
+
+    public void changeWorlds() {
+        BattleWorld bw = (BattleWorld)getWorld();
+        Greenfoot.setWorld(new AttackAnimationWorld(bw, a, e, "ally"));
+        bw.state = "attack animation";
+        removeSelf();
     }
 
     public void checkGoBack() {

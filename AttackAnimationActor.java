@@ -69,52 +69,7 @@ public abstract class AttackAnimationActor extends Actor
             updateHealthBarAndLabel();
         }
     }
-
-    public void initFrames() {
-        // ATTACK AND CRIT FRAMES
-        if (willCrit) {
-            int numFrames = new File(critPath).list().length;
-            for (int i = 0; i < numFrames; i++) {
-                String zeroes = i < 10 ? "00" : "0";
-                frames.add(new GreenfootImage(critPath + "Crit" + zeroes + i + ".png"));
-                if (this instanceof Defender) {
-                    frames.get(i).mirrorHorizontally();
-                }
-            }    
-        }
-        else {
-            int numFrames = new File(path).list().length;
-            for (int i = 0; i < numFrames; i++) {
-                String zeroes = i < 10 ? "00" : "0";
-                frames.add(new GreenfootImage(path + "Attack" + zeroes + i + ".png"));
-                if (this instanceof Defender) {
-                    frames.get(i).mirrorHorizontally();
-                }
-            }
-        }
-        // DMG INDICATOR FRAMES
-        if (willCrit) {
-            for (int i = 0; i < 8; i++) {
-                dmgIndicators.add(new GreenfootImage("Animations/DamageAnimations/Crit/Crit0" + i + ".png"));
-                if (this instanceof Defender) {
-                    dmgIndicators.get(i).mirrorHorizontally();
-                }
-            }   
-        }
-        else {
-            for (int i = 0; i < 8; i++) {
-                dmgIndicators.add(new GreenfootImage("Animations/DamageAnimations/Damage0" + i + ".png"));
-                if (this instanceof Defender) {
-                    dmgIndicators.get(i).mirrorHorizontally();
-                }
-            }   
-        }
-
-        setImage(frames.get(0));
-        dmgIndicator.setImage(dmgIndicators.get(0));
-        framesInitialized = true;
-    }
-
+    
     public double getWeaponMultiplier() {
         return GameWorld.getWeaponMultiplier(me.weapon, other.weapon);
     }
@@ -126,7 +81,24 @@ public abstract class AttackAnimationActor extends Actor
     }
 
     public boolean determineWillCrit() {
-        return Greenfoot.getRandomNumber(100) <  me.crit;
+        return Greenfoot.getRandomNumber(100) <  me.crit; // CHANGE AFTER
+    }
+
+    public void initFrames() {
+        // ATTACK AND CRIT FRAMES
+        if (willCrit) {
+            frames = Images.getFrames(critPath, willCrit, me instanceof Ally);   
+        }
+        else {
+            frames = Images.getFrames(path, willCrit, me instanceof Ally);
+        }
+        // DMG INDICATOR FRAMES
+        String key = (me instanceof Ally ? "ally" : "enemy") + " " + (willCrit ? "crit" : "attack") + " dmg indicators";
+        dmgIndicators = Images.imgs.get(key);
+
+        setImage(frames.get(0));
+        dmgIndicator.setImage(dmgIndicators.get(0));
+        framesInitialized = true;
     }
 
     public int getFrameOfImpact() {
@@ -144,10 +116,7 @@ public abstract class AttackAnimationActor extends Actor
             
         }
         else if (className.equals("AllyFootSoldier") || className.equals("EnemyFootSoldier")) {
-            return willCrit ? 22 : 18;
-        }
-        else if (className.equals("AllyKingsGuard") || className.equals("EnemyKingsGuard")) {
-            
+            return willCrit ? 21 : 16;
         }
         else if (className.equals("AllyCavalry") || className.equals("EnemyCavalry")) {
             
@@ -158,19 +127,68 @@ public abstract class AttackAnimationActor extends Actor
         else if (className.equals("AllyArcher") || className.equals("EnemyArcher")) {
             
         }
-        else if (className.equals("AllySniper") || className.equals("EnemySniper")) {
-            
-        }
         else if (className.equals("AllyWizard") || className.equals("EnemyWizard")) {
-            
-        }
-        else if (className.equals("AllyDivineSorceror") || className.equals("EnemyDivineSorceror")) {
             
         }
         
         return -1;
     }
 
+    public abstract void checkDeath();
+
+    public abstract void animate();
+
+    public void removeHealthBar() {
+        for (Image tick : ticks) {
+            getWorld().removeObject(tick);
+        }
+        ticks.clear();
+    }
+    
+    public void drawHealthBarAndLabel() {
+        int labelX = me instanceof Ally ? 50 : 600 + 50;
+        int barX = me instanceof Ally ? 110 : 600 + 110;
+    
+        // LABEL
+        hpLabel.setText(Integer.toString(me.health));
+        getWorld().addObject(hpLabel, labelX, getWorld().getHeight() - allyHpBg.getImage().getHeight() / 2 + 8);
+
+        // BAR
+        int y1 = 700; // top row
+        int y2 = y1 + tick.getImage().getHeight() + 8; // bottom row
+        if (me.maxHealth <= 33) {
+            // only display 1 row
+            for (int i = 0, x = barX, y = getWorld().getHeight() - allyHpBg.getImage().getHeight() / 2; i < me.maxHealth; i++, x += tick.getImage().getWidth() - 6) {
+                Image t = new Image("HealthTick.png");
+                ticks.add(t);
+                getWorld().addObject(t, x, y);
+            }
+        }
+        else {            
+            // top row - length 33
+            for (int i = 0, x = barX; i < 33; i++, x += tick.getImage().getWidth() - 6) {
+                Image t = new Image("HealthTick.png");
+                ticks.add(t);
+                getWorld().addObject(t, x, y1);
+            }
+            // bottom row - rest
+            for (int i = 0, x = barX; i < me.maxHealth - 33; i++, x += tick.getImage().getWidth() - 6) {
+                Image t = new Image("HealthTick.png");
+                ticks.add(t);
+                getWorld().addObject(t, x, y2);
+            }
+        }
+        // make attacker missing health grey
+        for (int i = me.maxHealth - 1; i >= me.health; i--) {
+            ticks.get(i).setImage("GreyHealthTick.png");
+        }
+    }
+
+    public void updateHealthBarAndLabel() {
+        removeHealthBar();
+        drawHealthBarAndLabel();
+    }
+    
     public void cutHp() {
         int damageDealt = AttackAnimationWorld.calculateDamageDealtBy(other, me, willCrit);
         int j = (me.health - damageDealt) < 0 ? 0 : me.health - damageDealt;
@@ -183,24 +201,6 @@ public abstract class AttackAnimationActor extends Actor
         }
         hpLabel.setText(Integer.toString(me.health));
         checkDeath();
-    }
-
-    public abstract void checkDeath();
-
-    public abstract void animate();
-
-    public abstract void drawHealthBarAndLabel();
-
-    public void updateHealthBarAndLabel() {
-        removeHealthBar();
-        drawHealthBarAndLabel();
-    }
-
-    public void removeHealthBar() {
-        for (Image tick : ticks) {
-            getWorld().removeObject(tick);
-        }
-        ticks.clear();
     }
 
     public void die() {
@@ -233,6 +233,16 @@ public abstract class AttackAnimationActor extends Actor
         }
         if (actCount % 2 == 0 && newTrans >= 0) {
             getImage().setTransparency(newTrans);
+        }
+    }
+    
+    /**
+     * Since images are pre-loaded only once, we have to reset all frames' transparency or else a transparent
+     * image may linger on the next fight.
+     */
+    public void resetTransparency() {
+        for (GreenfootImage img : frames) {
+            img.setTransparency(255);
         }
     }
 }

@@ -69,7 +69,7 @@ public abstract class AttackAnimationActor extends Actor
             updateHealthBarAndLabel();
         }
     }
-    
+
     public double getWeaponMultiplier() {
         return GameWorld.getWeaponMultiplier(me.weapon, other.weapon);
     }
@@ -104,33 +104,45 @@ public abstract class AttackAnimationActor extends Actor
     public int getFrameOfImpact() {
         if (className.equals("AllyHero")) {
             switch (me.weapon) {
-            case "Sword":
-                return willCrit ? 23 : 5;
-            case "Bow":
-                return willCrit ? 22 : 17;
-            case "Spear":
-                return willCrit ? 21 : 15;
+                case "Sword":
+                    return willCrit ? 23 : 5;
+                case "Bow":
+                    return willCrit ? 22 : 17;
+                case "Spear":
+                    return willCrit ? 21 : 15;
+                case "Fire":
+                    return willCrit ? 26 : 26;
+                case "Water":
+                    return willCrit ? 26 : 26;
+                case "Ice":
+                    return willCrit ? 25 : 26;
+                case "BladeOfEithalon":
+                    return willCrit ? 30 : 9;
             }
-        }
-        else if (className.equals("AllyTheBlessedOne")) {
-            
         }
         else if (className.equals("AllyFootSoldier") || className.equals("EnemyFootSoldier")) {
             return willCrit ? 21 : 16;
         }
         else if (className.equals("AllyCavalry") || className.equals("EnemyCavalry")) {
-            
+            return willCrit ? 7 : 2;
         }
         else if (className.equals("AllyCrusader") || className.equals("EnemyCrusader")) {
             return willCrit ? 7 : 2;
         }
         else if (className.equals("AllyArcher") || className.equals("EnemyArcher")) {
-            
+            return willCrit ? 6 : 17;
         }
         else if (className.equals("AllyWizard") || className.equals("EnemyWizard")) {
-            
+            switch (me.weapon) {
+                case "Fire":
+                    return willCrit ? 12 : 12;
+                case "Water":
+                    return willCrit ? 12 : 12;
+                case "Ice":
+                    return willCrit ? 12 : 12;
+            }
         }
-        
+
         return -1;
     }
 
@@ -144,11 +156,11 @@ public abstract class AttackAnimationActor extends Actor
         }
         ticks.clear();
     }
-    
+
     public void drawHealthBarAndLabel() {
         int labelX = me instanceof Ally ? 50 : 600 + 50;
         int barX = me instanceof Ally ? 110 : 600 + 110;
-    
+
         // LABEL
         hpLabel.setText(Integer.toString(me.health));
         getWorld().addObject(hpLabel, labelX, getWorld().getHeight() - allyHpBg.getImage().getHeight() / 2 + 8);
@@ -188,7 +200,7 @@ public abstract class AttackAnimationActor extends Actor
         removeHealthBar();
         drawHealthBarAndLabel();
     }
-    
+
     public void cutHp() {
         int damageDealt = AttackAnimationWorld.calculateDamageDealtBy(other, me, willCrit);
         int j = (me.health - damageDealt) < 0 ? 0 : me.health - damageDealt;
@@ -235,7 +247,7 @@ public abstract class AttackAnimationActor extends Actor
             getImage().setTransparency(newTrans);
         }
     }
-    
+
     /**
      * Since images are pre-loaded only once, we have to reset all frames' transparency or else a transparent
      * image may linger on the next fight.

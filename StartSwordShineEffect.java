@@ -13,7 +13,6 @@ public class StartSwordShineEffect extends Actor
     protected GreenfootImage[] shineFrames = new GreenfootImage[13];
     private boolean marked = false;
     private int imageIndex = 0;
-    World cutscene = new Cutscene();
     
     public StartSwordShineEffect() {
         for(int i = 0; i < 13; i++) {
@@ -36,7 +35,7 @@ public class StartSwordShineEffect extends Actor
         }
         animateShine();
         if(timer.millisElapsed() > 2050) {
-            Greenfoot.setWorld(cutscene);
+            Greenfoot.setWorld(new Cutscene());
         }
     }
     

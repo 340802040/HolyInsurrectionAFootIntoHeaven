@@ -28,6 +28,7 @@ public class EndTurnWindow extends NonAttackInterface
             }
             
             bw.state = "gameplay";
+            bw.selector.timer2.mark();
             removeSelf();
         }
     }

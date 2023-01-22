@@ -10,8 +10,8 @@ public class StartMenu extends GameWorld
 {
     Image playButton = new Image("Buttons/PlayButton.png");
     Image albumButton = new Image("Buttons/AlbumButton.png");
-    Image controlsButton = new Image("Placeholder/controls.png");
-    Image selector = new Image("images/TitleSelector.png");
+    Image controlsButton = new Image("Buttons/ControlsButton.png");
+    Image selector = new Image("TitleSelector.png");
     StartSwordShineEffect shine = new StartSwordShineEffect();
     private boolean added = false;
     private boolean onPlay, onAlbum, onControls;
@@ -23,13 +23,13 @@ public class StartMenu extends GameWorld
 
     public StartMenu() {    
         super(1200, 800, 1); 
-
         for(int i = 0; i < 5; i++) {
             titleFrames[i] = new GreenfootImage("images/Animations/TitleScreenAnimations/TitleScreen0" + i + ".png");
         }
-
         state = "normal";
+        initControlsText();
         setBackground("images/TitleScreen.png");
+        setPaintOrder(StatWindow.class);
 
         // Add Buttons
         addObject(playButton, 150, 400);
@@ -59,12 +59,12 @@ public class StartMenu extends GameWorld
             added = true;
             onAlbum = true;
         }
-        else if(Greenfoot.mouseMoved(albumButton) && !added) {
-            addObject(selector, albumButton.getX(), albumButton.getY());
+        else if(Greenfoot.mouseMoved(controlsButton) && !added) {
+            addObject(selector, controlsButton.getX(), controlsButton.getY());
             added = true;
             onControls = true;
         }
-        if(Greenfoot.mouseMoved(null) && added && !Greenfoot.mouseMoved(selector) && !Greenfoot.mouseMoved(playButton) && !Greenfoot.mouseMoved(albumButton)) {
+        if(Greenfoot.mouseMoved(null) && added && !Greenfoot.mouseMoved(selector) && !Greenfoot.mouseMoved(playButton) && !Greenfoot.mouseMoved(albumButton) && !Greenfoot.mouseMoved(controlsButton)) {
             removeObject(selector);
             added = false;
             onPlay = false;
@@ -101,7 +101,7 @@ public class StartMenu extends GameWorld
     public static void initControlsText() {
         controlsText = ""; // reset static variable
         String whitespace = "     ";
-        controlsText = "\n" + whitespace + "Controls" + whitespace + "\n";
+        controlsText = "\n" + whitespace + "Controls" + whitespace + "\n\n";
         controlsText += whitespace + "K - Select" + whitespace + "\n";
         controlsText += whitespace + "J - Back" + whitespace + "\n";
         controlsText += whitespace + "U - Stats" + whitespace + "\n";

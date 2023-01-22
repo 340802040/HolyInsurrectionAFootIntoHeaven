@@ -21,42 +21,6 @@ public abstract class Attacker extends AttackAnimationActor
         super.act();
     }
 
-    public void drawHealthBarAndLabel() {
-        // LABEL
-        hpLabel.setText(Integer.toString(me.health));
-        getWorld().addObject(hpLabel, 50, getWorld().getHeight() - allyHpBg.getImage().getHeight() / 2 + 8);
-
-        // BAR
-        int y1 = 700; // top row
-        int y2 = y1 + tick.getImage().getHeight() + 8; // bottom row
-        if (me.maxHealth <= 33) {
-            // only display 1 row
-            for (int i = 0, x = 110, y = getWorld().getHeight() - allyHpBg.getImage().getHeight() / 2; i < me.maxHealth; i++, x += tick.getImage().getWidth() - 6) {
-                Image t = new Image("HealthTick.png");
-                ticks.add(t);
-                getWorld().addObject(t, x, y);
-            }
-        }
-        else {            
-            // top row - length 33
-            for (int i = 0, x = 110; i < 33; i++, x += tick.getImage().getWidth() - 6) {
-                Image t = new Image("HealthTick.png");
-                ticks.add(t);
-                getWorld().addObject(t, x, y1);
-            }
-            // bottom row - rest
-            for (int i = 0, x = 110; i < me.maxHealth - 33; i++, x += tick.getImage().getWidth() - 6) {
-                Image t = new Image("HealthTick.png");
-                ticks.add(t);
-                getWorld().addObject(t, x, y2);
-            }
-        }
-        // make attacker missing health grey
-        for (int i = me.maxHealth - 1; i >= me.health; i--) {
-            ticks.get(i).setImage("GreyHealthTick.png");
-        }
-    }
-
     public void animate() {
         AttackAnimationWorld w = (AttackAnimationWorld)getWorld();
         AttackAnimationActor otherActor = w.getOtherActor(this);
@@ -85,7 +49,6 @@ public abstract class Attacker extends AttackAnimationActor
             }
 
             // ATTACK ANIMATION
-
             if (isAnimating) {
                 setImage(frames.get(i));
                 i++;

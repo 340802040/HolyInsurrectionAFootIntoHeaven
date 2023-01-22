@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.target=Images
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ Images\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=path\ willCrit\ isAlly
+comment1.target=java.util.ArrayList\ getFrames(java.lang.String,\ boolean,\ boolean)
+comment2.params=path\ willCrit\ isAlly
+comment2.target=java.util.ArrayList\ getDmgFrames(java.lang.String,\ boolean,\ boolean)
+comment3.params=
+comment3.target=void\ initDmgImgs()
+numComments=4

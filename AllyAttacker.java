@@ -31,10 +31,6 @@ public class AllyAttacker extends Attacker
         }
     }
     
-    public void drawHealthBarAndLabel() {
-        super.drawHealthBarAndLabel();
-    }
-    
     public void animate() {
         super.animate();
     }

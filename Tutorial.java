@@ -97,7 +97,7 @@ public class Tutorial extends BattleWorld
         boss.name = "Foot Soldier Boss";
         for (Enemy e : enemies) {
             if (e.isBoss) { // first check if boss since boss is also a foot soldier
-                e.maxHealth = e.health = 15;
+                e.maxHealth = e.health = 25;
                 e.atk = 6;
                 e.def = 2;
             }
@@ -109,8 +109,7 @@ public class Tutorial extends BattleWorld
     }
     
     public void checkClear() {
-        if (enemies.size() == 0 && state != "clear") {
-            state = "clear";
+        if (state == "clear" && oldManD2.getWorld() == null) {
             addObject(oldManD2, 0, 0);
         }
         if (oldManD2.i == oldManD2.dialogues.size()) {

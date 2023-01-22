@@ -32,8 +32,8 @@ public abstract class BattleWorld extends GameWorld
     }
 
     public void act() {
-        checkPhaseSwitch();
         checkState();
+        checkPhaseSwitch();
     }
 
     public void initializeGrid() {
@@ -81,6 +81,10 @@ public abstract class BattleWorld extends GameWorld
 
         if (phase == "enemy" && state == "gameplay") {
             moveEnemies();
+        }
+        
+        if (enemies.size() == 0) {
+            state = "clear";
         }
     }
 
@@ -151,6 +155,9 @@ public abstract class BattleWorld extends GameWorld
         enemies.remove(e);
         map[e.r][e.c] = 0;
         i -= (i == 0) ? 0 : 1;
+        if (e.isBoss) {
+            removeObject(bossIcon);
+        }
         removeObject(e);
     }
 

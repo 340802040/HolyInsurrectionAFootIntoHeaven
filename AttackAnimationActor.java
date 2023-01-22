@@ -116,7 +116,7 @@ public abstract class AttackAnimationActor extends Actor
             
         }
         else if (className.equals("AllyFootSoldier") || className.equals("EnemyFootSoldier")) {
-            return willCrit ? 22 : 18;
+            return willCrit ? 21 : 16;
         }
         else if (className.equals("AllyCavalry") || className.equals("EnemyCavalry")) {
             

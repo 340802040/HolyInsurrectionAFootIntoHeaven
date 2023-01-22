@@ -23,7 +23,6 @@ public class Images extends Actor
 
     public static ArrayList<GreenfootImage> getFrames(String path, boolean willCrit, boolean isAlly) {
         if (imgs.containsKey(path)) {
-            if (!isAlly) System.out.println(2);
             return imgs.get(path);
         }
         ArrayList<GreenfootImage> frames = new ArrayList<GreenfootImage>();

@@ -1,8 +1,8 @@
 #BlueJ class context
 comment0.target=Enemy
 comment0.text=\r\n\ Write\ a\ description\ of\ class\ Enemy\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
-comment1.params=
-comment1.target=Enemy()
+comment1.params=isBoss
+comment1.target=Enemy(boolean)
 comment10.params=
 comment10.target=void\ flash()
 comment11.params=r\ c

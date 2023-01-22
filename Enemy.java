@@ -20,10 +20,12 @@ public abstract class Enemy extends BattleWorldCharacter
     private boolean isFlashing, flip; // if enemy about to attack, flash as an indicator
     private int j = 0;
 
-    public Enemy() {
+    public Enemy(boolean isBoss) {
         name = getName();
-        hitXp = 10;
-        killXp = 20;
+        this.isBoss = isBoss;
+        hitXp = isBoss ? GameWorld.getRandomNumberInRange(25, 30) : GameWorld.getRandomNumberInRange(15, 20);
+        killXp = isBoss ? GameWorld.getRandomNumberInRange(45, 60) : GameWorld.getRandomNumberInRange(25, 40);
+        crit = 0;
     }
 
     public void addedToWorld(World w) {
@@ -41,7 +43,7 @@ public abstract class Enemy extends BattleWorldCharacter
             idleAnimate();
         }
         if (isFlashing) {
-            flash();
+            flash();    
         }
     }
 
@@ -198,7 +200,6 @@ public abstract class Enemy extends BattleWorldCharacter
 
     public void flash() {
         if (j == 11) {
-            Greenfoot.delay(40);
             BattleWorld bw = (BattleWorld)getWorld();
             Greenfoot.setWorld(new AttackAnimationWorld(bw, target, this, "enemy"));
             bw.state = "attack animation";

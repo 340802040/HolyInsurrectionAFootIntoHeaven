@@ -11,11 +11,11 @@ public class Chapter1 extends BattleWorld
     // CHARACTERS
     private AllyHero hero = new AllyHero("Hero");
     private AllyCrusader prodeus = new AllyCrusader("Prodeus");
-    private EnemyFootSoldier e1 = new EnemyFootSoldier();
-    private EnemyFootSoldier e2 = new EnemyFootSoldier();
-    private EnemyFootSoldier e3 = new EnemyFootSoldier();
-    private EnemyFootSoldier e4 = new EnemyFootSoldier();
-    private EnemyFootSoldier boss = new EnemyFootSoldier();
+    private EnemyFootSoldier e1 = new EnemyFootSoldier(false);
+    private EnemyFootSoldier e2 = new EnemyFootSoldier(false);
+    private EnemyFootSoldier e3 = new EnemyFootSoldier(false);
+    private EnemyFootSoldier e4 = new EnemyFootSoldier(false);
+    private EnemyFootSoldier boss = new EnemyFootSoldier(true);
     // DIALOGUES
     Dialogue oldManD = new Dialogue("images/Text/OldManInstructions/", "gameplay"); // images/ needed for Java.io.File detection
     Dialogue prodeusD = new Dialogue("images/Text/ProdeusInstructions/", "gameplay");
@@ -71,6 +71,7 @@ public class Chapter1 extends BattleWorld
         super.act();
         if (turns == 1 && !mark) {
             addObject(prodeusD, 0, 0);
+            hero.weapons.clear();
             hero.weapons.add("Sword");
             hero.weapons.add("Spear");
             hero.weapons.add("Bow");
@@ -85,15 +86,15 @@ public class Chapter1 extends BattleWorld
     public void setupStats() {
         // ALLIES
         hero.weapons.clear();
-        hero.weapons.add("Fists");
+        hero.weapons.add("Sword");
         hero.maxHealth = hero.health = 20;
-        hero.atk = 6;
+        hero.atk = 15;
+        hero.moveLimit = 15;
         prodeus.maxHealth = prodeus.health = 45;
         prodeus.atk = 12;
         prodeus.def = 10;
         
         // ENEMIES
-        boss.isBoss = true;
         boss.name = "Foot Soldier Boss";
         for (Enemy e : enemies) {
             if (e.isBoss) { // first check if boss since boss is also a foot soldier
@@ -102,8 +103,8 @@ public class Chapter1 extends BattleWorld
                 e.def = 2;
             }
             else if (e instanceof EnemyFootSoldier) {
-                e.maxHealth = e.health = 9;
-                e.atk = 1000;
+                e.maxHealth = e.health = 20;
+                e.atk = 2;
             }
         }
     }

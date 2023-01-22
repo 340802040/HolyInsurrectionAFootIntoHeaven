@@ -96,7 +96,7 @@ public abstract class Ally extends BattleWorldCharacter
                 }
                 xp -= xpNeeded;
                 numLevelUps++;
-                xpNeeded += 20;
+                xpNeeded += GameWorld.getRandomNumberInRange(30, 40);
             }
             level += numLevelUps;
             int increase = 1 * numLevelUps;

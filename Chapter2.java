@@ -8,8 +8,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Chapter2 extends BattleWorld
 {   
-    private EnemyFootSoldier e1 = new EnemyFootSoldier();
-    private EnemyFootSoldier e2 = new EnemyFootSoldier();
+    private EnemyFootSoldier e1 = new EnemyFootSoldier(false);
+    private EnemyFootSoldier e2 = new EnemyFootSoldier(false);
 
     public Chapter2() {
         // level1 should take in array of allies but for now hardcode them

@@ -12,6 +12,7 @@ import java.io.File;
 public class Images extends Actor
 {
     protected static final Hashtable<String, ArrayList<GreenfootImage>> imgs = new Hashtable<String, ArrayList<GreenfootImage>>();
+    protected static final Hashtable<String, GreenfootImage> imgs2 = new Hashtable<String, GreenfootImage>();
     
     static {
         initMiscImgs();
@@ -22,6 +23,7 @@ public class Images extends Actor
 
     public static ArrayList<GreenfootImage> getFrames(String path, boolean willCrit, boolean isAlly) {
         if (imgs.containsKey(path)) {
+            if (!isAlly) System.out.println(2);
             return imgs.get(path);
         }
         ArrayList<GreenfootImage> frames = new ArrayList<GreenfootImage>();
@@ -38,7 +40,7 @@ public class Images extends Actor
     }
     
     public static void initMiscImgs() {
-        
+        imgs2.put("attack animation world bg", new GreenfootImage("BattleBackground.png"));
     }
     
     public static void initDmgImgs() {

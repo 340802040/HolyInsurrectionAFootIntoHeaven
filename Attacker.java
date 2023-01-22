@@ -34,8 +34,9 @@ public abstract class Attacker extends AttackAnimationActor
                     getWorld().addObject(dmgIndicator, getWorld().getWidth() / 2, getWorld().getHeight() / 2);
 
                     if (willCrit) {
+                        Font font = new Font("Candara", true, false, 150);
                         TextCard t = new TextCard("Crit!", font, Color.WHITE, null, 5);
-                        getWorld().addObject(t, getWorld().getWidth() / 2, 100);
+                        getWorld().addObject(t, getWorld().getWidth() / 2, 150);
                     }
 
                     if (me instanceof Ally) {

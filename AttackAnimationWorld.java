@@ -31,7 +31,7 @@ public class AttackAnimationWorld extends GameWorld
         this.a = a;
         this.e = e;
         this.attacker_s = attacker_s;
-        setBackground("BattleBackground.png");
+        setBackground(Images.imgs2.get("attack animation world bg"));
         setup();
     }
 
@@ -102,5 +102,8 @@ public class AttackAnimationWorld extends GameWorld
             Greenfoot.setWorld(new GameOverWorld());
         }
         else Greenfoot.setWorld(returnWorld);
+        
+        attackerActor.resetTransparency();
+        defenderActor.resetTransparency();
     }
 }

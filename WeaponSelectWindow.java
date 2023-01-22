@@ -40,7 +40,7 @@ public class WeaponSelectWindow extends AttackInterface
         ice = new Image("Panels/WeaponIcons/Ice.png"); 
 
         // determine ally's weapons and bg size
-        if (a instanceof AllyHero || a instanceof AllyTheBlessedOne) {
+        if (a instanceof AllyHero) {
             setImage("Panels/WeaponIcons/BigWeaponIconBG.png");
         }
         else {

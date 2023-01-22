@@ -81,7 +81,7 @@ public abstract class AttackAnimationActor extends Actor
     }
 
     public boolean determineWillCrit() {
-        return Greenfoot.getRandomNumber(100) <  me.crit;
+        return Greenfoot.getRandomNumber(100) <  me.crit; // CHANGE AFTER
     }
 
     public void initFrames() {
@@ -118,9 +118,6 @@ public abstract class AttackAnimationActor extends Actor
         else if (className.equals("AllyFootSoldier") || className.equals("EnemyFootSoldier")) {
             return willCrit ? 22 : 18;
         }
-        else if (className.equals("AllyKingsGuard") || className.equals("EnemyKingsGuard")) {
-            
-        }
         else if (className.equals("AllyCavalry") || className.equals("EnemyCavalry")) {
             
         }
@@ -130,13 +127,7 @@ public abstract class AttackAnimationActor extends Actor
         else if (className.equals("AllyArcher") || className.equals("EnemyArcher")) {
             
         }
-        else if (className.equals("AllySniper") || className.equals("EnemySniper")) {
-            
-        }
         else if (className.equals("AllyWizard") || className.equals("EnemyWizard")) {
-            
-        }
-        else if (className.equals("AllyDivineSorceror") || className.equals("EnemyDivineSorceror")) {
             
         }
         
@@ -242,6 +233,16 @@ public abstract class AttackAnimationActor extends Actor
         }
         if (actCount % 2 == 0 && newTrans >= 0) {
             getImage().setTransparency(newTrans);
+        }
+    }
+    
+    /**
+     * Since images are pre-loaded only once, we have to reset all frames' transparency or else a transparent
+     * image may linger on the next fight.
+     */
+    public void resetTransparency() {
+        for (GreenfootImage img : frames) {
+            img.setTransparency(255);
         }
     }
 }

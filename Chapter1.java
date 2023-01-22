@@ -6,7 +6,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Tutorial extends BattleWorld
+public class Chapter1 extends BattleWorld
 {
     // CHARACTERS
     private AllyHero hero = new AllyHero("Hero");
@@ -23,7 +23,7 @@ public class Tutorial extends BattleWorld
     // MISC
     private boolean mark;
 
-    public Tutorial() {
+    public Chapter1() {
         super(1200, 800, 1);
         allies.add(hero);
         enemies.add(boss);
@@ -103,17 +103,17 @@ public class Tutorial extends BattleWorld
             }
             else if (e instanceof EnemyFootSoldier) {
                 e.maxHealth = e.health = 9;
-                e.atk = 2;
+                e.atk = 1000;
             }
         }
     }
     
-    public void checkClear() {
+    public void checkClear() {  
         if (state == "clear" && oldManD2.getWorld() == null) {
             addObject(oldManD2, 0, 0);
         }
         if (oldManD2.i == oldManD2.dialogues.size()) {
-            Greenfoot.setWorld(new Level1());
+            Greenfoot.setWorld(new Chapter2());
         }
     }
 }

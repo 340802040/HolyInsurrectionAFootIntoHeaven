@@ -49,8 +49,7 @@ public abstract class Card extends Actor
     }    
     
     public void fadeIn() {
-        int newTrans = getImage().getTransparency() + 15;
-        
+        int newTrans = getImage().getTransparency() + 15;    
         if (newTrans >= 255) {
             isFadingIn = false;
         }

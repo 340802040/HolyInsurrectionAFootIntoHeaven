@@ -16,6 +16,7 @@ public class AttackAnimationWorld extends GameWorld
     protected Ally a;
     protected Enemy e;
     protected String attacker_s;
+    protected String returnState = "gameplay";
     // IMAGE ACTORS
     protected Image allyHpBg = new Image("AllyHPbg.png");
     protected Image enemyHpBg = new Image("EnemyHPbg.png");
@@ -30,7 +31,6 @@ public class AttackAnimationWorld extends GameWorld
         this.a = a;
         this.e = e;
         this.attacker_s = attacker_s;
-        returnWorld.state = "attack animation";
         setBackground("BattleBackground.png");
         setup();
     }
@@ -97,7 +97,10 @@ public class AttackAnimationWorld extends GameWorld
     }
 
     public void returnToWorld() {
-        returnWorld.state = "gameplay";
-        Greenfoot.setWorld(returnWorld);
+        returnWorld.state = returnState;
+        if (returnState.equals("lost")) {
+            Greenfoot.setWorld(new GameOverWorld());
+        }
+        else Greenfoot.setWorld(returnWorld);
     }
 }

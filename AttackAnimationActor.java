@@ -94,7 +94,7 @@ public abstract class AttackAnimationActor extends Actor
         }
         // DMG INDICATOR FRAMES
         String key = (me instanceof Ally ? "ally" : "enemy") + " " + (willCrit ? "crit" : "attack") + " dmg indicators";
-        dmgIndicators = Images.dmgImgs.get(key);
+        dmgIndicators = Images.imgs.get(key);
 
         setImage(frames.get(0));
         dmgIndicator.setImage(dmgIndicators.get(0));

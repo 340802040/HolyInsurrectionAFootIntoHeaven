@@ -14,10 +14,10 @@ public class Dialogue extends Actor
     private Image curDialogue;
     protected int i = 0;
     protected SimpleTimer timer = new SimpleTimer();
-    protected String prevState;
+    protected String returnState;
 
-    public Dialogue(String path, String prevState) {
-        this.prevState = prevState;
+    public Dialogue(String path, String returnState) {
+        this.returnState = returnState;
         int size = new File(path).list().length;
         for (int i = 0; i < size; i++) {
             dialogues.add(new Image(path + "Text" + i + ".png"));
@@ -27,9 +27,7 @@ public class Dialogue extends Actor
     public void addedToWorld(World w) {
         if (w instanceof GameWorld) {
             GameWorld gw = (GameWorld)w;
-            if (gw instanceof BattleWorld) {
-                gw.state = "dialogue";            
-            }    
+            gw.state = "dialogue";
         }
     }
 
@@ -41,7 +39,7 @@ public class Dialogue extends Actor
         if (i == dialogues.size()) {
             GameWorld gw = ((GameWorld)getWorld());
             if (gw instanceof BattleWorld) {
-                gw.state = prevState;    
+                gw.state = returnState;    
             }
             gw.removeObject(this);
             return;

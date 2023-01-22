@@ -201,6 +201,7 @@ public abstract class Enemy extends BattleWorldCharacter
             Greenfoot.delay(40);
             BattleWorld bw = (BattleWorld)getWorld();
             Greenfoot.setWorld(new AttackAnimationWorld(bw, target, this, "enemy"));
+            bw.state = "attack animation";
             isFlashing = false;
             j = 0;
         }

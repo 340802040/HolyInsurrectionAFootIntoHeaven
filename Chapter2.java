@@ -6,12 +6,12 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Level1 extends BattleWorld
+public class Chapter2 extends BattleWorld
 {   
     private EnemyFootSoldier e1 = new EnemyFootSoldier();
     private EnemyFootSoldier e2 = new EnemyFootSoldier();
 
-    public Level1() {
+    public Chapter2() {
         // level1 should take in array of allies but for now hardcode them
         super(1200, 800, 1);
         allies.add(new AllyFootSoldier("placeholder"));

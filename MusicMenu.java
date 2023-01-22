@@ -211,7 +211,7 @@ public class MusicMenu extends GameWorld
         }
         if(Greenfoot.mouseClicked(backButton)) {
             Soundtrack.stopAll();
-            Greenfoot.setWorld(new StartMenu());
+            Greenfoot.setWorld(new MainMenu());
         }
     }
 }

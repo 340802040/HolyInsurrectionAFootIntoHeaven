@@ -3,7 +3,8 @@ import java.util.*;
 import java.io.File;
 
 /**
- * Write a description of class Images here.
+ * Class used to store frames for the attack animation in a hashmap so as to not constantly
+ * create new GreenfootImages of the same frames.
  * 
  * @author (your name) 
  * @version (a version number or a date)
@@ -11,10 +12,12 @@ import java.io.File;
 public class Images extends Actor
 {
     protected static final Hashtable<String, ArrayList<GreenfootImage>> imgs = new Hashtable<String, ArrayList<GreenfootImage>>();
-    protected static final Hashtable<String, ArrayList<GreenfootImage>> dmgImgs = new Hashtable<String, ArrayList<GreenfootImage>>();
     
     static {
+        initMiscImgs();
         initDmgImgs();
+        initCutsceneImgs();
+        initMainMenuImgs();
     }
 
     public static ArrayList<GreenfootImage> getFrames(String path, boolean willCrit, boolean isAlly) {
@@ -33,18 +36,9 @@ public class Images extends Actor
         imgs.put(path, frames);
         return frames;
     }
-
-    public static ArrayList<GreenfootImage> getDmgFrames(String path, boolean willCrit, boolean isAlly) {
-        if (dmgImgs.containsKey(path)) {
-            return dmgImgs.get(path);
-        }
-        ArrayList<GreenfootImage> frames = new ArrayList<GreenfootImage>();
-        for (int i = 0; i < 8; i++) {
-            frames.add(new GreenfootImage(path + (willCrit ? "Crit" : "Attack") + "0" + i + ".png"));
-        }   
-
-        dmgImgs.put(path, frames);
-        return frames;
+    
+    public static void initMiscImgs() {
+        
     }
     
     public static void initDmgImgs() {
@@ -53,13 +47,13 @@ public class Images extends Actor
         for (int i = 0; i < 8; i++) {
             frames.add(new GreenfootImage("Animations/DamageAnimations/Attack/Attack0" + i + ".png"));
         }
-        dmgImgs.put("ally attack dmg indicators", frames);
+        imgs.put("ally attack dmg indicators", frames);
         
         frames = new ArrayList<GreenfootImage>();
         for (int i = 0; i < 8; i++) {
             frames.add(new GreenfootImage("Animations/DamageAnimations/Crit/Crit0" + i + ".png"));
         }
-        dmgImgs.put("ally crit dmg indicators", frames);
+        imgs.put("ally crit dmg indicators", frames);
         
         // ENEMY DMG INDICATORS
         frames = new ArrayList<GreenfootImage>();
@@ -67,13 +61,38 @@ public class Images extends Actor
             frames.add(new GreenfootImage("Animations/DamageAnimations/Attack/Attack0" + i + ".png"));
             frames.get(i).mirrorHorizontally();
         }
-        dmgImgs.put("enemy attack dmg indicators", frames);
+        imgs.put("enemy attack dmg indicators", frames);
         
         frames = new ArrayList<GreenfootImage>();
         for (int i = 0; i < 8; i++) {
             frames.add(new GreenfootImage("Animations/DamageAnimations/Crit/Crit0" + i + ".png"));
             frames.get(i).mirrorHorizontally();
         }
-        dmgImgs.put("enemy crit dmg indicators", frames);
+        imgs.put("enemy crit dmg indicators", frames);
+    }
+    
+    public static void initCutsceneImgs() {
+        ArrayList<GreenfootImage> frames = new ArrayList<GreenfootImage>();
+        for (int i = 0; i < 50; i++) {
+            String zeroes = i >= 10 ? "0" : "00";
+            frames.add(new GreenfootImage("images/Cutscenes/Cutscene" + zeroes + i + ".png"));
+        }
+        imgs.put("cutscene", frames);
+    }
+    
+    public static void initMainMenuImgs() {
+        // START SWORD SHINE
+        ArrayList<GreenfootImage> frames = new ArrayList<GreenfootImage>();
+        for (int i = 0; i < 13; i++) {
+            String zeroes = i >= 10 ? "0" : "00";
+            frames.add(new GreenfootImage("images/Animations/ShineAnimations/Shine" + zeroes + i + ".png"));
+        }
+        imgs.put("start sword shine", frames);
+        // HERO CAPE
+        frames = new ArrayList<GreenfootImage>();
+        for (int i = 0; i < 5; i++) {
+            frames.add(new GreenfootImage("images/Animations/TitleScreenAnimations/TitleScreen0" + i + ".png"));
+        }
+        imgs.put("hero cape", frames);
     }
 }

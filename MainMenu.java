@@ -1,4 +1,5 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import java.util.*;
 
 /**
  * Write a description of class StartMenu here.
@@ -6,29 +7,28 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class StartMenu extends GameWorld
+public class MainMenu extends GameWorld
 {
-    Image playButton = new Image("Buttons/PlayButton.png");
-    Image albumButton = new Image("Buttons/AlbumButton.png");
-    Image controlsButton = new Image("Buttons/ControlsButton.png");
-    Image selector = new Image("TitleSelector.png");
-    StartSwordShineEffect shine = new StartSwordShineEffect();
+    // ANIMATION
+    protected StartSwordShineEffect shine = new StartSwordShineEffect();
+    private SimpleTimer animationTimer = new SimpleTimer();
+    protected ArrayList<GreenfootImage> frames = Images.imgs.get("hero cape");
+    private int imageIndex = 0;
+    // BUTTONS
+    protected Image playButton = new Image("Buttons/PlayButton.png");
+    protected Image albumButton = new Image("Buttons/AlbumButton.png");
+    protected Image controlsButton = new Image("Buttons/ControlsButton.png");
+    protected Image selector = new Image("TitleSelector.png");
+    // MISC
     private boolean added = false;
     private boolean onPlay, onAlbum, onControls;
-    private boolean clicked = false;
-    private SimpleTimer animationTimer = new SimpleTimer();
-    protected GreenfootImage[] titleFrames = new GreenfootImage[5];
-    private int imageIndex = 0;
     protected static String controlsText;
 
-    public StartMenu() {    
-        super(1200, 800, 1); 
-        for(int i = 0; i < 5; i++) {
-            titleFrames[i] = new GreenfootImage("images/Animations/TitleScreenAnimations/TitleScreen0" + i + ".png");
-        }
+    public MainMenu() {    
+        super(1200, 800, 1);
         state = "normal";
         initControlsText();
-        setBackground("images/TitleScreen.png");
+        setBackground(frames.get(0));
         setPaintOrder(StatWindow.class);
 
         // Add Buttons
@@ -49,38 +49,39 @@ public class StartMenu extends GameWorld
     }
 
     public void checkHovering() {
-        if(Greenfoot.mouseMoved(playButton) && !added) {
+        if (Greenfoot.mouseMoved(playButton) && !added) {
             addObject(selector, playButton.getX(), playButton.getY());
             added = true;
             onPlay = true;
+            onAlbum = onControls = false;
         }
-        else if(Greenfoot.mouseMoved(albumButton) && !added) {
+        else if (Greenfoot.mouseMoved(albumButton) && !added) {
             addObject(selector, albumButton.getX(), albumButton.getY());
             added = true;
             onAlbum = true;
+            onPlay = onControls = false;
         }
-        else if(Greenfoot.mouseMoved(controlsButton) && !added) {
+        else if (Greenfoot.mouseMoved(controlsButton) && !added) {
             addObject(selector, controlsButton.getX(), controlsButton.getY());
             added = true;
             onControls = true;
+            onPlay = onAlbum = false;
         }
-        if(Greenfoot.mouseMoved(null) && added && !Greenfoot.mouseMoved(selector) && !Greenfoot.mouseMoved(playButton) && !Greenfoot.mouseMoved(albumButton) && !Greenfoot.mouseMoved(controlsButton)) {
+        if (Greenfoot.mouseMoved(null) && added && !Greenfoot.mouseMoved(selector) && !Greenfoot.mouseMoved(playButton) && !Greenfoot.mouseMoved(albumButton) && !Greenfoot.mouseMoved(controlsButton)) {
             removeObject(selector);
             added = false;
-            onPlay = false;
-            onAlbum = false;
+            onPlay = onAlbum = onControls = false;
         }
     }
 
     public void checkClick() {
-        if(Greenfoot.mouseClicked(selector) && !clicked && onPlay) {
-            clicked = true;
+        if (Greenfoot.mouseClicked(selector) && onPlay) {
             addObject(shine, 600, 400);
         }
-        if(Greenfoot.mouseClicked(selector) && !clicked && onAlbum) {
+        if (Greenfoot.mouseClicked(selector) && onAlbum) {
             Greenfoot.setWorld(new MusicMenu());
         }
-        if(Greenfoot.mouseClicked(selector) && !clicked && onControls) {
+        if (Greenfoot.mouseClicked(selector) && onControls) {
             Font font = new Font("Candara", true, false, 45);
             StatWindow sw = new StatWindow(controlsText, font, Color.YELLOW, Color.BLACK, 255, state);
             state = "interface";
@@ -89,13 +90,12 @@ public class StartMenu extends GameWorld
     }
 
     public void animateTitleScreen() {
-        if(animationTimer.millisElapsed() < 120) {
+        if (animationTimer.millisElapsed() < 120) {
             return;
         }
         animationTimer.mark();
-
-        setBackground(titleFrames[imageIndex]);
-        imageIndex = (imageIndex + 1) % titleFrames.length;
+        setBackground(frames.get(imageIndex));
+        imageIndex = (imageIndex + 1) % frames.size();
     }
 
     public static void initControlsText() {

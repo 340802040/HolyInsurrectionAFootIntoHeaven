@@ -1,4 +1,4 @@
-        import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.*;
 
 /**
@@ -18,10 +18,11 @@ public class MainMenu extends GameWorld
     protected Image playButton = new Image("Buttons/PlayButton.png");
     protected Image albumButton = new Image("Buttons/AlbumButton.png");
     protected Image controlsButton = new Image("Buttons/ControlsButton.png");
+    protected Image loadButton = new Image("Buttons/LoadButton.png");
     protected Image selector = new Image("TitleSelector.png");
     // MISC
     private boolean added = false;
-    private boolean onPlay, onAlbum, onControls;
+    private boolean onPlay, onAlbum, onControls, onLoad;
     protected static String controlsText;
 
     public MainMenu() {    
@@ -35,6 +36,7 @@ public class MainMenu extends GameWorld
         addObject(playButton, 150, 400);
         addObject(albumButton, 150, 480);
         addObject(controlsButton, 150, 560);
+        addObject(loadButton, 150, 640);
 
         // Set soundtrack volume
         Soundtrack.setVolume();
@@ -53,24 +55,30 @@ public class MainMenu extends GameWorld
             addObject(selector, playButton.getX(), playButton.getY());
             added = true;
             onPlay = true;
-            onAlbum = onControls = false;
+            onAlbum = onControls = onLoad = false;
         }
         else if (Greenfoot.mouseMoved(albumButton) && !added) {
             addObject(selector, albumButton.getX(), albumButton.getY());
             added = true;
             onAlbum = true;
-            onPlay = onControls = false;
+            onPlay = onControls = onLoad = false;
         }
         else if (Greenfoot.mouseMoved(controlsButton) && !added) {
             addObject(selector, controlsButton.getX(), controlsButton.getY());
             added = true;
             onControls = true;
-            onPlay = onAlbum = false;
+            onPlay = onAlbum = onLoad = false;
         }
-        if (Greenfoot.mouseMoved(null) && added && !Greenfoot.mouseMoved(selector) && !Greenfoot.mouseMoved(playButton) && !Greenfoot.mouseMoved(albumButton) && !Greenfoot.mouseMoved(controlsButton)) {
+        else if (Greenfoot.mouseMoved(loadButton) && !added) {
+            addObject(selector, loadButton.getX(), loadButton.getY());
+            added = true;
+            onLoad = true;
+            onPlay = onAlbum = onControls = false;
+        }
+        if (Greenfoot.mouseMoved(null) && added && !Greenfoot.mouseMoved(selector) && !Greenfoot.mouseMoved(playButton) && !Greenfoot.mouseMoved(albumButton) && !Greenfoot.mouseMoved(controlsButton) && !Greenfoot.mouseMoved(loadButton)) {
             removeObject(selector);
             added = false;
-            onPlay = onAlbum = onControls = false;
+            onPlay = onAlbum = onControls = onLoad = false;
         }
     }
 
@@ -86,6 +94,19 @@ public class MainMenu extends GameWorld
             StatWindow sw = new StatWindow(controlsText, font, Color.YELLOW, Color.BLACK, 255, state);
             state = "interface";
             addObject(sw, getWidth() / 2, getHeight() / 2);
+        }
+        if (Greenfoot.mouseClicked(selector) && onLoad) {
+            if (UserInfo.isStorageAvailable()) {
+                UserInfo myInfo = UserInfo.getMyInfo();
+                switch (myInfo.getScore()) {
+                    case 1:
+                        Greenfoot.setWorld(new Chapter1());
+                        break;
+                    case 2:
+                        Greenfoot.setWorld(new Chapter2());
+                        break;    
+                }
+            }
         }
     }
 

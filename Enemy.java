@@ -81,6 +81,7 @@ public abstract class Enemy extends BattleWorldCharacter
             moved = true;
         }
     }
+    
     public void getTargetAlly() { // for now just gets a random ally
         ArrayList<Ally> allies = ((BattleWorld)getWorld()).allies;
         

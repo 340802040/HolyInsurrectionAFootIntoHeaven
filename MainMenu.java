@@ -28,11 +28,10 @@ public class MainMenu extends GameWorld
     public MainMenu() {    
         super(1200, 800, 1);
         state = "normal";
-        initControlsText();
         setBackground(frames.get(0));
         setPaintOrder(StatWindow.class);
 
-        // Add Buttons
+        // Add buttons
         addObject(playButton, 150, 400);
         addObject(albumButton, 150, 480);
         addObject(controlsButton, 150, 560);
@@ -40,6 +39,10 @@ public class MainMenu extends GameWorld
 
         // Set soundtrack volume
         Soundtrack.setVolume();
+    }
+    
+    static {
+        initControlsText();
     }
 
     public void act() {

@@ -61,11 +61,9 @@ public class Chapter1 extends BattleWorld
         super.act();
         if (turns == 1 && !mark) {
             addObject(prodeusD, 0, 0);
-            hero.weapons.clear();
             hero.weapons.add("Sword");
             hero.weapons.add("Spear");
             hero.weapons.add("Bow");
-            hero.weapon = "Sword"; // testing
             addObject(prodeus, GameWorld.getX(3), GameWorld.getY(7));
             allies.add(prodeus);
             mark = true;
@@ -87,15 +85,14 @@ public class Chapter1 extends BattleWorld
     
     public void setupStats() {
         // ALLIES
-        hero.weapons.clear();
-        hero.weapons.add("Sword");
-        hero.maxHealth = 15;
-        hero.atk = 6;
-        hero.moveLimit = 15; // testing
+        hero.maxHealth = 100; // testing, should be 16
+        hero.atk = 100; // testing, should be 6
+        hero.weapon = "Fists";
+        hero.moveLimit = 100; // testing
         prodeus.maxHealth = prodeus.health = 45;
-        prodeus.atk = 12;
+        prodeus.atk = 100; // testing, should be 12
         prodeus.def = 10;
-        prodeus.moveLimit = 15; // testing
+        prodeus.moveLimit = 100; // testing
         replenish();
         // ENEMIES
         boss.name = "Foot Soldier Boss";

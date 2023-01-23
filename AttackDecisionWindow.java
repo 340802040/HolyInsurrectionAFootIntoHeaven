@@ -25,9 +25,6 @@ public class AttackDecisionWindow extends AttackInterface
             getWorld().addObject(new WeaponSelectWindow(a, e), getWorld().getWidth() - 250, getWorld().getHeight() / 2);
             removeSelf();
         }
-        else if (Greenfoot.isKeyDown("x")) { // item
-
-        }
         else if (Greenfoot.isKeyDown("c")) { // wait
             bw.state = "gameplay";
             removeSelf();

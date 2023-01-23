@@ -7,7 +7,7 @@ import java.util.*;
  * @author (your name) 
  * @version (a version number or a date)
  */
-public abstract class Ally extends BattleWorldCharacter
+public class Ally extends BattleWorldCharacter
 {
     protected Enemy selectedEnemy; // whether character has selected an enemy to move to
     protected int xp = 0, xpNeeded = 50, xpGained;
@@ -138,5 +138,46 @@ public abstract class Ally extends BattleWorldCharacter
         }
         
         return msg;
+    }
+    
+    public Ally getClone() {
+        Ally a = new Ally("");
+        String className = getClass().getSimpleName();
+        switch (className) {
+            case "AllyArcher":
+               a = new AllyArcher(name);
+               break;
+            case "AllyCavalry":
+               a = new AllyCavalry(name);
+               break;
+            case "AllyCrusader":
+               a = new AllyCrusader(name);
+               break;
+            case "AllyFootSoldier":
+               a = new AllyFootSoldier(name);
+               break;
+            case "AllyHero":
+               a = new AllyHero(name);
+               break;
+        }
+        
+        a.level = level;
+        a.maxHealth = maxHealth;
+        a.health = health;
+        a.atk = atk;
+        a.def = def;
+        a.ev = ev;
+        a.spd = spd;
+        a.weapon = weapon;
+        
+        return a;
+    }
+    
+    public static ArrayList<Ally> getClones(ArrayList<Ally> allies) {
+        ArrayList<Ally> clones = new ArrayList<Ally>();
+        for (Ally a : allies) {
+            clones.add(a.getClone());
+        }
+        return clones;
     }
 }

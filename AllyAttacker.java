@@ -27,10 +27,10 @@ public class AllyAttacker extends Attacker
         if (me.health <= 0) {
             die();
             AttackAnimationWorld w = (AttackAnimationWorld)getWorld();
-            w.returnWorld.removeAlly(me);
             if (me.name.equals("Hero") || me.name.equals("Prodeus")) {
                 w.returnState = "lost";
             }
+            else w.returnWorld.removeAlly(me);
         }
     }
 

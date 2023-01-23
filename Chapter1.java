@@ -26,44 +26,34 @@ public class Chapter1 extends BattleWorld
     public Chapter1() {
         super(1200, 800, 1);
         allies.add(hero);
-        enemies.add(boss);
         enemies.add(e1);
         enemies.add(e2);
         enemies.add(e3);
         enemies.add(e4);
-    
-        setupStats();
+        enemies.add(boss);
 
         map = new int[][] {
             {3, 3, 3, 0, 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 3, 0, 0, 0, 3, 3, 3, 0, 3, 3},
             {3, 3, 3, 0, 0, 3, 3, 3, 0, 0, 3, 3, 3, 3, 3, 3, 0, 0, 3, 0, 0, 0, 3, 3},
             {0, 4, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 5, 5, 5, 5, 5, 5, 5, 5},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 5, 0, 5, 5, 5, 0, 0, 5},
             {0, 0, 4, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 5, 0},
             {0, 0, 0, 0, 0, 0, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
             {0, 4, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 5, 0, 0, 0},
             {0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 4, 4, 0, 0, 0, 0, 0, 0, 5, 5, 5, 5, 5, 5, 5, 5, 5},
+            {0, 0, 0, 0, 0, 0, 0, 4, 4, 0, 0, 0, 0, 0, 0, 0, 5, 5, 0, 0, 5, 5, 5, 5},
             {0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
             {0, 3, 3, 3, 3, 0, 3, 3, 0, 0, 0, 3, 3, 3, 3, 0, 3, 3, 3, 0, 0, 3, 0, 0},
             {3, 3, 3, 0, 3, 3, 0, 3, 3, 0, 3, 3, 3, 3, 3, 3, 0, 0, 3, 3, 3, 3, 3, 3}
         };
-        initializeGrid();
-
-        addObject(hero, GameWorld.getX(4), GameWorld.getY(8));
-        //map[8][4] = 1; // BattleWorldCharacter addedToWorld() may be too slow to set coordinates
-        addObject(boss, GameWorld.getX(21), GameWorld.getY(8));
-        addObject(bossIcon, GameWorld.getX(21), GameWorld.getY(8));
         
-        addObject(e1, GameWorld.getX(19), GameWorld.getY(6));
-        addObject(e2, GameWorld.getX(19), GameWorld.getY(7));
-        addObject(e3, GameWorld.getX(19), GameWorld.getY(9));
-        addObject(e4, GameWorld.getX(19), GameWorld.getY(10));
-
+        initializeGrid();
+        spawn();
+        setupStats();
         addObject(oldManD, 0, 0);
     }
 
@@ -75,36 +65,49 @@ public class Chapter1 extends BattleWorld
             hero.weapons.add("Sword");
             hero.weapons.add("Spear");
             hero.weapons.add("Bow");
-            hero.weapon = "Sword";
-            addObject(prodeus, GameWorld.getX(1), GameWorld.getY(7));
+            hero.weapon = "Sword"; // testing
+            addObject(prodeus, GameWorld.getX(3), GameWorld.getY(7));
             allies.add(prodeus);
             mark = true;
         }
         checkClear();
     }
     
+    public void spawn() {
+        // ALLIES
+        addObject(hero, GameWorld.getX(4), GameWorld.getY(8));
+        // ENEMIES
+        addObject(e1, GameWorld.getX(19), GameWorld.getY(6));
+        addObject(e2, GameWorld.getX(19), GameWorld.getY(7));
+        addObject(e3, GameWorld.getX(19), GameWorld.getY(9));
+        addObject(e4, GameWorld.getX(19), GameWorld.getY(10));
+        addObject(boss, GameWorld.getX(21), GameWorld.getY(8));
+        addObject(bossIcon, GameWorld.getX(21), GameWorld.getY(8));
+    }
+    
     public void setupStats() {
         // ALLIES
         hero.weapons.clear();
         hero.weapons.add("Sword");
-        hero.maxHealth = hero.health = 20;
-        hero.atk = 15;
-        hero.moveLimit = 15;
+        hero.maxHealth = 15;
+        hero.atk = 6;
+        hero.moveLimit = 15; // testing
         prodeus.maxHealth = prodeus.health = 45;
         prodeus.atk = 12;
         prodeus.def = 10;
-        
+        prodeus.moveLimit = 15; // testing
+        replenish();
         // ENEMIES
         boss.name = "Foot Soldier Boss";
         for (Enemy e : enemies) {
             if (e.isBoss) { // first check if boss since boss is also a foot soldier
-                e.maxHealth = e.health = 25;
-                e.atk = 6;
+                e.maxHealth = e.health = 18;
+                e.atk = 4;
                 e.def = 2;
             }
             else if (e instanceof EnemyFootSoldier) {
-                e.maxHealth = e.health = 20;
-                e.atk = 2;
+                e.maxHealth = e.health = 9;
+                e.atk = 3;
             }
         }
     }

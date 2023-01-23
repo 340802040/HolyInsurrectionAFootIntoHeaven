@@ -81,7 +81,7 @@ public abstract class AttackAnimationActor extends Actor
     }
 
     public boolean determineWillCrit() {
-        return Greenfoot.getRandomNumber(100) <  me.crit; // CHANGE AFTER
+        return Greenfoot.getRandomNumber(100) <  me.crit;
     }
 
     public void initFrames() {

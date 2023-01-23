@@ -63,7 +63,7 @@ public class AttackAnimationWorld extends GameWorld
     }
 
     public static int calculateDamageDealtBy(BattleWorldCharacter dealer, BattleWorldCharacter dealtTo, boolean willCrit) {
-        int weaponDmg = 0; // wth was this
+        int weaponDmg = 0;
         int damageDealt = (int)((dealer.atk + weaponDmg) * (willCrit ? 3 : 1) * dealer.terrainMultiplier * GameWorld.getWeaponMultiplier(dealer.weapon, dealtTo.weapon) - dealtTo.def);
         if (damageDealt <= 0) {
             damageDealt = 1; // minimum

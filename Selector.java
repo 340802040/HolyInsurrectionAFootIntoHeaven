@@ -96,7 +96,6 @@ public class Selector extends Actor
         }
         else if (animationTimer.millisElapsed() > 300) {
             animationTimer.mark();
-
             setImage(selectionFrames[imageIndex]);
             imageIndex = (imageIndex + 1) % selectionFrames.length;
         }

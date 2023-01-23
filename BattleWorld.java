@@ -12,6 +12,7 @@ public abstract class BattleWorld extends GameWorld
     // DATA
     protected String phase = "player";
     protected ArrayList<Ally> allies = new ArrayList<Ally>();
+    protected static ArrayList<Ally> ALLIES = new ArrayList<Ally>();
     protected ArrayList<Enemy> enemies = new ArrayList<Enemy>();
     protected Selector selector = new Selector();
     protected boolean selectorAdded; // whether selector is in the world
@@ -25,9 +26,7 @@ public abstract class BattleWorld extends GameWorld
     public BattleWorld(int width, int height, int pixelSize) {    
         super(width, height, pixelSize);
         state = "gameplay";
-
         addObject(selector, GameWorld.getX(0), GameWorld.getY(0)); 
-        
         setPaintOrder(HoverWindow.class, Selector.class);
     }
 
@@ -84,6 +83,7 @@ public abstract class BattleWorld extends GameWorld
         }
         if (enemies.size() == 0) {
             state = "clear";
+            saveHighestChapter();
         }
     }
 
@@ -97,7 +97,7 @@ public abstract class BattleWorld extends GameWorld
         resetEnemyVariables();
         phase = "player";
     }
-    
+
     /**
      * Resets all necessary Ally variables such as Ally.moved and alliesMoved after player phase is over.
      */
@@ -127,13 +127,10 @@ public abstract class BattleWorld extends GameWorld
             else {
                 curMovingEnemy.startMoving();   
             }
+            i++;
         }
         if (curMovingEnemy.moved && i < enemies.size()) {
             Greenfoot.delay(30);
-            i++;
-            if (i == enemies.size()) {
-                return;
-            }
             curMovingEnemy = enemies.get(i);
             if (curMovingEnemy.isBoss) {
                 curMovingEnemy.moved = true;
@@ -141,12 +138,13 @@ public abstract class BattleWorld extends GameWorld
             else {
                 curMovingEnemy.startMoving();    
             }
+            i++;
         }
     }
 
     public void removeAlly(Ally a) {
         allies.remove(a);
-        map[a.r][a.c] = 0;
+        map[a.r][a.c] = 0;  
         removeObject(a);
     }
 
@@ -167,7 +165,6 @@ public abstract class BattleWorld extends GameWorld
                 ret++;
             }
         }
-
         return ret;
     }
 
@@ -178,7 +175,6 @@ public abstract class BattleWorld extends GameWorld
                 ret++;
             }
         }
-
         return ret;
     }
 
@@ -188,7 +184,40 @@ public abstract class BattleWorld extends GameWorld
     public void addSelector() {
         addObject(selector, GameWorld.getX(selector.c), GameWorld.getY(selector.r));
     }
+    
+    /**
+     * Replenishes all allies' hp at start of a chapter.
+     */
+    public void replenish() {
+        for (Ally a : allies) {
+            a.health = a.maxHealth; // replenish
+        }
+    }
 
+    /**
+     * Saves the highest chapter achieved with the army present at that time.
+     * Only called once a chapter has been complete.
+     */
+    public void saveHighestChapter() {
+        int newScore = 1;
+        if (this instanceof Chapter1) {
+            newScore = 2;
+        }
+        if (this instanceof Chapter2) {
+            newScore = 3;
+        }
+        
+        ALLIES = Ally.getClones(allies); //  save clones to master array of allies
+
+        if (UserInfo.isStorageAvailable()) {
+            UserInfo myInfo = UserInfo.getMyInfo();
+            if (newScore > myInfo.getScore()) {
+                myInfo.setScore(newScore);
+                myInfo.store();  // write back to server
+            }
+        }
+    }
+    
     /**
      * BattleWorld Map Legend:
      * 
@@ -217,5 +246,6 @@ public abstract class BattleWorld extends GameWorld
      * 4 - Forest
      * 5 - House
      * 6 - Market
+     * 7 - Hill
      */
 }

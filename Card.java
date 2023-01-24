@@ -4,14 +4,14 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * Card is an introduction or visual that covers most of the screen and
  * notifies the player of a change in the game state or setting.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Patrick Hu
+ * @version Jan 2023
  */
 public abstract class Card extends Actor
 {
     protected int actCount = 0;
     protected boolean isFadingIn = true;
-    protected int mod = 4;
+    protected int mod = 1;
     
     /**
      * Creates a card of an image.
@@ -49,7 +49,7 @@ public abstract class Card extends Actor
     }    
     
     public void fadeIn() {
-        int newTrans = getImage().getTransparency() + 15;    
+        int newTrans = getImage().getTransparency() + 4;    
         if (newTrans >= 255) {
             isFadingIn = false;
         }
@@ -59,8 +59,8 @@ public abstract class Card extends Actor
     }
     
     public void fadeOut() {
-        int newTrans = getImage().getTransparency() - 15;
-        if (newTrans == 0) {
+        int newTrans = getImage().getTransparency() - 4;
+        if (newTrans <= 0) {
             getWorld().removeObject(this);
         }
         if (actCount % mod == 0 && newTrans >= 0) {

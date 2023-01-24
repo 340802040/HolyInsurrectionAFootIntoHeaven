@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=Ally
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ Ally\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment0.text=\r\n\ Ally\ classes.\ All\ data\ and\ logic\ pertaining\ to\ Ally's\ in\ the\ BattleWorld\ are\ here.\r\n\ A\ cloning\ method\ is\ included\ for\ saving\ the\ player's\ army\ after\ beating\ a\ chapter.\r\n\ \r\n\ @author\ Patrick\ Hu\r\n\ @version\ Jan\ 2023\r\n
 comment1.params=name
 comment1.target=Ally(java.lang.String)
 comment2.params=w
@@ -9,8 +9,10 @@ comment3.params=
 comment3.target=void\ act()
 comment4.params=path
 comment4.target=void\ startMoving(java.util.ArrayList)
+comment4.text=\r\n\ Method\ for\ starting\ the\ movement\ of\ an\ ally.\r\n
 comment5.params=
 comment5.target=void\ move()
+comment5.text=\r\n\ Moves\ towards\ the\ selector's\ location\ if\ path\ was\ possible.\r\n
 comment6.params=amount
 comment6.target=void\ increaseXp(int)
 comment7.params=

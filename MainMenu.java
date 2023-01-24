@@ -2,10 +2,10 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.*;
 
 /**
- * Write a description of class StartMenu here.
+ * The initial menu that at the beginning of the game.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Jonathan Zhao
+ * @version Jan 2023
  */
 public class MainMenu extends GameWorld
 {
@@ -23,7 +23,6 @@ public class MainMenu extends GameWorld
     // MISC
     private boolean added = false;
     private boolean onPlay, onAlbum, onControls, onLoad;
-    protected static String controlsText;
 
     public MainMenu() {    
         super(1200, 800, 1);
@@ -42,10 +41,11 @@ public class MainMenu extends GameWorld
     }
     
     static {
-        initControlsText();
+        resetSaves();
     }
 
     public void act() {
+        Soundtrack.stopAll();
         if (state == "normal") {
             checkHovering();
             checkClick();    
@@ -125,6 +125,19 @@ public class MainMenu extends GameWorld
         }
     }
 
+    /**
+     * Rewrites the most recent chapter achieved/visited. Done at the start of the program since
+     * the static array of allies is likely wiped from closing the previous session, thus loading should not
+     * send the player into a high chapter with an empty army. Instead their most recent chapter gets reset to 1.
+     */
+    public static void resetSaves() {
+        if (UserInfo.isStorageAvailable()) {
+            UserInfo myInfo = UserInfo.getMyInfo();
+            myInfo.setScore(1);
+            myInfo.store();  
+        }
+    }
+
     public void animateTitleScreen() {
         if (animationTimer.millisElapsed() < 120) {
             return;
@@ -132,22 +145,5 @@ public class MainMenu extends GameWorld
         animationTimer.mark();
         setBackground(frames.get(imageIndex));
         imageIndex = (imageIndex + 1) % frames.size();
-    }
-
-    public static void initControlsText() {
-        controlsText = ""; // reset static variable
-        String whitespace = "     ";
-        controlsText = "\n" + whitespace + "Controls" + whitespace + "\n\n";
-        controlsText += whitespace + "K - Select" + whitespace + "\n";
-        controlsText += whitespace + "J - Back" + whitespace + "\n";
-        controlsText += whitespace + "U - Stats" + whitespace + "\n";
-        controlsText += whitespace + "WASD - Movement" + whitespace + "\n";
-        controlsText += whitespace + "Z - Attack" + whitespace + "\n";
-        controlsText += whitespace + "C - Wait" + whitespace + "\n";
-        controlsText += whitespace + "1-6 - Select weapon" + whitespace + "\n \n";
-    }
-
-    public void stopped() {
-        Soundtrack.stopAll();
     }
 }

@@ -2,10 +2,12 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.*;
 
 /**
- * Write a description of class Selector here.
+ * The selector in BattleWorlds. Implements path finding to find shortest path from selected ally to the desired location of the selector.
+ * Is only present when the game world state is "gameplay". Deals with hovering over allies and enemies, displaying their stats and initiating 
+ * ally movement upon selection.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Patrick Hu
+ * @version Jan 2023
  */
 public class Selector extends Actor
 {
@@ -51,8 +53,11 @@ public class Selector extends Actor
         animateSelector();
     }
 
+    /**
+     * Checks for input (WASD) from the user to move the selector.
+     */
     public void checkMovement() {
-        if (moveTimer.millisElapsed() > 100) {
+        if (moveTimer.millisElapsed() > 65) {
             if (Greenfoot.isKeyDown("w") && canMoveTo(r - 1, c)) {
                 r--;
                 setLocation(GameWorld.getX(c), GameWorld.getY(r));
@@ -101,6 +106,9 @@ public class Selector extends Actor
         }
     }
 
+    /**
+     * Checks the possible cases when a user triggers the selector.
+     */
     public void checkSelect() {
         BattleWorld bw = (BattleWorld)getWorld();
         Ally a = (Ally)getOneObjectAtOffset(0, 0, Ally.class);
@@ -138,6 +146,9 @@ public class Selector extends Actor
         removeHighlight();
     }
 
+    /**
+     * Checks if selector is hovering over a character, if so displays that character's information.
+     */
     public void checkHovering() {
         BattleWorldCharacter bwc = (BattleWorldCharacter)getOneObjectAtOffset(0, 0, BattleWorldCharacter.class);
         if (bwc != null && hoverAdded && bwc != curHovering) {
@@ -194,6 +205,7 @@ public class Selector extends Actor
         while (!Q.isEmpty()) {
             Point cur = Q.poll();
             if (cur.r == r && cur.c == c && map[r][c] == 2) { // if node is enemy and selector is on one (user wishes to attack)
+                if (!checkProdeusVsTheBeing()) break;
                 // get path from ally to just 1 tile before the enemy
                 getPath(start, prev[cur.r][cur.c], prev);
                 if (path.size() <= selectedAlly.moveLimit) {
@@ -278,5 +290,14 @@ public class Selector extends Actor
 
     public boolean canMoveTo(int r, int c) {
         return r >= 0 && r < GameWorld.GRID_HEIGHT && c >= 0 && c < GameWorld.GRID_WIDTH;
+    }
+    
+    public boolean checkProdeusVsTheBeing() {
+        Enemy e = (Enemy)getOneObjectAtOffset(0, 0, Enemy.class);
+        GameWorld gw = (GameWorld)getWorld();
+        if (gw instanceof Chapter6 && e.name.equals("The Being") && !selectedAlly.name.equals("Prodeus")) {
+            return false;
+        }
+        return true;
     }
 }

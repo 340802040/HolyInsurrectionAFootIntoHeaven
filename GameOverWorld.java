@@ -1,10 +1,10 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class GameOverWorld here.
+ * The world when you lose the game (Prodeus or the Hero dies).
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Patrick Hu
+ * @version Jan 2023
  */
 public class GameOverWorld extends GameWorld
 {
@@ -15,12 +15,15 @@ public class GameOverWorld extends GameWorld
     public GameOverWorld() {
         super(1200, 800, 1);
         setBackground(bg);       
+        bg.setTransparency(0);
         mainMenuButton.getImage().setTransparency(190);
         addObject(mainMenuButton, 400, 300);
     }
     
     public void act() {
         actCount++;
+        Soundtrack.anUnwantedVisitor.playLoop();
+        Soundtrack.stopAllExceptAnUnwantedVisitor();
         fadeIn();
         checkHovering();
         checkClick();

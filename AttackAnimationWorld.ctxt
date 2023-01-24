@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=AttackAnimationWorld
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ AttackAnimationWorld\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment0.text=\r\n\ World\ where\ attack\ animations\ occur\ when\ two\ characters\ fight.\r\n\ \r\n\ @author\ Patrick\ Hu\r\n\ @version\ Jan\ 2023\r\n
 comment1.params=returnWorld\ a\ e\ attacker_s
 comment1.target=AttackAnimationWorld(BattleWorld,\ Ally,\ Enemy,\ java.lang.String)
 comment2.params=
@@ -11,7 +11,7 @@ comment4.params=
 comment4.target=void\ setupActors()
 comment5.params=
 comment5.target=void\ setupHpBgs()
-comment6.params=dealer\ dealtTo\ willCrit
+comment6.params=dealer\ dealtTo\ dealerWillCrit
 comment6.target=int\ calculateDamageDealtBy(BattleWorldCharacter,\ BattleWorldCharacter,\ boolean)
 comment7.params=a
 comment7.target=AttackAnimationActor\ getOtherActor(AttackAnimationActor)

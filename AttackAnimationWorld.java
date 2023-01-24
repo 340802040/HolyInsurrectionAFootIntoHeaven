@@ -3,10 +3,10 @@ import java.util.*;
 import java.io.File;
 
 /**
- * Write a description of class AttackAnimationWorld here.
+ * World where attack animations occur when two characters fight.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Patrick Hu
+ * @version Jan 2023
  */
 public class AttackAnimationWorld extends GameWorld
 {
@@ -31,15 +31,19 @@ public class AttackAnimationWorld extends GameWorld
         this.a = a;
         this.e = e;
         this.attacker_s = attacker_s;
+        state = "normal";
         setBackground(Images.imgs2.get("attack animation world bg"));
         setup();
     }
 
     public void act() {
-        actCount++;
-        if (actCount == 1) {
+        if (e.name == "The Being") {
+            Soundtrack.anInsurmountableHindrance.playLoop();
+            Soundtrack.stopAllExceptAnInsurmountableHindrance();
+        }
+        else {
             Soundtrack.inAnUnfalteringField.playLoop();
-            Soundtrack.pauseAllExceptInAnUnfalteringField();
+            Soundtrack.stopAllExceptInAnUnfalteringField();    
         }
         checkFightFinished();
     }
@@ -67,11 +71,14 @@ public class AttackAnimationWorld extends GameWorld
         addObject(enemyHpBg, getWidth() / 4 * 3, getHeight() - enemyHpBg.getImage().getHeight() / 2);
     }
 
-    public static int calculateDamageDealtBy(BattleWorldCharacter dealer, BattleWorldCharacter dealtTo, boolean willCrit) {
+    public static int calculateDamageDealtBy(BattleWorldCharacter dealer, BattleWorldCharacter dealtTo, boolean dealerWillCrit) {
         int weaponDmg = 0;
-        int damageDealt = (int)((dealer.atk + weaponDmg) * (willCrit ? 3 : 1) * dealer.terrainMultiplier * GameWorld.getWeaponMultiplier(dealer.weapon, dealtTo.weapon) - dealtTo.def);
-        if (damageDealt <= 0) {
-            damageDealt = 1; // minimum
+        if (dealer.weapon == "BladeOfEithalon") {
+            weaponDmg = 20;
+        }
+        int damageDealt = (int)((dealer.atk + weaponDmg) * (dealerWillCrit ? 3.5 : 1) * dealer.terrainMultiplier * GameWorld.getWeaponMultiplier(dealer.weapon, dealtTo.weapon) - dealtTo.def * 0.4);
+        if (damageDealt <= 1) {
+            damageDealt = 2; // minimum
         }
 
         return damageDealt;
@@ -85,7 +92,7 @@ public class AttackAnimationWorld extends GameWorld
     }
 
     public void checkFightFinished() {
-        if (attackerActor.finished && defenderActor.finished) {
+        if (attackerActor.finished && defenderActor.finished && state == "normal") {
             if (!timerMarked) {
                 timer.mark();
                 timerMarked = true;
@@ -95,7 +102,7 @@ public class AttackAnimationWorld extends GameWorld
                 StatWindow sw = new StatWindow(msg, font, Color.YELLOW, Color.BLACK, 240, null);
                 addObject(sw, getWidth() / 2, getHeight() / 2);
             }
-            else if (timer.millisElapsed() > 2000) {
+            else if (timer.millisElapsed() > 1700) {
                 returnToWorld();    
             }
         }
@@ -107,7 +114,7 @@ public class AttackAnimationWorld extends GameWorld
             Greenfoot.setWorld(new GameOverWorld());
         }
         else Greenfoot.setWorld(returnWorld);
-                
+
         attackerActor.resetTransparency();
         defenderActor.resetTransparency();
         Soundtrack.inAnUnfalteringField.stop();

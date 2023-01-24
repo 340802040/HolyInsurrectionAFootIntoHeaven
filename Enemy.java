@@ -2,35 +2,42 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.*;
 
 /**
- * Write a description of class Enemy here.
+ * The enemy classes. Enemies can either be bosses or regular cronies that will target an ally in range if they find one
+ * that provides them with a weapon advantage. Otherwise they will choose a random ally and move towards them after finding
+ * the shortest path.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Patrick Hu 
+ * @version Jan 2023
  */
 public abstract class Enemy extends BattleWorldCharacter
 {
     // DATA
-    private Ally target; // AI will determine which target enemy chooses to attack
-    private boolean willAttack; // if enemy can reach its target within its move limit, willAttack will be true
+    protected Ally target; // AI will determine which target enemy chooses to attack
+    protected boolean willAttack; // if enemy can reach its target within its move limit, willAttack will be true
     protected int hitXp, killXp; // xp rewarded for hitting 
     protected boolean isBoss;
     // MOVEMENT
-    private int endIndex; // for movement
+    protected int endIndex; // for movement
     // DEATH ANIMATION
-    private boolean isFlashing, flip; // if enemy about to attack, flash as an indicator
-    private int j = 0;
+    protected boolean isFlashing, flip; // if enemy about to attack, flash as an indicator
+    protected int j = 0;
+    protected Image bossIcon = new Image("BossIcon.png");
 
     public Enemy(boolean isBoss) {
         name = getName();
         this.isBoss = isBoss;
-        hitXp = isBoss ? GameWorld.getRandomNumberInRange(25, 30) : GameWorld.getRandomNumberInRange(15, 20);
-        killXp = isBoss ? GameWorld.getRandomNumberInRange(45, 60) : GameWorld.getRandomNumberInRange(25, 40);
+        hitXp = isBoss ? GameWorld.getRandomNumberInRange(35, 50) : GameWorld.getRandomNumberInRange(25, 30);
+        killXp = isBoss ? GameWorld.getRandomNumberInRange(55, 80) : GameWorld.getRandomNumberInRange(35, 55);
         crit = isBoss ? 5 : 0;
+        moveLimit = isBoss ? 0 : moveLimit;
     }
 
     public void addedToWorld(World w) {
         super.addedToWorld(w);
         map[r][c] = 2;
+        if (isBoss) {
+            w.addObject(bossIcon, GameWorld.getX(c), GameWorld.getX(r));
+        }
     }
 
     public void act() {
@@ -57,14 +64,17 @@ public abstract class Enemy extends BattleWorldCharacter
             }
             ret += ss + " ";
         }
+        if (isBoss) ret += " Boss";
         return ret;
     }
 
+    /**
+     * Initiates the movement of the enemy.
+     */
     public void startMoving() {
         getTargetAlly();
-        checkPath();
-        if (pathPossible) {
-            isMoving = true; 
+        if (target != null) { // only bosses can not have a target
+            isMoving = true;
             i = path.size() - 1;
             if (path.size() <= moveLimit) {
                 endIndex = -1;
@@ -75,18 +85,19 @@ public abstract class Enemy extends BattleWorldCharacter
                 willAttack = false;
             }
             prevLocation = new Point(r, c);
-            map[r][c] = 0; // clear spot
+            if (!isBoss) map[r][c] = 0; // clear spot
         }
         else {
             moved = true;
+            getImage().setTransparency(150);
         }
     }
-    
+
+    /**
+     * Detects surrounding allies and calculates weapon advantages to determine a good target.
+     */
     public void getTargetAlly() { // for now just gets a random ally
         ArrayList<Ally> allies = ((BattleWorld)getWorld()).allies;
-        
-        target = null;
-        
         // try to find a weapon counter
         String counter = "";
         for (Ally a : allies) {
@@ -112,19 +123,41 @@ public abstract class Enemy extends BattleWorldCharacter
             }
 
             if (weapons.contains(counter)) {
-                target = a;
-                weapon = counter;
-                return;
+                if (checkPath(a)) {
+                    target = a;
+                    weapon = counter;
+                    return;
+                }
             }
         }
 
-        if (target == null) { // if no counter
-            target = allies.get(Greenfoot.getRandomNumber(allies.size()));
-            weapon = weapons.get(0);
+        // if no counter, attack random ally in range
+        for (Ally a : allies) {
+            if (checkPath(a)) {
+                target = a;
+                weapon = weapons.get(Greenfoot.getRandomNumber(weapons.size()));
+                return;
+            }
         }
+        // if no allies in rage, choose a random target to move towards, unless is boss
+        if (isBoss) target = null;
+        else {
+            for (Ally a : allies) {
+                checkPath(a); // calls getPath() that creates path to `a`
+                if (path.size() > 0) {
+                    target = a;
+                    weapon = weapons.get(Greenfoot.getRandomNumber(weapons.size()));    
+                }
+            }
+        }
+        // if no enemy is blocked behind by other enemies, target will remain null
     }
 
-    public void checkPath() {
+    /**
+     * Checks if there is a path to target ally given enemy's move limit restriction.
+     * Does NOT just return whether a path of any length is possible.
+     */
+    public boolean checkPath(Ally target) {
         // find shortest path from Ally to selector
         map = ((GameWorld)getWorld()).getMap();
         int[] dx = {-1, 0, 1, 0};
@@ -136,7 +169,7 @@ public abstract class Enemy extends BattleWorldCharacter
 
         Q.add(start);
         vis[start.r][start.c] = true;
-        pathPossible = false;
+        boolean pathPossible = false;
 
         while (!Q.isEmpty()) {
             Point cur = Q.poll();
@@ -159,6 +192,8 @@ public abstract class Enemy extends BattleWorldCharacter
                 }
             }
         }
+
+        return pathPossible && path.size() <= moveLimit;
     }
 
     /**
@@ -179,12 +214,10 @@ public abstract class Enemy extends BattleWorldCharacter
             moved = true;
             map[r][c] = 2;
             getImage().setTransparency(150);
-
             if (willAttack) {
                 ((BattleWorld)getWorld()).state = "other";
                 isFlashing = true;
             }
-
             return;
         }
 

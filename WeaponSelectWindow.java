@@ -2,10 +2,10 @@ import greenfoot.*;  // (World, Actor, GreenfootWeaponIcon, Greenfoot and MouseI
 import java.util.*;
 
 /**
- * Write a description of class WeaponSelectWindow here.
+ * The Weapon selection window.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Patrick Hu
+ * @version Jan 2023
  */
 public class WeaponSelectWindow extends AttackInterface
 {
@@ -15,6 +15,7 @@ public class WeaponSelectWindow extends AttackInterface
     private Image fire;
     private Image water;
     private Image ice;
+    private Image bladeOfEithalon;
     private ArrayList<Image> icons = new ArrayList<Image>();
 
     public WeaponSelectWindow(Ally a, Enemy e) {
@@ -38,6 +39,7 @@ public class WeaponSelectWindow extends AttackInterface
         fire = new Image("Panels/WeaponIcons/Fire.png");
         water = new Image("Panels/WeaponIcons/Water.png");
         ice = new Image("Panels/WeaponIcons/Ice.png"); 
+        bladeOfEithalon = new Image("Panels/WeaponIcons/BladeOfEithalon.png"); 
 
         // determine ally's weapons and bg size
         if (a instanceof AllyHero) {
@@ -65,6 +67,9 @@ public class WeaponSelectWindow extends AttackInterface
                     break;
                 case "Ice":
                     icons.add(ice);
+                    break;
+                case "BladeOfEithalon":
+                    icons.add(bladeOfEithalon);
                     break;
             }
         }
@@ -103,30 +108,32 @@ public class WeaponSelectWindow extends AttackInterface
             a.weapon = "Ice";
             changeWorlds();
         }
+        else if (Greenfoot.isKeyDown("7") && icons.contains(bladeOfEithalon)) {
+            a.weapon = "BladeOfEithalon";
+            changeWorlds();
+        }
     }
 
     public void changeWorlds() {
+        removeWeaponIcons();
         BattleWorld bw = (BattleWorld)getWorld();
-        Greenfoot.setWorld(new AttackAnimationWorld(bw, a, e, "ally"));
         bw.state = "attack animation";
         removeSelf();
+        Greenfoot.setWorld(new AttackAnimationWorld(bw, a, e, "ally"));
     }
 
     public void checkGoBack() {
         if (Greenfoot.isKeyDown("j")) {
             BattleWorld bw = ((BattleWorld)getWorld());
             bw.addObject(new AttackDecisionWindow(a, e), bw.getWidth() - 250, bw.getHeight() / 2);
+            removeWeaponIcons();
             removeSelf();
         }
     }
 
-    /**
-     * Removes itself and all WeaponIcon's from the world.
-     */
-    public void removeSelf() {
+    public void removeWeaponIcons() {
         for (Image icon : icons) {
             icon.removeSelf();
         }
-        super.removeSelf();
     }
 }

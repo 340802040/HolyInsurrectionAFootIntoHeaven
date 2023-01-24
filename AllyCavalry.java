@@ -1,18 +1,18 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Cavalry here.
+ * Ally cavalry class.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Patrick Hu
+ * @version Jan 2023
  */
 public class AllyCavalry extends Ally
 {
     public AllyCavalry(String name) {
         super(name);
-        moveLimit = 7;
-        //weapons.add("Sword");
+        moveLimit = 8;
         weapons.add("Spear");
+        className = "AllyCavalry";
     }
     
     public void act() {

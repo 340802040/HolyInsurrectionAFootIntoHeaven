@@ -1,10 +1,10 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class MusicMenu here.
+ * A world with music selection. All of our original music is here.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Jonathan Zhao
+ * @version Jan 24
  */
 public class MusicMenu extends GameWorld
 {
@@ -20,6 +20,7 @@ public class MusicMenu extends GameWorld
     Image fairiesButton = new Image("images/Buttons/MusicSelection/LullabyOfFairies.png");
     Image dahliaButton = new Image("images/Buttons/MusicSelection/MeadowOfDahlias.png");
     Image strollingButton = new Image("images/Buttons/MusicSelection/TheStrolling.png");
+    Image visitorButton = new Image("images/Buttons/MusicSelection/AnUnwantedVisitor.png");
     
     private boolean added = false;
     private boolean clicked = false;
@@ -32,6 +33,7 @@ public class MusicMenu extends GameWorld
     private boolean onFairies = false;
     private boolean onDahlia = false;
     private boolean onStrolling = false;
+    private boolean onVisitor = false;
     
     public MusicMenu() {    
         super(1200, 800, 1);
@@ -44,6 +46,7 @@ public class MusicMenu extends GameWorld
         addObject(fairiesButton, 600, 500);
         addObject(dahliaButton, 600, 575);
         addObject(strollingButton, 600, 650);
+        addObject(visitorButton, 600, 725);
         addObject(pauseButton, 1145, 50);
         addObject(backButton, 1080, 50);
         setBackground("images/Buttons/MusicSelection/MusicBackground.png");
@@ -63,6 +66,7 @@ public class MusicMenu extends GameWorld
         Soundtrack.lullabyOfFairies.pause();
         Soundtrack.meadowOfDahlias.pause();
         Soundtrack.theStrolling.pause();
+        Soundtrack.anUnwantedVisitor.pause();
     }
 
     public void checkHovering() {
@@ -106,7 +110,12 @@ public class MusicMenu extends GameWorld
             added = true;
             onStrolling = true;
         }
-        if(Greenfoot.mouseMoved(null) && added && !Greenfoot.mouseMoved(selector) && !Greenfoot.mouseMoved(insurmountableButton) && !Greenfoot.mouseMoved(fogButton) && !Greenfoot.mouseMoved(landsButton) && !Greenfoot.mouseMoved(revolutionaryButton) && !Greenfoot.mouseMoved(fairiesButton) && !Greenfoot.mouseMoved(fieldButton) && !Greenfoot.mouseMoved(dahliaButton) && !Greenfoot.mouseMoved(strollingButton)) {
+        else if(Greenfoot.mouseMoved(visitorButton) && !added) {
+            addObject(selector, 600, 725);
+            added = true;
+            onVisitor = true;
+        }
+        if(Greenfoot.mouseMoved(null) && added && !Greenfoot.mouseMoved(selector) && !Greenfoot.mouseMoved(insurmountableButton) && !Greenfoot.mouseMoved(fogButton) && !Greenfoot.mouseMoved(landsButton) && !Greenfoot.mouseMoved(revolutionaryButton) && !Greenfoot.mouseMoved(fairiesButton) && !Greenfoot.mouseMoved(fieldButton) && !Greenfoot.mouseMoved(dahliaButton) && !Greenfoot.mouseMoved(strollingButton) && !Greenfoot.mouseMoved(visitorButton)) {
             removeObject(selector);
             added = false;
 
@@ -118,6 +127,7 @@ public class MusicMenu extends GameWorld
             onFairies = false;
             onDahlia = false;
             onStrolling = false;
+            onVisitor = false;
         }
     }
     
@@ -201,6 +211,16 @@ public class MusicMenu extends GameWorld
             isSoundIcon = true;
             Soundtrack.stopAll();
             Soundtrack.theStrolling.playLoop();
+        }
+        if(Greenfoot.mouseClicked(selector) && onVisitor) {
+            if(isSoundIcon) {
+                removeObject(soundIcon);
+                isSoundIcon = false;
+            }
+            addObject(soundIcon, 100, 725);
+            isSoundIcon = true;
+            Soundtrack.stopAll();
+            Soundtrack.anUnwantedVisitor.playLoop();
         }
         if(Greenfoot.mouseClicked(pauseButton)) {
             Soundtrack.stopAll();

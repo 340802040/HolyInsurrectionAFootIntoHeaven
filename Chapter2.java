@@ -1,10 +1,10 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Level1 here.
+ * Chapter 2 world. Forume.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Patrick Hu
+ * @version Jan 2023
  */
 public class Chapter2 extends BattleWorld
 {   
@@ -17,6 +17,8 @@ public class Chapter2 extends BattleWorld
     private EnemyArcher e5 = new EnemyArcher(false);
     private EnemyArcher e6 = new EnemyArcher(false);
     private EnemyArcher boss = new EnemyArcher(true);
+    // DIALOGUES
+    Dialogue preCh2 = new Dialogue("images/Text/PreCh2/", "gameplay"); 
 
     public Chapter2() {
         // level1 should take in array of allies but for now hardcode them
@@ -54,9 +56,13 @@ public class Chapter2 extends BattleWorld
         initializeGrid();
         spawn();
         setupStats();
+        replenish();
     }
     
     public void act() {
+        if (turns == 0 && state == "gameplay" && !preCh2.added) {
+            addObject(preCh2, 0, 0);
+        }
         super.act();
     }
     
@@ -84,7 +90,6 @@ public class Chapter2 extends BattleWorld
         addObject(e6, GameWorld.getX(19), GameWorld.getY(8));
         // boss
         addObject(boss, GameWorld.getX(21), GameWorld.getY(8));
-        addObject(bossIcon, GameWorld.getX(21), GameWorld.getY(8));
     }
     
     public void setupStats() {
@@ -94,32 +99,30 @@ public class Chapter2 extends BattleWorld
         hero.weapons.add("Water");
         hero.weapons.add("Ice");
         ipos.maxHealth = 28;
-        ipos.atk = 6;
+        ipos.atk = 8;
         ipos.def = 5;
         effitos.maxHealth = 20;
-        effitos.atk = 5;
-        effitos.def = 3;
-        replenish();
+        effitos.atk = 10;
+        effitos.def = 1;
         // ENEMIES
-        boss.name = "Archer Boss";
         for (Enemy e : enemies) {
             if (e instanceof EnemyFootSoldier) {
-                e.maxHealth = e.health = 20;
+                e.maxHealth = e.health = 17;
                 e.atk = 4;
                 e.ev = 1;
             }
             if (e instanceof EnemyArcher) {
-                e.maxHealth = e.health = 15;
-                e.atk = 6;
-                e.ev = 2;
+                e.maxHealth = e.health = 14;
+                e.atk = 4;
+                e.ev = 1;
                 e.spd = 1;
             }
             if (e.isBoss) {
-                e.maxHealth = e.health = 35;
+                e.maxHealth = e.health = 20;
                 e.atk = 5;
-                e.def = 4;
-                e.ev = 4;
-                e.spd = 2;
+                e.def = 2;
+                e.ev = 2;
+                e.spd = 1;
             }
         }
     }

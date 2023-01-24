@@ -1,10 +1,10 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class AllyAttacker here.
+ * Subclass of Attacker's that are allies.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Patrick Hu
+ * @version Jan 2023
  */
 public class AllyAttacker extends Attacker
 {    
@@ -27,7 +27,11 @@ public class AllyAttacker extends Attacker
         if (me.health <= 0) {
             die();
             AttackAnimationWorld w = (AttackAnimationWorld)getWorld();
-            if (me.name.equals("Hero") || me.name.equals("Prodeus")) {
+            if (me.name.equals("Prodeus") && w.returnWorld instanceof Chapter6) {
+                w.returnWorld.save();
+                Greenfoot.setWorld(new Intermission("Intermissions/Intermission6.png", "images/text/Intermission6/", 6));
+            }
+            else if (me.name.equals("Hero") || me.name.equals("Prodeus")) {
                 w.returnState = "lost";
             }
             else w.returnWorld.removeAlly(me);

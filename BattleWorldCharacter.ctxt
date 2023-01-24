@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=BattleWorldCharacter
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ GameWorldCharacter\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment0.text=\r\n\ BattleWorldCharacter's\ are\ either\ allies\ or\ enemies\ on\ the\ grid\ based\ BattleWorld.\r\n\ \r\n\ @author\ Patrick\ Hu\r\n\ @version\ Jan\ 2023\r\n
 comment1.params=
 comment1.target=void\ move()
 comment10.params=
@@ -17,6 +17,7 @@ comment4.params=
 comment4.target=void\ act()
 comment5.params=
 comment5.target=void\ initFrames()
+comment5.text=\r\n\ Initializes\ sprites\ for\ the\ grid\ world.\r\n
 comment6.params=
 comment6.target=void\ updateCoords()
 comment6.text=\r\n\ Constantly\ updates\ the\ coordinates\ (r\ and\ c)\ of\ game\ world\ character\ as\ it\ moves.\r\n

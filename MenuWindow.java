@@ -3,8 +3,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 /**
  * Menu window is only available in BattleWorld.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Patrick Hu
+ * @version Jan 2023
  */
 public class MenuWindow extends Image
 {
@@ -35,11 +35,8 @@ public class MenuWindow extends Image
     }
 
     public void act() {
-        actCount++;
-        if (actCount == 1) {
-            Soundtrack.lullabyOfFairies.playLoop();
-            Soundtrack.pauseAllExceptLullabyOfFairies();
-        }
+        Soundtrack.lullabyOfFairies.playLoop();
+        Soundtrack.pauseAllExceptLullabyOfFairies();
         BattleWorld bw = (BattleWorld)getWorld();
         if (bw.state == "menu") {
             checkHovering();
@@ -96,7 +93,22 @@ public class MenuWindow extends Image
                         break;
                     case 2:
                         Greenfoot.setWorld(new Chapter2());
-                        break;    
+                        break;
+                    case 3:
+                        Greenfoot.setWorld(new Chapter3());
+                        break;
+                    case 4:
+                        Greenfoot.setWorld(new Chapter4());
+                        break;
+                    case 5:
+                        Greenfoot.setWorld(new Chapter5());
+                        break;
+                    case 6:
+                        Greenfoot.setWorld(new Chapter6());
+                        break;
+                    case 7:
+                        Greenfoot.setWorld(new Chapter7());
+                        break;  
                 }
             }
         }

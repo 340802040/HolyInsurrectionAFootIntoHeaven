@@ -1,10 +1,11 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Attacker here.
+ * Subclass of AttackAnimationActor that is an attacker. All attackers have specific logic to their animation since
+ * they are the first ones to strike, therefore the animate() method belongs to this class.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Patrick Hu
+ * @version Jan 2023
  */
 public abstract class Attacker extends AttackAnimationActor
 {    

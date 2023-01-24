@@ -1,10 +1,10 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class EnemyDefender here.
+ * Subclass of Defender that is an enemy.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Patrick Hu
+ * @version Jan 2023
  */
 public class EnemyDefender extends Defender
 {    
@@ -28,9 +28,16 @@ public class EnemyDefender extends Defender
             die();
             AttackAnimationWorld w = (AttackAnimationWorld)getWorld();
             w.returnWorld.removeEnemy(me);
+            if (me.name.equals("The Being")) {
+                Dialogue d = new Dialogue("images/Text/TheBeingDying/", "normal");
+                w.addObject(d, 0, 0);
+            }
+            if (me.name.equals("Prodeus")) {
+                Dialogue d = new Dialogue("images/Text/ProdeusDying/", "normal");
+                w.addObject(d, 0, 0);
+            }
             if (w.returnWorld.enemies.size() == 0) {
                 w.returnState = "clear";
-                w.returnWorld.saveHighestChapter();
             }
             other.increaseXp(me.killXp);
         }

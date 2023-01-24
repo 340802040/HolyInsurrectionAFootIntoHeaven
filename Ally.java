@@ -1,11 +1,13 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.*;
+import java.io.*;
 
 /**
- * Write a description of class Ally here.
+ * Ally classes. All data and logic pertaining to Ally's in the BattleWorld are here.
+ * A cloning method is included for saving the player's army after beating a chapter.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Patrick Hu
+ * @version Jan 2023
  */
 public class Ally extends BattleWorldCharacter
 {
@@ -15,7 +17,7 @@ public class Ally extends BattleWorldCharacter
 
     public Ally(String name) {
         this.name = name;
-        crit = 10;
+        crit = 15;
     }
 
     public void addedToWorld(World w) {
@@ -34,6 +36,9 @@ public class Ally extends BattleWorldCharacter
         }
     }
 
+    /**
+     * Method for starting the movement of an ally.
+     */
     public void startMoving(ArrayList<Point> path) {
         i = path.size() - 1;
         isMoving = true;
@@ -42,6 +47,9 @@ public class Ally extends BattleWorldCharacter
         backLocation = new Point(r, c); // save location to go back to
     }
 
+    /**
+     * Moves towards the selector's location if path was possible.
+     */
     public void move() {
         if (i == -1) { // reached destination
             BattleWorld bw = ((BattleWorld)getWorld());
@@ -87,7 +95,7 @@ public class Ally extends BattleWorldCharacter
     public String getLevelUpMsg() {
         String msg;
         String whitespace = "     ";
-        
+
         if (xp >= xpNeeded) {
             int numLevelUps = 0;
             while (true) {
@@ -136,44 +144,50 @@ public class Ally extends BattleWorldCharacter
             msg = "\n" + whitespace + "XP +" + xpGained + whitespace + "\n \n";   
             xpGained = 0;
         }
-        
+
         return msg;
     }
-    
+
     public Ally getClone() {
-        Ally a = new Ally("");
-        String className = getClass().getSimpleName();
+        Ally a = null;
         switch (className) {
             case "AllyArcher":
-               a = new AllyArcher(name);
-               break;
+                a = new AllyArcher(name);
+                break;
             case "AllyCavalry":
-               a = new AllyCavalry(name);
-               break;
+                a = new AllyCavalry(name);
+                break;
             case "AllyCrusader":
-               a = new AllyCrusader(name);
-               break;
+                a = new AllyCrusader(name);
+                break;
             case "AllyFootSoldier":
-               a = new AllyFootSoldier(name);
-               break;
+                a = new AllyFootSoldier(name);
+                break;
             case "AllyHero":
-               a = new AllyHero(name);
-               break;
+                a = new AllyHero(name);
+                break;
+            case "AllyWizard":
+                a = new AllyWizard(name);
+                break;
         }
-        
+
         a.level = level;
+        a.xp = xp;
+        a.xpNeeded = xpNeeded;
         a.maxHealth = maxHealth;
         a.health = health;
         a.atk = atk;
         a.def = def;
         a.ev = ev;
         a.spd = spd;
+        a.terrainMultiplier = terrainMultiplier;
+        a.moveLimit = moveLimit;
         a.weapons = weapons;
         a.weapon = weapon;
-        
+
         return a;
     }
-    
+
     public static ArrayList<Ally> getClones(ArrayList<Ally> allies) {
         ArrayList<Ally> clones = new ArrayList<Ally>();
         for (Ally a : allies) {

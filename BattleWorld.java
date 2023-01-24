@@ -1,11 +1,12 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.*;
+import java.io.*;
 
 /**
- * Write a description of class BattleWorld here.
+ * Battle worlds are the main grid worlds where characters move around in between phases. Varies based on which chapter it is.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Patrick Hu, Jonathan Zhao
+ * @version Jan 2023
  */
 public abstract class BattleWorld extends GameWorld
 {
@@ -17,43 +18,59 @@ public abstract class BattleWorld extends GameWorld
     protected Selector selector = new Selector();
     protected boolean selectorAdded; // whether selector is in the world
     protected int turns = 0;
+    protected int chapterNumber;
     // ENEMY PHASE
     private int i; // index used for going through each enemy during enemy phase
     protected Enemy curMovingEnemy;
     // MISC
-    protected Image bossIcon = new Image("BossIcon.png");
     protected MenuWindow menuWindow;
+    protected ChapterCard chapterCard;
 
     public BattleWorld(int width, int height, int pixelSize) {    
         super(width, height, pixelSize);
+        setPaintOrder(ChapterCard.class, DialogueText.class, HoverWindow.class, Selector.class);
         state = "gameplay";
         addObject(selector, GameWorld.getX(0), GameWorld.getY(0)); 
-        setPaintOrder(HoverWindow.class, Selector.class);
+        // CHAPTER CARD
+        String s = this.getClass().getSimpleName();
+        chapterNumber = Integer.parseInt(s.substring(s.length() - 1));
+        if (chapterNumber != 1) {
+            chapterCard = new ChapterCard("ChapterImages/Ch" + chapterNumber + ".png");
+            addObject(chapterCard, getWidth() / 2, getHeight() / 2);
+            state = "card";
+        }
     }
 
     public void act() {
         checkStateAndPhase();
         checkMenu();
+        checkClear();
     }
 
     public void checkStateAndPhase() {        
         // PHASE SWITCH
         if (phase == "player" && state == "gameplay" && getNumAlliesMoved() == allies.size()) {
             addObject(new BattlePhaseCard("EnemyPhase.png"), getWidth() / 2, getHeight() / 2);
-            state = "card animation";
+            state = "card";
         }
         else if (phase == "enemy" && state == "gameplay" && getNumEnemiesMoved() == enemies.size()) {
             addObject(new BattlePhaseCard("PlayerPhase.png"), getWidth() / 2, getHeight() / 2);
-            state = "card animation";
+            state = "card";
         }
         // PHASES
         if (phase == "player" && (state == "gameplay" || state == "dialogue")) {
-            Soundtrack.farInForeignLands.playLoop();
-            Soundtrack.pauseAllExceptFarInForeignLands();
+            if (this instanceof Chapter7) {
+                Soundtrack.intrusiveRevolutionary.playLoop();
+                Soundtrack.stopAllExceptIntrusiveRevolutionary();
+            }
+            else {
+                Soundtrack.farInForeignLands.playLoop();
+                Soundtrack.stopAllExceptFarInForeignLands();    
+            }
         }
         if (phase == "enemy" && (state == "gameplay" || state == "dialogue")) {
             Soundtrack.aSweepingFog.playLoop();
-            Soundtrack.pauseAllExceptASweepingFog();
+            Soundtrack.stopAllExceptASweepingFog();
         }
         // ENEMY MOVEMENT
         if (phase == "enemy" && state == "gameplay") {
@@ -69,12 +86,19 @@ public abstract class BattleWorld extends GameWorld
             selectorAdded = false;
         }
     }
-    
+
     public void checkMenu() {
         if (Greenfoot.isKeyDown("escape") && state == "gameplay") {
             menuWindow = new MenuWindow(state);
             addObject(menuWindow, getWidth() / 2, getHeight() / 2);
             state = "menu";
+        }
+    }
+
+    public void checkClear() {
+        if (state == "clear") {
+            save();
+            Greenfoot.setWorld(new Intermission("images/Intermissions/Intermission" + chapterNumber + ".png", "images/Text/Intermission" + chapterNumber + "/", chapterNumber));
         }
     }
 
@@ -112,23 +136,13 @@ public abstract class BattleWorld extends GameWorld
     public void moveEnemies() {
         if (i == 0 && curMovingEnemy == null) {
             curMovingEnemy = enemies.get(i);
-            if (curMovingEnemy.isBoss) {
-                curMovingEnemy.moved = true;
-            }
-            else {
-                curMovingEnemy.startMoving();   
-            }
+            curMovingEnemy.startMoving();   
             i++;
         }
         if (curMovingEnemy.moved && i < enemies.size()) {
             Greenfoot.delay(30);
             curMovingEnemy = enemies.get(i);
-            if (curMovingEnemy.isBoss) {
-                curMovingEnemy.moved = true;
-            }
-            else {
-                curMovingEnemy.startMoving();    
-            }
+            curMovingEnemy.startMoving();    
             i++;
         }
     }
@@ -144,7 +158,7 @@ public abstract class BattleWorld extends GameWorld
         map[e.r][e.c] = 0;
         i -= (i == 0) ? 0 : 1;
         if (e.isBoss) {
-            removeObject(bossIcon);
+            removeObject(e.bossIcon);
         }
         removeObject(e);
     }
@@ -170,12 +184,39 @@ public abstract class BattleWorld extends GameWorld
     }
 
     /**
-     * Adds selector back into world at the position it left off at.
+     * Saves the most recent chapter achieved with the army present at that time.
+     * Only called once a chapter has been complete.
      */
-    public void addSelector() {
-        addObject(selector, GameWorld.getX(selector.c), GameWorld.getY(selector.r));
+    public void save() {
+        int newScore = 1;
+        if (this instanceof Chapter1) {
+            newScore = 2;
+        }
+        if (this instanceof Chapter2) {
+            newScore = 3;
+        }
+        if (this instanceof Chapter3) {
+            newScore = 4;
+        }
+        if (this instanceof Chapter4) {
+            newScore = 5;
+        }
+        if (this instanceof Chapter5) {
+            newScore = 6;
+        }
+        if (this instanceof Chapter6) {
+            newScore = 7;
+        }
+
+        ALLIES = Ally.getClones(allies); //  save clones to master array of allies
+
+        if (UserInfo.isStorageAvailable()) {
+            UserInfo myInfo = UserInfo.getMyInfo();
+            myInfo.setScore(newScore);
+            myInfo.store();  // write back to server
+        }
     }
-    
+
     /**
      * Replenishes all allies' hp at start of a chapter.
      */
@@ -184,45 +225,60 @@ public abstract class BattleWorld extends GameWorld
             a.health = a.maxHealth; // replenish
         }
     }
-    
+
+    public boolean tileAvailable(int r, int c) {
+        int[][] map = getMap();
+        return map[r][c] == 0 || map[r][c] == 7 || map[r][c] == 8 || map[r][c] == 15 || map[r][c] == 22 || map[r][c] == 25;
+    }
+
     public Ally findAlly(String name) {
         for (Ally a : allies) {
             if (a.name.equals(name)) {
                 return a;
             }
         }
-        return new Ally("");
+        return null;
     }
 
     /**
-     * Saves the highest chapter achieved with the army present at that time.
-     * Only called once a chapter has been complete.
+     * For testing chapters, buff() adds allies to ALLIES.
      */
-    public void saveHighestChapter() {
-        int newScore = 1;
-        if (this instanceof Chapter1) {
-            newScore = 2;
+    public static void buff() {
+        for (int i = 0; i < 1; i++) {
+            AllyArcher a = new AllyArcher("");
+            a.atk = 100;
+            a.moveLimit = 100;
+            a.maxHealth = a.health = 66;
+            ALLIES.add(a);
         }
-        if (this instanceof Chapter2) {
-            newScore = 3;
-        }
-        
-        ALLIES = Ally.getClones(allies); //  save clones to master array of allies
+        AllyCrusader prodeus = new AllyCrusader("Prodeus");
+        prodeus.atk = 100;
+        prodeus.moveLimit = 100;
+        prodeus.maxHealth = prodeus.health = 66;
+        prodeus.weapon = "Spear";
+        ALLIES.add(prodeus);
 
-        if (UserInfo.isStorageAvailable()) {
-            UserInfo myInfo = UserInfo.getMyInfo();
-            if (newScore > myInfo.getScore()) {
-                myInfo.setScore(newScore);
-                myInfo.store();  // write back to server
-            }
-        }
+        AllyHero hero = new AllyHero("Hero");
+        hero.atk = 100;
+        hero.moveLimit = 100;
+        hero.maxHealth = prodeus.health = 66;
+        hero.weapons.add("Fire");
+        hero.weapons.add("Water");
+        hero.weapons.add("Ice");
+        hero.weapons.add("Sword");
+        hero.weapons.add("Spear");
+        hero.weapons.add("Bow");
+        hero.weapon = "Sword";
+        ALLIES.add(hero);
     }
-    
-    public boolean tileAvailable(int r, int c) {
-        int[][] map = getMap();
-        return map[r][c] == 0 || map[r][c] == 7 || map[r][c] == 8 || map[r][c] == 15 || map[r][c] == 22 || map[r][c] == 25;
+
+    /**
+     * Adds selector back into world at the position it left off at.
+     */
+    public void addSelector() {
+        addObject(selector, GameWorld.getX(selector.c), GameWorld.getY(selector.r));
     }
-    
+
     public void initializeGrid() {
         for (int r = 0; r < GRID_HEIGHT; r++) {
             for (int c = 0; c < GRID_WIDTH; c++) {
@@ -301,10 +357,13 @@ public abstract class BattleWorld extends GameWorld
                 else if (map[r][c] == 26) {
                     addObject(new Cell("EnvironmentTiles/castlewallvertical.png"), GameWorld.getX(c), GameWorld.getY(r));
                 }
+                else if (map[r][c] == 27) {
+                    addObject(new Cell("EnvironmentTiles/roadtree.png"), GameWorld.getX(c), GameWorld.getY(r));
+                }
             }
         } 
     }
-    
+
     /**
      * BattleWorld Map Legend:
      * 
@@ -353,5 +412,6 @@ public abstract class BattleWorld extends GameWorld
      * 24 - slumberwallvertical
      * 25 - castletile
      * 26 - castlewallvertical
+     * 27 - roadtree
      */
 }

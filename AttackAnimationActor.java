@@ -3,10 +3,13 @@ import java.util.*;
 import java.io.File;
 
 /**
- * Image of a battle world character used in AttackAnimationWorld
+ * Image of a battle world character used in AttackAnimationWorld.
+ * All frames pertaining to the character such as their regular attack animation, crit animation, and respective damage indicator animations
+ * are initialized here using java.io.File which find the number of images inside a folder. The character's health bar and label displaying the
+ * current health are created here, along with the flashing and fading animations upon death of a character if their hp drops below 0.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Patrick Hu
+ * @version Jan 2023
  */
 public abstract class AttackAnimationActor extends Actor
 {
@@ -76,7 +79,7 @@ public abstract class AttackAnimationActor extends Actor
 
     public boolean determineWillHit() {
         double bowMultiplier = me.weapon == "Bow" ? 0.9 : 1.0;
-        int hitChance = (int)(me.spd * 2 * weaponMultiplier * me.terrainMultiplier * bowMultiplier - (other.ev * 3 * GameWorld.getWeaponMultiplier(other.weapon, me.weapon) * other.terrainMultiplier) + (me.spd - other.spd > 5 ? 70 : 90));
+        int hitChance = 25 + (int)(me.spd * 2 * weaponMultiplier * me.terrainMultiplier * bowMultiplier - (other.ev * 3 * GameWorld.getWeaponMultiplier(other.weapon, me.weapon) * other.terrainMultiplier) + (me.spd - other.spd > 5 ? 70 : 90));
         return Greenfoot.getRandomNumber(100) < hitChance;
     }
 
@@ -84,6 +87,9 @@ public abstract class AttackAnimationActor extends Actor
         return Greenfoot.getRandomNumber(100) <  me.crit;
     }
 
+    /**
+     * Initializes frames for the attack animation.
+     */
     public void initFrames() {
         // ATTACK AND CRIT FRAMES
         if (willCrit) {
@@ -101,6 +107,9 @@ public abstract class AttackAnimationActor extends Actor
         framesInitialized = true;
     }
 
+    /**
+     * Gets the frame where the weapon makes contact with the other character.
+     */
     public int getFrameOfImpact() {
         if (className.equals("AllyHero")) {
             switch (me.weapon) {
@@ -195,7 +204,9 @@ public abstract class AttackAnimationActor extends Actor
     }
 
     public void cutHp() {
-        int damageDealt = AttackAnimationWorld.calculateDamageDealtBy(other, me, willCrit);
+        AttackAnimationWorld w = (AttackAnimationWorld)getWorld();
+        boolean dealerWillCrit = w.getOtherActor(this).willCrit;
+        int damageDealt = AttackAnimationWorld.calculateDamageDealtBy(other, me, dealerWillCrit);
         int j = (me.health - damageDealt) < 0 ? 0 : me.health - damageDealt;
         for (int i = me.health - 1; i >= j; i--) {
             ticks.get(i).setImage("GreyHealthTick.png");

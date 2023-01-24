@@ -1,16 +1,16 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Intermission here.
+ * Worlds with story and dialogue that occur after beating a chapter.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Patrick Hu
+ * @version Jan 2023
  */
 public class Intermission extends GameWorld
 {
     int chapterNumber;
     Dialogue d;
-    
+
     public Intermission(String path, String dialoguePath, int chapterNumber) {
         super(1200, 800, 1);
         setBackground(path);
@@ -18,14 +18,11 @@ public class Intermission extends GameWorld
         d = new Dialogue(dialoguePath, "");
         addObject(d, 0, 0);
     }
-    
+
     public void act() {
-        actCount++;
-        if (actCount == 1) {
-            Soundtrack.theStrolling.playLoop();
-            Soundtrack.pauseAllExceptTheStrolling();
-        }
-        if (d.i == d.dialogues.size()) {
+        Soundtrack.theStrolling.playLoop();
+        Soundtrack.pauseAllExceptTheStrolling();
+        if (d.finished) {
             switch (chapterNumber) {
                 case 1:
                     Greenfoot.setWorld(new Chapter2());
@@ -49,6 +46,10 @@ public class Intermission extends GameWorld
                     break;
                 case 6:
                     Greenfoot.setWorld(new Chapter7());
+                    Soundtrack.theStrolling.stop();
+                    break;
+                case 7:
+                    Greenfoot.setWorld(new VictoryWorld());
                     Soundtrack.theStrolling.stop();
                     break;
             }

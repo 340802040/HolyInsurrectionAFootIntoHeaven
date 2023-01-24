@@ -1,19 +1,20 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class EnemyCrusader here.
+ * The enemy crusader class.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Patrick Hu
+ * @version Jan 2023
  */
 public class EnemyCrusader extends EnemyCavalry
 {
     public EnemyCrusader(boolean isBoss) {
         super(isBoss);
-        moveLimit = 7;
+        moveLimit = isBoss ? 0 : 8;
+        className = "EnemyCrusader";
     }
     
     public void act() {
-        
+        super.act();
     }
 }

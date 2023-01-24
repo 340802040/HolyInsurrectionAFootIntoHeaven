@@ -1,19 +1,20 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class EnemyWizard here.
+ * The enemy wizard class.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Patrick Hu
+ * @version Jan 2023
  */
 public class EnemyWizard extends Enemy
 {
     public EnemyWizard(boolean isBoss) {
         super(isBoss);
-        moveLimit = 4;
+        moveLimit = isBoss ? 0 : 6;
         weapons.add("Fire");
         weapons.add("Water");
         weapons.add("Ice");
+        className = "EnemyWizard";
     }
     
     public void act() {

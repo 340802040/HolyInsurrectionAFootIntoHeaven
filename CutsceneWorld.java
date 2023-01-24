@@ -5,7 +5,7 @@ import java.util.*;
  * The beginning cutscene.
  * 
  * @author Jonathan Zhao
- * @version (a version number or a date)
+ * @version Jan 2023
  */
 public class CutsceneWorld extends GameWorld
 {

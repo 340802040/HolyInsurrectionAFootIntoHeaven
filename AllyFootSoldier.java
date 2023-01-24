@@ -1,19 +1,18 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class FootSoldier here.
+ * Ally foot soldier class.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Patrick Hu
+ * @version Jan 2023
  */
 public class AllyFootSoldier extends Ally
 {
     public AllyFootSoldier(String name) {
         super(name);
-        maxHealth = health = 30;
-        crit = 20;
-        moveLimit = 15;
+        moveLimit = 7;
         weapons.add("Spear");
+        className = "AllyFootSoldier";
     }   
     
     public void act() {

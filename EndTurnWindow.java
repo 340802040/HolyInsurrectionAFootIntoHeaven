@@ -1,10 +1,10 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class EndTurnWindow here.
+ * The panel if you click on the ground that asks if you want to end turn.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Patrick Hu 
+ * @version Jan 2023
  */
 public class EndTurnWindow extends NonAttackInterface
 {

@@ -1,17 +1,18 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class EnemyArcher here.
+ * Enemy archer class.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Patrick Hu
+ * @version Jan 2023
  */
 public class EnemyArcher extends Enemy
 {
     public EnemyArcher(boolean isBoss) {
         super(isBoss);
-        moveLimit = 4;    
+        moveLimit = isBoss ? 0 : 5;    
         weapons.add("Bow");
+        className = "EnemyArcher";
     }
     
     public void act() {

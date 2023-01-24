@@ -1,10 +1,10 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Chapter5 here.
+ * Chapter 5 world. The Place of Slumber.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Jonathan Zhao, Patrick Hu 
+ * @version Jan 2023
  */
 public class Chapter5 extends BattleWorld
 {
@@ -12,15 +12,11 @@ public class Chapter5 extends BattleWorld
     private EnemyArcher e2 = new EnemyArcher(false);
     private EnemyArcher e3 = new EnemyArcher(false);
     private EnemyArcher e4 = new EnemyArcher(false);
-    private EnemyArcher e5 = new EnemyArcher(false);
-    private EnemyArcher e6 = new EnemyArcher(false);
-    private EnemyCavalry e7 = new EnemyCavalry(false);
-    private EnemyCavalry e8 = new EnemyCavalry(false);
-    private EnemyFootSoldier e9 = new EnemyFootSoldier(false);
-    private EnemyFootSoldier e10 = new EnemyFootSoldier(false);
-    private EnemyWizard e11 = new EnemyWizard(false);
-    private EnemyWizard e12 = new EnemyWizard(false);
-    private EnemyArcher boss = new EnemyArcher(true);
+    private EnemyCavalry e5 = new EnemyCavalry(false);
+    private EnemyCavalry e6 = new EnemyCavalry(false);
+    private EnemyFootSoldier e7 = new EnemyFootSoldier(false);
+    private EnemyArcher boss1 = new EnemyArcher(true);
+    private EnemyWizard boss2 = new EnemyWizard(true);
     
     public Chapter5() {
         super(1200, 800, 1);
@@ -32,12 +28,8 @@ public class Chapter5 extends BattleWorld
         enemies.add(e5);
         enemies.add(e6);
         enemies.add(e7);
-        enemies.add(e8);
-        enemies.add(e9);
-        enemies.add(e10);
-        enemies.add(e11);
-        enemies.add(e12);
-        enemies.add(boss);
+        enemies.add(boss1);
+        enemies.add(boss2);
         
         map = new int[][] {
             {22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 24, 22, 22, 22, 22, 22, 22, 22, 22},
@@ -61,6 +53,7 @@ public class Chapter5 extends BattleWorld
         initializeGrid();
         spawn();
         setupStats();
+        replenish();
     }
 
     public void act() {
@@ -72,8 +65,7 @@ public class Chapter5 extends BattleWorld
         for (Ally a : allies) {
             while (true) {
                 int r = getRandomNumberInRange(3, 5);
-                int c = getRandomNumberInRange(1
-                , 7);
+                int c = getRandomNumberInRange(1, 7);
                 if (tileAvailable(r, c)) {
                     addObject(a, GameWorld.getX(c), GameWorld.getY(r));
                     map[r][c] = 1;
@@ -94,46 +86,49 @@ public class Chapter5 extends BattleWorld
                 }
             }
         }
-        
-        // boss
+        // 2 bosses
         int r = 13;
         int c = GameWorld.GRID_WIDTH - 3;
-        addObject(boss, GameWorld.getX(c), GameWorld.getY(r));
-        addObject(bossIcon, GameWorld.getX(c), GameWorld.getY(r));
+        addObject(boss1, GameWorld.getX(c), GameWorld.getY(r));
+        r = 2;
+        addObject(boss2, GameWorld.getX(c), GameWorld.getY(r));
     }
     
     public void setupStats() {
         for (Enemy e : enemies) {
             if (e instanceof EnemyFootSoldier) {
-                e.maxHealth = e.health = 30;
-                e.atk = 9;
-                e.def = 5;
+                e.maxHealth = e.health = 22;
+                e.atk = 7;
+                e.def = 3;
                 e.ev = 2;
             }
             if (e instanceof EnemyArcher) {
-                e.maxHealth = e.health = 22;
-                e.atk = 9;
+                e.maxHealth = e.health = 17;
+                e.atk = 7;
+                e.def = 2;
                 e.ev = 4;
                 e.spd = 4;
             }
             if (e instanceof EnemyWizard) {
-                e.maxHealth = e.health = 20;
-                e.atk = 9;
+                e.maxHealth = e.health = 15;
+                e.atk = 7;
+                e.def = 2;
                 e.ev = 4;
                 e.spd = 3;
             }
             if (e instanceof EnemyCavalry) {
-                e.maxHealth = e.health = 28;
-                e.atk = 8;
+                e.maxHealth = e.health = 22;
+                e.atk = 7;
+                e.def = 3;
                 e.ev = 3;
                 e.spd = 5;
             }
             if (e.isBoss) {
-                e.maxHealth = e.health = 50;
-                e.atk = 11;
-                e.def = 7;
+                e.maxHealth = e.health = 40;
+                e.atk = 7;
+                e.def = 2;
                 e.ev = 4;
-                e.spd = 6;
+                e.spd = 5;
             }
         }
     }

@@ -1,17 +1,18 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class EnemyFootSoldier here.
+ * Enemy Foot Soldier class.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Patrick Hu 
+ * @version Jan 2023
  */
 public class EnemyFootSoldier extends Enemy
 {
     public EnemyFootSoldier(boolean isBoss) {
         super(isBoss);
-        moveLimit = 4;
+        moveLimit = isBoss ? 0 : 5;
         weapons.add("Spear");
+        className = "EnemyFootSoldier";
     }
     
     public void act() {

@@ -4,8 +4,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * A window with informational text such as stats that provide the user with an
  * option to go back.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Patrick Hu
+ * @version Jan 2023
  */
 public class StatWindow extends Image
 {    
@@ -51,13 +51,6 @@ public class StatWindow extends Image
     public void checkGoBack() {
         if (Greenfoot.isKeyDown("j")) {
             GameWorld gw = ((GameWorld)getWorld());
-            // if stat window was from menu button
-            if (gw instanceof BattleWorld) {
-                BattleWorld bw = (BattleWorld)gw;
-                if (bw.menuWindow != null && bw.menuWindow.getWorld() != null) { // if menu window is present
-                    bw.menuWindow.timer.mark();
-                }
-            }
             gw.state = returnState;
             removeSelf();
         }

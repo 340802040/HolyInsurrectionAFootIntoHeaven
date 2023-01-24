@@ -36,36 +36,14 @@ public abstract class BattleWorld extends GameWorld
         checkMenu();
     }
 
-    public void initializeGrid() {
-        for (int r = 0; r < GRID_HEIGHT; r++) {
-            for (int c = 0; c < GRID_WIDTH; c++) {
-                if (map[r][c] == 0) {
-                    addObject(new Cell("EnvironmentTiles/cloud.png"), GameWorld.getX(c), GameWorld.getY(r));
-                }
-                else if (map[r][c] == 3) {
-                    addObject(new Cell("EnvironmentTiles/mountain.png"), GameWorld.getX(c), GameWorld.getY(r));
-                }
-                else if (map[r][c] == 4) {
-                    addObject(new Cell("EnvironmentTiles/forest.png"), GameWorld.getX(c), GameWorld.getY(r));
-                }
-                else if (map[r][c] == 5) {
-                    addObject(new Cell("EnvironmentTiles/house.png"), GameWorld.getX(c), GameWorld.getY(r));
-                }
-                else if (map[r][c] == 6) {
-                    addObject(new Cell("EnvironmentTiles/market.png"), GameWorld.getX(c), GameWorld.getY(r));
-                }
-            }
-        } 
-    }
-
     public void checkStateAndPhase() {        
         // PHASES
         if (phase == "player" && state == "gameplay" && getNumAlliesMoved() == allies.size()) {
-            addObject(new BattlePhaseCard("Placeholder/enemy-phase.jpg"), getWidth() / 2, getHeight() / 2);
+            addObject(new BattlePhaseCard("EnemyPhase.png"), getWidth() / 2, getHeight() / 2);
             state = "card animation";
         }
         else if (phase == "enemy" && state == "gameplay" && getNumEnemiesMoved() == enemies.size()) {
-            addObject(new BattlePhaseCard("Placeholder/player-phase.jpg"), getWidth() / 2, getHeight() / 2);
+            addObject(new BattlePhaseCard("PlayerPhase.png"), getWidth() / 2, getHeight() / 2);
             state = "card animation";
         }
         // ENEMY MOVEMENT
@@ -231,6 +209,78 @@ public abstract class BattleWorld extends GameWorld
         }
     }
     
+    public boolean tileAvailable(int r, int c) {
+        int[][] map = getMap();
+        return map[r][c] == 0 || map[r][c] == 7 || map[r][c] == 8 || map[r][c] == 15;
+    }
+    
+    public void initializeGrid() {
+        for (int r = 0; r < GRID_HEIGHT; r++) {
+            for (int c = 0; c < GRID_WIDTH; c++) {
+                if (map[r][c] == 0) {
+                    addObject(new Cell("EnvironmentTiles/cloud.png"), GameWorld.getX(c), GameWorld.getY(r));
+                }
+                else if (map[r][c] == 3) {
+                    addObject(new Cell("EnvironmentTiles/mountain.png"), GameWorld.getX(c), GameWorld.getY(r));
+                }
+                else if (map[r][c] == 4) {
+                    addObject(new Cell("EnvironmentTiles/forest.png"), GameWorld.getX(c), GameWorld.getY(r));
+                }
+                else if (map[r][c] == 5) {
+                    addObject(new Cell("EnvironmentTiles/house.png"), GameWorld.getX(c), GameWorld.getY(r));
+                }
+                else if (map[r][c] == 6) {
+                    addObject(new Cell("EnvironmentTiles/market.png"), GameWorld.getX(c), GameWorld.getY(r));
+                }
+                else if (map[r][c] == 7) {
+                    addObject(new Cell("EnvironmentTiles/hill.png"), GameWorld.getX(c), GameWorld.getY(r));
+                }
+                else if (map[r][c] == 8) {
+                    addObject(new Cell("EnvironmentTiles/grass.png"), GameWorld.getX(c), GameWorld.getY(r));
+                }
+                else if (map[r][c] == 9) {
+                    addObject(new Cell("EnvironmentTiles/forestforest.png"), GameWorld.getX(c), GameWorld.getY(r));
+                }
+                else if (map[r][c] == 10) {
+                    addObject(new Cell("EnvironmentTiles/foresthill.png"), GameWorld.getX(c), GameWorld.getY(r));
+                }
+                else if (map[r][c] == 11) {
+                    addObject(new Cell("EnvironmentTiles/forestmountain.png"), GameWorld.getX(c), GameWorld.getY(r));
+                }
+                else if (map[r][c] == 12) {
+                    addObject(new Cell("EnvironmentTiles/foresttree.png"), GameWorld.getX(c), GameWorld.getY(r));
+                }
+                else if (map[r][c] == 13) {
+                    addObject(new Cell("EnvironmentTiles/foresttree1.png"), GameWorld.getX(c), GameWorld.getY(r));
+                }
+                else if (map[r][c] == 14) {
+                    addObject(new Cell("EnvironmentTiles/river.png"), GameWorld.getX(c), GameWorld.getY(r));
+                }
+                else if (map[r][c] == 15) {
+                    addObject(new Cell("EnvironmentTiles/road.png"), GameWorld.getX(c), GameWorld.getY(r));
+                }
+                else if (map[r][c] == 16) {
+                    addObject(new Cell("EnvironmentTiles/blacksmith.png"), GameWorld.getX(c), GameWorld.getY(r));
+                }
+                else if (map[r][c] == 17) {
+                    addObject(new Cell("EnvironmentTiles/wizardhut.png"), GameWorld.getX(c), GameWorld.getY(r));
+                }
+                else if (map[r][c] == 18) {
+                    addObject(new Cell("EnvironmentTiles/cloudtree.png"), GameWorld.getX(c), GameWorld.getY(r));
+                }
+                else if (map[r][c] == 19) {
+                    addObject(new Cell("EnvironmentTiles/colosseum.png"), GameWorld.getX(c), GameWorld.getY(r));
+                }
+                else if (map[r][c] == 20) {
+                    addObject(new Cell("EnvironmentTiles/deserthouse.png"), GameWorld.getX(c), GameWorld.getY(r));
+                }
+                else if (map[r][c] == 21) {
+                    addObject(new Cell("EnvironmentTiles/house1.png"), GameWorld.getX(c), GameWorld.getY(r));
+                }
+            }
+        } 
+    }
+    
     /**
      * BattleWorld Map Legend:
      * 
@@ -252,13 +302,27 @@ public abstract class BattleWorld extends GameWorld
      * {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
      * {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
      * 
-     * 0 - Available space
+     * 0 - cloud
      * 1 - Ally
      * 2 - Enemy
-     * 3 - Mountain
-     * 4 - Forest
-     * 5 - House
-     * 6 - Market
-     * 7 - Hill
+     * 3 - mountain
+     * 4 - forest
+     * 5 - house
+     * 6 - market
+     * 7 - hill
+     * 8 - grass
+     * 9 - forestforest
+     * 10 - foresthill
+     * 11 - forestmountain
+     * 12 - foresttree
+     * 13 - foresttree1
+     * 14 - river
+     * 15 - road
+     * 16 - blacksmith
+     * 17 - wizardhut
+     * 18 - cloudtree
+     * 19 - colosseum
+     * 20 - deserthouse
+     * 21 - house1
      */
 }

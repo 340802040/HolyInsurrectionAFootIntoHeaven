@@ -8,10 +8,10 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class MenuWindow extends Image
 {
-    protected Image instructionsButton = new Image("Placeholder/ally.png");
-    protected Image controlsButton = new Image("Buttons/ControlsButton.png");
-    protected Image loadButton = new Image("Buttons/LoadButton.png");
-    protected Image quitButton = new Image("Buttons/QuitButton.png");
+    protected Image instructionsButton = new Image("Buttons/menuInstructionsButton.png");
+    protected Image controlsButton = new Image("Buttons/menuControlsButton.png");
+    protected Image loadButton = new Image("Buttons/menuLoadButton.png");
+    protected Image quitButton = new Image("Buttons/menuQuitButton.png");
     protected Image selector = new Image("TitleSelector.png");
     protected boolean added = false;
     protected boolean onInstructions, onQuit, onControls, onLoad;
@@ -26,7 +26,7 @@ public class MenuWindow extends Image
 
     public void addedToWorld(World w) {
         int startY = 320;
-        int spacing = 70;
+        int spacing = 75;
         getWorld().addObject(instructionsButton, getWorld().getWidth() / 2, startY);
         getWorld().addObject(controlsButton, getWorld().getWidth() / 2, startY + spacing);
         getWorld().addObject(loadButton, getWorld().getWidth() / 2, startY + spacing * 2);
@@ -76,14 +76,10 @@ public class MenuWindow extends Image
 
     public void checkClick() {
         if (Greenfoot.mouseClicked(selector) && onInstructions) {
-            // add instructions image
+            Greenfoot.setWorld(new Visual("Details.png", (GameWorld)getWorld()));
         }
         if (Greenfoot.mouseClicked(selector) && onControls) {
-            Font font = new Font("Candara", true, false, 45);
-            BattleWorld bw = (BattleWorld)getWorld();
-            StatWindow sw = new StatWindow(MainMenu.controlsText, font, Color.YELLOW, Color.BLACK, 255, bw.state);
-            bw.state = "interface";
-            bw.addObject(sw, bw.getWidth() / 2, bw.getHeight() / 2);
+            Greenfoot.setWorld(new Visual("Controls.png", (GameWorld)getWorld()));
         }
         if (Greenfoot.mouseClicked(selector) && onLoad) {
             if (UserInfo.isStorageAvailable()) {

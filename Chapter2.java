@@ -33,22 +33,22 @@ public class Chapter2 extends BattleWorld
         enemies.add(boss);
 
         map = new int[][] {
-            {0, 3, 3, 0, 3, 3, 3, 3, 0, 3, 3, 3, 3, 0, 3, 0, 0, 0, 3, 3, 3, 0, 3, 0},
-            {3, 0, 3, 0, 0, 3, 3, 3, 0, 0, 3, 3, 3, 3, 0, 3, 0, 0, 3, 0, 3, 0, 3, 3},
+            {3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3},
+            {3, 18, 3, 4, 18, 3, 3, 3, 4, 4, 3, 3, 3, 3, 4, 3, 18, 3, 3, 18, 3, 4, 3, 3},
+            {4, 4, 0, 3, 0, 18, 3, 3, 0, 18, 4, 18, 3, 4, 0, 0, 3, 18, 3, 3, 0, 4, 4, 3},
+            {4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 18, 0, 18, 0, 0, 0, 0, 0, 0, 4, 0, 0, 18, 0},
+            {5, 5, 0, 0, 5, 5, 0, 0, 0, 6, 0, 6, 0, 6, 0, 6, 0, 6, 0, 6, 0, 6, 0, 6},
+            {0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 6, 0, 6, 0, 6, 0, 6, 0, 6, 0, 6, 0, 6, 0},
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {5, 5, 0, 0, 5, 5, 0, 0, 0, 6, 0, 6, 0, 6, 0, 6, 0, 6, 0, 6, 0, 0, 0, 0},
-            {0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 5, 0, 5, 5, 5, 0, 0, 0, 6, 0, 6, 0, 6, 0, 6, 0, 6, 0, 6, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 3, 3, 3, 0, 0, 3, 0, 3, 0, 3, 0, 3, 3, 0, 3, 3, 0, 3, 0, 3, 0, 0},
-            {3, 3, 3, 0, 3, 3, 0, 3, 3, 0, 3, 3, 3, 3, 3, 3, 0, 0, 0, 3, 3, 3, 3, 3}
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 6, 0, 6, 0, 6, 0, 6, 0, 6, 0, 6, 0},
+            {0, 5, 0, 5, 5, 5, 0, 0, 0, 6, 0, 6, 0, 6, 0, 6, 0, 6, 0, 6, 0, 6, 0, 6},
+            {4, 0, 0, 0, 0, 18, 0, 4, 0, 0, 18, 0, 18, 0, 4, 0, 0, 0, 4, 0, 0, 0, 18, 4},
+            {4, 4, 0, 4, 0, 4, 3, 0, 18, 0, 4, 18, 18, 3, 4, 0, 3, 3, 4, 18, 3, 0, 4, 4, 3},
+            {3, 18, 3, 4, 18, 3, 3, 18, 4, 4, 3, 3, 3, 3, 4, 3, 18, 3, 3, 18, 3, 4, 3, 3},
+            {3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3}
         };
         
         initializeGrid();
@@ -66,7 +66,7 @@ public class Chapter2 extends BattleWorld
             while (true) {
                 int r = getRandomNumberInRange(4, 11);
                 int c = getRandomNumberInRange(1, 4);
-                if (map[r][c] == 0) {                      
+                if (tileAvailable(r, c)) {                      
                     addObject(a, GameWorld.getX(c), GameWorld.getY(r));         
                     map[r][c] = 1; // just to be safe in case the loop runs faster than Ally's addedToWorld()
                     break;
@@ -74,12 +74,15 @@ public class Chapter2 extends BattleWorld
             }
         }
         // ENEMIES
-        addObject(e1, GameWorld.getX(16), GameWorld.getY(6));
-        addObject(e2, GameWorld.getX(16), GameWorld.getY(7));
-        addObject(e3, GameWorld.getX(16), GameWorld.getY(9));
-        addObject(e4, GameWorld.getX(16), GameWorld.getY(10));
+        // foot soldiers
+        addObject(e1, GameWorld.getX(15), GameWorld.getY(6));
+        addObject(e2, GameWorld.getX(15), GameWorld.getY(7));
+        addObject(e4, GameWorld.getX(15), GameWorld.getY(8));
+        addObject(e3, GameWorld.getX(15), GameWorld.getY(9));
+        // archers
         addObject(e5, GameWorld.getX(19), GameWorld.getY(7));
-        addObject(e6, GameWorld.getX(19), GameWorld.getY(9));
+        addObject(e6, GameWorld.getX(19), GameWorld.getY(8));
+        // boss
         addObject(boss, GameWorld.getX(21), GameWorld.getY(8));
         addObject(bossIcon, GameWorld.getX(21), GameWorld.getY(8));
     }
@@ -94,28 +97,29 @@ public class Chapter2 extends BattleWorld
         ipos.atk = 6;
         ipos.def = 5;
         effitos.maxHealth = 20;
-        effitos.atk = 8;
+        effitos.atk = 5;
         effitos.def = 3;
         replenish();
         // ENEMIES
         boss.name = "Archer Boss";
         for (Enemy e : enemies) {
             if (e instanceof EnemyFootSoldier) {
-                e.maxHealth = e.health = 15;
+                e.maxHealth = e.health = 20;
                 e.atk = 4;
                 e.ev = 1;
             }
             if (e instanceof EnemyArcher) {
-                e.maxHealth = e.health = 10;
+                e.maxHealth = e.health = 15;
                 e.atk = 6;
                 e.ev = 2;
                 e.spd = 1;
             }
             if (e.isBoss) {
-                e.maxHealth = e.health = 25;
+                e.maxHealth = e.health = 35;
                 e.atk = 5;
-                e.def = 2;
-                e.ev = 2;
+                e.def = 4;
+                e.ev = 4;
+                e.spd = 2;
             }
         }
     }

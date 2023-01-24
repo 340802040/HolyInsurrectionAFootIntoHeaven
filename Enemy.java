@@ -151,7 +151,8 @@ public abstract class Enemy extends BattleWorldCharacter
 
             for (int j = 0; j < 4; j++) { // checks 4 cardinal offsets
                 int nr = cur.r + dy[j], nc = cur.c + dx[j];
-                if (nc >= 0 && nc < GameWorld.GRID_WIDTH && nr >= 0 && nr < GameWorld.GRID_HEIGHT && !vis[nr][nc] && (map[nr][nc] == 0 || map[nr][nc] == 1)) {
+                BattleWorld bw = (BattleWorld)getWorld();
+                if (nc >= 0 && nc < GameWorld.GRID_WIDTH && nr >= 0 && nr < GameWorld.GRID_HEIGHT && !vis[nr][nc] && (bw.tileAvailable(nr, nc) || map[nr][nc] == 1)) {
                     Q.add(new Point(nr, nc));
                     vis[nr][nc] = true;
                     prev[nr][nc] = cur;

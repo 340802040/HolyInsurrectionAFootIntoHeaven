@@ -36,6 +36,11 @@ public class AttackAnimationWorld extends GameWorld
     }
 
     public void act() {
+        actCount++;
+        if (actCount == 1) {
+            Soundtrack.inAnUnfalteringField.playLoop();
+            Soundtrack.pauseAllExceptInAnUnfalteringField();
+        }
         checkFightFinished();
     }
 
@@ -102,8 +107,9 @@ public class AttackAnimationWorld extends GameWorld
             Greenfoot.setWorld(new GameOverWorld());
         }
         else Greenfoot.setWorld(returnWorld);
-        
+                
         attackerActor.resetTransparency();
         defenderActor.resetTransparency();
+        Soundtrack.inAnUnfalteringField.stop();
     }
 }

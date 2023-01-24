@@ -20,25 +20,36 @@ public class Intermission extends GameWorld
     }
     
     public void act() {
+        actCount++;
+        if (actCount == 1) {
+            Soundtrack.theStrolling.playLoop();
+            Soundtrack.pauseAllExceptTheStrolling();
+        }
         if (d.i == d.dialogues.size()) {
             switch (chapterNumber) {
                 case 1:
                     Greenfoot.setWorld(new Chapter2());
+                    Soundtrack.theStrolling.stop();
                     break;
                 case 2:
                     Greenfoot.setWorld(new Chapter3());
+                    Soundtrack.theStrolling.stop();
                     break;
                 case 3:
                     Greenfoot.setWorld(new Chapter4());
+                    Soundtrack.theStrolling.stop();
                     break;
                 case 4:
                     Greenfoot.setWorld(new Chapter5());
+                    Soundtrack.theStrolling.stop();
                     break;
                 case 5:
                     Greenfoot.setWorld(new Chapter6());
+                    Soundtrack.theStrolling.stop();
                     break;
                 case 6:
                     Greenfoot.setWorld(new Chapter7());
+                    Soundtrack.theStrolling.stop();
                     break;
             }
         }

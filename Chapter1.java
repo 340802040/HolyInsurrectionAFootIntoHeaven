@@ -64,6 +64,7 @@ public class Chapter1 extends BattleWorld
             hero.weapons.add("Sword");
             hero.weapons.add("Spear");
             hero.weapons.add("Bow");
+            hero.weapon = "Sword";
             addObject(prodeus, GameWorld.getX(2), GameWorld.getY(8));
             allies.add(prodeus);
             mark = true;
@@ -114,7 +115,7 @@ public class Chapter1 extends BattleWorld
             addObject(oldManD2, 0, 0);
         }
         if (oldManD2.i == oldManD2.dialogues.size()) {
-            Greenfoot.setWorld(new Intermission("images/Intermissions/Intermission1.png", "images/Text/OldManInstructions/", 1));
+            Greenfoot.setWorld(new Intermission("images/Intermissions/Intermission1.png", "images/Text/Intermission1/", 1));
         }
     }
 }

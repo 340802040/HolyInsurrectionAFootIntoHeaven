@@ -15,6 +15,7 @@ public class Dialogue extends Actor
     protected int i = 0;
     protected SimpleTimer timer = new SimpleTimer();
     protected String returnState;
+    protected int actCount = 0;
 
     public Dialogue(String path, String returnState) {
         this.returnState = returnState;
@@ -32,6 +33,7 @@ public class Dialogue extends Actor
     }
 
     public void act() {
+        actCount++;
         displayDialogues();    
     }
 

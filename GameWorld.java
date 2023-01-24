@@ -100,6 +100,6 @@ public class GameWorld extends World
     }
 
     public void stopped() {
-        //Soundtrack.stopAll();
+        Soundtrack.pauseAll();
     }
 }

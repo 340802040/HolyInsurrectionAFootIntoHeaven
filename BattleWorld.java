@@ -47,11 +47,13 @@ public abstract class BattleWorld extends GameWorld
             state = "card animation";
         }
         // PHASES
-        if (phase == "player") {
+        if (phase == "player" && (state == "gameplay" || state == "dialogue")) {
             Soundtrack.farInForeignLands.playLoop();
+            Soundtrack.pauseAllExceptFarInForeignLands();
         }
-        if (phase == "enemy") {
+        if (phase == "enemy" && (state == "gameplay" || state == "dialogue")) {
             Soundtrack.aSweepingFog.playLoop();
+            Soundtrack.pauseAllExceptASweepingFog();
         }
         // ENEMY MOVEMENT
         if (phase == "enemy" && state == "gameplay") {
@@ -73,8 +75,6 @@ public abstract class BattleWorld extends GameWorld
             menuWindow = new MenuWindow(state);
             addObject(menuWindow, getWidth() / 2, getHeight() / 2);
             state = "menu";
-            Soundtrack.lullabyOfFairies.playLoop();
-            Soundtrack.stopAllExceptLullabyOfFairies();
         }
     }
 
@@ -220,7 +220,7 @@ public abstract class BattleWorld extends GameWorld
     
     public boolean tileAvailable(int r, int c) {
         int[][] map = getMap();
-        return map[r][c] == 0 || map[r][c] == 7 || map[r][c] == 8 || map[r][c] == 15;
+        return map[r][c] == 0 || map[r][c] == 7 || map[r][c] == 8 || map[r][c] == 15 || map[r][c] == 22 || map[r][c] == 25;
     }
     
     public void initializeGrid() {
@@ -303,10 +303,6 @@ public abstract class BattleWorld extends GameWorld
                 }
             }
         } 
-    }
-    
-    public void stopped() {
-        
     }
     
     /**

@@ -12,11 +12,12 @@ public class MenuWindow extends Image
     protected Image controlsButton = new Image("Buttons/menuControlsButton.png");
     protected Image loadButton = new Image("Buttons/menuLoadButton.png");
     protected Image quitButton = new Image("Buttons/menuQuitButton.png");
-    protected Image selector = new Image("TitleSelector.png");
+    protected Image selector = new Image("menuSelector.png");
     protected boolean added = false;
     protected boolean onInstructions, onQuit, onControls, onLoad;
     protected String returnState;
     protected SimpleTimer timer = new SimpleTimer();
+    private int actCount = 0;
 
     public MenuWindow(String returnState) {
         super("MenuBG.png");
@@ -34,6 +35,11 @@ public class MenuWindow extends Image
     }
 
     public void act() {
+        actCount++;
+        if (actCount == 1) {
+            Soundtrack.lullabyOfFairies.playLoop();
+            Soundtrack.pauseAllExceptLullabyOfFairies();
+        }
         BattleWorld bw = (BattleWorld)getWorld();
         if (bw.state == "menu") {
             checkHovering();

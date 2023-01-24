@@ -168,6 +168,7 @@ public class Ally extends BattleWorldCharacter
         a.def = def;
         a.ev = ev;
         a.spd = spd;
+        a.weapons = weapons;
         a.weapon = weapon;
         
         return a;

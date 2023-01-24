@@ -96,6 +96,7 @@ public class MenuWindow extends Image
         }
         if (Greenfoot.mouseClicked(selector) && onQuit) {
             Greenfoot.setWorld(new MainMenu());
+            Soundtrack.lullabyOfFairies.stop();
         }
     }
 

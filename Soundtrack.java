@@ -35,6 +35,8 @@ public class Soundtrack extends Actor
         theStrolling.stop();
     }
     
+    //public static void pauseall
+    
     /**
      * Stops music except A Sweeping Fog
      */

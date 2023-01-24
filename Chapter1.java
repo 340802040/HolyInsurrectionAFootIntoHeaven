@@ -114,7 +114,7 @@ public class Chapter1 extends BattleWorld
             addObject(oldManD2, 0, 0);
         }
         if (oldManD2.i == oldManD2.dialogues.size()) {
-            Greenfoot.setWorld(new Intermission("Intermissions/Intermission1.png", "images/Text/OldManInstructions/", 1));
+            Greenfoot.setWorld(new Intermission("images/Intermissions/Intermission1.png", "images/Text/OldManInstructions/", 1));
         }
     }
 }

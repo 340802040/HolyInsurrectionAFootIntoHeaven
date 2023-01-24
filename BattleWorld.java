@@ -37,7 +37,7 @@ public abstract class BattleWorld extends GameWorld
     }
 
     public void checkStateAndPhase() {        
-        // PHASES
+        // PHASE SWITCH
         if (phase == "player" && state == "gameplay" && getNumAlliesMoved() == allies.size()) {
             addObject(new BattlePhaseCard("EnemyPhase.png"), getWidth() / 2, getHeight() / 2);
             state = "card animation";
@@ -45,6 +45,13 @@ public abstract class BattleWorld extends GameWorld
         else if (phase == "enemy" && state == "gameplay" && getNumEnemiesMoved() == enemies.size()) {
             addObject(new BattlePhaseCard("PlayerPhase.png"), getWidth() / 2, getHeight() / 2);
             state = "card animation";
+        }
+        // PHASES
+        if (phase == "player") {
+            Soundtrack.farInForeignLands.playLoop();
+        }
+        if (phase == "enemy") {
+            Soundtrack.aSweepingFog.playLoop();
         }
         // ENEMY MOVEMENT
         if (phase == "enemy" && state == "gameplay") {
@@ -66,6 +73,8 @@ public abstract class BattleWorld extends GameWorld
             menuWindow = new MenuWindow(state);
             addObject(menuWindow, getWidth() / 2, getHeight() / 2);
             state = "menu";
+            Soundtrack.lullabyOfFairies.playLoop();
+            Soundtrack.stopAllExceptLullabyOfFairies();
         }
     }
 
@@ -277,8 +286,27 @@ public abstract class BattleWorld extends GameWorld
                 else if (map[r][c] == 21) {
                     addObject(new Cell("EnvironmentTiles/house1.png"), GameWorld.getX(c), GameWorld.getY(r));
                 }
+                else if (map[r][c] == 22) {
+                    addObject(new Cell("EnvironmentTiles/placeofslumbertile.png"), GameWorld.getX(c), GameWorld.getY(r));
+                }
+                else if (map[r][c] == 23) {
+                    addObject(new Cell("EnvironmentTiles/slumberwallhorizontal.png"), GameWorld.getX(c), GameWorld.getY(r));
+                }
+                else if (map[r][c] == 24) {
+                    addObject(new Cell("EnvironmentTiles/slumberwallvertical.png"), GameWorld.getX(c), GameWorld.getY(r));
+                }
+                else if (map[r][c] == 25) {
+                    addObject(new Cell("EnvironmentTiles/castletile.png"), GameWorld.getX(c), GameWorld.getY(r));
+                }
+                else if (map[r][c] == 26) {
+                    addObject(new Cell("EnvironmentTiles/castlewallvertical.png"), GameWorld.getX(c), GameWorld.getY(r));
+                }
             }
         } 
+    }
+    
+    public void stopped() {
+        
     }
     
     /**
@@ -324,5 +352,10 @@ public abstract class BattleWorld extends GameWorld
      * 19 - colosseum
      * 20 - deserthouse
      * 21 - house1
+     * 22 - placeofslumbertile
+     * 23 - slumberwallhorizontal
+     * 24 - slumberwallvertical
+     * 25 - castletile
+     * 26 - castlewallvertical
      */
 }

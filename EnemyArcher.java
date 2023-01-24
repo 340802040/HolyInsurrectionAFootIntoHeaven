@@ -16,5 +16,17 @@ public class EnemyArcher extends Enemy
     
     public void act() {
         super.act();
+        checkOnHill();
+    }
+    
+    public void checkOnHill() {
+        BattleWorld bw = (BattleWorld)getWorld();
+        int[][] map = bw.getMap();
+        if (map[r][c] == 7) {
+            terrainMultiplier = 1.3;
+        }
+        else {
+            terrainMultiplier = 1;
+        }
     }
 }

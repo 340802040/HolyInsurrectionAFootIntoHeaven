@@ -19,7 +19,7 @@ public abstract class BattleWorldCharacter extends Actor
     protected int def;
     protected int ev; // evasion - each evasion reduces opponent's chance of hitting by 3%
     protected int spd; // each speed you have greater than your enemy, the hit chance increases by 2%, if speed is greater than opponent's by 4, double attack
-    protected int terrainMultiplier;
+    protected double terrainMultiplier;
     protected int crit; // crit chance
     protected ArrayList<String> weapons = new ArrayList<String>();
     protected String weapon = "";
@@ -54,7 +54,7 @@ public abstract class BattleWorldCharacter extends Actor
         map = ((GameWorld)getWorld()).getMap();
         initFrames();
         setImage(idleFrames.get(0));
-        weapon = weapons.get(0); // set default weapon
+        weapon = weapons.size() != 0 ? weapons.get(0) : ""; // set default weapon
     }
 
     public void act() {

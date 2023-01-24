@@ -32,7 +32,7 @@ public class Dialogue extends Actor
     }
 
     public void act() {
-        displayDialogues();
+        displayDialogues();    
     }
 
     public void displayDialogues() {

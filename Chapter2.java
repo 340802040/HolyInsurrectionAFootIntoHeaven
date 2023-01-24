@@ -56,6 +56,10 @@ public class Chapter2 extends BattleWorld
         setupStats();
     }
     
+    public void act() {
+        super.act();
+    }
+    
     public void spawn() {
         // ALLIES
         for (Ally a : allies) {
@@ -82,6 +86,10 @@ public class Chapter2 extends BattleWorld
     
     public void setupStats() {
         // ALLIES
+        Ally hero = findAlly("Hero");
+        hero.weapons.add("Fire");
+        hero.weapons.add("Water");
+        hero.weapons.add("Ice");
         ipos.maxHealth = 28;
         ipos.atk = 6;
         ipos.def = 5;

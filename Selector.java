@@ -199,6 +199,7 @@ public class Selector extends Actor
                 if (path.size() <= selectedAlly.moveLimit) {
                     highlightPath();
                     getWorld().addObject(new Highlight("RedHighlight.png"), GameWorld.getX(c), GameWorld.getY(r));   
+                    
                     pathPossible = true;
                 }
                 break;

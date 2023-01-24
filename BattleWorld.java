@@ -22,6 +22,7 @@ public abstract class BattleWorld extends GameWorld
     protected Enemy curMovingEnemy;
     // MISC
     protected Image bossIcon = new Image("BossIcon.png");
+    protected MenuWindow menuWindow;
 
     public BattleWorld(int width, int height, int pixelSize) {    
         super(width, height, pixelSize);
@@ -31,8 +32,8 @@ public abstract class BattleWorld extends GameWorld
     }
 
     public void act() {
-        checkPhaseSwitch();
-        checkState();
+        checkStateAndPhase();
+        checkMenu();
     }
 
     public void initializeGrid() {
@@ -57,7 +58,8 @@ public abstract class BattleWorld extends GameWorld
         } 
     }
 
-    public void checkPhaseSwitch() {
+    public void checkStateAndPhase() {        
+        // PHASES
         if (phase == "player" && state == "gameplay" && getNumAlliesMoved() == allies.size()) {
             addObject(new BattlePhaseCard("Placeholder/enemy-phase.jpg"), getWidth() / 2, getHeight() / 2);
             state = "card animation";
@@ -66,9 +68,11 @@ public abstract class BattleWorld extends GameWorld
             addObject(new BattlePhaseCard("Placeholder/player-phase.jpg"), getWidth() / 2, getHeight() / 2);
             state = "card animation";
         }
-    }
-
-    public void checkState() {
+        // ENEMY MOVEMENT
+        if (phase == "enemy" && state == "gameplay") {
+            moveEnemies();
+        }
+        // SELECTOR
         if (state == "gameplay" && phase == "player" && !selectorAdded) {
             addSelector();
             selectorAdded = true;
@@ -77,13 +81,13 @@ public abstract class BattleWorld extends GameWorld
             selector.removeSelf();
             selectorAdded = false;
         }
-
-        if (phase == "enemy" && state == "gameplay") {
-            moveEnemies();
-        }
-        if (enemies.size() == 0) {
-            state = "clear";
-            saveHighestChapter();
+    }
+    
+    public void checkMenu() {
+        if (Greenfoot.isKeyDown("escape") && state == "gameplay") {
+            menuWindow = new MenuWindow(state);
+            addObject(menuWindow, getWidth() / 2, getHeight() / 2);
+            state = "menu";
         }
     }
 
@@ -192,6 +196,15 @@ public abstract class BattleWorld extends GameWorld
         for (Ally a : allies) {
             a.health = a.maxHealth; // replenish
         }
+    }
+    
+    public Ally findAlly(String name) {
+        for (Ally a : allies) {
+            if (a.name.equals(name)) {
+                return a;
+            }
+        }
+        return new Ally("");
     }
 
     /**

@@ -28,6 +28,10 @@ public class EnemyDefender extends Defender
             die();
             AttackAnimationWorld w = (AttackAnimationWorld)getWorld();
             w.returnWorld.removeEnemy(me);
+            if (w.returnWorld.enemies.size() == 0) {
+                w.returnState = "clear";
+                w.returnWorld.saveHighestChapter();
+            }
             other.increaseXp(me.killXp);
         }
     }

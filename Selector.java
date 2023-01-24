@@ -218,7 +218,8 @@ public class Selector extends Actor
 
             for (int j = 0; j < 4; j++) { // checks 4 cardinal offsets
                 int nr = cur.r + dy[j], nc = cur.c + dx[j];
-                if (nc >= 0 && nc < GameWorld.GRID_WIDTH && nr >= 0 && nr < GameWorld.GRID_HEIGHT && !vis[nr][nc] && (map[nr][nc] == 0 || map[nr][nc] == 2)) {
+                BattleWorld bw = (BattleWorld)getWorld();
+                if (nc >= 0 && nc < GameWorld.GRID_WIDTH && nr >= 0 && nr < GameWorld.GRID_HEIGHT && !vis[nr][nc] && (bw.tileAvailable(nr, nc) || map[nr][nc] == 2)) {
                     // add enemy cells into the queue but ignore them when polled unless selector is currently on an enemy
                     Q.add(new Point(nr, nc));
                     vis[nr][nc] = true;

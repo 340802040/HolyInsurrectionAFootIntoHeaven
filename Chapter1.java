@@ -81,12 +81,11 @@ public class Chapter1 extends BattleWorld
         addObject(e3, GameWorld.getX(19), GameWorld.getY(9));
         addObject(e4, GameWorld.getX(19), GameWorld.getY(10));
         addObject(boss, GameWorld.getX(21), GameWorld.getY(8));
-        addObject(bossIcon, GameWorld.getX(21), GameWorld.getY(8));
     }
     
     public void setupStats() {
         // ALLIES
-        hero.maxHealth = 100; // testing, should be 16
+        hero.maxHealth = hero.health = 66; // testing, should be 16
         hero.atk = 100; // testing, should be 6
         hero.weapon = "Fists";
         hero.moveLimit = 100; // testing
@@ -96,7 +95,6 @@ public class Chapter1 extends BattleWorld
         prodeus.moveLimit = 100; // testing
         replenish();
         // ENEMIES
-        boss.name = "Foot Soldier Boss";
         for (Enemy e : enemies) {
             if (e.isBoss) { // first check if boss since boss is also a foot soldier
                 e.maxHealth = e.health = 18;

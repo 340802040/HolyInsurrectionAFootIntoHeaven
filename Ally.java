@@ -162,12 +162,16 @@ public class Ally extends BattleWorldCharacter
         }
         
         a.level = level;
+        a.xp = xp;
+        a.xpNeeded = xpNeeded;
         a.maxHealth = maxHealth;
         a.health = health;
         a.atk = atk;
         a.def = def;
         a.ev = ev;
         a.spd = spd;
+        a.terrainMultiplier = terrainMultiplier;
+        a.moveLimit = moveLimit;
         a.weapons = weapons;
         a.weapon = weapon;
         

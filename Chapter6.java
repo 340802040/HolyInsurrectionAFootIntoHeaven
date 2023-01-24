@@ -102,7 +102,6 @@ public class Chapter6 extends BattleWorld
         int r = GameWorld.GRID_HEIGHT / 2;
         int c = GameWorld.GRID_WIDTH - 1;
         addObject(boss, GameWorld.getX(c), GameWorld.getY(r));
-        addObject(bossIcon, GameWorld.getX(c), GameWorld.getY(r));
     }
     
     public void setupStats() {

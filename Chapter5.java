@@ -94,12 +94,9 @@ public class Chapter5 extends BattleWorld
                 }
             }
         }
-        
-        // boss
         int r = 13;
         int c = GameWorld.GRID_WIDTH - 3;
         addObject(boss, GameWorld.getX(c), GameWorld.getY(r));
-        addObject(bossIcon, GameWorld.getX(c), GameWorld.getY(r));
     }
     
     public void setupStats() {

@@ -21,7 +21,6 @@ public abstract class BattleWorld extends GameWorld
     private int i; // index used for going through each enemy during enemy phase
     protected Enemy curMovingEnemy;
     // MISC
-    protected Image bossIcon = new Image("BossIcon.png");
     protected MenuWindow menuWindow;
 
     public BattleWorld(int width, int height, int pixelSize) {    
@@ -69,7 +68,7 @@ public abstract class BattleWorld extends GameWorld
             selectorAdded = false;
         }
     }
-    
+
     public void checkMenu() {
         if (Greenfoot.isKeyDown("escape") && state == "gameplay") {
             menuWindow = new MenuWindow(state);
@@ -112,23 +111,13 @@ public abstract class BattleWorld extends GameWorld
     public void moveEnemies() {
         if (i == 0 && curMovingEnemy == null) {
             curMovingEnemy = enemies.get(i);
-            if (curMovingEnemy.isBoss) {
-                curMovingEnemy.moved = true;
-            }
-            else {
-                curMovingEnemy.startMoving();   
-            }
+            curMovingEnemy.startMoving();   
             i++;
         }
         if (curMovingEnemy.moved && i < enemies.size()) {
             Greenfoot.delay(30);
             curMovingEnemy = enemies.get(i);
-            if (curMovingEnemy.isBoss) {
-                curMovingEnemy.moved = true;
-            }
-            else {
-                curMovingEnemy.startMoving();    
-            }
+            curMovingEnemy.startMoving();    
             i++;
         }
     }
@@ -144,7 +133,7 @@ public abstract class BattleWorld extends GameWorld
         map[e.r][e.c] = 0;
         i -= (i == 0) ? 0 : 1;
         if (e.isBoss) {
-            removeObject(bossIcon);
+            removeObject(e.bossIcon);
         }
         removeObject(e);
     }
@@ -170,31 +159,6 @@ public abstract class BattleWorld extends GameWorld
     }
 
     /**
-     * Adds selector back into world at the position it left off at.
-     */
-    public void addSelector() {
-        addObject(selector, GameWorld.getX(selector.c), GameWorld.getY(selector.r));
-    }
-    
-    /**
-     * Replenishes all allies' hp at start of a chapter.
-     */
-    public void replenish() {
-        for (Ally a : allies) {
-            a.health = a.maxHealth; // replenish
-        }
-    }
-    
-    public Ally findAlly(String name) {
-        for (Ally a : allies) {
-            if (a.name.equals(name)) {
-                return a;
-            }
-        }
-        return new Ally("");
-    }
-
-    /**
      * Saves the highest chapter achieved with the army present at that time.
      * Only called once a chapter has been complete.
      */
@@ -206,7 +170,7 @@ public abstract class BattleWorld extends GameWorld
         if (this instanceof Chapter2) {
             newScore = 3;
         }
-        
+
         ALLIES = Ally.getClones(allies); //  save clones to master array of allies
 
         if (UserInfo.isStorageAvailable()) {
@@ -217,12 +181,50 @@ public abstract class BattleWorld extends GameWorld
             }
         }
     }
-    
+
+    /**
+     * Replenishes all allies' hp at start of a chapter.
+     */
+    public void replenish() {
+        for (Ally a : allies) {
+            a.health = a.maxHealth; // replenish
+        }
+    }
+
     public boolean tileAvailable(int r, int c) {
         int[][] map = getMap();
         return map[r][c] == 0 || map[r][c] == 7 || map[r][c] == 8 || map[r][c] == 15 || map[r][c] == 22 || map[r][c] == 25;
     }
-    
+
+    public Ally findAlly(String name) {
+        for (Ally a : allies) {
+            if (a.name.equals(name)) {
+                return a;
+            }
+        }
+        return new Ally("");
+    }
+
+    /**
+     * For testing chapters, buff() adds allies to ALLIES.
+     */
+    public static void buff() {
+        for (int i = 0; i < 5; i++) {
+            AllyCrusader a = new AllyCrusader("");
+            a.atk = 15;
+            a.moveLimit = 100;
+            a.maxHealth = a.health = 66;
+            ALLIES.add(a);
+        }
+    }
+
+    /**
+     * Adds selector back into world at the position it left off at.
+     */
+    public void addSelector() {
+        addObject(selector, GameWorld.getX(selector.c), GameWorld.getY(selector.r));
+    }
+
     public void initializeGrid() {
         for (int r = 0; r < GRID_HEIGHT; r++) {
             for (int c = 0; c < GRID_WIDTH; c++) {
@@ -304,7 +306,7 @@ public abstract class BattleWorld extends GameWorld
             }
         } 
     }
-    
+
     /**
      * BattleWorld Map Legend:
      * 

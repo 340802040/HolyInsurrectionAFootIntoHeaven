@@ -84,7 +84,6 @@ public class Chapter2 extends BattleWorld
         addObject(e6, GameWorld.getX(19), GameWorld.getY(8));
         // boss
         addObject(boss, GameWorld.getX(21), GameWorld.getY(8));
-        addObject(bossIcon, GameWorld.getX(21), GameWorld.getY(8));
     }
     
     public void setupStats() {
@@ -101,7 +100,6 @@ public class Chapter2 extends BattleWorld
         effitos.def = 3;
         replenish();
         // ENEMIES
-        boss.name = "Archer Boss";
         for (Enemy e : enemies) {
             if (e instanceof EnemyFootSoldier) {
                 e.maxHealth = e.health = 20;

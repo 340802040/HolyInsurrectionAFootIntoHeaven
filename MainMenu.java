@@ -2,10 +2,10 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.*;
 
 /**
- * Write a description of class StartMenu here.
+ * The initial menu that starts the game
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Jonathan Zhao
+ * @version Jan 2023
  */
 public class MainMenu extends GameWorld
 {

@@ -10,10 +10,10 @@ public class EnemyCrusader extends EnemyCavalry
 {
     public EnemyCrusader(boolean isBoss) {
         super(isBoss);
-        moveLimit = 7;
+        moveLimit = isBoss ? 0 : 7;
     }
     
     public void act() {
-        
+        super.act();
     }
 }

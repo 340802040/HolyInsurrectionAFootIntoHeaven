@@ -10,7 +10,7 @@ public class EnemyFootSoldier extends Enemy
 {
     public EnemyFootSoldier(boolean isBoss) {
         super(isBoss);
-        moveLimit = 4;
+        moveLimit = isBoss ? 0 : 4;
         weapons.add("Spear");
     }
     

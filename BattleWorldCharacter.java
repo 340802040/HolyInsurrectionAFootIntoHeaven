@@ -54,7 +54,7 @@ public abstract class BattleWorldCharacter extends Actor
         map = ((GameWorld)getWorld()).getMap();
         initFrames();
         setImage(idleFrames.get(0));
-        weapon = weapons.size() != 0 ? weapons.get(0) : ""; // set default weapon
+        weapon = weapons.size() != 0 ? weapons.get(Greenfoot.getRandomNumber(weapons.size())) : ""; // set default weapon
     }
 
     public void act() {
@@ -70,12 +70,10 @@ public abstract class BattleWorldCharacter extends Actor
         else if (this instanceof Enemy) {
             path = "Animations/EnemyAnimations/" + this.getClass().getSimpleName() + "Animations/";
         }
-
         // IDLE
         for (int i = 0; i < 2; i++) {
             idleFrames.add(new GreenfootImage(path + "Idle/Idle00" + i + ".png"));
         }
-
         // WALK
         for (int i = 0; i < 2; i++) {
             walkFrames.add(new GreenfootImage(path + "Walk/Walk00" + i + ".png"));

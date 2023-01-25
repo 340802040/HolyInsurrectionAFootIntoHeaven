@@ -1,5 +1,6 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.*;
+import java.io.*;
 
 /**
  * Write a description of class BattleWorld here.
@@ -21,6 +22,7 @@ public abstract class BattleWorld extends GameWorld
     private int i; // index used for going through each enemy during enemy phase
     protected Enemy curMovingEnemy;
     // MISC
+    
     protected MenuWindow menuWindow;
 
     public BattleWorld(int width, int height, int pixelSize) {    
@@ -211,7 +213,7 @@ public abstract class BattleWorld extends GameWorld
     public static void buff() {
         for (int i = 0; i < 5; i++) {
             AllyCrusader a = new AllyCrusader("");
-            a.atk = 15;
+            a.atk = 100;
             a.moveLimit = 100;
             a.maxHealth = a.health = 66;
             ALLIES.add(a);

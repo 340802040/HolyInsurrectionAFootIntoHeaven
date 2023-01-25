@@ -27,7 +27,7 @@ public abstract class Enemy extends BattleWorldCharacter
         hitXp = isBoss ? GameWorld.getRandomNumberInRange(25, 30) : GameWorld.getRandomNumberInRange(15, 20);
         killXp = isBoss ? GameWorld.getRandomNumberInRange(45, 60) : GameWorld.getRandomNumberInRange(25, 40);
         crit = isBoss ? 5 : 0;
-        moveLimit = isBoss ? 1 : moveLimit;
+        moveLimit = isBoss ? 0 : moveLimit;
     }
 
     public void addedToWorld(World w) {
@@ -82,7 +82,10 @@ public abstract class Enemy extends BattleWorldCharacter
             prevLocation = new Point(r, c);
             if (!isBoss) map[r][c] = 0; // clear spot
         }
-        else moved = true;
+        else {
+            moved = true;
+            getImage().setTransparency(150);
+        }
     }
 
     public void getTargetAlly() { // for now just gets a random ally
@@ -131,9 +134,15 @@ public abstract class Enemy extends BattleWorldCharacter
         // if no allies in rage, choose a random target to move towards, unless is boss
         if (isBoss) target = null;
         else {
-            target = allies.get(Greenfoot.getRandomNumber(allies.size()));
-            weapon = weapons.get(Greenfoot.getRandomNumber(weapons.size()));    
+            for (Ally a : allies) {
+                checkPath(a); // calls getPath() that creates path to `a`
+                if (path.size() > 0) {
+                    target = a;
+                    weapon = weapons.get(Greenfoot.getRandomNumber(weapons.size()));    
+                }
+            }
         }
+        // if no enemy is blocked behind by other enemies, target will remain null
     }
 
     /**
@@ -176,7 +185,7 @@ public abstract class Enemy extends BattleWorldCharacter
             }
         }
 
-        return path.size() <= moveLimit;
+        return pathPossible && path.size() <= moveLimit;
     }
 
     /**

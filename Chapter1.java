@@ -17,9 +17,9 @@ public class Chapter1 extends BattleWorld
     private EnemyFootSoldier e4 = new EnemyFootSoldier(false);
     private EnemyFootSoldier boss = new EnemyFootSoldier(true);
     // DIALOGUES
-    Dialogue oldManD = new Dialogue("images/Text/OldManInstructions/", "gameplay"); // images/ needed for Java.io.File detection
-    Dialogue prodeusD = new Dialogue("images/Text/ProdeusInstructions/", "gameplay");
-    Dialogue oldManD2 = new Dialogue("images/Text/PostChap1/", "clear");
+    Dialogue oldManInstructions = new Dialogue("images/Text/OldManInstructions/", "gameplay"); // images/ needed for Java.io.File detection
+    Dialogue prodeusInstructions = new Dialogue("images/Text/ProdeusInstructions/", "gameplay");
+    Dialogue postChap1 = new Dialogue("images/Text/PostChap1/", "clear");
 
     public Chapter1() {
         super(1200, 800, 1);
@@ -56,11 +56,11 @@ public class Chapter1 extends BattleWorld
 
     public void act() {
         super.act();
-        if (turns == 0 && state == "gameplay" && !oldManD.added) {
-            addObject(oldManD, 0, 0);
+        if (turns == 0 && state == "gameplay" && !oldManInstructions.added) {
+            addObject(oldManInstructions, 0, 0);
         }
-        if (turns == 1 && !prodeusD.added && prodeus.getWorld() == null) {
-            addObject(prodeusD, 0, 0);
+        if (turns == 1 && !prodeusInstructions.added && prodeus.getWorld() == null) {
+            addObject(prodeusInstructions, 0, 0);
             hero.weapons.add("Sword");
             hero.weapons.add("Spear");
             hero.weapons.add("Bow");
@@ -107,10 +107,10 @@ public class Chapter1 extends BattleWorld
     }
     
     public void checkClear() {  
-        if (state == "clear" && oldManD2.getWorld() == null) {
-            addObject(oldManD2, 0, 0);
+        if (state == "clear" && postChap1.getWorld() == null) {
+            addObject(postChap1, 0, 0);
         }
-        if (oldManD2.i == oldManD2.dialogues.size()) {
+        if (postChap1.i == postChap1.dialogues.size()) {
             Greenfoot.setWorld(new Intermission("images/Intermissions/Intermission1.png", "images/Text/Intermission1/", 1));
         }
     }

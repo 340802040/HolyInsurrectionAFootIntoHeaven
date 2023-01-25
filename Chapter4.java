@@ -60,6 +60,7 @@ public class Chapter4 extends BattleWorld
         initializeGrid();
         spawn();
         setupStats();
+        replenish();
     }
 
     public void act() {

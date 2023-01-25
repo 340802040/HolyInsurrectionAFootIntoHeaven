@@ -56,9 +56,10 @@ public class Chapter3 extends BattleWorld
         initializeGrid();
         spawn();
         setupStats();
+        replenish();
     }
     
-    public void act() {
+    public void act() {        
         super.act();
     }
     

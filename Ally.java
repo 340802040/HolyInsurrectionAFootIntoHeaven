@@ -35,6 +35,9 @@ public class Ally extends BattleWorldCharacter
         }
     }
 
+    /**
+     * Method for starting the movement of an ally.
+     */
     public void startMoving(ArrayList<Point> path) {
         i = path.size() - 1;
         isMoving = true;
@@ -43,6 +46,9 @@ public class Ally extends BattleWorldCharacter
         backLocation = new Point(r, c); // save location to go back to
     }
 
+    /**
+     * Moves towards the selector's location if path was possible.
+     */
     public void move() {
         if (i == -1) { // reached destination
             BattleWorld bw = ((BattleWorld)getWorld());

@@ -17,6 +17,7 @@ comment4.params=
 comment4.target=void\ act()
 comment5.params=
 comment5.target=void\ initFrames()
+comment5.text=\r\n\ Initializes\ sprites\ for\ the\ grid\ world.\r\n
 comment6.params=
 comment6.target=void\ updateCoords()
 comment6.text=\r\n\ Constantly\ updates\ the\ coordinates\ (r\ and\ c)\ of\ game\ world\ character\ as\ it\ moves.\r\n

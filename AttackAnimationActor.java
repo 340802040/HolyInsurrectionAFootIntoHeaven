@@ -84,6 +84,9 @@ public abstract class AttackAnimationActor extends Actor
         return Greenfoot.getRandomNumber(100) <  me.crit;
     }
 
+    /**
+     * Initializes frames for the attack animation.
+     */
     public void initFrames() {
         // ATTACK AND CRIT FRAMES
         if (willCrit) {
@@ -101,6 +104,9 @@ public abstract class AttackAnimationActor extends Actor
         framesInitialized = true;
     }
 
+    /**
+     * Gets the frame where the weapon makes contact with the other character.
+     */
     public int getFrameOfImpact() {
         if (className.equals("AllyHero")) {
             switch (me.weapon) {

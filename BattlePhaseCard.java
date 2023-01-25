@@ -1,7 +1,7 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Image that shows which chapter it is
+ * Image that displays the current battle phase, either player or enemy.
  * 
  * @author Patrick Hu
  * @version Jan 2023

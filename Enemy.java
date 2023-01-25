@@ -66,6 +66,9 @@ public abstract class Enemy extends BattleWorldCharacter
         return ret;
     }
 
+    /**
+     * Initiates the movement of the enemy.
+     */
     public void startMoving() {
         getTargetAlly();
         if (target != null) { // only bosses can not have a target
@@ -88,6 +91,9 @@ public abstract class Enemy extends BattleWorldCharacter
         }
     }
 
+    /**
+     * Detects surrounding allies and calculates weapon advantages to determine a good target.
+     */
     public void getTargetAlly() { // for now just gets a random ally
         ArrayList<Ally> allies = ((BattleWorld)getWorld()).allies;
         // try to find a weapon counter

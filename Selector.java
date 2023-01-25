@@ -51,6 +51,9 @@ public class Selector extends Actor
         animateSelector();
     }
 
+    /**
+     * Checks for input (WASD) from the user to move the selector.
+     */
     public void checkMovement() {
         if (moveTimer.millisElapsed() > 100) {
             if (Greenfoot.isKeyDown("w") && canMoveTo(r - 1, c)) {
@@ -101,6 +104,9 @@ public class Selector extends Actor
         }
     }
 
+    /**
+     * Checks the possible cases when a user triggers the selector.
+     */
     public void checkSelect() {
         BattleWorld bw = (BattleWorld)getWorld();
         Ally a = (Ally)getOneObjectAtOffset(0, 0, Ally.class);
@@ -138,6 +144,9 @@ public class Selector extends Actor
         removeHighlight();
     }
 
+    /**
+     * Checks if selector is hovering over a character, if so displays that character's information.
+     */
     public void checkHovering() {
         BattleWorldCharacter bwc = (BattleWorldCharacter)getOneObjectAtOffset(0, 0, BattleWorldCharacter.class);
         if (bwc != null && hoverAdded && bwc != curHovering) {

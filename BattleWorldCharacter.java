@@ -62,6 +62,9 @@ public abstract class BattleWorldCharacter extends Actor
         updateCoords();
     }
 
+    /**
+     * Initializes sprites for the grid world.
+     */
     public void initFrames() {        
         String path = "";
         if (this instanceof Ally) {

@@ -3,7 +3,7 @@ import java.util.*;
 import java.io.File;
 
 /**
- * Write a description of class Dialogue here.
+ * Class that handles all dialogue by taking in the path to the files and adding them to the world.
  * 
  * @author (your name) 
  * @version (a version number or a date)

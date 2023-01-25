@@ -51,13 +51,6 @@ public class StatWindow extends Image
     public void checkGoBack() {
         if (Greenfoot.isKeyDown("j")) {
             GameWorld gw = ((GameWorld)getWorld());
-            // if stat window was from menu button
-            if (gw instanceof BattleWorld) {
-                BattleWorld bw = (BattleWorld)gw;
-                if (bw.menuWindow != null && bw.menuWindow.getWorld() != null) { // if menu window is present
-                    bw.menuWindow.timer.mark();
-                }
-            }
             gw.state = returnState;
             removeSelf();
         }

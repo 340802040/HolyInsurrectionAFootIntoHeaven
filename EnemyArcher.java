@@ -10,7 +10,7 @@ public class EnemyArcher extends Enemy
 {
     public EnemyArcher(boolean isBoss) {
         super(isBoss);
-        moveLimit = 4;    
+        moveLimit = isBoss ? 0 : 4;    
         weapons.add("Bow");
     }
     

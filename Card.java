@@ -11,7 +11,7 @@ public abstract class Card extends Actor
 {
     protected int actCount = 0;
     protected boolean isFadingIn = true;
-    protected int mod = 4;
+    protected int mod = 1;
     
     /**
      * Creates a card of an image.
@@ -49,7 +49,7 @@ public abstract class Card extends Actor
     }    
     
     public void fadeIn() {
-        int newTrans = getImage().getTransparency() + 2;    
+        int newTrans = getImage().getTransparency() + 3;    
         if (newTrans >= 255) {
             isFadingIn = false;
         }
@@ -59,8 +59,8 @@ public abstract class Card extends Actor
     }
     
     public void fadeOut() {
-        int newTrans = getImage().getTransparency() - 2;
-        if (newTrans == 0) {
+        int newTrans = getImage().getTransparency() - 3;
+        if (newTrans <= 0) {
             getWorld().removeObject(this);
         }
         if (actCount % mod == 0 && newTrans >= 0) {

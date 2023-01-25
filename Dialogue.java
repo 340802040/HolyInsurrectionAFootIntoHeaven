@@ -16,6 +16,7 @@ public class Dialogue extends Actor
     protected SimpleTimer timer = new SimpleTimer();
     protected String returnState;
     protected int actCount = 0;
+    protected boolean added;
 
     public Dialogue(String path, String returnState) {
         this.returnState = returnState;
@@ -30,6 +31,7 @@ public class Dialogue extends Actor
             GameWorld gw = (GameWorld)w;
             gw.state = "dialogue";
         }
+        added = true;
     }
 
     public void act() {

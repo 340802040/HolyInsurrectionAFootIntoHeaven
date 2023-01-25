@@ -17,8 +17,8 @@ public class BattlePhaseCard extends Card
     }
     
     public void fadeOut() {
-        int newTrans = getImage().getTransparency() - 15;
-        if (newTrans == 0) {
+        int newTrans = getImage().getTransparency() - 4;
+        if (newTrans <= 0) {
             BattleWorld bw = (BattleWorld)getWorld();
             bw.state = "gameplay";
             if (bw.phase == "player") {
@@ -29,7 +29,7 @@ public class BattlePhaseCard extends Card
             }
             bw.removeObject(this);
         }
-        if (actCount % 4 == 0 && newTrans >= 0) {
+        if (actCount % 1 == 0 && newTrans >= 0) {
             getImage().setTransparency(newTrans);
         }
     }

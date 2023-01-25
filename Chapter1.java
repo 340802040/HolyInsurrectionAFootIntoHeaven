@@ -56,10 +56,10 @@ public class Chapter1 extends BattleWorld
 
     public void act() {
         super.act();
-        if (turns == 0 && state == "gameplay" && oldManD.getWorld() != null) {
+        if (turns == 0 && state == "gameplay" && !oldManD.added) {
             addObject(oldManD, 0, 0);
         }
-        if (turns == 1 && prodeusD.getWorld() != null && prodeus.getWorld() != null) {
+        if (turns == 1 && !prodeusD.added && prodeus.getWorld() == null) {
             addObject(prodeusD, 0, 0);
             hero.weapons.add("Sword");
             hero.weapons.add("Spear");

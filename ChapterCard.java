@@ -27,7 +27,7 @@ public class ChapterCard extends Card
         }
         if (timer.millisElapsed() > 800) {
             int newTrans = getImage().getTransparency() - 5;
-            if (newTrans == 0) {
+            if (newTrans <= 0) {
                 BattleWorld bw = (BattleWorld)getWorld();
                 bw.state = "gameplay";
                 bw.removeObject(this);

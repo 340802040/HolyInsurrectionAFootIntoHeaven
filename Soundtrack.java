@@ -31,7 +31,15 @@ public class Soundtrack extends Actor
     }
     
     public static void setVolume() {
-        aSweepingFog.setVolume(80);
+        aSweepingFog.setVolume(40);
+        anInsurmountableHindrance.setVolume(50);
+        farInForeignLands.setVolume(50);
+        inAnUnfalteringField.setVolume(50);
+        intrusiveRevolutionary.setVolume(50);
+        lullabyOfFairies.setVolume(50);
+        meadowOfDahlias.setVolume(50);
+        theStrolling.setVolume(50);
+        anUnwantedVisitor.setVolume(50);
     }
     
     /**

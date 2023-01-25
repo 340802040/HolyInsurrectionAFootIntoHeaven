@@ -45,27 +45,27 @@ public class Images extends Actor
     public static void initDmgImgs() {
         // ALLY DMG INDICATORS
         ArrayList<GreenfootImage> frames = new ArrayList<GreenfootImage>();
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < 3; i++) {
             frames.add(new GreenfootImage("Animations/DamageAnimations/Attack/Attack0" + i + ".png"));
         }
         imgs.put("ally attack dmg indicators", frames);
         
         frames = new ArrayList<GreenfootImage>();
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < 3; i++) {
             frames.add(new GreenfootImage("Animations/DamageAnimations/Crit/Crit0" + i + ".png"));
         }
         imgs.put("ally crit dmg indicators", frames);
         
         // ENEMY DMG INDICATORS
         frames = new ArrayList<GreenfootImage>();
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < 3; i++) {
             frames.add(new GreenfootImage("Animations/DamageAnimations/Attack/Attack0" + i + ".png"));
             frames.get(i).mirrorHorizontally();
         }
         imgs.put("enemy attack dmg indicators", frames);
         
         frames = new ArrayList<GreenfootImage>();
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < 3; i++) {
             frames.add(new GreenfootImage("Animations/DamageAnimations/Crit/Crit0" + i + ".png"));
             frames.get(i).mirrorHorizontally();
         }

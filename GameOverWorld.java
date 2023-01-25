@@ -23,7 +23,7 @@ public class GameOverWorld extends GameWorld
     public void act() {
         actCount++;
         Soundtrack.anUnwantedVisitor.playLoop();
-        Soundtrack.pauseAllExceptAnUnwantedVisitor();
+        Soundtrack.stopAllExceptAnUnwantedVisitor();
         fadeIn();
         checkHovering();
         checkClick();

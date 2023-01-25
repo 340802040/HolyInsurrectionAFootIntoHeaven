@@ -60,14 +60,14 @@ public abstract class BattleWorld extends GameWorld
         if (phase == "player" && (state == "gameplay" || state == "dialogue")) {
             if (this instanceof Chapter7) {
                 Soundtrack.intrusiveRevolutionary.playLoop();
-                Soundtrack.pauseAllExceptIntrusiveRevolutionary();
+                Soundtrack.stopAllExceptIntrusiveRevolutionary();
             }
             Soundtrack.farInForeignLands.playLoop();
-            Soundtrack.pauseAllExceptFarInForeignLands();
+            Soundtrack.stopAllExceptFarInForeignLands();
         }
         if (phase == "enemy" && (state == "gameplay" || state == "dialogue")) {
             Soundtrack.aSweepingFog.playLoop();
-            Soundtrack.pauseAllExceptASweepingFog();
+            Soundtrack.stopAllExceptASweepingFog();
         }
         // ENEMY MOVEMENT
         if (phase == "enemy" && state == "gameplay") {

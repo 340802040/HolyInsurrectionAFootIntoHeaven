@@ -3,10 +3,10 @@ import java.util.*;
 import java.io.*;
 
 /**
- * Write a description of class BattleWorld here.
+ * Battle worlds. Varies based on which chapter it is.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Patrick Hu, Jonathan Zhao
+ * @version Jan 2023
  */
 public abstract class BattleWorld extends GameWorld
 {

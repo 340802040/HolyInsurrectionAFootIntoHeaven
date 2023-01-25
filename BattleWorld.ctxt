@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=BattleWorld
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ BattleWorld\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment0.text=\r\n\ Battle\ worlds.\ Varies\ based\ on\ which\ chapter\ it\ is.\r\n\ \r\n\ @author\ Patrick\ Hu,\ Jonathan\ Zhao\r\n\ @version\ Jan\ 2023\r\n
 comment1.params=width\ height\ pixelSize
 comment1.target=BattleWorld(int,\ int,\ int)
 comment10.params=

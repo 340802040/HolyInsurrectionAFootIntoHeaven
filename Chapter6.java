@@ -1,10 +1,10 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Chapter6 here.
+ * Chapter 6 world. Palace gates
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Jonathan Zhao, Patrick Hu
+ * @version Jan 2023
  */
 public class Chapter6 extends BattleWorld
 {

@@ -1,10 +1,10 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Chapter4 here.
+ * Chapter 4 world. Vasmerc.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Jonathan Zhao, Patrick Hu
+ * @version Jan 2023
  */
 public class Chapter4 extends BattleWorld
 {

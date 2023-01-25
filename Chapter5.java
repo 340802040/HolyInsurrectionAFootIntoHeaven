@@ -1,10 +1,10 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Chapter5 here.
+ * Chapter 5 world. The Place of Slumber
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Jonathan Zhao, Patrick Hu 
+ * @version Jan 2023
  */
 public class Chapter5 extends BattleWorld
 {

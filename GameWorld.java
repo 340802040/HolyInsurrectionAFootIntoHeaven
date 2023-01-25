@@ -2,7 +2,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.*;
 
 /**
- * Summary:
+ * Summary: The Holy Insurrection: A Foot Into Heaven
  * This game is a turn-based strategy RPG. You meet allies who all have a common goal in reclaiming the throne from the corrupt ruler who usurped the throne, The Being.
  * It takes great inspiration from the game Fire Emblem, particularly the Game Boy Advance ones.
  * 

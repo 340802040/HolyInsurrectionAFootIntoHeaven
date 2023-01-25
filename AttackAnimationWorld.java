@@ -3,10 +3,10 @@ import java.util.*;
 import java.io.File;
 
 /**
- * Write a description of class AttackAnimationWorld here.
+ * World where attack animations occur
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Patrick Hu
+ * @version Jan 2023
  */
 public class AttackAnimationWorld extends GameWorld
 {

@@ -1,0 +1,6 @@
+#BlueJ class context
+comment0.target=DialogueText
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ DialogueText\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=path
+comment1.target=DialogueText(java.lang.String)
+numComments=2

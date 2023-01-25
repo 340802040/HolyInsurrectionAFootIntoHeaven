@@ -10,8 +10,8 @@ import java.io.File;
  */
 public class Dialogue extends Actor
 {
-    protected ArrayList<Image> dialogues = new ArrayList<Image>();
-    private Image curDialogue;
+    protected ArrayList<DialogueText> dialogues = new ArrayList<DialogueText>();
+    protected DialogueText curDialogue;
     protected int i = 0;
     protected SimpleTimer timer = new SimpleTimer();
     protected String returnState;
@@ -22,7 +22,7 @@ public class Dialogue extends Actor
         this.returnState = returnState;
         int size = new File(path).list().length;
         for (int i = 0; i < size; i++) {
-            dialogues.add(new Image(path + "Text" + i + ".png"));
+            dialogues.add(new DialogueText(path + "Text" + i + ".png"));
         }
     }
 

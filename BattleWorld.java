@@ -23,12 +23,14 @@ public abstract class BattleWorld extends GameWorld
     private int i; // index used for going through each enemy during enemy phase
     protected Enemy curMovingEnemy;
     // MISC
+    
+    
     protected MenuWindow menuWindow;
     protected ChapterCard chapterCard;
 
     public BattleWorld(int width, int height, int pixelSize) {    
         super(width, height, pixelSize);
-        setPaintOrder(ChapterCard.class, HoverWindow.class, Selector.class);
+        setPaintOrder(ChapterCard.class, DialogueText.class, HoverWindow.class, Selector.class);
         state = "gameplay";
         String s = this.getClass().getSimpleName();
         chapterNumber = Integer.parseInt(s.substring(s.length() - 1));
@@ -62,8 +64,10 @@ public abstract class BattleWorld extends GameWorld
                 Soundtrack.intrusiveRevolutionary.playLoop();
                 Soundtrack.stopAllExceptIntrusiveRevolutionary();
             }
-            Soundtrack.farInForeignLands.playLoop();
-            Soundtrack.stopAllExceptFarInForeignLands();
+            else {
+                Soundtrack.farInForeignLands.playLoop();
+                Soundtrack.stopAllExceptFarInForeignLands();    
+            }
         }
         if (phase == "enemy" && (state == "gameplay" || state == "dialogue")) {
             Soundtrack.aSweepingFog.playLoop();
@@ -259,6 +263,13 @@ public abstract class BattleWorld extends GameWorld
         hero.atk = 100;
         hero.moveLimit = 100;
         hero.maxHealth = prodeus.health = 66;
+        hero.weapons.add("Fire");
+        hero.weapons.add("Water");
+        hero.weapons.add("Ice");
+        hero.weapons.add("BladeOfEithalon");
+        hero.weapons.add("Sword");
+        hero.weapons.add("Spear");
+        hero.weapons.add("Bow");
         ALLIES.add(hero);
     }
 

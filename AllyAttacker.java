@@ -27,7 +27,11 @@ public class AllyAttacker extends Attacker
         if (me.health <= 0) {
             die();
             AttackAnimationWorld w = (AttackAnimationWorld)getWorld();
-            if (me.name.equals("Hero") || me.name.equals("Prodeus")) {
+            if (me.name.equals("Prodeus") && w.returnWorld instanceof Chapter6) {
+                w.returnWorld.saveHighestChapter();
+                Greenfoot.setWorld(new Chapter7());
+            }
+            else if (me.name.equals("Hero") || me.name.equals("Prodeus")) {
                 w.returnState = "lost";
             }
             else w.returnWorld.removeAlly(me);

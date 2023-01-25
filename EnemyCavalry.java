@@ -11,7 +11,6 @@ public class EnemyCavalry extends Enemy
     public EnemyCavalry(boolean isBoss) {
         super(isBoss);
         moveLimit = isBoss ? 0 : 7;
-        weapons.add("Sword");
         weapons.add("Spear");
     }
     

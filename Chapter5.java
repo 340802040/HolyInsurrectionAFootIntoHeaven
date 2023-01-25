@@ -20,7 +20,8 @@ public class Chapter5 extends BattleWorld
     private EnemyFootSoldier e10 = new EnemyFootSoldier(false);
     private EnemyWizard e11 = new EnemyWizard(false);
     private EnemyWizard e12 = new EnemyWizard(false);
-    private EnemyArcher boss = new EnemyArcher(true);
+    private EnemyArcher boss1 = new EnemyArcher(true);
+    private EnemyWizard boss2 = new EnemyWizard(true);
     
     public Chapter5() {
         super(1200, 800, 1);
@@ -37,7 +38,8 @@ public class Chapter5 extends BattleWorld
         enemies.add(e10);
         enemies.add(e11);
         enemies.add(e12);
-        enemies.add(boss);
+        enemies.add(boss1);
+        enemies.add(boss2);
         
         map = new int[][] {
             {22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 24, 22, 22, 22, 22, 22, 22, 22, 22},
@@ -94,9 +96,12 @@ public class Chapter5 extends BattleWorld
                 }
             }
         }
+        // 2 bosses
         int r = 13;
         int c = GameWorld.GRID_WIDTH - 3;
-        addObject(boss, GameWorld.getX(c), GameWorld.getY(r));
+        addObject(boss1, GameWorld.getX(c), GameWorld.getY(r));
+        r = 2;
+        addObject(boss2, GameWorld.getX(c), GameWorld.getY(r));
     }
     
     public void setupStats() {

@@ -10,7 +10,7 @@ public class Intermission extends GameWorld
 {
     int chapterNumber;
     Dialogue d;
-    
+
     public Intermission(String path, String dialoguePath, int chapterNumber) {
         super(1200, 800, 1);
         setBackground(path);
@@ -18,13 +18,10 @@ public class Intermission extends GameWorld
         d = new Dialogue(dialoguePath, "");
         addObject(d, 0, 0);
     }
-    
+
     public void act() {
-        actCount++;
-        if (actCount == 1) {
-            Soundtrack.theStrolling.playLoop();
-            Soundtrack.pauseAllExceptTheStrolling();
-        }
+        Soundtrack.theStrolling.playLoop();
+        Soundtrack.pauseAllExceptTheStrolling();
         if (d.i == d.dialogues.size()) {
             switch (chapterNumber) {
                 case 1:

@@ -27,6 +27,7 @@ public class Chapter7 extends BattleWorld
     
     public Chapter7() {
         super(1200, 800, 1);
+        buff();
         allies = Ally.getClones(ALLIES);
         enemies.add(e1);
         enemies.add(e2);
@@ -104,14 +105,28 @@ public class Chapter7 extends BattleWorld
         int r = GameWorld.GRID_HEIGHT / 2;
         int c = GameWorld.GRID_WIDTH - 2;
         addObject(boss1, GameWorld.getX(c), GameWorld.getY(r));
+        boss1.name = "The Being";
         
         // boss 2
         r = 8;
         c = 11;
         addObject(boss2, GameWorld.getX(c), GameWorld.getY(r));
+        boss2.name = "Prodeus";
     }
     
     public void setupStats() {
+        // transfer prodeus over to enemy side
+        Ally prodeus = findAlly("Prodeus");
+        boss2.maxHealth = prodeus.maxHealth;
+        boss2.health = prodeus.health;
+        boss2.atk = prodeus.atk;
+        boss2.def = prodeus.def;
+        boss2.ev = prodeus.ev;
+        boss2.spd = prodeus.spd;
+        boss2.moveLimit = prodeus.moveLimit;
+        boss2.weapons = prodeus.weapons;
+        boss2.weapon = prodeus.weapon;  
+        
         for (Enemy e : enemies) {
             if (e instanceof EnemyFootSoldier) {
                 e.maxHealth = e.health = 32;
@@ -131,22 +146,18 @@ public class Chapter7 extends BattleWorld
                 e.ev = 4;
                 e.spd = 3;
             }
-            if (e instanceof EnemyCavalry) {
+            if (e instanceof EnemyCavalry && !e.name.equals("Prodeus") && !e.name.equals("The Being")) {
                 e.maxHealth = e.health = 32;
                 e.atk = 8;
                 e.ev = 3;
                 e.spd = 5;
             }
-            if (e.isBoss) {
-                boss1.name = "The Being";
+            if (e.name == "The Being") {
                 e.maxHealth = e.health = 66;
                 e.atk = 14;
                 e.def = 10;
-                e.ev = 4;
+                e.ev = 5;
                 e.spd = 8;
-            }
-            if (e.isBoss) {
-                
             }
         }
     }

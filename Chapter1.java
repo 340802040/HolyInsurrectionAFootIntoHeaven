@@ -20,8 +20,6 @@ public class Chapter1 extends BattleWorld
     Dialogue oldManD = new Dialogue("images/Text/OldManInstructions/", "gameplay"); // images/ needed for Java.io.File detection
     Dialogue prodeusD = new Dialogue("images/Text/ProdeusInstructions/", "gameplay");
     Dialogue oldManD2 = new Dialogue("images/Text/PostChap1/", "clear");
-    // MISC
-    private boolean mark;
 
     public Chapter1() {
         super(1200, 800, 1);
@@ -54,12 +52,14 @@ public class Chapter1 extends BattleWorld
         initializeGrid();
         spawn();
         setupStats();
-        addObject(oldManD, 0, 0);
     }
 
     public void act() {
         super.act();
-        if (turns == 1 && !mark) {
+        if (turns == 0 && state == "gameplay" && oldManD.getWorld() != null) {
+            addObject(oldManD, 0, 0);
+        }
+        if (turns == 1 && prodeusD.getWorld() != null && prodeus.getWorld() != null) {
             addObject(prodeusD, 0, 0);
             hero.weapons.add("Sword");
             hero.weapons.add("Spear");
@@ -67,9 +67,7 @@ public class Chapter1 extends BattleWorld
             hero.weapon = "Sword";
             addObject(prodeus, GameWorld.getX(2), GameWorld.getY(8));
             allies.add(prodeus);
-            mark = true;
         }
-        checkClear();
     }
     
     public void spawn() {

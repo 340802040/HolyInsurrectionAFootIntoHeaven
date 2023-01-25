@@ -194,6 +194,7 @@ public class Selector extends Actor
         while (!Q.isEmpty()) {
             Point cur = Q.poll();
             if (cur.r == r && cur.c == c && map[r][c] == 2) { // if node is enemy and selector is on one (user wishes to attack)
+                if (!checkProdeusVsTheBeing()) break;
                 // get path from ally to just 1 tile before the enemy
                 getPath(start, prev[cur.r][cur.c], prev);
                 if (path.size() <= selectedAlly.moveLimit) {
@@ -278,5 +279,14 @@ public class Selector extends Actor
 
     public boolean canMoveTo(int r, int c) {
         return r >= 0 && r < GameWorld.GRID_HEIGHT && c >= 0 && c < GameWorld.GRID_WIDTH;
+    }
+    
+    public boolean checkProdeusVsTheBeing() {
+        Enemy e = (Enemy)getOneObjectAtOffset(0, 0, Enemy.class);
+        GameWorld gw = (GameWorld)getWorld();
+        if (gw instanceof Chapter6 && e.name.equals("The Being") && !selectedAlly.name.equals("Prodeus")) {
+            return false;
+        }
+        return true;
     }
 }

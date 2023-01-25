@@ -18,34 +18,44 @@ public abstract class BattleWorld extends GameWorld
     protected Selector selector = new Selector();
     protected boolean selectorAdded; // whether selector is in the world
     protected int turns = 0;
+    protected int chapterNumber;
+    protected int actCount = 0;
     // ENEMY PHASE
     private int i; // index used for going through each enemy during enemy phase
     protected Enemy curMovingEnemy;
     // MISC
-    
     protected MenuWindow menuWindow;
+    protected ChapterCard chapterCard;
 
     public BattleWorld(int width, int height, int pixelSize) {    
         super(width, height, pixelSize);
+        setPaintOrder(ChapterCard.class, HoverWindow.class, Selector.class);
         state = "gameplay";
+        String s = this.getClass().getSimpleName();
+        chapterNumber = Integer.parseInt(s.substring(s.length() - 1));
+        if (chapterNumber != 1) {
+            chapterCard = new ChapterCard("ChapterImages/Ch" + chapterNumber + ".png");
+            addObject(chapterCard, getWidth() / 2, getHeight() / 2);
+            state = "card";
+        }
         addObject(selector, GameWorld.getX(0), GameWorld.getY(0)); 
-        setPaintOrder(HoverWindow.class, Selector.class);
     }
 
     public void act() {
         checkStateAndPhase();
         checkMenu();
+        checkClear();
     }
 
     public void checkStateAndPhase() {        
         // PHASE SWITCH
         if (phase == "player" && state == "gameplay" && getNumAlliesMoved() == allies.size()) {
             addObject(new BattlePhaseCard("EnemyPhase.png"), getWidth() / 2, getHeight() / 2);
-            state = "card animation";
+            state = "card";
         }
         else if (phase == "enemy" && state == "gameplay" && getNumEnemiesMoved() == enemies.size()) {
             addObject(new BattlePhaseCard("PlayerPhase.png"), getWidth() / 2, getHeight() / 2);
-            state = "card animation";
+            state = "card";
         }
         // PHASES
         if (phase == "player" && (state == "gameplay" || state == "dialogue")) {
@@ -76,6 +86,12 @@ public abstract class BattleWorld extends GameWorld
             menuWindow = new MenuWindow(state);
             addObject(menuWindow, getWidth() / 2, getHeight() / 2);
             state = "menu";
+        }
+    }
+
+    public void checkClear() {
+        if (state == "clear") {           
+            Greenfoot.setWorld(new Intermission("images/Intermissions/Intermission" + chapterNumber + ".png", "images/Text/Intermission" + chapterNumber + "/", chapterNumber));
         }
     }
 
@@ -172,6 +188,18 @@ public abstract class BattleWorld extends GameWorld
         if (this instanceof Chapter2) {
             newScore = 3;
         }
+        if (this instanceof Chapter3) {
+            newScore = 4;
+        }
+        if (this instanceof Chapter4) {
+            newScore = 5;
+        }
+        if (this instanceof Chapter5) {
+            newScore = 6;
+        }
+        if (this instanceof Chapter6) {
+            newScore = 7;
+        }
 
         ALLIES = Ally.getClones(allies); //  save clones to master array of allies
 
@@ -204,20 +232,31 @@ public abstract class BattleWorld extends GameWorld
                 return a;
             }
         }
-        return new Ally("");
+        return null;
     }
 
     /**
      * For testing chapters, buff() adds allies to ALLIES.
      */
     public static void buff() {
-        for (int i = 0; i < 5; i++) {
-            AllyCrusader a = new AllyCrusader("");
+        for (int i = 0; i < 1; i++) {
+            AllyArcher a = new AllyArcher("");
             a.atk = 100;
             a.moveLimit = 100;
             a.maxHealth = a.health = 66;
             ALLIES.add(a);
         }
+        AllyCrusader prodeus = new AllyCrusader("Prodeus");
+        prodeus.atk = 100;
+        prodeus.moveLimit = 100;
+        prodeus.maxHealth = prodeus.health = 66;
+        ALLIES.add(prodeus);
+
+        AllyHero hero = new AllyHero("Hero");
+        hero.atk = 100;
+        hero.moveLimit = 100;
+        hero.maxHealth = prodeus.health = 66;
+        ALLIES.add(hero);
     }
 
     /**

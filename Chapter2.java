@@ -21,6 +21,7 @@ public class Chapter2 extends BattleWorld
     public Chapter2() {
         // level1 should take in array of allies but for now hardcode them
         super(1200, 800, 1);
+        buff();
         allies = Ally.getClones(ALLIES); // clone the saved copy
         allies.add(ipos);
         allies.add(effitos);

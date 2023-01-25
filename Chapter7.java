@@ -24,6 +24,8 @@ public class Chapter7 extends BattleWorld
     private EnemyWizard e14 = new EnemyWizard(false);
     private EnemyCrusader boss1 = new EnemyCrusader(true);
     private EnemyCrusader boss2 = new EnemyCrusader(true);
+    // DIALOGUE
+    Dialogue prodeusDying = new Dialogue("images/Text/ProdeusDying/", "gameplay");
     
     public Chapter7() {
         super(1200, 800, 1);
@@ -68,10 +70,12 @@ public class Chapter7 extends BattleWorld
         initializeGrid();
         spawn();
         setupStats();
+        replenish();
     }
 
     public void act() {
         super.act();
+        checkDeaths();
     }
     
     public void spawn() {
@@ -162,6 +166,12 @@ public class Chapter7 extends BattleWorld
                 e.ev = 5;
                 e.spd = 8;
             }
+        }
+    }
+    
+    public void checkDeaths() {
+        if (boss2.health == 0 && !prodeusDying.added) {
+            addObject(prodeusDying, 0, 0);
         }
     }
 }

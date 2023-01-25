@@ -17,6 +17,8 @@ public class Chapter2 extends BattleWorld
     private EnemyArcher e5 = new EnemyArcher(false);
     private EnemyArcher e6 = new EnemyArcher(false);
     private EnemyArcher boss = new EnemyArcher(true);
+    // DIALOGUES
+    Dialogue preCh2 = new Dialogue("images/Text/PreCh2/", "gameplay"); 
 
     public Chapter2() {
         // level1 should take in array of allies but for now hardcode them
@@ -55,9 +57,13 @@ public class Chapter2 extends BattleWorld
         initializeGrid();
         spawn();
         setupStats();
+        replenish();
     }
     
     public void act() {
+        if (turns == 0 && state == "gameplay" && !preCh2.added) {
+            addObject(preCh2, 0, 0);
+        }
         super.act();
     }
     
@@ -99,7 +105,6 @@ public class Chapter2 extends BattleWorld
         effitos.maxHealth = 20;
         effitos.atk = 5;
         effitos.def = 3;
-        replenish();
         // ENEMIES
         for (Enemy e : enemies) {
             if (e instanceof EnemyFootSoldier) {

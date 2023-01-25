@@ -23,6 +23,8 @@ public class Chapter6 extends BattleWorld
     private EnemyWizard e13 = new EnemyWizard(false);
     private EnemyWizard e14 = new EnemyWizard(false);
     private EnemyCrusader boss = new EnemyCrusader(true);
+    // DIALOGUE
+    Dialogue preCh6 = new Dialogue("images/Text/PreCh6/", "gameplay"); 
     
     public Chapter6() {
         super(1200, 800, 1);
@@ -66,9 +68,13 @@ public class Chapter6 extends BattleWorld
         initializeGrid();
         spawn();
         setupStats();
+        replenish();
     }
 
     public void act() {
+        if (turns == 0 && state == "gameplay" && !preCh6.added) {
+            addObject(preCh6, 0, 0);
+        }
         super.act();
     }
     

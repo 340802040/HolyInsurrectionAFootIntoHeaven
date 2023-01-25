@@ -46,6 +46,7 @@ public class MainMenu extends GameWorld
     }
 
     public void act() {
+        Soundtrack.stopAll();
         if (state == "normal") {
             checkHovering();
             checkClick();    

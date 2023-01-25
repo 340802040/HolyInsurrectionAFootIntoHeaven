@@ -2,10 +2,10 @@ import greenfoot.*;  // (World, Actor, GreenfootWeaponIcon, Greenfoot and MouseI
 import java.util.*;
 
 /**
- * Write a description of class WeaponSelectWindow here.
+ * The Weapon selection window
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Patrick Hu
+ * @version Jan 2023
  */
 public class WeaponSelectWindow extends AttackInterface
 {

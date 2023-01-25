@@ -5,7 +5,7 @@ import java.util.*;
  * Shine of sword that brings you into game
  * 
  * @author Jonathan Zhao
- * @version Jan 14
+ * @version Jan 2023
  */
 public class StartSwordShineEffect extends Actor
 {

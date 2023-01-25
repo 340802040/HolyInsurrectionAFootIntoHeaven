@@ -1,10 +1,10 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class AttackDecisionWindow here.
+ * Window that asks whether you want to attack the enemy or to wait.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Patrick Hu
+ * @version Jan 2023
  */
 public class AttackDecisionWindow extends AttackInterface
 {

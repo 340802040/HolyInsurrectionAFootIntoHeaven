@@ -303,6 +303,9 @@ public abstract class BattleWorld extends GameWorld
                 else if (map[r][c] == 26) {
                     addObject(new Cell("EnvironmentTiles/castlewallvertical.png"), GameWorld.getX(c), GameWorld.getY(r));
                 }
+                else if (map[r][c] == 27) {
+                    addObject(new Cell("EnvironmentTiles/roadtree.png"), GameWorld.getX(c), GameWorld.getY(r));
+                }
             }
         } 
     }
@@ -355,5 +358,6 @@ public abstract class BattleWorld extends GameWorld
      * 24 - slumberwallvertical
      * 25 - castletile
      * 26 - castlewallvertical
+     * 27 - roadtree
      */
 }

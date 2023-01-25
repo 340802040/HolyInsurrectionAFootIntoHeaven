@@ -24,7 +24,6 @@ public class Chapter4 extends BattleWorld
     public Chapter4() {
         super(1200, 800, 1);
         allies = Ally.getClones(ALLIES); // clone the saved copy
-        buff();
         allies.add(venetha);
         enemies.add(e1);
         enemies.add(e2);

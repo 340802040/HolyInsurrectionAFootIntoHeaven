@@ -22,7 +22,6 @@ public class Chapter3 extends BattleWorld
     public Chapter3() {
         super(1200, 800, 1);
         allies = Ally.getClones(ALLIES); // clone the saved copy
-        buff();
         allies.add(telu);
         enemies.add(e1);
         enemies.add(e2);

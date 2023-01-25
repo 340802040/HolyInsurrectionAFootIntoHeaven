@@ -23,8 +23,6 @@ public abstract class BattleWorld extends GameWorld
     private int i; // index used for going through each enemy during enemy phase
     protected Enemy curMovingEnemy;
     // MISC
-    
-    
     protected MenuWindow menuWindow;
     protected ChapterCard chapterCard;
 

@@ -29,7 +29,6 @@ public class Chapter7 extends BattleWorld
     
     public Chapter7() {
         super(1200, 800, 1);
-        buff();
         allies = Ally.getClones(ALLIES);
         enemies.add(e1);
         enemies.add(e2);

@@ -16,6 +16,7 @@ public class Soundtrack extends Actor
     public static GreenfootSound lullabyOfFairies;
     public static GreenfootSound meadowOfDahlias;
     public static GreenfootSound theStrolling;
+    public static GreenfootSound anUnwantedVisitor;
     
     static {
         aSweepingFog = new GreenfootSound("sounds/A_Sweeping_Fog.mp3");
@@ -26,6 +27,7 @@ public class Soundtrack extends Actor
         lullabyOfFairies = new GreenfootSound("Lullaby_of_Fairies.mp3");
         meadowOfDahlias = new GreenfootSound("Meadow_of_Dahlias.mp3");
         theStrolling = new GreenfootSound("The_Strolling.mp3");
+        anUnwantedVisitor = new GreenfootSound("An_Unwanted_Visitor.mp3");
     }
     
     public static void setVolume() {
@@ -44,6 +46,7 @@ public class Soundtrack extends Actor
         lullabyOfFairies.stop();
         meadowOfDahlias.stop();
         theStrolling.stop();
+        anUnwantedVisitor.stop();
     }
     
     public static void pauseAll() {
@@ -55,6 +58,7 @@ public class Soundtrack extends Actor
         lullabyOfFairies.pause();
         meadowOfDahlias.pause();
         theStrolling.pause();
+        anUnwantedVisitor.pause();
     }
     
     /**
@@ -68,6 +72,7 @@ public class Soundtrack extends Actor
         lullabyOfFairies.pause();
         meadowOfDahlias.pause();
         theStrolling.pause();
+        anUnwantedVisitor.pause();
     }
     
     /**
@@ -81,6 +86,7 @@ public class Soundtrack extends Actor
         lullabyOfFairies.pause();
         meadowOfDahlias.pause();
         theStrolling.pause();
+        anUnwantedVisitor.pause();
     }
     
     /**
@@ -94,6 +100,7 @@ public class Soundtrack extends Actor
         lullabyOfFairies.pause();
         meadowOfDahlias.pause();
         theStrolling.pause();
+        anUnwantedVisitor.pause();
     }
     
     /**
@@ -107,6 +114,7 @@ public class Soundtrack extends Actor
         lullabyOfFairies.pause();
         meadowOfDahlias.pause();
         theStrolling.pause();
+        anUnwantedVisitor.pause();
     }
     
     /**
@@ -120,6 +128,7 @@ public class Soundtrack extends Actor
         lullabyOfFairies.pause();
         meadowOfDahlias.pause();
         theStrolling.pause();
+        anUnwantedVisitor.pause();
     }
     
     /**
@@ -133,6 +142,7 @@ public class Soundtrack extends Actor
         intrusiveRevolutionary.pause();
         meadowOfDahlias.pause();
         theStrolling.pause();
+        anUnwantedVisitor.pause();
     }
     
     /**
@@ -146,12 +156,27 @@ public class Soundtrack extends Actor
         intrusiveRevolutionary.pause();
         lullabyOfFairies.pause();
         theStrolling.pause();
+        anUnwantedVisitor.pause();
     }
     
-    /*
+    /**
      * pauses music except The Strolling
      */
     public static void pauseAllExceptTheStrolling() {
+        aSweepingFog.pause();
+        anInsurmountableHindrance.pause();
+        farInForeignLands.pause();
+        inAnUnfalteringField.pause();
+        intrusiveRevolutionary.pause();
+        lullabyOfFairies.pause();
+        meadowOfDahlias.pause();
+        anUnwantedVisitor.pause();
+    }
+    
+    /**
+     * pauses music except The Strolling
+     */
+    public static void pauseAllExceptAnUnwantedVisitor() {
         aSweepingFog.pause();
         anInsurmountableHindrance.pause();
         farInForeignLands.pause();

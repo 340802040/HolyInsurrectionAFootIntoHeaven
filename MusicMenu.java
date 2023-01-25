@@ -1,10 +1,10 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class MusicMenu here.
+ * A world with music selection. All of our original music is here.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Jonathan Zhao
+ * @version Jan 24
  */
 public class MusicMenu extends GameWorld
 {

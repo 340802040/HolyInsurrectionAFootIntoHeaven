@@ -100,27 +100,26 @@ public class Chapter3 extends BattleWorld
     public void setupStats() {
         // ALLIES
         telu.maxHealth = telu.health = 33;
-        telu.atk = 6;
+        telu.atk = 13;
         telu.def = 7;
         telu.ev = 4;
         telu.spd = 3;
         // ENEMIES
         for (Enemy e : enemies) {
             if (e instanceof EnemyFootSoldier) {
-                e.maxHealth = e.health = 20;
+                e.maxHealth = e.health = 18;
                 e.atk = 7;
-                e.def = 3;
                 e.ev = 2;
             }
             if (e instanceof EnemyWizard) {
-                e.maxHealth = e.health = 18;
-                e.atk = 7;
+                e.maxHealth = e.health = 13;
+                e.atk = 6;
                 e.ev = 2;
                 e.spd = 2;
             }
             if (e.isBoss) {
-                e.maxHealth = e.health = 35;
-                e.atk = 9;
+                e.maxHealth = e.health = 30;
+                e.atk = 11;
                 e.def = 4;
                 e.ev = 3;
                 e.spd = 3;

@@ -85,12 +85,13 @@ public class Chapter1 extends BattleWorld
     public void setupStats() {
         // ALLIES
         hero.maxHealth = hero.health = 16; 
-        hero.atk = 6; 
+        hero.atk = 6;
+        hero.def = 3;
         hero.weapon = "Fists";
         hero.moveLimit = 5; 
-        prodeus.maxHealth = prodeus.health = 45;
-        prodeus.atk = 12; 
-        prodeus.def = 10;
+        prodeus.maxHealth = prodeus.health = 35;
+        prodeus.atk = 10; 
+        prodeus.def = 4;
         prodeus.moveLimit = 7;
         // ENEMIES
         for (Enemy e : enemies) {

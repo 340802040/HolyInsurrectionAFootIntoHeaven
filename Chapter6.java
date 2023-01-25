@@ -114,25 +114,25 @@ public class Chapter6 extends BattleWorld
     public void setupStats() {
         for (Enemy e : enemies) {
             if (e instanceof EnemyFootSoldier) {
-                e.maxHealth = e.health = 32;
+                e.maxHealth = e.health = 24;
                 e.atk = 9;
                 e.def = 5;
                 e.ev = 2;
             }
             if (e instanceof EnemyArcher) {
-                e.maxHealth = e.health = 24;
+                e.maxHealth = e.health = 19;
                 e.atk = 9;
                 e.ev = 4;
                 e.spd = 4;
             }
             if (e instanceof EnemyWizard) {
-                e.maxHealth = e.health = 22;
+                e.maxHealth = e.health = 15;
                 e.atk = 9;
                 e.ev = 4;
                 e.spd = 3;
             }
             if (e instanceof EnemyCavalry) {
-                e.maxHealth = e.health = 32;
+                e.maxHealth = e.health = 25;
                 e.atk = 8;
                 e.ev = 3;
                 e.spd = 5;

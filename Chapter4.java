@@ -102,20 +102,20 @@ public class Chapter4 extends BattleWorld
     public void setupStats() {
         // ALLIES
         venetha.maxHealth = venetha.health = 30;
-        venetha.atk = 7;
+        venetha.atk = 15;
         venetha.def = 5;
-        venetha.ev = 5;
+        venetha.ev = 6;
         venetha.spd = 5;
         // ENEMIES
         for (Enemy e : enemies) {
             if (e instanceof EnemyArcher) {
-                e.maxHealth = e.health = 20;
+                e.maxHealth = e.health = 18;
                 e.atk = 7;
                 e.def = 3;
                 e.ev = 2;
             }
             if (e instanceof EnemyCavalry) {
-                e.maxHealth = e.health = 27;
+                e.maxHealth = e.health = 22;
                 e.atk = 5;
                 e.def = 6;
                 e.ev = 2;

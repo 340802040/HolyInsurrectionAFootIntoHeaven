@@ -76,7 +76,7 @@ public abstract class AttackAnimationActor extends Actor
 
     public boolean determineWillHit() {
         double bowMultiplier = me.weapon == "Bow" ? 0.9 : 1.0;
-        int hitChance = (int)(me.spd * 2 * weaponMultiplier * me.terrainMultiplier * bowMultiplier - (other.ev * 3 * GameWorld.getWeaponMultiplier(other.weapon, me.weapon) * other.terrainMultiplier) + (me.spd - other.spd > 5 ? 70 : 90));
+        int hitChance = 25 + (int)(me.spd * 2 * weaponMultiplier * me.terrainMultiplier * bowMultiplier - (other.ev * 3 * GameWorld.getWeaponMultiplier(other.weapon, me.weapon) * other.terrainMultiplier) + (me.spd - other.spd > 5 ? 70 : 90));
         return Greenfoot.getRandomNumber(100) < hitChance;
     }
 

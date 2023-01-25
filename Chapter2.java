@@ -99,30 +99,30 @@ public class Chapter2 extends BattleWorld
         hero.weapons.add("Water");
         hero.weapons.add("Ice");
         ipos.maxHealth = 28;
-        ipos.atk = 6;
+        ipos.atk = 8;
         ipos.def = 5;
         effitos.maxHealth = 20;
-        effitos.atk = 5;
-        effitos.def = 3;
+        effitos.atk = 10;
+        effitos.def = 1;
         // ENEMIES
         for (Enemy e : enemies) {
             if (e instanceof EnemyFootSoldier) {
-                e.maxHealth = e.health = 20;
-                e.atk = 4;
+                e.maxHealth = e.health = 17;
+                e.atk = 5;
                 e.ev = 1;
             }
             if (e instanceof EnemyArcher) {
-                e.maxHealth = e.health = 15;
+                e.maxHealth = e.health = 14;
                 e.atk = 6;
-                e.ev = 2;
+                e.ev = 1;
                 e.spd = 1;
             }
             if (e.isBoss) {
-                e.maxHealth = e.health = 35;
-                e.atk = 5;
-                e.def = 4;
-                e.ev = 4;
-                e.spd = 2;
+                e.maxHealth = e.health = 25;
+                e.atk = 10;
+                e.def = 3;
+                e.ev = 3;
+                e.spd = 1;
             }
         }
     }

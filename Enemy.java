@@ -24,8 +24,8 @@ public abstract class Enemy extends BattleWorldCharacter
     public Enemy(boolean isBoss) {
         name = getName();
         this.isBoss = isBoss;
-        hitXp = isBoss ? GameWorld.getRandomNumberInRange(25, 30) : GameWorld.getRandomNumberInRange(15, 20);
-        killXp = isBoss ? GameWorld.getRandomNumberInRange(45, 60) : GameWorld.getRandomNumberInRange(25, 40);
+        hitXp = isBoss ? GameWorld.getRandomNumberInRange(35, 50) : GameWorld.getRandomNumberInRange(25, 30);
+        killXp = isBoss ? GameWorld.getRandomNumberInRange(55, 80) : GameWorld.getRandomNumberInRange(35, 55);
         crit = isBoss ? 5 : 0;
         moveLimit = isBoss ? 0 : moveLimit;
     }

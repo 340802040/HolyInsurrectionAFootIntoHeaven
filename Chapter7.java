@@ -135,25 +135,25 @@ public class Chapter7 extends BattleWorld
         
         for (Enemy e : enemies) {
             if (e instanceof EnemyFootSoldier) {
-                e.maxHealth = e.health = 32;
+                e.maxHealth = e.health = 25;
                 e.atk = 9;
                 e.def = 5;
                 e.ev = 2;
             }
             if (e instanceof EnemyArcher) {
-                e.maxHealth = e.health = 24;
+                e.maxHealth = e.health = 20;
                 e.atk = 9;
                 e.ev = 4;
                 e.spd = 4;
             }
             if (e instanceof EnemyWizard) {
-                e.maxHealth = e.health = 22;
+                e.maxHealth = e.health = 17;
                 e.atk = 9;
                 e.ev = 4;
                 e.spd = 3;
             }
             if (e instanceof EnemyCavalry && !e.name.equals("Prodeus") && !e.name.equals("The Being")) {
-                e.maxHealth = e.health = 32;
+                e.maxHealth = e.health = 30;
                 e.atk = 8;
                 e.ev = 3;
                 e.spd = 5;
@@ -161,9 +161,9 @@ public class Chapter7 extends BattleWorld
             if (e.name == "The Being") {
                 e.maxHealth = e.health = 66;
                 e.atk = 14;
-                e.def = 10;
+                e.def = 8;
                 e.ev = 5;
-                e.spd = 8;
+                e.spd = 5;
             }
         }
     }

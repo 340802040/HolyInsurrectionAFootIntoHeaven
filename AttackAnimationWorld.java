@@ -75,9 +75,9 @@ public class AttackAnimationWorld extends GameWorld
         if (dealer.weapon == "BladeOfEithalon") {
             weaponDmg = 20;
         }
-        int damageDealt = (int)((dealer.atk + weaponDmg) * (willCrit ? 3 : 1) * dealer.terrainMultiplier * GameWorld.getWeaponMultiplier(dealer.weapon, dealtTo.weapon) - dealtTo.def);
-        if (damageDealt <= 0) {
-            damageDealt = 1; // minimum
+        int damageDealt = (int)((dealer.atk + weaponDmg) * (willCrit ? 4 : 1) * dealer.terrainMultiplier * GameWorld.getWeaponMultiplier(dealer.weapon, dealtTo.weapon) - dealtTo.def * 0.3);
+        if (damageDealt <= 1) {
+            damageDealt = 2; // minimum
         }
 
         return damageDealt;

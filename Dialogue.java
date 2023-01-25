@@ -17,6 +17,7 @@ public class Dialogue extends Actor
     protected String returnState;
     protected int actCount = 0;
     protected boolean added;
+    protected boolean finished;
 
     public Dialogue(String path, String returnState) {
         this.returnState = returnState;
@@ -41,6 +42,7 @@ public class Dialogue extends Actor
 
     public void displayDialogues() {
         if (i == dialogues.size()) {
+            finished = true;
             GameWorld gw = ((GameWorld)getWorld());
             if (gw instanceof BattleWorld) {
                 BattleWorld bw = (BattleWorld)getWorld();

@@ -10,32 +10,24 @@ public class Chapter4 extends BattleWorld
 {
     AllyWizard venetha = new AllyWizard("Venetha");
     EnemyCavalry e1 = new EnemyCavalry(false);
-    EnemyCavalry e2 = new EnemyCavalry(false);
-    EnemyCavalry e3 = new EnemyCavalry(false);
-    EnemyCavalry e4 = new EnemyCavalry(false);
-    EnemyCavalry e5 = new EnemyCavalry(false);
-    EnemyCavalry e6 = new EnemyCavalry(false);
-    EnemyArcher e7 = new EnemyArcher(false);
-    EnemyArcher e8 = new EnemyArcher(false);
-    EnemyArcher e9 = new EnemyArcher(false);
-    EnemyArcher e10 = new EnemyArcher(false);
-    EnemyCavalry boss = new EnemyCavalry(true);
+    //EnemyCavalry e2 = new EnemyCavalry(false);
+    //EnemyCavalry e3 = new EnemyCavalry(false);
+    //EnemyCavalry e4 = new EnemyCavalry(false);
+    //EnemyCavalry e5 = new EnemyCavalry(false);
+    //EnemyArcher e6 = new EnemyArcher(false);
+    //EnemyCavalry boss = new EnemyCavalry(true);
 
     public Chapter4() {
         super(1200, 800, 1);
         allies = Ally.getClones(ALLIES); // clone the saved copy
         allies.add(venetha);
         enemies.add(e1);
-        enemies.add(e2);
-        enemies.add(e3);
-        enemies.add(e4);
-        enemies.add(e5);
-        enemies.add(e6);
-        enemies.add(e7);
-        enemies.add(e8);
-        enemies.add(e9);
-        enemies.add(e10);
-        enemies.add(boss);
+        //enemies.add(e2);
+        //enemies.add(e3);
+        //enemies.add(e4);
+        //enemies.add(e5);
+        //enemies.add(e6);
+        //enemies.add(boss);
 
         map = new int[][] {
             {19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19},
@@ -96,7 +88,7 @@ public class Chapter4 extends BattleWorld
         // boss
         int r = 2;
         int c = GameWorld.GRID_WIDTH / 2;
-        addObject(boss, GameWorld.getX(c), GameWorld.getY(r));
+        //addObject(boss, GameWorld.getX(c), GameWorld.getY(r));
     }
 
     public void setupStats() {

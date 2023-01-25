@@ -13,15 +13,9 @@ public class Chapter7 extends BattleWorld
     private EnemyFootSoldier e3 = new EnemyFootSoldier(false);
     private EnemyArcher e4 = new EnemyArcher(false);
     private EnemyArcher e5 = new EnemyArcher(false);
-    private EnemyArcher e6 = new EnemyArcher(false);
-    private EnemyCavalry e7 = new EnemyCavalry(false);
-    private EnemyCavalry e8 = new EnemyCavalry(false);
-    private EnemyCavalry e9 = new EnemyCavalry(false);
-    private EnemyCavalry e10 = new EnemyCavalry(false);
-    private EnemyWizard e11 = new EnemyWizard(false);
-    private EnemyWizard e12 = new EnemyWizard(false);
-    private EnemyWizard e13 = new EnemyWizard(false);
-    private EnemyWizard e14 = new EnemyWizard(false);
+    private EnemyCavalry e6 = new EnemyCavalry(false);
+    private EnemyWizard e7 = new EnemyWizard(false);
+    private EnemyWizard e8 = new EnemyWizard(false);
     private EnemyCrusader boss1 = new EnemyCrusader(true);
     private EnemyCrusader boss2 = new EnemyCrusader(true);
     // DIALOGUE
@@ -38,12 +32,6 @@ public class Chapter7 extends BattleWorld
         enemies.add(e6);
         enemies.add(e7);
         enemies.add(e8);
-        enemies.add(e9);
-        enemies.add(e10);
-        enemies.add(e11);
-        enemies.add(e12);
-        enemies.add(e13);
-        enemies.add(e14);
         enemies.add(boss1);
         enemies.add(boss2);
         

@@ -113,13 +113,13 @@ public class Chapter2 extends BattleWorld
             }
             if (e instanceof EnemyArcher) {
                 e.maxHealth = e.health = 14;
-                e.atk = 6;
+                e.atk = 5;
                 e.ev = 1;
                 e.spd = 1;
             }
             if (e.isBoss) {
-                e.maxHealth = e.health = 25;
-                e.atk = 10;
+                e.maxHealth = e.health = 20;
+                e.atk = 6;
                 e.def = 3;
                 e.ev = 3;
                 e.spd = 1;

@@ -13,13 +13,9 @@ public class Chapter5 extends BattleWorld
     private EnemyArcher e3 = new EnemyArcher(false);
     private EnemyArcher e4 = new EnemyArcher(false);
     private EnemyArcher e5 = new EnemyArcher(false);
-    private EnemyArcher e6 = new EnemyArcher(false);
+    private EnemyCavalry e6 = new EnemyCavalry(false);
     private EnemyCavalry e7 = new EnemyCavalry(false);
-    private EnemyCavalry e8 = new EnemyCavalry(false);
-    private EnemyFootSoldier e9 = new EnemyFootSoldier(false);
-    private EnemyFootSoldier e10 = new EnemyFootSoldier(false);
-    private EnemyWizard e11 = new EnemyWizard(false);
-    private EnemyWizard e12 = new EnemyWizard(false);
+    private EnemyFootSoldier e8 = new EnemyFootSoldier(false);
     private EnemyArcher boss1 = new EnemyArcher(true);
     private EnemyWizard boss2 = new EnemyWizard(true);
     
@@ -34,10 +30,6 @@ public class Chapter5 extends BattleWorld
         enemies.add(e6);
         enemies.add(e7);
         enemies.add(e8);
-        enemies.add(e9);
-        enemies.add(e10);
-        enemies.add(e11);
-        enemies.add(e12);
         enemies.add(boss1);
         enemies.add(boss2);
         

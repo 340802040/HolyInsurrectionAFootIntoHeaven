@@ -10,7 +10,7 @@ public class EnemyWizard extends Enemy
 {
     public EnemyWizard(boolean isBoss) {
         super(isBoss);
-        moveLimit = isBoss ? 0 : 4;
+        moveLimit = isBoss ? 0 : 6;
         weapons.add("Fire");
         weapons.add("Water");
         weapons.add("Ice");

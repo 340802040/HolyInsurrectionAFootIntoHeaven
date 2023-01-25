@@ -15,6 +15,7 @@ public class WeaponSelectWindow extends AttackInterface
     private Image fire;
     private Image water;
     private Image ice;
+    private Image bladeOfEithalon;
     private ArrayList<Image> icons = new ArrayList<Image>();
 
     public WeaponSelectWindow(Ally a, Enemy e) {
@@ -38,6 +39,7 @@ public class WeaponSelectWindow extends AttackInterface
         fire = new Image("Panels/WeaponIcons/Fire.png");
         water = new Image("Panels/WeaponIcons/Water.png");
         ice = new Image("Panels/WeaponIcons/Ice.png"); 
+        bladeOfEithalon = new Image("Panels/WeaponIcons/BladeOfEithalon.png"); 
 
         // determine ally's weapons and bg size
         if (a instanceof AllyHero) {
@@ -65,6 +67,9 @@ public class WeaponSelectWindow extends AttackInterface
                     break;
                 case "Ice":
                     icons.add(ice);
+                    break;
+                case "BladeOfEithalon":
+                    icons.add(bladeOfEithalon);
                     break;
             }
         }
@@ -101,6 +106,10 @@ public class WeaponSelectWindow extends AttackInterface
         }
         else if (Greenfoot.isKeyDown("6") && icons.contains(ice)) {
             a.weapon = "Ice";
+            changeWorlds();
+        }
+        else if (Greenfoot.isKeyDown("7") && icons.contains(bladeOfEithalon)) {
+            a.weapon = "BladeOfEithalon";
             changeWorlds();
         }
     }

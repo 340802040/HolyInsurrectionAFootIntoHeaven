@@ -195,7 +195,9 @@ public abstract class AttackAnimationActor extends Actor
     }
 
     public void cutHp() {
-        int damageDealt = AttackAnimationWorld.calculateDamageDealtBy(other, me, willCrit);
+        AttackAnimationWorld w = (AttackAnimationWorld)getWorld();
+        boolean dealerWillCrit = w.getOtherActor(this).willCrit;
+        int damageDealt = AttackAnimationWorld.calculateDamageDealtBy(other, me, dealerWillCrit);
         int j = (me.health - damageDealt) < 0 ? 0 : me.health - damageDealt;
         for (int i = me.health - 1; i >= j; i--) {
             ticks.get(i).setImage("GreyHealthTick.png");

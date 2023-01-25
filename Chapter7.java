@@ -29,6 +29,7 @@ public class Chapter7 extends BattleWorld
     
     public Chapter7() {
         super(1200, 800, 1);
+        buff();
         allies = Ally.getClones(ALLIES);
         enemies.add(e1);
         enemies.add(e2);
@@ -74,7 +75,6 @@ public class Chapter7 extends BattleWorld
 
     public void act() {
         super.act();
-        checkDeaths();
     }
     
     public void spawn() {
@@ -165,12 +165,6 @@ public class Chapter7 extends BattleWorld
                 e.ev = 5;
                 e.spd = 5;
             }
-        }
-    }
-    
-    public void checkDeaths() {
-        if (boss2.health == 0 && !prodeusDying.added) {
-            addObject(prodeusDying, 0, 0);
         }
     }
 }

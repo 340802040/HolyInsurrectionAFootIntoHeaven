@@ -10,7 +10,7 @@ public class AllyArcher extends Ally
 {
     public AllyArcher(String name) {
         super(name);
-        moveLimit = 4;
+        moveLimit = 5;
         weapons.add("Bow");
     }
     

@@ -29,8 +29,12 @@ public class EnemyDefender extends Defender
             AttackAnimationWorld w = (AttackAnimationWorld)getWorld();
             w.returnWorld.removeEnemy(me);
             if (me.name.equals("The Being")) {
-                Dialogue theBeingDying = new Dialogue("images/Text/TheBeingDying/", "clear");
-                w.addObject(theBeingDying, 0, 0);
+                Dialogue d = new Dialogue("images/Text/TheBeingDying/", "clear");
+                w.addObject(d, 0, 0);
+            }
+            if (me.name.equals("Prodeus")) {
+                Dialogue d = new Dialogue("images/Text/ProdeusDying/", "clear");
+                w.addObject(d, 0, 0);
             }
             if (w.returnWorld.enemies.size() == 0) {
                 w.returnState = "clear";

@@ -70,12 +70,12 @@ public class AttackAnimationWorld extends GameWorld
         addObject(enemyHpBg, getWidth() / 4 * 3, getHeight() - enemyHpBg.getImage().getHeight() / 2);
     }
 
-    public static int calculateDamageDealtBy(BattleWorldCharacter dealer, BattleWorldCharacter dealtTo, boolean willCrit) {
+    public static int calculateDamageDealtBy(BattleWorldCharacter dealer, BattleWorldCharacter dealtTo, boolean dealerWillCrit) {
         int weaponDmg = 0;
         if (dealer.weapon == "BladeOfEithalon") {
             weaponDmg = 20;
         }
-        int damageDealt = (int)((dealer.atk + weaponDmg) * (willCrit ? 4 : 1) * dealer.terrainMultiplier * GameWorld.getWeaponMultiplier(dealer.weapon, dealtTo.weapon) - dealtTo.def * 0.3);
+        int damageDealt = (int)((dealer.atk + weaponDmg) * (dealerWillCrit ? 3.5 : 1) * dealer.terrainMultiplier * GameWorld.getWeaponMultiplier(dealer.weapon, dealtTo.weapon) - dealtTo.def * 0.3);
         if (damageDealt <= 1) {
             damageDealt = 2; // minimum
         }

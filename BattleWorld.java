@@ -244,7 +244,7 @@ public abstract class BattleWorld extends GameWorld
      * For testing chapters, buff() adds allies to ALLIES.
      */
     public static void buff() {
-        for (int i = 0; i < 1; i++) {
+        for (int i = 0; i < 4; i++) {
             AllyArcher a = new AllyArcher("");
             a.atk = 100;
             a.moveLimit = 100;

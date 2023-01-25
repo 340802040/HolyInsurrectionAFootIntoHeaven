@@ -10,8 +10,7 @@ public class AllyCavalry extends Ally
 {
     public AllyCavalry(String name) {
         super(name);
-        moveLimit = 7;
-        //weapons.add("Sword");
+        moveLimit = 8;
         weapons.add("Spear");
     }
     

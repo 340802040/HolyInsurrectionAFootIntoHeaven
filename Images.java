@@ -6,8 +6,8 @@ import java.io.File;
  * Class used to store frames for the attack animation in a hashmap so as to not constantly
  * create new GreenfootImages of the same frames.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Patrick Hu
+ * @version Jan 2023
  */
 public class Images extends Actor
 {

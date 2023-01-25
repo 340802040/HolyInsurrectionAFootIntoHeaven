@@ -4,8 +4,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * Card is an introduction or visual that covers most of the screen and
  * notifies the player of a change in the game state or setting.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Patrick Hu
+ * @version Jan 2023
  */
 public abstract class Card extends Actor
 {

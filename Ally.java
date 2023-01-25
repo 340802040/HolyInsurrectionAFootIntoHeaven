@@ -3,10 +3,10 @@ import java.util.*;
 import java.io.*;
 
 /**
- * Write a description of class Ally here.
+ * Ally classes
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Patrick Hu
+ * @version Jan 2023
  */
 public class Ally extends BattleWorldCharacter
 {

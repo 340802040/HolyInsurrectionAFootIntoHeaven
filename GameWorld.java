@@ -2,10 +2,49 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.*;
 
 /**
- * Write a description of class GameWorld here.
+ * Summary:
+ * This game is a turn-based strategy RPG. You meet allies who all have a common goal in reclaiming the throne from the corrupt ruler who usurped the throne, The Being.
+ * It takes great inspiration from the game Fire Emblem, particularly the Game Boy Advance ones.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * Details:
+ * 
+ * In the game, each unit is a specific class. Each class has unique weapons they can use and a specific amount of tiles they can move each turn. The goal of the game
+ * is to defeat the enemies using strategy, such as the weapon triangles. Much of this is explained in the "Details" tab.
+ * 
+ * Stats. Units have 5 different stats (MaxHealth, ATK, DEF, EV, SPD). Upon leveling up, a stat has a chance of increasing by 1. These stats are used in numerous 
+ * calculations involving damage and hit chance. Along with stats, some terrain also provides advantages. The most notable is the hill and how it boosts archers' damage
+ * and hit chance.
+ * 
+ * Pathfinding. Pathfinding is implemented as to optimize character movements. 
+ * 
+ * Enemy AI. Enemy AI is also implemented in an intellectual way. The enemy finds paths to optimal targets rather than attacking whatever is most convenient. They also switch
+ * weapons to their best possible weapon to optimize the damage they deal to you. Bosses stay still, but they will attack if you stand next to them.
+ * 
+ * Death. If the main character or the character Prodeus dies, there will be a game over. This will prompt you to return to main menu, where you may restart the chapter by
+ * clicking the Load button. However, if any of your other units fall in battle, they will be considered critically injured. This means that they will not move on to
+ * following chapters, as if they had actually died.
+ * 
+ * Load. The game saves at the end of every chapter, saving which chapter you completed. The load button will bring you back to the highest chapter completed, with information
+ * of units saved as well. This means that character stats and their status (dead or alive) are saved as well. This feature is useful if you get a game over or if you
+ * accidentally killed one of your characters that you did not want to die.
+ * 
+ * Menu. Apart from the main menu, you can open a menu during your turn of the game by pressing the escape key. In the menu, you can look at controls, further details of the
+ * game, or you can quit/load the game. If you want to exit the menu and return to the game, press the j key, as it represents the back button. It should be noted that on
+ * all menus, including the main menu, the game menu, and the music menu (album), only the mouse can click on buttons. Otherwise, the game is played using WASD to move, k
+ * to select, j to deselect, and u(when hovering over the target character) to check stats of characters.
+ * 
+ * Album. Our game is completely original. Everything you see and hear is created by us. To highlight this, there is an album where you can listen to any of our original tracks.
+ * The album is on the main menu.
+ * 
+ * 
+ * Credits:
+ * Art and animations - Jonathan Zhao
+ * Music - Jonathan Zhao
+ * Story - Jonathan Zhao
+ * 
+ * 
+ * @author Jonathan Zhao, Patrick Hu 
+ * @version Jan 24
  */
 public class GameWorld extends World
 {

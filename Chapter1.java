@@ -52,6 +52,7 @@ public class Chapter1 extends BattleWorld
         initializeGrid();
         spawn();
         setupStats();
+        replenish();
     }
 
     public void act() {
@@ -83,15 +84,14 @@ public class Chapter1 extends BattleWorld
     
     public void setupStats() {
         // ALLIES
-        hero.maxHealth = hero.health = 66; // testing, should be 16
-        hero.atk = 100; // testing, should be 6
+        hero.maxHealth = hero.health = 16; 
+        hero.atk = 6; 
         hero.weapon = "Fists";
-        hero.moveLimit = 100; // testing
+        hero.moveLimit = 5; 
         prodeus.maxHealth = prodeus.health = 45;
-        prodeus.atk = 100; // testing, should be 12
+        prodeus.atk = 12; 
         prodeus.def = 10;
-        prodeus.moveLimit = 100; // testing
-        replenish();
+        prodeus.moveLimit = 7;
         // ENEMIES
         for (Enemy e : enemies) {
             if (e.isBoss) { // first check if boss since boss is also a foot soldier

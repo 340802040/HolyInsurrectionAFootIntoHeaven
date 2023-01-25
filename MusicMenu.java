@@ -115,7 +115,7 @@ public class MusicMenu extends GameWorld
             added = true;
             onVisitor = true;
         }
-        if(Greenfoot.mouseMoved(null) && added && !Greenfoot.mouseMoved(selector) && !Greenfoot.mouseMoved(insurmountableButton) && !Greenfoot.mouseMoved(fogButton) && !Greenfoot.mouseMoved(landsButton) && !Greenfoot.mouseMoved(revolutionaryButton) && !Greenfoot.mouseMoved(fairiesButton) && !Greenfoot.mouseMoved(fieldButton) && !Greenfoot.mouseMoved(dahliaButton) && !Greenfoot.mouseMoved(strollingButton)) {
+        if(Greenfoot.mouseMoved(null) && added && !Greenfoot.mouseMoved(selector) && !Greenfoot.mouseMoved(insurmountableButton) && !Greenfoot.mouseMoved(fogButton) && !Greenfoot.mouseMoved(landsButton) && !Greenfoot.mouseMoved(revolutionaryButton) && !Greenfoot.mouseMoved(fairiesButton) && !Greenfoot.mouseMoved(fieldButton) && !Greenfoot.mouseMoved(dahliaButton) && !Greenfoot.mouseMoved(strollingButton) && !Greenfoot.mouseMoved(visitorButton)) {
             removeObject(selector);
             added = false;
 

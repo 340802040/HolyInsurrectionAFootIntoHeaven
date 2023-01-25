@@ -48,6 +48,10 @@ public class Intermission extends GameWorld
                     Greenfoot.setWorld(new Chapter7());
                     Soundtrack.theStrolling.stop();
                     break;
+                case 7:
+                    Greenfoot.setWorld(new VictoryWorld());
+                    Soundtrack.theStrolling.stop();
+                    break;
             }
         }
     }

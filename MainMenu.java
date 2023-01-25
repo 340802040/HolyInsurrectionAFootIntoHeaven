@@ -146,8 +146,4 @@ public class MainMenu extends GameWorld
         controlsText += whitespace + "C - Wait" + whitespace + "\n";
         controlsText += whitespace + "1-6 - Select weapon" + whitespace + "\n \n";
     }
-
-    public void stopped() {
-        Soundtrack.stopAll();
-    }
 }

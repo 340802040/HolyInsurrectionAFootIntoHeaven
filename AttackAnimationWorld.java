@@ -36,8 +36,14 @@ public class AttackAnimationWorld extends GameWorld
     }
 
     public void act() {
-        Soundtrack.inAnUnfalteringField.playLoop();
-        Soundtrack.pauseAllExceptInAnUnfalteringField();
+        if (e.name == "The Being") {
+            Soundtrack.anInsurmountableHindrance.playLoop();
+            Soundtrack.pauseAllExceptAnInsurmountableHindrance();
+        }
+        else {
+            Soundtrack.inAnUnfalteringField.playLoop();
+            Soundtrack.pauseAllExceptInAnUnfalteringField();    
+        }
         checkFightFinished();
     }
 

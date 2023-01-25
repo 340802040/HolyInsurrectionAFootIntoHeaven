@@ -115,6 +115,9 @@ public class Chapter7 extends BattleWorld
     }
     
     public void setupStats() {
+        // add blade of eithalon
+        Ally hero = findAlly("Hero");
+        hero.weapons.add("BladeOfEithalon");
         // transfer prodeus over to enemy side
         Ally prodeus = findAlly("Prodeus");
         boss2.maxHealth = prodeus.maxHealth;

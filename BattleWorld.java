@@ -19,7 +19,6 @@ public abstract class BattleWorld extends GameWorld
     protected boolean selectorAdded; // whether selector is in the world
     protected int turns = 0;
     protected int chapterNumber;
-    protected int actCount = 0;
     // ENEMY PHASE
     private int i; // index used for going through each enemy during enemy phase
     protected Enemy curMovingEnemy;
@@ -59,6 +58,10 @@ public abstract class BattleWorld extends GameWorld
         }
         // PHASES
         if (phase == "player" && (state == "gameplay" || state == "dialogue")) {
+            if (this instanceof Chapter7) {
+                Soundtrack.intrusiveRevolutionary.playLoop();
+                Soundtrack.pauseAllExceptIntrusiveRevolutionary();
+            }
             Soundtrack.farInForeignLands.playLoop();
             Soundtrack.pauseAllExceptFarInForeignLands();
         }

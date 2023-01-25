@@ -1,41 +1,38 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class GameOverWorld here.
+ * 
  * 
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class GameOverWorld extends GameWorld
+public class VictoryWorld extends GameWorld
 {
     protected Image mainMenuButton = new Image("Buttons/MainMenuButton.png");
     protected boolean isHovering;
-    protected GreenfootImage bg = new GreenfootImage("DeathScreen.png");
     
-    public GameOverWorld() {
-        super(1200, 800, 1);
-        setBackground(bg);       
-        bg.setTransparency(0);
-        mainMenuButton.getImage().setTransparency(190);
-        addObject(mainMenuButton, 400, 300);
+    public VictoryWorld() {
+        super(1200, 800, 1);   
+        setBackground("VictoryScreen.png");
+        getBackground().setTransparency(0);
     }
     
     public void act() {
         actCount++;
-        Soundtrack.anUnwantedVisitor.playLoop();
-        Soundtrack.pauseAllExceptAnUnwantedVisitor();
+        Soundtrack.meadowOfDahlias.playLoop();
+        Soundtrack.pauseAllExceptMeadowOfDahlias();
         fadeIn();
         checkHovering();
         checkClick();
     }
     
     public void fadeIn() {
-        int newTrans = bg.getTransparency() + 15;
+        int newTrans = getBackground().getTransparency() + 2;    
         if (newTrans >= 255) {
             return;
         }
-        if (actCount % 5 == 0 && newTrans <= 255) {
-            bg.setTransparency(newTrans);
+        if (actCount % 3 == 0 && newTrans <= 255) {
+            getBackground().setTransparency(newTrans);
         }
     }
     

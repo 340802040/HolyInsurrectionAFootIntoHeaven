@@ -13,8 +13,6 @@ public class Chapter1 extends BattleWorld
     private AllyCrusader prodeus = new AllyCrusader("Prodeus");
     private EnemyFootSoldier e1 = new EnemyFootSoldier(false);
     private EnemyFootSoldier e2 = new EnemyFootSoldier(false);
-    private EnemyFootSoldier e3 = new EnemyFootSoldier(false);
-    private EnemyFootSoldier e4 = new EnemyFootSoldier(false);
     private EnemyFootSoldier boss = new EnemyFootSoldier(true);
     // DIALOGUES
     Dialogue oldManInstructions = new Dialogue("images/Text/OldManInstructions/", "gameplay"); // images/ needed for Java.io.File detection
@@ -26,8 +24,6 @@ public class Chapter1 extends BattleWorld
         allies.add(hero);
         enemies.add(e1);
         enemies.add(e2);
-        enemies.add(e3);
-        enemies.add(e4);
         enemies.add(boss);
 
         map = new int[][] {
@@ -75,10 +71,8 @@ public class Chapter1 extends BattleWorld
         // ALLIES
         addObject(hero, GameWorld.getX(4), GameWorld.getY(8));
         // ENEMIES
-        addObject(e1, GameWorld.getX(19), GameWorld.getY(6));
-        addObject(e2, GameWorld.getX(19), GameWorld.getY(7));
-        addObject(e3, GameWorld.getX(19), GameWorld.getY(9));
-        addObject(e4, GameWorld.getX(19), GameWorld.getY(10));
+        addObject(e1, GameWorld.getX(19), GameWorld.getY(7));
+        addObject(e2, GameWorld.getX(19), GameWorld.getY(9));
         addObject(boss, GameWorld.getX(21), GameWorld.getY(8));
     }
     

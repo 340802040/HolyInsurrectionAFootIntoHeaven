@@ -10,6 +10,7 @@ public class AllyFootSoldier extends Ally
 {
     public AllyFootSoldier(String name) {
         super(name);
+        moveLimit = 6;
         weapons.add("Spear");
     }   
     

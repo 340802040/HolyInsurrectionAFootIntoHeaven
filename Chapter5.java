@@ -75,8 +75,7 @@ public class Chapter5 extends BattleWorld
         for (Ally a : allies) {
             while (true) {
                 int r = getRandomNumberInRange(3, 5);
-                int c = getRandomNumberInRange(1
-                , 7);
+                int c = getRandomNumberInRange(1, 7);
                 if (tileAvailable(r, c)) {
                     addObject(a, GameWorld.getX(c), GameWorld.getY(r));
                     map[r][c] = 1;

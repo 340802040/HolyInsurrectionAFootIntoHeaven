@@ -20,8 +20,6 @@ public class Chapter5 extends BattleWorld
     
     public Chapter5() {
         super(1200, 800, 1);
-        
-        buff();
         allies = Ally.getClones(ALLIES);
         enemies.add(e1);
         enemies.add(e2);

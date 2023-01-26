@@ -26,13 +26,13 @@ public class Chapter7 extends BattleWorld
         super(1200, 800, 1);
         allies = Ally.getClones(ALLIES);
         enemies.add(e1);
-        //enemies.add(e2);
-        //enemies.add(e3);
-        //enemies.add(e4);
-        //enemies.add(e5);
-        //enemies.add(e6);
-        //enemies.add(e7);
-        //enemies.add(e8);
+        enemies.add(e2);
+        enemies.add(e3);
+        enemies.add(e4);
+        enemies.add(e5);
+        enemies.add(e6);
+        enemies.add(e7);
+        enemies.add(e8);
         enemies.add(boss1);
         enemies.add(boss2);
         

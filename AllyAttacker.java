@@ -28,8 +28,8 @@ public class AllyAttacker extends Attacker
             die();
             AttackAnimationWorld w = (AttackAnimationWorld)getWorld();
             if (me.name.equals("Prodeus") && w.returnWorld instanceof Chapter6) {
-                w.returnWorld.saveHighestChapter();
-                Greenfoot.setWorld(new Chapter7());
+                w.returnWorld.save();
+                Greenfoot.setWorld(new Intermission("Intermissions/Intermission6.png", "images/text/Intermission6/", 6));
             }
             else if (me.name.equals("Hero") || me.name.equals("Prodeus")) {
                 w.returnState = "lost";

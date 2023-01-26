@@ -10,10 +10,11 @@ public class AllyWizard extends Ally
 {
     public AllyWizard(String name) {
         super(name);
-        moveLimit = 6;
+        moveLimit = 7;
         weapons.add("Fire");
         weapons.add("Water");
         weapons.add("Ice");
+        className = "AllyWizard";
     }
     
     public void act() {

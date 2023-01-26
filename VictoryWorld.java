@@ -15,6 +15,7 @@ public class VictoryWorld extends GameWorld
         super(1200, 800, 1);   
         setBackground("VictoryScreen.png");
         getBackground().setTransparency(0);
+        addObject(mainMenuButton, getWidth() - 90, 70);
     }
     
     public void act() {

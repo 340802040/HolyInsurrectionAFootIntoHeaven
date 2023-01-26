@@ -45,10 +45,10 @@ public class Dialogue extends Actor
             finished = true;
             GameWorld gw = ((GameWorld)getWorld());
             if (gw instanceof BattleWorld) {
-                BattleWorld bw = (BattleWorld)getWorld();
-                bw.state = returnState;
+                BattleWorld bw = (BattleWorld)getWorld();  
                 bw.selector.timer2.mark(); // so player doesn't instantly select ground after dialogue
             }
+            gw.state = returnState;
             gw.removeObject(this);
             return;
         }

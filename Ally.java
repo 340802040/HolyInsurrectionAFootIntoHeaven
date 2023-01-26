@@ -94,7 +94,7 @@ public class Ally extends BattleWorldCharacter
     public String getLevelUpMsg() {
         String msg;
         String whitespace = "     ";
-        
+
         if (xp >= xpNeeded) {
             int numLevelUps = 0;
             while (true) {
@@ -143,31 +143,33 @@ public class Ally extends BattleWorldCharacter
             msg = "\n" + whitespace + "XP +" + xpGained + whitespace + "\n \n";   
             xpGained = 0;
         }
-        
+
         return msg;
     }
-    
+
     public Ally getClone() {
-        Ally a = new Ally("");
-        String className = getClass().getSimpleName();
+        Ally a = null;
         switch (className) {
             case "AllyArcher":
-               a = new AllyArcher(name);
-               break;
+                a = new AllyArcher(name);
+                break;
             case "AllyCavalry":
-               a = new AllyCavalry(name);
-               break;
+                a = new AllyCavalry(name);
+                break;
             case "AllyCrusader":
-               a = new AllyCrusader(name);
-               break;
+                a = new AllyCrusader(name);
+                break;
             case "AllyFootSoldier":
-               a = new AllyFootSoldier(name);
-               break;
+                a = new AllyFootSoldier(name);
+                break;
             case "AllyHero":
-               a = new AllyHero(name);
-               break;
+                a = new AllyHero(name);
+                break;
+            case "AllyWizard":
+                a = new AllyWizard(name);
+                break;
         }
-        
+
         a.level = level;
         a.xp = xp;
         a.xpNeeded = xpNeeded;
@@ -181,10 +183,10 @@ public class Ally extends BattleWorldCharacter
         a.moveLimit = moveLimit;
         a.weapons = weapons;
         a.weapon = weapon;
-        
+
         return a;
     }
-    
+
     public static ArrayList<Ally> getClones(ArrayList<Ally> allies) {
         ArrayList<Ally> clones = new ArrayList<Ally>();
         for (Ally a : allies) {

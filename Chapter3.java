@@ -10,28 +10,28 @@ public class Chapter3 extends BattleWorld
 {
     private AllyFootSoldier telu = new AllyFootSoldier("Telu");
     private EnemyFootSoldier e1 = new EnemyFootSoldier(false);
-    //private EnemyFootSoldier e2 = new EnemyFootSoldier(false);
-    //private EnemyWizard e3 = new EnemyWizard(false);
-    //private EnemyWizard e4 = new EnemyWizard(false);
-    //private EnemyWizard e5 = new EnemyWizard(false);
-    //private EnemyWizard e6 = new EnemyWizard(false);
-    //private EnemyWizard e7 = new EnemyWizard(false);
-    //private EnemyWizard boss1 = new EnemyWizard(true);
-    //private EnemyWizard boss2 = new EnemyWizard(true);
+    private EnemyFootSoldier e2 = new EnemyFootSoldier(false);
+    private EnemyWizard e3 = new EnemyWizard(false);
+    private EnemyWizard e4 = new EnemyWizard(false);
+    private EnemyWizard e5 = new EnemyWizard(false);
+    private EnemyWizard e6 = new EnemyWizard(false);
+    private EnemyWizard e7 = new EnemyWizard(false);
+    private EnemyWizard boss1 = new EnemyWizard(true);
+    private EnemyWizard boss2 = new EnemyWizard(true);
     
     public Chapter3() {
         super(1200, 800, 1);
         allies = Ally.getClones(ALLIES); // clone the saved copy
         allies.add(telu);
         enemies.add(e1);
-        //enemies.add(e2);
-        //enemies.add(e3);
-        //enemies.add(e4);
-        //enemies.add(e5);
-        //enemies.add(e6);
-        //enemies.add(e7);
-        //enemies.add(boss1);
-        //enemies.add(boss2);
+        enemies.add(e2);
+        enemies.add(e3);
+        enemies.add(e4);
+        enemies.add(e5);
+        enemies.add(e6);
+        enemies.add(e7);
+        enemies.add(boss1);
+        enemies.add(boss2);
         
         map = new int[][] {
             {11, 11, 11, 12, 11, 11, 11, 11, 11, 12, 11, 11, 11, 13, 12, 11, 11, 12, 11, 11, 11, 13, 13, 13},
@@ -92,9 +92,9 @@ public class Chapter3 extends BattleWorld
         // 2 bosses
         int r = GameWorld.GRID_HEIGHT - 4;
         int c = GameWorld.GRID_WIDTH - 3;
-        //addObject(boss1, GameWorld.getX(c), GameWorld.getY(r));
+        addObject(boss1, GameWorld.getX(c), GameWorld.getY(r));
         r = 4;
-        //addObject(boss2, GameWorld.getX(c), GameWorld.getY(r));
+        addObject(boss2, GameWorld.getX(c), GameWorld.getY(r));
     }
     
     public void setupStats() {
@@ -108,7 +108,7 @@ public class Chapter3 extends BattleWorld
         for (Enemy e : enemies) {
             if (e instanceof EnemyFootSoldier) {
                 e.maxHealth = e.health = 18;
-                e.atk = 7;
+                e.atk = 6;
                 e.ev = 2;
             }
             if (e instanceof EnemyWizard) {
@@ -118,8 +118,8 @@ public class Chapter3 extends BattleWorld
                 e.spd = 2;
             }
             if (e.isBoss) {
-                e.maxHealth = e.health = 30;
-                e.atk = 11;
+                e.maxHealth = e.health = 25;
+                e.atk = 7;
                 e.def = 4;
                 e.ev = 3;
                 e.spd = 3;

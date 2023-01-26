@@ -29,16 +29,15 @@ public class EnemyAttacker extends Attacker
             AttackAnimationWorld w = (AttackAnimationWorld)getWorld();
             w.returnWorld.removeEnemy(me);
             if (me.name.equals("The Being")) {
-                Dialogue d = new Dialogue("images/Text/TheBeingDying/", "clear");
+                Dialogue d = new Dialogue("images/Text/TheBeingDying/", "normal");
                 w.addObject(d, 0, 0);
             }
             else if (me.name.equals("Prodeus")) {
-                Dialogue d = new Dialogue("images/Text/ProdeusDying/", "clear");
+                Dialogue d = new Dialogue("images/Text/ProdeusDying/", "normal");
                 w.addObject(d, 0, 0);
             }
             if (w.returnWorld.enemies.size() == 0) {
                 w.returnState = "clear";
-                w.returnWorld.saveHighestChapter();
             }
             other.increaseXp(me.killXp);
         }

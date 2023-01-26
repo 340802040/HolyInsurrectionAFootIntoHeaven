@@ -25,6 +25,7 @@ public abstract class BattleWorldCharacter extends Actor
     protected String weapon = "";
     protected int r, c;
     protected int moveLimit;
+    protected String className;
     // MOVEMENT
     protected boolean isMoving = false;
     protected boolean moved = false; // whether has been moved already
@@ -68,10 +69,10 @@ public abstract class BattleWorldCharacter extends Actor
     public void initFrames() {        
         String path = "";
         if (this instanceof Ally) {
-            path = "Animations/AllyAnimations/" + this.getClass().getSimpleName() + "Animations/";
+            path = "Animations/AllyAnimations/" + className + "Animations/";
         }
         else if (this instanceof Enemy) {
-            path = "Animations/EnemyAnimations/" + this.getClass().getSimpleName() + "Animations/";
+            path = "Animations/EnemyAnimations/" + className + "Animations/";
         }
         // IDLE
         for (int i = 0; i < 2; i++) {

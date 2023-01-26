@@ -49,7 +49,7 @@ public abstract class Card extends Actor
     }    
     
     public void fadeIn() {
-        int newTrans = getImage().getTransparency() + 3;    
+        int newTrans = getImage().getTransparency() + 4;    
         if (newTrans >= 255) {
             isFadingIn = false;
         }
@@ -59,7 +59,7 @@ public abstract class Card extends Actor
     }
     
     public void fadeOut() {
-        int newTrans = getImage().getTransparency() - 3;
+        int newTrans = getImage().getTransparency() - 4;
         if (newTrans <= 0) {
             getWorld().removeObject(this);
         }

@@ -11,6 +11,7 @@ public class EnemyCrusader extends EnemyCavalry
     public EnemyCrusader(boolean isBoss) {
         super(isBoss);
         moveLimit = isBoss ? 0 : 8;
+        className = "EnemyCrusader";
     }
     
     public void act() {

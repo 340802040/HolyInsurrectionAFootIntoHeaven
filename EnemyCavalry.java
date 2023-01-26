@@ -12,6 +12,7 @@ public class EnemyCavalry extends Enemy
         super(isBoss);
         moveLimit = isBoss ? 0 : 8;
         weapons.add("Spear");
+        className = "EnemyCavalry";
     }
     
     public void act() {

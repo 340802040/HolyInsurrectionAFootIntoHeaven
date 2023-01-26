@@ -22,7 +22,7 @@ public class Chapter6 extends BattleWorld
     
     public Chapter6() {
         super(1200, 800, 1);
-        allies = Ally.getClones(ALLIES);
+        allies = Ally.getClones(ALLIES);        
         enemies.add(e1);
         enemies.add(e2);
         enemies.add(e3);
@@ -103,25 +103,27 @@ public class Chapter6 extends BattleWorld
         for (Enemy e : enemies) {
             if (e instanceof EnemyFootSoldier) {
                 e.maxHealth = e.health = 24;
-                e.atk = 9;
-                e.def = 5;
+                e.atk = 7;
+                e.def = 2;
                 e.ev = 2;
             }
             if (e instanceof EnemyArcher) {
                 e.maxHealth = e.health = 19;
-                e.atk = 9;
+                e.atk = 7;
+                e.def = 2;
                 e.ev = 4;
                 e.spd = 4;
             }
             if (e instanceof EnemyWizard) {
                 e.maxHealth = e.health = 15;
-                e.atk = 9;
+                e.atk = 8;
                 e.ev = 4;
                 e.spd = 3;
             }
             if (e instanceof EnemyCavalry) {
                 e.maxHealth = e.health = 25;
-                e.atk = 8;
+                e.atk = 7;
+                e.def = 2;
                 e.ev = 3;
                 e.spd = 5;
             }

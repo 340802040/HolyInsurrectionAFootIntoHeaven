@@ -12,6 +12,7 @@ public class EnemyArcher extends Enemy
         super(isBoss);
         moveLimit = isBoss ? 0 : 5;    
         weapons.add("Bow");
+        className = "EnemyArcher";
     }
     
     public void act() {

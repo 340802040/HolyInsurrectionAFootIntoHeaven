@@ -12,6 +12,7 @@ public class AllyCavalry extends Ally
         super(name);
         moveLimit = 8;
         weapons.add("Spear");
+        className = "AllyCavalry";
     }
     
     public void act() {

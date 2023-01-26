@@ -10,6 +10,7 @@ public class BattlePhaseCard extends Card
 {
     public BattlePhaseCard(String path) {
         super(path);
+        mod = 1;
     }
     
     public void act() {
@@ -17,7 +18,7 @@ public class BattlePhaseCard extends Card
     }
     
     public void fadeOut() {
-        int newTrans = getImage().getTransparency() - 4;
+        int newTrans = getImage().getTransparency() - 5;
         if (newTrans <= 0) {
             BattleWorld bw = (BattleWorld)getWorld();
             bw.state = "gameplay";

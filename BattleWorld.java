@@ -30,6 +30,8 @@ public abstract class BattleWorld extends GameWorld
         super(width, height, pixelSize);
         setPaintOrder(ChapterCard.class, DialogueText.class, HoverWindow.class, Selector.class);
         state = "gameplay";
+        addObject(selector, GameWorld.getX(0), GameWorld.getY(0)); 
+        // CHAPTER CARD
         String s = this.getClass().getSimpleName();
         chapterNumber = Integer.parseInt(s.substring(s.length() - 1));
         if (chapterNumber != 1) {
@@ -37,7 +39,6 @@ public abstract class BattleWorld extends GameWorld
             addObject(chapterCard, getWidth() / 2, getHeight() / 2);
             state = "card";
         }
-        addObject(selector, GameWorld.getX(0), GameWorld.getY(0)); 
     }
 
     public void act() {
@@ -95,7 +96,8 @@ public abstract class BattleWorld extends GameWorld
     }
 
     public void checkClear() {
-        if (state == "clear") {           
+        if (state == "clear") {
+            save();
             Greenfoot.setWorld(new Intermission("images/Intermissions/Intermission" + chapterNumber + ".png", "images/Text/Intermission" + chapterNumber + "/", chapterNumber));
         }
     }
@@ -182,10 +184,10 @@ public abstract class BattleWorld extends GameWorld
     }
 
     /**
-     * Saves the highest chapter achieved with the army present at that time.
+     * Saves the most recent chapter achieved with the army present at that time.
      * Only called once a chapter has been complete.
      */
-    public void saveHighestChapter() {
+    public void save() {
         int newScore = 1;
         if (this instanceof Chapter1) {
             newScore = 2;
@@ -210,10 +212,8 @@ public abstract class BattleWorld extends GameWorld
 
         if (UserInfo.isStorageAvailable()) {
             UserInfo myInfo = UserInfo.getMyInfo();
-            if (newScore > myInfo.getScore()) {
-                myInfo.setScore(newScore);
-                myInfo.store();  // write back to server
-            }
+            myInfo.setScore(newScore);
+            myInfo.store();  // write back to server
         }
     }
 
@@ -244,7 +244,7 @@ public abstract class BattleWorld extends GameWorld
      * For testing chapters, buff() adds allies to ALLIES.
      */
     public static void buff() {
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 1; i++) {
             AllyArcher a = new AllyArcher("");
             a.atk = 100;
             a.moveLimit = 100;
@@ -255,6 +255,7 @@ public abstract class BattleWorld extends GameWorld
         prodeus.atk = 100;
         prodeus.moveLimit = 100;
         prodeus.maxHealth = prodeus.health = 66;
+        prodeus.weapon = "Spear";
         ALLIES.add(prodeus);
 
         AllyHero hero = new AllyHero("Hero");
@@ -264,10 +265,10 @@ public abstract class BattleWorld extends GameWorld
         hero.weapons.add("Fire");
         hero.weapons.add("Water");
         hero.weapons.add("Ice");
-        hero.weapons.add("BladeOfEithalon");
         hero.weapons.add("Sword");
         hero.weapons.add("Spear");
         hero.weapons.add("Bow");
+        hero.weapon = "Sword";
         ALLIES.add(hero);
     }
 

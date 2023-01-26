@@ -55,7 +55,7 @@ public class Selector extends Actor
      * Checks for input (WASD) from the user to move the selector.
      */
     public void checkMovement() {
-        if (moveTimer.millisElapsed() > 100) {
+        if (moveTimer.millisElapsed() > 65) {
             if (Greenfoot.isKeyDown("w") && canMoveTo(r - 1, c)) {
                 r--;
                 setLocation(GameWorld.getX(c), GameWorld.getY(r));

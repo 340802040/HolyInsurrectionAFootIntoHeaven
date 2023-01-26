@@ -10,7 +10,8 @@ public class AllyHero extends Ally
 {
     public AllyHero(String name) {
         super(name);
-        moveLimit = 7;
+        moveLimit = 8;
+        className = "AllyHero";
     }
     
     public void act() {

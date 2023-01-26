@@ -21,6 +21,8 @@ public class Image extends Actor
     }
     
     public void removeSelf() {
-        getWorld().removeObject(this);
+        if (getWorld() != null) {
+            getWorld().removeObject(this);    
+        }
     }
 }

@@ -17,7 +17,6 @@ public class Intermission extends GameWorld
         this.chapterNumber = chapterNumber;
         d = new Dialogue(dialoguePath, "");
         addObject(d, 0, 0);
-        System.out.println(chapterNumber);
     }
 
     public void act() {
@@ -38,7 +37,7 @@ public class Intermission extends GameWorld
                     Soundtrack.theStrolling.stop();
                     break;
                 case 4:
-                    Greenfoot.setWorld(new Chapter4());
+                    Greenfoot.setWorld(new Chapter5());
                     Soundtrack.theStrolling.stop();
                     break;
                 case 5:

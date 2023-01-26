@@ -12,15 +12,16 @@ public class Chapter5 extends BattleWorld
     private EnemyArcher e2 = new EnemyArcher(false);
     private EnemyArcher e3 = new EnemyArcher(false);
     private EnemyArcher e4 = new EnemyArcher(false);
-    private EnemyArcher e5 = new EnemyArcher(false);
+    private EnemyCavalry e5 = new EnemyCavalry(false);
     private EnemyCavalry e6 = new EnemyCavalry(false);
-    private EnemyCavalry e7 = new EnemyCavalry(false);
-    private EnemyFootSoldier e8 = new EnemyFootSoldier(false);
+    private EnemyFootSoldier e7 = new EnemyFootSoldier(false);
     private EnemyArcher boss1 = new EnemyArcher(true);
     private EnemyWizard boss2 = new EnemyWizard(true);
     
     public Chapter5() {
         super(1200, 800, 1);
+        
+        buff();
         allies = Ally.getClones(ALLIES);
         enemies.add(e1);
         enemies.add(e2);
@@ -29,7 +30,6 @@ public class Chapter5 extends BattleWorld
         enemies.add(e5);
         enemies.add(e6);
         enemies.add(e7);
-        enemies.add(e8);
         enemies.add(boss1);
         enemies.add(boss2);
         
@@ -100,33 +100,35 @@ public class Chapter5 extends BattleWorld
         for (Enemy e : enemies) {
             if (e instanceof EnemyFootSoldier) {
                 e.maxHealth = e.health = 22;
-                e.atk = 9;
-                e.def = 5;
+                e.atk = 7;
+                e.def = 3;
                 e.ev = 2;
             }
             if (e instanceof EnemyArcher) {
                 e.maxHealth = e.health = 17;
-                e.atk = 9;
+                e.atk = 7;
+                e.def = 2;
                 e.ev = 4;
                 e.spd = 4;
             }
             if (e instanceof EnemyWizard) {
                 e.maxHealth = e.health = 15;
-                e.atk = 9;
+                e.atk = 7;
+                e.def = 2;
                 e.ev = 4;
                 e.spd = 3;
             }
             if (e instanceof EnemyCavalry) {
                 e.maxHealth = e.health = 22;
-                e.atk = 8;
+                e.atk = 7;
                 e.def = 3;
                 e.ev = 3;
                 e.spd = 5;
             }
             if (e.isBoss) {
                 e.maxHealth = e.health = 40;
-                e.atk = 11;
-                e.def = 7;
+                e.atk = 7;
+                e.def = 2;
                 e.ev = 4;
                 e.spd = 5;
             }

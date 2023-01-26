@@ -18,6 +18,5 @@ comment7.target=void\ changeWorlds()
 comment8.params=
 comment8.target=void\ checkGoBack()
 comment9.params=
-comment9.target=void\ removeSelf()
-comment9.text=\r\n\ Removes\ itself\ and\ all\ WeaponIcon's\ from\ the\ world.\r\n
+comment9.target=void\ removeWeaponIcons()
 numComments=10

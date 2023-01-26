@@ -10,6 +10,7 @@ public class AllyCrusader extends AllyCavalry
 {
     public AllyCrusader(String name) {
         super(name);
+        className = "AllyCrusader";
     }
     
     public void act() {

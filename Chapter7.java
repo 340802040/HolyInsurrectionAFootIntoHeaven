@@ -19,19 +19,20 @@ public class Chapter7 extends BattleWorld
     private EnemyCrusader boss1 = new EnemyCrusader(true);
     private EnemyCrusader boss2 = new EnemyCrusader(true);
     // DIALOGUE
+    Dialogue preCh7 = new Dialogue("images/Text/PreCh7/", "gameplay");
     Dialogue prodeusDying = new Dialogue("images/Text/ProdeusDying/", "gameplay");
     
     public Chapter7() {
         super(1200, 800, 1);
         allies = Ally.getClones(ALLIES);
         enemies.add(e1);
-        enemies.add(e2);
-        enemies.add(e3);
-        enemies.add(e4);
-        enemies.add(e5);
-        enemies.add(e6);
-        enemies.add(e7);
-        enemies.add(e8);
+        //enemies.add(e2);
+        //enemies.add(e3);
+        //enemies.add(e4);
+        //enemies.add(e5);
+        //enemies.add(e6);
+        //enemies.add(e7);
+        //enemies.add(e8);
         enemies.add(boss1);
         enemies.add(boss2);
         
@@ -55,12 +56,15 @@ public class Chapter7 extends BattleWorld
         };
         
         initializeGrid();
-        spawn();
         setupStats();
+        spawn();
         replenish();
     }
 
     public void act() {
+        if (turns == 0 && state == "gameplay" && !preCh7.added) {
+            addObject(preCh7, 0, 0);
+        }
         super.act();
     }
     
@@ -111,46 +115,48 @@ public class Chapter7 extends BattleWorld
         // transfer prodeus over to enemy side
         Ally prodeus = findAlly("Prodeus");
         boss2.maxHealth = prodeus.maxHealth;
-        boss2.health = prodeus.health;
+        boss2.health = boss2.maxHealth;
         boss2.atk = prodeus.atk;
         boss2.def = prodeus.def;
         boss2.ev = prodeus.ev;
         boss2.spd = prodeus.spd;
-        boss2.moveLimit = prodeus.moveLimit;
         boss2.weapons = prodeus.weapons;
-        boss2.weapon = prodeus.weapon;  
+        boss2.weapon = prodeus.weapon;
+        // remove prodeus from allies
+        allies.remove(prodeus);
         
         for (Enemy e : enemies) {
             if (e instanceof EnemyFootSoldier) {
                 e.maxHealth = e.health = 25;
-                e.atk = 9;
-                e.def = 5;
+                e.atk = 7;
+                e.def = 2;
                 e.ev = 2;
             }
             if (e instanceof EnemyArcher) {
                 e.maxHealth = e.health = 20;
-                e.atk = 9;
+                e.atk = 7;
                 e.ev = 4;
                 e.spd = 4;
             }
             if (e instanceof EnemyWizard) {
                 e.maxHealth = e.health = 17;
-                e.atk = 9;
+                e.atk = 8;
                 e.ev = 4;
                 e.spd = 3;
             }
-            if (e instanceof EnemyCavalry && !e.name.equals("Prodeus") && !e.name.equals("The Being")) {
-                e.maxHealth = e.health = 30;
-                e.atk = 8;
+            if (e instanceof EnemyCavalry && !e.isBoss) {
+                e.maxHealth = e.health = 25;
+                e.atk = 7;
+                e.def = 2;
                 e.ev = 3;
                 e.spd = 5;
             }
-            if (e.name == "The Being") {
+            if (e == boss1) {
                 e.maxHealth = e.health = 66;
-                e.atk = 14;
-                e.def = 8;
-                e.ev = 5;
-                e.spd = 5;
+                e.atk = 10;
+                e.def = 4;
+                e.ev = 4;
+                e.spd = 4;
             }
         }
     }

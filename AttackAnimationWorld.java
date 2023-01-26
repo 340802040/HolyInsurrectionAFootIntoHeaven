@@ -31,6 +31,7 @@ public class AttackAnimationWorld extends GameWorld
         this.a = a;
         this.e = e;
         this.attacker_s = attacker_s;
+        state = "normal";
         setBackground(Images.imgs2.get("attack animation world bg"));
         setup();
     }
@@ -75,7 +76,7 @@ public class AttackAnimationWorld extends GameWorld
         if (dealer.weapon == "BladeOfEithalon") {
             weaponDmg = 20;
         }
-        int damageDealt = (int)((dealer.atk + weaponDmg) * (dealerWillCrit ? 3.5 : 1) * dealer.terrainMultiplier * GameWorld.getWeaponMultiplier(dealer.weapon, dealtTo.weapon) - dealtTo.def * 0.3);
+        int damageDealt = (int)((dealer.atk + weaponDmg) * (dealerWillCrit ? 3.5 : 1) * dealer.terrainMultiplier * GameWorld.getWeaponMultiplier(dealer.weapon, dealtTo.weapon) - dealtTo.def * 0.4);
         if (damageDealt <= 1) {
             damageDealt = 2; // minimum
         }
@@ -91,7 +92,7 @@ public class AttackAnimationWorld extends GameWorld
     }
 
     public void checkFightFinished() {
-        if (attackerActor.finished && defenderActor.finished) {
+        if (attackerActor.finished && defenderActor.finished && state == "normal") {
             if (!timerMarked) {
                 timer.mark();
                 timerMarked = true;

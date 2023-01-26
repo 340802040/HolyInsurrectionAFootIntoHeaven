@@ -14,6 +14,7 @@ public class EnemyWizard extends Enemy
         weapons.add("Fire");
         weapons.add("Water");
         weapons.add("Ice");
+        className = "EnemyWizard";
     }
     
     public void act() {

@@ -115,27 +115,25 @@ public class WeaponSelectWindow extends AttackInterface
     }
 
     public void changeWorlds() {
+        removeWeaponIcons();
         BattleWorld bw = (BattleWorld)getWorld();
-        Greenfoot.setWorld(new AttackAnimationWorld(bw, a, e, "ally"));
         bw.state = "attack animation";
         removeSelf();
+        Greenfoot.setWorld(new AttackAnimationWorld(bw, a, e, "ally"));
     }
 
     public void checkGoBack() {
         if (Greenfoot.isKeyDown("j")) {
             BattleWorld bw = ((BattleWorld)getWorld());
             bw.addObject(new AttackDecisionWindow(a, e), bw.getWidth() - 250, bw.getHeight() / 2);
+            removeWeaponIcons();
             removeSelf();
         }
     }
 
-    /**
-     * Removes itself and all WeaponIcon's from the world.
-     */
-    public void removeSelf() {
+    public void removeWeaponIcons() {
         for (Image icon : icons) {
             icon.removeSelf();
         }
-        super.removeSelf();
     }
 }

@@ -108,20 +108,20 @@ public class Chapter2 extends BattleWorld
         for (Enemy e : enemies) {
             if (e instanceof EnemyFootSoldier) {
                 e.maxHealth = e.health = 17;
-                e.atk = 5;
+                e.atk = 4;
                 e.ev = 1;
             }
             if (e instanceof EnemyArcher) {
                 e.maxHealth = e.health = 14;
-                e.atk = 5;
+                e.atk = 4;
                 e.ev = 1;
                 e.spd = 1;
             }
             if (e.isBoss) {
                 e.maxHealth = e.health = 20;
-                e.atk = 6;
-                e.def = 3;
-                e.ev = 3;
+                e.atk = 5;
+                e.def = 2;
+                e.ev = 2;
                 e.spd = 1;
             }
         }

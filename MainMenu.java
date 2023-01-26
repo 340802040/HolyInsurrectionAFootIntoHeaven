@@ -2,7 +2,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.*;
 
 /**
- * The initial menu that starts the game
+ * The initial menu that at the beginning of the game.
  * 
  * @author Jonathan Zhao
  * @version Jan 2023

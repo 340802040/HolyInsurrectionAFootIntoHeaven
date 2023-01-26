@@ -1,7 +1,7 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Ally foot soldier class
+ * Ally foot soldier class.
  * 
  * @author Patrick Hu
  * @version Jan 2023

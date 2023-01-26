@@ -1,7 +1,7 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * The details and controls images
+ * The details and controls images.
  * 
  * @author Patrick Hu
  * @version Jan 2023

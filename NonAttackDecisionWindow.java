@@ -1,7 +1,7 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * The window when you do not move onto an enemy
+ * The window when you do not move onto an enemy.
  * 
  * @author Patrick Hu
  * @version Jan 2023

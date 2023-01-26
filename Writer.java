@@ -2,14 +2,13 @@ import java.util.*;
 import java.io.*;
 
 /**
- * Write a description of class Writer here.
+ * Attempted use of files to permanently save the array of Ally objects. However did not work.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Patrick Hu
+ * @version Jan 2023
  */
 public class Writer  
 {
-    // instance variables - replace the example below with your own
     private int x;
 
     public Writer() {

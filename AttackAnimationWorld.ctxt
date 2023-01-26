@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=AttackAnimationWorld
-comment0.text=\r\n\ World\ where\ attack\ animations\ occur\r\n\ \r\n\ @author\ Patrick\ Hu\r\n\ @version\ Jan\ 2023\r\n
+comment0.text=\r\n\ World\ where\ attack\ animations\ occur\ when\ two\ characters\ fight.\r\n\ \r\n\ @author\ Patrick\ Hu\r\n\ @version\ Jan\ 2023\r\n
 comment1.params=returnWorld\ a\ e\ attacker_s
 comment1.target=AttackAnimationWorld(BattleWorld,\ Ally,\ Enemy,\ java.lang.String)
 comment2.params=

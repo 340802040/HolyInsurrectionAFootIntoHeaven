@@ -1,7 +1,7 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Shows which chapter it is
+ * Shows which chapter it is.
  * 
  * @author Patrick Hu
  * @version Jan 2023

@@ -1,7 +1,7 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * The first chapter. It is the tutorial world. Closterium
+ * The first chapter. It is the tutorial world. Closterium.
  * 
  * @author Patrick Hu
  * @version Jan 2023

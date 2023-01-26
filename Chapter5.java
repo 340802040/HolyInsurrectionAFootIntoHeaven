@@ -1,7 +1,7 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Chapter 5 world. The Place of Slumber
+ * Chapter 5 world. The Place of Slumber.
  * 
  * @author Jonathan Zhao, Patrick Hu 
  * @version Jan 2023

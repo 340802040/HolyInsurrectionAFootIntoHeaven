@@ -1,7 +1,7 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Chapter 2 world. Forume
+ * Chapter 2 world. Forume.
  * 
  * @author Patrick Hu
  * @version Jan 2023

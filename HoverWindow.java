@@ -1,7 +1,7 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * When you hover over an ally or enemy, show basic stats.
+ * When you hover over an ally or enemy, show basic important stats.
  * 
  * @author Patrick Hu
  * @version Jan 2023

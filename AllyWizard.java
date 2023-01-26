@@ -1,7 +1,7 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Ally wizard class
+ * Ally wizard class.
  * 
  * @author Patrick Hu
  * @version Jan 2023

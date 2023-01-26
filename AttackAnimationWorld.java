@@ -3,7 +3,7 @@ import java.util.*;
 import java.io.File;
 
 /**
- * World where attack animations occur
+ * World where attack animations occur when two characters fight.
  * 
  * @author Patrick Hu
  * @version Jan 2023

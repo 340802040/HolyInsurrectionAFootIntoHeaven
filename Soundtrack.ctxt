@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=Soundtrack
-comment0.text=\r\n\ Manages\ all\ of\ the\ songs\ used\ in\ the\ game\r\n\ \r\n\ @author\ Jonathan\ Zhao\r\n\ @version\ Jan\ 2023\r\n
+comment0.text=\r\n\ Manages\ all\ of\ the\ songs\ used\ in\ the\ game.\r\n\ \r\n\ @author\ Jonathan\ Zhao\r\n\ @version\ Jan\ 2023\r\n
 comment1.params=
 comment1.target=void\ setVolume()
 comment10.params=

@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=Ally
-comment0.text=\r\n\ Ally\ classes\r\n\ \r\n\ @author\ Patrick\ Hu\r\n\ @version\ Jan\ 2023\r\n
+comment0.text=\r\n\ Ally\ classes.\ All\ data\ and\ logic\ pertaining\ to\ Ally's\ in\ the\ BattleWorld\ are\ here.\r\n\ A\ cloning\ method\ is\ included\ for\ saving\ the\ player's\ army\ after\ beating\ a\ chapter.\r\n\ \r\n\ @author\ Patrick\ Hu\r\n\ @version\ Jan\ 2023\r\n
 comment1.params=name
 comment1.target=Ally(java.lang.String)
 comment2.params=w

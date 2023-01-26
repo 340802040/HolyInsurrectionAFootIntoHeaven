@@ -1,10 +1,12 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class me here.
+ * Subclass of AttackAnimationActor that is a defender. Defenders, like attackers, have specific logic to 
+ * their animation since they always strike after the attacker. Therefore their animate() method is 
+ * exclusive to them and not all AttackAnimationActor's.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Patrick Hu
+ * @version Jan 2023
  */
 public abstract class Defender extends AttackAnimationActor
 {

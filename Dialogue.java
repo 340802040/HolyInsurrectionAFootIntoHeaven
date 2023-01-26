@@ -5,8 +5,8 @@ import java.io.File;
 /**
  * Class that handles all dialogue by taking in the path to the files and adding them to the world.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Patrick Hu
+ * @version Jan 2023
  */
 public class Dialogue extends Actor
 {

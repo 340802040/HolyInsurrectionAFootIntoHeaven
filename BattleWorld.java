@@ -3,7 +3,7 @@ import java.util.*;
 import java.io.*;
 
 /**
- * Battle worlds. Varies based on which chapter it is.
+ * Battle worlds are the main grid worlds where characters move around in between phases. Varies based on which chapter it is.
  * 
  * @author Patrick Hu, Jonathan Zhao
  * @version Jan 2023

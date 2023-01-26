@@ -1,7 +1,7 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Image of just text.
+ * Card of just text.
  * 
  * @author Patrick Hu
  * @version Jan 2023

@@ -1,7 +1,7 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Chapter 6 world. Palace gates
+ * Chapter 6 world. Palace gates.
  * 
  * @author Jonathan Zhao, Patrick Hu
  * @version Jan 2023

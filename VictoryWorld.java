@@ -1,7 +1,7 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * The victory world
+ * The victory world.
  * 
  * @author Patrick Hu
  * @version Jan 2023

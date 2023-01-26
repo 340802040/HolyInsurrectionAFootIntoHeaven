@@ -1,7 +1,7 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Interfaces that do not involve preparing for attacking
+ * Interfaces that do not involve preparing for attacking.
  * 
  * @author Patrick Hu
  * @version Jan 2023

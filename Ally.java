@@ -3,7 +3,8 @@ import java.util.*;
 import java.io.*;
 
 /**
- * Ally classes
+ * Ally classes. All data and logic pertaining to Ally's in the BattleWorld are here.
+ * A cloning method is included for saving the player's army after beating a chapter.
  * 
  * @author Patrick Hu
  * @version Jan 2023

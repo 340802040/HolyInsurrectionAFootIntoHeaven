@@ -53,10 +53,11 @@ import java.util.*;
  * Art and animations - Jonathan Zhao
  * Music - Jonathan Zhao
  * Story - Jonathan Zhao
+ * TextImage class - Danpost
  * 
  * 
  * @author Jonathan Zhao, Patrick Hu 
- * @version Jan 24
+ * @version Jan 24 2023
  */
 public class GameWorld extends World
 {

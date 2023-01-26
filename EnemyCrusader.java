@@ -1,7 +1,7 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * The enemy crusader class
+ * The enemy crusader class.
  * 
  * @author Patrick Hu
  * @version Jan 2023

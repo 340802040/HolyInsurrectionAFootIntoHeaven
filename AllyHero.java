@@ -1,7 +1,7 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Ally Hero class
+ * Ally Hero class.
  * 
  * @author Patrick Hu 
  * @version Jan 2023

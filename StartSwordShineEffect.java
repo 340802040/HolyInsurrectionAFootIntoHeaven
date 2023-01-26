@@ -2,7 +2,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.*;
 
 /**
- * Shine of sword that brings you into game
+ * Shine of sword that brings you into game.
  * 
  * @author Jonathan Zhao
  * @version Jan 2023

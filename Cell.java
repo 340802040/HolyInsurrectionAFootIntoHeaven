@@ -1,7 +1,7 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Image of a grid
+ * Image of a grid.
  * 
  * @author Patrick Hu 
  * @version Jan 2023

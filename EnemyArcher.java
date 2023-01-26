@@ -1,7 +1,7 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Enemy archer class
+ * Enemy archer class.
  * 
  * @author Patrick Hu
  * @version Jan 2023

@@ -1,7 +1,7 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Chapter 3 world. Magghea
+ * Chapter 3 world. Magghea.
  * 
  * @author Patrick Hu
  * @version Jan 2023

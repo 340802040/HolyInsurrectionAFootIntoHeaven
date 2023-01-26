@@ -2,7 +2,9 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.*;
 
 /**
- * The enemy classes
+ * The enemy classes. Enemies can either be bosses or regular cronies that will target an ally in range if they find one
+ * that provides them with a weapon advantage. Otherwise they will choose a random ally and move towards them after finding
+ * the shortest path.
  * 
  * @author Patrick Hu 
  * @version Jan 2023

@@ -1,7 +1,7 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * The world when you lose the game (Prodeus or the Hero dies)
+ * The world when you lose the game (Prodeus or the Hero dies).
  * 
  * @author Patrick Hu
  * @version Jan 2023

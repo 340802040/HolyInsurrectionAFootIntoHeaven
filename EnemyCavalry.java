@@ -1,7 +1,7 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Enemy cavalry class
+ * Enemy cavalry class.
  * 
  * @author Patrick Hu 
  * @version Jan 2023

@@ -1,7 +1,7 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * The blue highlight that shows movement possibilities
+ * The blue highlight that shows movement possibilities.
  * 
  * @author Patrick Hu
  * @version Jan 2023

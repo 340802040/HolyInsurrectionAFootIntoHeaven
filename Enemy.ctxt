@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=Enemy
-comment0.text=\r\n\ The\ enemy\ classes\r\n\ \r\n\ @author\ Patrick\ Hu\ \r\n\ @version\ Jan\ 2023\r\n
+comment0.text=\r\n\ The\ enemy\ classes.\ Enemies\ can\ either\ be\ bosses\ or\ regular\ cronies\ that\ will\ target\ an\ ally\ in\ range\ if\ they\ find\ one\r\n\ that\ provides\ them\ with\ a\ weapon\ advantage.\ Otherwise\ they\ will\ choose\ a\ random\ ally\ and\ move\ towards\ them\ after\ finding\r\n\ \r\n\ \r\n\ @author\ Patrick\ Hu\ \r\n\ @version\ Jan\ 2023\r\n
 comment1.params=isBoss
 comment1.target=Enemy(boolean)
 comment10.params=

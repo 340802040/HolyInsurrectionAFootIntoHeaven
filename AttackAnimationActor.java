@@ -3,10 +3,13 @@ import java.util.*;
 import java.io.File;
 
 /**
- * Image of a battle world character used in AttackAnimationWorld
+ * Image of a battle world character used in AttackAnimationWorld.
+ * All frames pertaining to the character such as their regular attack animation, crit animation, and respective damage indicator animations
+ * are initialized here using java.io.File which find the number of images inside a folder. The character's health bar and label displaying the
+ * current health are created here, along with the flashing and fading animations upon death of a character if their hp drops below 0.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Patrick Hu
+ * @version Jan 2023
  */
 public abstract class AttackAnimationActor extends Actor
 {

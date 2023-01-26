@@ -2,7 +2,9 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.*;
 
 /**
- * The selector in Battle worlds.
+ * The selector in BattleWorlds. Implements path finding to find shortest path from selected ally to the desired location of the selector.
+ * Is only present when the game world state is "gameplay". Deals with hovering over allies and enemies, displaying their stats and initiating 
+ * ally movement upon selection.
  * 
  * @author Patrick Hu
  * @version Jan 2023

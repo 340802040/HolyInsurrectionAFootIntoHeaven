@@ -2,7 +2,7 @@ import greenfoot.*;  // (World, Actor, GreenfootWeaponIcon, Greenfoot and MouseI
 import java.util.*;
 
 /**
- * The Weapon selection window
+ * The Weapon selection window.
  * 
  * @author Patrick Hu
  * @version Jan 2023

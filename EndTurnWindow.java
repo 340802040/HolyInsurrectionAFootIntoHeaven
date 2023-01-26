@@ -1,7 +1,7 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * The panel if you click on the ground that asks if you want to end turn
+ * The panel if you click on the ground that asks if you want to end turn.
  * 
  * @author Patrick Hu 
  * @version Jan 2023

@@ -1,7 +1,7 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Interface that deals with when you have the option to attack
+ * Interface that deals with when you have the option to attack.
  * 
  * @author Patrick Hu
  * @version Jan 2023

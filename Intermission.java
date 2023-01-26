@@ -1,7 +1,7 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Worlds with story and dialogue.
+ * Worlds with story and dialogue that occur after beating a chapter.
  * 
  * @author Patrick Hu
  * @version Jan 2023

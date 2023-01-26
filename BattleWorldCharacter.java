@@ -3,10 +3,10 @@ import java.util.*;
 import java.io.File;
 
 /**
- * Write a description of class GameWorldCharacter here.
+ * BattleWorldCharacter's are either allies or enemies on the grid based BattleWorld.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Patrick Hu
+ * @version Jan 2023
  */
 public abstract class BattleWorldCharacter extends Actor
 {    

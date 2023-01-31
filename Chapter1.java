@@ -100,8 +100,8 @@ public class Chapter1 extends BattleWorld
     }
     
     public void checkClear() {  
-        save();
         if (state == "clear" && postChap1.getWorld() == null) {
+            save();
             addObject(postChap1, 0, 0);
         }
         if (postChap1.i == postChap1.dialogues.size()) {

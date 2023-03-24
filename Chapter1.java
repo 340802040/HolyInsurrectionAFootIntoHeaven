@@ -13,7 +13,7 @@ public class Chapter1 extends BattleWorld
     private AllyCrusader prodeus = new AllyCrusader("Prodeus");
     private EnemyFootSoldier e1 = new EnemyFootSoldier(false);
     private EnemyFootSoldier e2 = new EnemyFootSoldier(false);
-    private EnemyFootSoldier boss = new EnemyFootSoldier(true);
+    private EnemyFootSoldier boss = new EnemyFootSoldier(false);
     // DIALOGUES
     Dialogue oldManInstructions = new Dialogue("images/Text/OldManInstructions/", "gameplay"); // images/ needed for Java.io.File detection
     Dialogue prodeusInstructions = new Dialogue("images/Text/ProdeusInstructions/", "gameplay");
